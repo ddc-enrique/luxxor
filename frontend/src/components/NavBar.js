@@ -1,4 +1,5 @@
 import styles from '../styles/navBar.module.css'
+import { Link } from "react-router-dom"
 
 const NavBar = () => {
 return(
@@ -8,6 +9,7 @@ return(
             <p>Como Comprar?</p>
             <p>Productos</p>
             <p>Contacto</p>
+            <Link to="/signup">Sign up</Link>
         </nav>
         <div className={styles.navIcons}>
             <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}}>

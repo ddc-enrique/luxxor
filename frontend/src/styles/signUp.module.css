@@ -1,0 +1,48 @@
+.container{
+    display: flex;
+    justify-content:space-around;
+    flex-wrap: wrap;
+    margin:1rem 0rem
+}
+
+.containerForm{
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+}
+
+.containerForm h1,.containerForm .location{
+    display:flex;
+    justify-content:center;
+}
+
+div.textSign{
+    display:flex;
+    justify-content:space-between;
+    flex-direction: row;
+    align-items: center;
+    margin:1rem 0rem
+}
+
+.buttonSign {
+	background-color:#7A5EA8;
+	border-radius:2em;
+    outline: none;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:1rem;
+	padding:0.5rem 1rem;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #7A5EA8;
+    margin-left:1rem
+}
+
+.inputTypes{
+    outline:none;
+    width: 100%;
+    background-color:transparent;
+    margin: 0.9rem 0rem ;
+    border-width: 0 0 3px 0;
+    border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1;
+}
