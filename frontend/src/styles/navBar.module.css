@@ -37,4 +37,30 @@ div.icon {
     height: 3rem;
     background-position: center;
     background-size: cover;
+    cursor: pointer;
+}
+
+div.dropDown {
+    position: absolute;
+    right: 11.5rem;
+    top: 4.1rem;
+    width: 7rem;
+    height: 4rem;
+    background-color: #cccbca61;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+    padding: 1rem;
+    box-shadow: 1px 1px 5px #75747461;
+}
+
+div.dropDown p {
+    text-align: center;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 500px) {
+    header.headerContainer h1 {
+        font-size: 2rem;
+    }
 }

@@ -1,0 +1,17 @@
+const mongoose = require('mongoose')
+
+const SaleSchema = new mongoose.Schema({
+    date: { type: Date },
+    user: { type: mongoose.Types.ObjectId, ref: "user" },
+    shopCart: [{
+        quantity: {type: Number },
+        product: { type: mongoose.Types.ObjectId, ref: "product" },
+    }],
+    amount: { type: Number },
+    methodPayment: { type: String }, //
+    shipping: { type: Boolean } //true si es envio, false si retira por local
+})
+
+const Sale = mongoose.model("sale", SaleSchema)
+
+module.exports = Sale

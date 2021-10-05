@@ -11,7 +11,6 @@ div.heroContainer {
 div.heroContainer>* {
     width: 40%;
     height: 30rem;
-    /* border: 2px solid blue; */
 }
 
 div.containerProducts {
@@ -25,8 +24,6 @@ div.containerProducts {
 div.productPic {
     width: 25rem;
     height: 25rem;
-    background-size: cover;
-    background-position: center;
 }
 
 div.subtitleHero {
@@ -51,4 +48,26 @@ button.buttonHero {
     padding: 1rem 3rem;
     color: #F1F6F7;
     font-size: 1.5rem;
+}
+
+@media(max-width: 500px) {
+    div.heroContainer {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+    div.heroContainer>* {
+        width: 80%;
+        height: 20rem
+    }
+
+    div.subtitleHero h2 {
+        font-size: 2rem;
+    }
+
+    div.containerProducts {
+        background-position: 30%;
+    }
+
 }
