@@ -11,7 +11,7 @@ const usersControllers = {
     signUp: (req, res) =>{
         console.log("Received Register User Petition:" + Date())
         const { firstName, lastName, eMail, password, profilePic, google } = req.body
-        let hashedPass = bcryptjs.hashSync(password)
+        let hashedPass = bcryptjs.hashSync(password.trim())
         const adminUser = [ process.env.ADMIN1 ]
         let admin = adminUser.includes(eMail)
         const newUser = new User({
@@ -59,10 +59,8 @@ const usersControllers = {
         User.findOne({ dni: req.body.dni })
             .then( (userFound) => {
                 if (userFound) throw new Error ("DNI en uso")
-                User.findOneAndUpdate({ _id: req.params.id }, { ...req.body })
+                User.findOneAndUpdate({ _id: req.params.id }, { ...req.body }, { new: true })
                     .then( (userUpdated) => {
-                        // console.log("USUARIO ACTUALIZADO")
-                        // console.log(userUpdated)
                         res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName } })
                     } )
             })
@@ -72,8 +70,8 @@ const usersControllers = {
     editProfile: (req, res) => {
         console.log("Received EDIT DATA USER Petition:" + Date())
 
-        User.findOneAndUpdate({ _id: req.params.id }, {...req.body} )
-            .then( () => res.json({ success: true, response: { firstName: userFound.firstName, lastName: userFound.lastName } }) )
+        User.findOneAndUpdate({ _id: req.params.id }, {...req.body}, { new: true })
+            .then( (userUpdated) => res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName } }) )
             .catch( err => handleError(res, err) )
     },
 
