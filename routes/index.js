@@ -3,12 +3,12 @@ const passport = require('passport')
 const usersControllers = require('../controllers/usersControllers')
 const productsControllers = require('../controllers/productsControllers')
 const brandCategoryControllers= require('../controllers/brandCategoryControllers')
+const validatorControllers = require('../controllers/validatorControllers')
 
 const router = express.Router()
 
-//rutas de usuarios
 router.route('/user/sign-up')
-    .post(usersControllers.signUp)
+    .post(validatorControllers.validatorSignUp ,usersControllers.signUp)
 router.route('/user/sign-in')
     .post(usersControllers.signIn)
 router.route('/user/edit-profile/:id')
@@ -20,9 +20,9 @@ router.route('/products')
     .post(productsControllers.addProduct)
 
 router.route('/product/:id')
-    /* .get(productsControllers.getOneProduct) */
+    .get(productsControllers.getOneProduct)
     .put(productsControllers.editProduct)
-  /*   .delete(productsControllers.deleteProduct) */
+    .delete(productsControllers.deleteProduct)
 
 router.route('/admin/brands')
     .get(brandCategoryControllers.getAll)

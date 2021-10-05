@@ -43,8 +43,24 @@ const productsControllers = {
         console.log(req.body)
         Product.findOneAndUpdate({_id},{...req.body},{new:true})
         .then(editedProduct=>res.json({success:true,response:editedProduct}))
-        .catch(error=>res.json({success:false,response:editedProduct}))
-    }
+        .catch(error=>res.json({success:false,response:error.message}))
+    },
+    deleteProduct:(req,res)=>{
+        console.log("Received DELETE PRODUCTS Petition:" + Date())
+        const _id = req.params.id
+        Product.findOneAndDelete({_id})
+        .then(() => res.json({success: true}))
+        .catch(error=> res.json({success: false, response:error.message}))
+    },
+    getOneProduct:(req,res)=>{
+        console.log("Received DELETE PRODUCTS Petition:" + Date())
+        Product.findById(req.params.id)
+        .then( productFound => {
+            if(!productFound) throw new Error("No se encontro ningun Producto")
+            res.json({success:true, response:productFound})
+        })
+        .catch(error=> res.json({success: false, reponse:error.message}))
+    },
 
 }
 

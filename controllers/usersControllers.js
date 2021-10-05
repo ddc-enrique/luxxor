@@ -11,7 +11,7 @@ const usersControllers = {
     signUp: (req, res) =>{
         console.log("Received Register User Petition:" + Date())
         const { firstName, lastName, eMail, password, profilePic, google } = req.body
-        let hashedPass = bcryptjs.hashSync(password)
+        let hashedPass = bcryptjs.hashSync(password.trim())
         const adminUser = [ process.env.ADMIN1 ]
         let admin = adminUser.includes(eMail)
         const newUser = new User({

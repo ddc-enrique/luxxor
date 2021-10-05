@@ -1,6 +1,6 @@
 const Brand = require('../models/Brand')
 const Category = require('../models/Category')
-/* req.url */
+
 const brandCategoryControllers={
 
     getAll: async(req,res)=>{
