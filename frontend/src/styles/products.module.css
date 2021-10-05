@@ -1,0 +1,95 @@
+/*contenedor*/
+main.productsContainer {
+  background-color: aqua;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+/*secciones*/
+main.productsContainer section {
+  border-radius: 1rem;
+  display: flex;
+  padding: 1rem;
+  border: 1px solid black;
+  background-color: #fff;
+  width: 80%;
+  margin-top: 1rem;
+}
+/*filtro*/
+main.productsContainer section:first-child {
+  height: 1.5rem;
+}
+/*productos*/
+main.productsContainer section:nth-child(2) {
+  min-height: 24rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: .5rem 0;
+}
+main.productsContainer section:nth-child(2) .info {
+  display: flex;
+  justify-content: space-around;
+}
+main.productsContainer section:nth-child(2) p:first-child {
+  background-color: #6b6b6b;
+}
+main.productsContainer section:nth-child(2) p {
+  text-align: center;
+  font-size: 1rem;
+  padding: 1rem;
+  border-radius: 1rem;
+  color: white;
+  font-weight: lighter;
+  height: 1.2rem;
+  margin: 0 0.2rem;
+  background-color: #f48f31;
+}
+main.productsContainer section:nth-child(2) h3 {
+  text-align: end;
+  font-size: 1rem;
+  font-weight: lighter;
+}
+main.productsContainer section:nth-child(2) .containerProduct {
+  min-height: 10rem;
+  padding: 1rem;
+}
+main.productsContainer section:nth-child(2) .containerImage {
+  min-height: 15rem;
+  background-color: rgb(255, 248, 248);
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+}
+main.productsContainer section:nth-child(2) .containerImage .image {
+  height: 8rem;
+  position: absolute;
+  top: 17rem;
+  left: auto;
+  width: 12rem;
+  background-position: center;
+  background-size: cover;
+}
+@media only screen and (min-width: 1024px) {
+  main.productsContainer {
+    background-color: aqua;
+    min-height: 100vh;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  main.productsContainer section {
+    height: 30rem;
+    border-radius: 1rem;
+    display: flex;
+    padding: 1rem;
+  }
+  main.productsContainer section:first-child {
+    background-color: #fff;
+    width: 20rem;
+  }
+  main.productsContainer section:nth-child(2) {
+    background-color: #fff;
+    width: 55rem;
+  }
+}
