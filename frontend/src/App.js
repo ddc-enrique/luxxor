@@ -1,13 +1,14 @@
 import "./App.css"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
+import SignIn from "./components/SignIn"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 
 const App = () => {
   return (
     <BrowserRouter>
-    <Home />
-    {/* <SignUp/> */}
+    {/* <SignIn /> */}
+    <SignUp/>
       <Switch>
         <Route />
         <Route path="/signup" component={SignUp} />
