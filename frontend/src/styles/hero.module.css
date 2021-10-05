@@ -48,9 +48,10 @@ button.buttonHero {
     padding: 1rem 3rem;
     color: #F1F6F7;
     font-size: 1.5rem;
+    cursor: pointer;
 }
 
-@media(max-width: 500px) {
+@media (min-width: 375px) and (max-width: 767px) {
     div.heroContainer {
         flex-direction: column;
         align-items: center;
@@ -58,16 +59,37 @@ button.buttonHero {
     }
 
     div.heroContainer>* {
-        width: 80%;
-        height: 20rem
+        width: 90%;
+        height: 18rem
     }
 
     div.subtitleHero h2 {
-        font-size: 2rem;
+        font-size: 1.2rem;
+    }
+
+    div.subtitleHero {
+        height: 8rem;
+        align-items: center;
     }
 
     div.containerProducts {
         background-position: 30%;
     }
 
+    button.buttonHero {
+        padding: 0.5rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    div.heroContainer>* {
+        width: 45%;
+        height: 27rem;
+    }
+
+    div.subtitleHero h2 {
+        font-size: 2.5rem;
+        text-align: end
+    }
 }

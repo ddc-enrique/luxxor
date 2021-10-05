@@ -9,6 +9,11 @@ body {
   color: #545454;
 }
 
+a {
+  text-decoration: none;
+  color: #545454;
+}
+
 @media only screen and (min-width: 375px) {
   html {
     font-size: 4vw;
@@ -23,9 +28,7 @@ body {
 }
 
 
-@media only screen and (min-width: 576px) {
-  
-}
+@media only screen and (min-width: 576px) {}
 
 
 @media only screen and (min-width: 768px) {
@@ -35,9 +38,7 @@ body {
 }
 
 
-@media only screen and (min-width: 768px) {
-
-}
+@media only screen and (min-width: 768px) {}
 
 @media only screen and (min-width: 1024px) {
   html {
@@ -45,6 +46,4 @@ body {
   }
 }
 
-@media only screen and (min-width: 1440px) {
-
-}
+@media only screen and (min-width: 1440px) {}

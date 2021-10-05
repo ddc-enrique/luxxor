@@ -12,24 +12,30 @@ header.headerContainer h1 {
 
 nav.navContainer {
     display: flex;
-    justify-content: space-between;
-    width: 35rem;
+    justify-content: space-evenly;
+    width: 70%;
     align-items: center;
 }
 
+nav.navContainerMobile {
+    display: none;
+}
+
+
 span.orange {
-    color: #F99D22
+    color: #F99D22;
+    font-size: 2.9rem;
 }
 
 span.violet {
-    color: #7A5EA8
+    color: #7A5EA8;
+    font-size: 2.9rem;
 }
 
-div.navIcons {
-    display: flex;
-    justify-content: space-evenly;
-    width: 10rem;
-
+span.violet:hover,
+span.orange:hover {
+    font-size: 3.5rem;
+    transition: all(1.5s);
 }
 
 div.icon {
@@ -42,16 +48,17 @@ div.icon {
 
 div.dropDown {
     position: absolute;
-    right: 11.5rem;
+    right: 28.5rem;
     top: 4.1rem;
     width: 7rem;
     height: 4rem;
-    background-color: #cccbca61;
+    background-color: #E3E5E6;
     border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
     border-bottom-right-radius: 1.5rem;
     padding: 1rem;
     box-shadow: 1px 1px 5px #75747461;
+    z-index: 1;
 }
 
 div.dropDown p {
@@ -59,8 +66,52 @@ div.dropDown p {
     margin-bottom: 1rem;
 }
 
-@media (max-width: 500px) {
+@media (min-width: 375px) and (max-width: 767px) {
+    header.headerContainer {
+        justify-content: space-between;
+    }
+
     header.headerContainer h1 {
-        font-size: 2rem;
+        font-size: 2.5rem;
+        margin-left: 1rem;
+    }
+
+    nav.navContainer {
+        display: none;
+    }
+
+    nav.navContainerMobile {
+        display: flex;
+        height: 10rem;
+        flex-direction: column;
+        justify-content: space-between;
+        background-color: #E3E5E6;
+        border-top-left-radius: 1.5rem;
+        border-bottom-left-radius: 1.5rem;
+        border-bottom-right-radius: 1.5rem;
+        padding: 1rem;
+        box-shadow: 1px 1px 5px #75747461;
+        position: absolute;
+        z-index: 1;
+        right: 0.2rem;
+        top: 4rem
+    }
+
+    div.icon {
+        width: 1.5rem;
+        height: 1.5rem;
+    }
+
+    div.menu {
+        width: 3rem;
+        height: 3rem;
+        background-position: center;
+        background-size: cover;
+        cursor: pointer;
+    }
+
+    div.dropDown {
+        right: 10.5rem;
+        top: 11rem;
     }
 }

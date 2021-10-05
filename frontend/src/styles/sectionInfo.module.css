@@ -4,7 +4,6 @@ section.sectionContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 2rem;
 }
 
@@ -31,6 +30,11 @@ div.cardInfo {
     text-align: center;
 }
 
+div.cardInfo:hover {
+    transform: scale(1.1, 1.1);
+    transition: all(1.5s);
+}
+
 div.imgCard {
     width: 5rem;
     height: 5rem;
@@ -38,8 +42,13 @@ div.imgCard {
     background-size: cover;
 }
 
-@media (max-width: 500px) {
+@media (min-width: 375px) and (max-width: 767px) {
     article.articleContainer {
         flex-direction: column;
     }
+
+    section.sectionContainer h2 {
+        font-size: 1.7rem;
+    }
+
 }
