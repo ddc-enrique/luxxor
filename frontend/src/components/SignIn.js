@@ -32,15 +32,14 @@ const SignIn = () => {
 
     return (
         <>
-        <button type="button"  data-toggle="modal" data-target="#windowAdd">
+         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
             Sign Up
-        </button>
-            
-            <div id="windowAdd" className={styles.modal}>
-            <div className={styles.windowPopUp}>
-                <a href="#Home" style={{textDecoration: 'none'}}>
-                    X
-                </a>
+        </button> 
+        <div className={styles.modal} id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className={styles.modalDialog} role="document">
+                <div className={styles.modalContent}>
+                <div className={styles.modalBody}>
+                    <div className={styles.column}>
                     <div style={{backgroundColor: "#EFEAEA", width: "29rem", height: "24rem"}}>
                         <h1>Sign In</h1>
                         <div style={styles.inputContain}>
@@ -59,7 +58,11 @@ const SignIn = () => {
                             cookiePolicy={"single_host_origin"}
                         />
                     </div>
-            </div>  
+                    
+                    </div>
+                </div>
+                </div>
+            </div>
         </div>
         </>
     )
@@ -69,7 +72,23 @@ export default SignIn
 
 
 
-    
-
-       
+{/* <div style={{backgroundColor: "#EFEAEA", width: "29rem", height: "24rem"}}>
+            <h1>Sign In</h1>
+            <div style={styles.inputContain}>
+                <input type="email" className={styles.input} placeholder="Ingrese su email" name="eMail" defaultValue={userLog.eMail} onChange={userLoginHandler}/>
+                <div className={styles.inputPassContainer}>
+                    <input className={styles.inputPass} type={!check ? "password" : "text"} placeholder="Ingrese su contraseña" name="password" defaultValue={userLog.password} onChange={userLoginHandler}/>
+                    <img onClick={()=>setCheck(!check)} className={styles.imgForPass} src={`https://i.postimg.cc/${viewPassImg}`} alt="..."/>
+                </div>
+                <button className={styles.buttonSign} onClick={enterUser}>Entrar</button>
+            </div>
+            <GoogleLogin 
+                clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"
+                buttonText="Ingresar con Google"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                cookiePolicy={"single_host_origin"}
+                
+              />
+        </div> */}
 
