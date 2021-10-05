@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useState } from "react"
 import styles from "../styles/signUp.module.css"
 import Footer from "../components/Footer"
@@ -6,6 +7,15 @@ import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 import { GoogleLogin} from "react-google-login"
 import { Link } from "react-router-dom"
+=======
+import React,{useState} from "react"
+import styles from "../styles/signUp.module.css"
+import Footer from "../components/Footer"
+import Navbar from "../components/NavBar"
+import { Carousel } from "react-carousel-minimal"
+import { Link } from "react-router-dom"
+import {GoogleLogin} from "react-google-login"
+>>>>>>> origin/fernando
 
 const SignUp = (props) => {
   const {signUp} = props
@@ -47,12 +57,56 @@ const SignUp = (props) => {
     }
  }
 
+<<<<<<< HEAD
+=======
+
+  const data = [
+    {
+      image: "https://i.postimg.cc/c1fWVFXW/first-Comment.png",
+      caption: "",
+    },
+    {
+      image: "https://i.postimg.cc/1tPB45hJ/second-Comment.png",
+      caption: "",
+    },
+    {
+      image: "https://i.postimg.cc/bYS5MdY2/third-Comment.png",
+      caption: "",
+    },
+    {
+      image: "https://i.postimg.cc/9FWG9NkF/fourth-Comment.pngpng",
+      caption: "",
+    },
+    {
+      image: "https://i.postimg.cc/TwyvP9VR/fifth-Comment.png",
+      caption: "",
+    },
+    {
+      image: "https://i.postimg.cc/P5fcxyHB/sixth-Comment.png",
+      caption: "",
+    },
+  ]
+
+  const captionStyle = {
+    fontSize: "2em",
+    fontWeight: "bold",
+  }
+  const slideNumberStyle = {
+    fontSize: "20px",
+    fontWeight: "bold",
+  }
+>>>>>>> origin/fernando
 
   return (
     <>
       <Navbar />
+<<<<<<< HEAD
         <div className={styles.container}>
           <div className={styles.containerForm}>
+=======
+      <div className={styles.container}>
+      <div className={styles.containerForm}>
+>>>>>>> origin/fernando
             <h1>Crear cuenta</h1>
             <h2>Completa con tus datos</h2>
             <input
@@ -112,7 +166,11 @@ const SignUp = (props) => {
                 <div className={styles.buttonGoogle}>
                   <GoogleLogin 
                       clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"
+<<<<<<< HEAD
                       buttonText="Ingresar"
+=======
+                      buttonText="Registrarme"
+>>>>>>> origin/fernando
                       onSuccess={responseGoogle}
                       onFailure={responseGoogle}
                       cookiePolicy={"single_host_origin"}
@@ -127,14 +185,40 @@ const SignUp = (props) => {
               </Link>
             </div>
           </div>
+        <div className={styles.containerCarousel}>
+          <h2>Testimonios de nuestros clientes</h2>
+          <Carousel
+            data={data}
+            time={2000}
+            width="42rem"
+            height="25rem"
+            automatic={true}
+            dots={false}
+            slideBackgroundColor="trasnparent"
+            slideImageFit="cover"
+            thumbnails={false}
+          />
         </div>
+<<<<<<< HEAD
+=======
+      </div>
+>>>>>>> origin/fernando
       <Footer />
     </>
   )
 }
 
+<<<<<<< HEAD
 const mapDispatchToProps = {
   signUp: usersAction.signUp,
 }
 
 export default connect(null, mapDispatchToProps)(SignUp)
+=======
+// const mapDispatchToProps = {
+//   signUp: usersAction.signUp,
+// }
+
+export default SignUp 
+// export default connect(null, mapDispatchToProps)(SignUp)
+>>>>>>> origin/fernando

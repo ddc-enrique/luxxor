@@ -15,7 +15,7 @@ return(
             <p>Como Comprar?</p>
             <p>Productos</p>
             <p>Contacto</p>
-            <Link to="/signup">Sign up</Link>
+            
         </nav>
         <div className={styles.navIcons}>
             <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}} onClick={clickHandler}>
@@ -25,7 +25,7 @@ return(
             </div>
             { visible &&  <div className={styles.dropDown}>
                 <p>Ingresar</p>
-                <p>Registrarme</p>
+                <Link to="/signup"><p>Registrarme</p></Link>
                 </div>}
     </header>
 )
