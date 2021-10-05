@@ -2,6 +2,7 @@ const express = require('express')
 const passport = require('passport')
 const usersControllers = require('../controllers/usersControllers')
 const productsControllers = require('../controllers/productsControllers')
+const brandCategoryControllers= require('../controllers/brandCategoryControllers')
 
 const router = express.Router()
 
@@ -19,6 +20,22 @@ router.route('/user/edit-profile/:id')
 // router.route('/products')
 //     .get(productsControllers)
 //     .post(productsControllers)
+router.route('/admin/brands')
+    .get(brandCategoryControllers.getAll)
+    .post(brandCategoryControllers.addValueField)
+    
+router.route('/admin/brand/:id')
+    .get(brandCategoryControllers.getOneValueField)
+    .put(brandCategoryControllers.editValueField)
+    .delete(brandCategoryControllers.deleteValueField)
 
+router.route('/admin/categories')
+    .get(brandCategoryControllers.getAll)
+    .post(brandCategoryControllers.addValueField)
+
+router.route('/admin/category/:id')
+    .get(brandCategoryControllers.getOneValueField)
+    .put(brandCategoryControllers.editValueField)
+    .delete(brandCategoryControllers.deleteValueField)
 
 module.exports = router
