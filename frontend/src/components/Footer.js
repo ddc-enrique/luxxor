@@ -3,10 +3,10 @@ const Footer = ()=>{
     return(
     <footer className={styles.footerContainer}>
         <div className={styles.divContainer}>
-            <div>
-                <p>Como Comprar?</p>
-                <p>Productos</p>
-                <p>Contacto</p>
+            <div className={styles.navFooter}>
+            <a href="#comoComprar">Como Comprar?</a>
+            <a>Productos</a>
+            <a href="#contacto">Contacto</a>
             </div>
             <div className={styles.redes}>
                 <img src= 'https://i.postimg.cc/RZr1wMdv/Dise-o-sin-t-tulo-50.png' alt='facebook'/>

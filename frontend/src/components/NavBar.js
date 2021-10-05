@@ -4,28 +4,42 @@ import { Link } from "react-router-dom"
 
 const NavBar = () => {
     const [visible, setVisible] =useState(false)
+    const [visibleMenu, setVisibleMenu] =useState(false)
     const clickHandler= ()=>{
         setVisible(!visible)
+    }
+    const clickHandlerMenu= ()=>{
+        setVisibleMenu(!visibleMenu)
     }
 
 return(
     <header className={styles.headerContainer}>
-        <h1>Lu<span className={styles.orange}>x</span><span className={styles.violet}>x</span>or</h1>
+        <Link to='/'>
+            <h1>Lu<span className={styles.orange}>x</span><span className={styles.violet}>x</span>or</h1>
+        </Link>
         <nav className={styles.navContainer}>
-            <p>Como Comprar?</p>
+            <a href="#comoComprar">Como Comprar?</a>
             <p>Productos</p>
-            <p>Contacto</p>
-            <Link to="/signup">Sign up</Link>
-        </nav>
-        <div className={styles.navIcons}>
+            <a href="#contacto">Contacto</a>
             <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}} onClick={clickHandler}>
             </div>
             <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/1z2c686R/Dise-o-sin-t-tulo-46.png")'}}>
             </div>
-            </div>
+        </nav>
+            {visibleMenu && 
+            <nav className={styles.navContainerMobile}>
+                <a href="#comoComprar">Como Comprar?</a>
+                <p>Productos</p>
+                <a href="#contacto">Contacto</a>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}} onClick={clickHandler}>
+                </div>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/1z2c686R/Dise-o-sin-t-tulo-46.png")'}}>
+                </div>
+            </nav>}
+        <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/R0X4cphc/menu-1.png")'}}  onClick={clickHandlerMenu}></div>
             { visible &&  <div className={styles.dropDown}>
-                <p>Ingresar</p>
-                <p>Registrarme</p>
+                <Link to="/ingreso"><p>Ingresar</p></Link>
+                <Link to="/registro"><p>Registrarme</p></Link>
                 </div>}
     </header>
 )

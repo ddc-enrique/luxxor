@@ -1,7 +1,7 @@
 import styles from '../styles/sectionInfo.module.css'
 const SectionInfo = ()=>{
 return(
-    <section className={styles.sectionContainer}> 
+    <section id="comoComprar" className={styles.sectionContainer}> 
         <h2>Como Comprar?</h2>
         <article className={styles.articleContainer}>
             <div className={styles.cardInfo} style={{backgroundImage: 'url("https://i.postimg.cc/ZqrngHc1/Dise-o-sin-t-tulo-51.png")'}}>
