@@ -15,11 +15,15 @@ router.route('/user/edit-profile/:id')
     .post( passport.authenticate('jwt', {session: false}), usersControllers.completeProfile)
     .put( passport.authenticate('jwt', {session: false}), usersControllers.editProfile)
 
+router.route('/products')
+    .get(productsControllers.getAllProducts)
+    .post(productsControllers.addProduct)
 
-//rutas de productos
-// router.route('/products')
-//     .get(productsControllers)
-//     .post(productsControllers)
+router.route('/product/:id')
+    /* .get(productsControllers.getOneProduct) */
+    .put(productsControllers.editProduct)
+  /*   .delete(productsControllers.deleteProduct) */
+
 router.route('/admin/brands')
     .get(brandCategoryControllers.getAll)
     .post(brandCategoryControllers.addValueField)

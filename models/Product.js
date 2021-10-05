@@ -12,7 +12,7 @@ const ProductSchema = new mongoose.Schema({
         optionValue: { type: String }
     } ],
     description: { type: String },
-    discount: { type: Number, max: 70}, //en porcentaje, si no existe no tiene descuento
+    discount: { type: Number, max: 70,default: 0}, //en porcentaje, si no existe no tiene descuento
     category: { type: mongoose.Types.ObjectId, ref: "category" },
     brand: { type: mongoose.Types.ObjectId, ref: "brand" },
 })
