@@ -6,8 +6,8 @@ import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 const App = () => {
   return (
     <BrowserRouter>
-    {/* <Home /> */}
-    <SignUp/>
+    <Home />
+    {/* <SignUp/> */}
       <Switch>
         <Route />
         <Route path="/signup" component={SignUp} />
