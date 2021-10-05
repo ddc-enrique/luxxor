@@ -1,10 +1,12 @@
-.App {
-  text-align: center;
+* {
+  margin: 0%;
+  padding: 0%;
+  font-family: 'Fredoka One', cursive;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  background-color: #F1F6F7;
+  color: #545454;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -32,6 +34,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }
