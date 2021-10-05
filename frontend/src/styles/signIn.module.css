@@ -1,0 +1,68 @@
+
+div.signContainer {
+    background-color: red;
+    width: 60rem;
+    height: 60rem;
+}
+
+div.inputPassContainer {
+    display: flex;
+    background: linear-gradient(90deg, rgba(248,4,156,1) 25%, rgba(253,213,79,1) 100%);
+    width: 13.3rem;
+}
+
+
+
+input.input {
+    outline:none;
+    background-color:transparent;
+    margin: 0.9rem 0rem ;
+    border-width: 0 0 3px 0;
+    border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1;
+}
+
+input.inputPass {
+    border: none;
+    background: transparent;
+    
+}
+
+img.imgForPass {
+    height: 1.2rem;
+    cursor: pointer;
+    background: transparent;
+}
+
+button.buttonSign {
+    background: violet;
+    border-radius: 50px;
+    border: none;
+}
+
+div#windowAdd:target{
+    opacity:1;
+    pointer-events:auto;
+}
+
+div.modal{
+    background-color: rgba(0, 0, 0, 0.445);
+    position:fixed;
+    top:-250px;
+    right:0;
+    bottom:0;
+    left:0;
+    opacity:0;
+    pointer-events:none;
+    transition: all 0.4s;
+}
+
+div.windowPopUp{
+background-color:rgb(255, 255, 255);
+padding: 10px 20px;
+margin: 17% 30%;
+width: 40%;
+position: relative;
+border-radius: 2em;
+}
+  
+ 
