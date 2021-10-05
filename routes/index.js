@@ -11,14 +11,14 @@ router.route('/user/sign-up')
 router.route('/user/sign-in')
     .post(usersControllers.signIn)
 router.route('/user/edit-profile/:id')
-    .post( passport.authenticate('jwt', {session: false}), usersControllers)
-    .put( passport.authenticate('jwt', {session: false}), usersControllers)
+    .post( passport.authenticate('jwt', {session: false}), usersControllers.completeProfile)
+    .put( passport.authenticate('jwt', {session: false}), usersControllers.editProfile)
 
 
 //rutas de productos
-router.route('/products')
-    .get(productsControllers)
-    .post(productsControllers)
+// router.route('/products')
+//     .get(productsControllers)
+//     .post(productsControllers)
 
 
 module.exports = router

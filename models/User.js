@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     dni: { type: Number }, 
     admin: { type: Boolean, default: false },
     google: { type: Boolean, default: false },
-    validated: { type: Boolean },
+    validated: { type: Boolean, default: false},
 })
 
 const User = mongoose.model("user", UserSchema)

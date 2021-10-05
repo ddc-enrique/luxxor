@@ -1,4 +1,7 @@
 const User = require('../models/User')
+const bcryptjs = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+
 const handleError = (res, err) =>{
     // console.log(err.message)
     res.json({success: false, response: err.message})
@@ -57,7 +60,11 @@ const usersControllers = {
             .then( (userFound) => {
                 if (userFound) throw new Error ("DNI en uso")
                 User.findOneAndUpdate({ _id: req.params.id }, { ...req.body })
-                    .then( () => res.json({ success: true, response: { firstName: userFound.firstName, lastName: userFound.lastName } }) )
+                    .then( (userUpdated) => {
+                        // console.log("USUARIO ACTUALIZADO")
+                        // console.log(userUpdated)
+                        res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName } })
+                    } )
             })
             .catch( err => handleError(res, err) )
     },
@@ -70,7 +77,7 @@ const usersControllers = {
             .catch( err => handleError(res, err) )
     },
 
-    
+
 
 }
 
