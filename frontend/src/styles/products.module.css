@@ -1,6 +1,4 @@
-/*contenedor*/
 main.productsContainer {
-  background-color: aqua;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -11,7 +9,7 @@ main.productsContainer section {
   border-radius: 1rem;
   display: flex;
   padding: 1rem;
-  border: 1px solid black;
+  box-shadow: 4px 1px 8px #ebebeb;
   background-color: #fff;
   width: 80%;
   margin-top: 1rem;
@@ -26,16 +24,20 @@ main.productsContainer section:nth-child(2) {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
 }
 main.productsContainer section:nth-child(2) .info {
   display: flex;
   justify-content: space-around;
 }
-main.productsContainer section:nth-child(2) p:first-child {
+main.productsContainer section:nth-child(2) .infoPrice {
+  display: flex;
+  justify-content: flex-end;
+}
+main.productsContainer section:nth-child(2) .info p:first-child {
   background-color: #6b6b6b;
 }
-main.productsContainer section:nth-child(2) p {
+main.productsContainer section:nth-child(2) .info p {
   text-align: center;
   font-size: 1rem;
   padding: 1rem;
@@ -47,13 +49,17 @@ main.productsContainer section:nth-child(2) p {
   background-color: #f48f31;
 }
 main.productsContainer section:nth-child(2) h3 {
-  text-align: end;
   font-size: 1rem;
+  width: 15rem;
   font-weight: lighter;
 }
 main.productsContainer section:nth-child(2) .containerProduct {
   min-height: 10rem;
   padding: 1rem;
+}
+main.productsContainer section:nth-child(2) .containerProduct .titleIcon {
+  display: flex;
+  justify-content: space-between;
 }
 main.productsContainer section:nth-child(2) .containerImage {
   min-height: 15rem;
@@ -61,23 +67,108 @@ main.productsContainer section:nth-child(2) .containerImage {
   margin: 1rem 0;
   border-radius: 0.5rem;
 }
-main.productsContainer section:nth-child(2) .containerImage .image {
-  height: 8rem;
-  position: absolute;
-  top: 17rem;
-  left: auto;
-  width: 12rem;
+
+main.productsContainer section:nth-child(2) .icon {
+  height: 2rem;
+  width: 2rem;
   background-position: center;
   background-size: cover;
 }
+main.productsContainer section:nth-child(2) .modal {
+  height: 20rem;
+  width: 26rem;
+  position: absolute;
+  top: 10rem;
+  border-radius: 1rem;
+  width: 18rem;
+  background-color: rgb(255 255 255);
+  box-shadow: 12px 0px 100vw 55vw #444343d1;
+}
+main.productsContainer section:nth-child(2) .price {
+  height: 1.2rem;
+  width: 7rem;
+  border-radius: 0.8rem;
+  background-color: #f48f31;
+  color: white;
+  text-align: center;
+  padding: 0.6rem;
+}
+main.productsContainer section:nth-child(2) .infoProduct,
+.details {
+  margin: 0.5rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+main.productsContainer section:nth-child(2) .promotions {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+main.productsContainer section:nth-child(2) .promotions span {
+  font-style: italic;
+}
+main.productsContainer section:nth-child(2) .promotions p {
+  width: 13rem;
+  margin: 0 0.5rem;
+}
+main.productsContainer section:nth-child(2) .orange {
+  color: #f48f31;
+}
+main.productsContainer section:nth-child(2) .counter {
+  border: 1px solid #f0f0f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+main.productsContainer section:nth-child(2) .details {
+  border: 1px solid #f0f0f0;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+}
+main.productsContainer section:nth-child(2) .details p {
+  padding: 0.5rem;
+  border-bottom: 1px solid #f1f1f1;
+}
+@media only screen and (min-width: 768px) {
+  main.productsContainer section:nth-child(2) .containerImage {
+    display: flex;
+  }
+  main.productsContainer section:nth-child(2) .infoProduct,
+  .details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+  }
+  main.productsContainer section:nth-child(2) .containerProduct .titleIcon {
+    justify-content: flex-end;
+  }
+  main.productsContainer section:nth-child(2) h3 {
+    font-size: 1rem;
+    width: 36rem;
+  }
+  main.productsContainer section:nth-child(2) .info {
+    justify-content: flex-end;
+  }
+  main.productsContainer section:nth-child(2) .info p {
+    text-align: center;
+    padding: 0.2rem;
+    width: 8rem;
+    border-radius: 0.45rem;
+  }
+}
 @media only screen and (min-width: 1024px) {
   main.productsContainer {
-    background-color: aqua;
+    background-color: #f1f6f7;
     min-height: 100vh;
-    flex-direction: row;
-    justify-content: space-around;
+    margin: 1rem 0;
   }
-
+  main.productsContainer section:nth-child(2) {
+    background-color: #fff;
+    min-width: 65rem;
+    min-height: 40rem;
+  }
   main.productsContainer section {
     height: 30rem;
     border-radius: 1rem;
@@ -86,10 +177,43 @@ main.productsContainer section:nth-child(2) .containerImage .image {
   }
   main.productsContainer section:first-child {
     background-color: #fff;
-    width: 20rem;
+    min-width: 55rem;
   }
   main.productsContainer section:nth-child(2) {
     background-color: #fff;
-    width: 55rem;
+    min-width: 55rem;
+  }
+  main.productsContainer section:nth-child(2) .infoProduct,
+  .details {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    font-size: 1.2rem;
+    width: 27rem;
+  }
+  main.productsContainer section:nth-child(2) .containerImage {
+    justify-content: space-around;
+  }
+  main.productsContainer section:nth-child(2) .containerProduct .titleIcon {
+    justify-content: space-between;
+    align-items: center;
+  }
+  main.productsContainer section:nth-child(2) h3 {
+    font-size: 1.5rem;
+  }
+  main.productsContainer section:nth-child(2) .promotions p {
+    min-width: 23rem;
+    margin: 0 0.5rem;
+  }
+  main.productsContainer section:nth-child(2) .details {
+    padding: 0rem;
+    border: none;
+  }
+  main.productsContainer section:nth-child(2) .details p {
+    padding: 0.2rem;
+    width: 23rem;
+    font-size: 0.8rem;
+    font-weight: lighter;
+    border-bottom: 1px solid #f1f1f1;
   }
 }
