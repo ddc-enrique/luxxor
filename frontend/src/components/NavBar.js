@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import styles from '../styles/navBar.module.css'
-import { Link } from "react-router-dom"
 
 const NavBar = () => {
     const [visible, setVisible] =useState(false)
@@ -19,7 +18,9 @@ return(
         </Link>
         <nav className={styles.navContainer}>
             <a href="#comoComprar">Como Comprar?</a>
-            <p>Productos</p>
+            <Link to='/producto'>
+                Producto
+            </Link>
             <a href="#contacto">Contacto</a>
             <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}} onClick={clickHandler}>
             </div>
@@ -29,7 +30,9 @@ return(
             {visibleMenu && 
             <nav className={styles.navContainerMobile}>
                 <a href="#comoComprar">Como Comprar?</a>
-                <p>Productos</p>
+                <Link to='/producto'>
+                    Producto
+                </Link>
                 <a href="#contacto">Contacto</a>
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}} onClick={clickHandler}>
                 </div>
