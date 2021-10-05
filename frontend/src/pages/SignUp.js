@@ -61,7 +61,7 @@ const SignUp = () => {
             <button className={styles.buttonSign}>Sign Up</button>
           </div>
         </div>
-        <div>COMMENTS</div>
+        <div>TESTIMONIOS DE CLIENTES </div>
       </div>
       <Footer />
     </>
