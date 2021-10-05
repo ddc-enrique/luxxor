@@ -46,3 +46,15 @@ div.textSign{
     border-width: 0 0 3px 0;
     border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1;
 }
+
+div.inputPassContainer {
+    display: flex;
+    width: 100%;
+}
+
+img.imgForPass {
+    height: 0.6rem;
+    cursor: pointer;
+    background: transparent;
+    align-self: center;
+}
