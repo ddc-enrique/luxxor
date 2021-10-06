@@ -4,7 +4,8 @@ const Contact = () =>{
     let slides = [
         <img  src="https://i.postimg.cc/MGRPjDfG/nh_1.jpg" alt="1" />,
         <img  src="https://i.postimg.cc/pTJssLZb/nh_2.jpg" alt="2" />  ,
-        <img  src="https://i.postimg.cc/kMwj8DGW/nh_3.jpg" alt="3" />   ]
+        <img  src="https://i.postimg.cc/kMwj8DGW/nh_3.jpg" alt="3" />   
+    ]
 return(
     <> 
         <h2 className={styles.subtitleContact }>Contactanos</h2>
