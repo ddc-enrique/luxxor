@@ -8,7 +8,7 @@ const SaleSchema = new mongoose.Schema({
         product: { type: mongoose.Types.ObjectId, ref: "product" },
     }],
     amount: { type: Number },
-    methodPayment: { type: String }, //
+    methodPayment: { type: String }, // Efectivo, Paypal, 
     shipping: { type: Boolean } //true si es envio, false si retira por local
 })
 
