@@ -35,7 +35,7 @@ div.redes img {
     width: 2.5rem;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
+@media screen and (min-width: 375px) and (max-width: 767px) {
     div.redes img {
         width: 1.8rem;
     }
@@ -58,7 +58,7 @@ div.redes img {
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
     div.divContainer:first-child {
         display: flex;
         flex-direction: column

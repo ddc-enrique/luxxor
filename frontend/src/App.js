@@ -10,12 +10,12 @@ import Admin from "./Admin/Admin"
 const App = () => {
   return (
     <BrowserRouter>
-      <Admin/>
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/registro" component={SignUp} />
-        <Route path="/producto" component={Product} />
-        {/* <Route path="/notFound" component={NotFound} />*/}
+        <Route path="/producto" component={Product} /> 
+        <Route path="/admin" component={Admin} /> 
+        {/* <Route path="/notFound" component={NotFound} /> */}
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>
