@@ -36,6 +36,9 @@ const NavBar = () => {
                 <Link to='/producto'>
                     Producto
                 </Link>
+                <Link to='/productos'>
+                    Productos
+                </Link>
                 {history.location.pathname==="/" && 
                     <a href="#contacto">
                        Contacto 
