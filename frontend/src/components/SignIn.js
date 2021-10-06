@@ -42,9 +42,6 @@ const SignIn = (props) => {
 
     return (
         <>
-        <button onClick={()=>setModalLogIn(!modalLogIn)}>Ver modal</button>
-            {!modalLogIn &&
-            
             <div className={styles.container}>
                 <div className={styles.signContainer}>
                     <div className={styles.icono} onClick={()=> setModalLogIn(!modalLogIn)} style={{backgroundImage: "url('https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png')"}} ></div>
@@ -64,16 +61,15 @@ const SignIn = (props) => {
                             onSuccess={responseGoogle}
                             onFailure={responseGoogle}
                             cookiePolicy={"single_host_origin"}
+                            
                         />
                     </div>
                     <div className={styles.textSign}>
                         <h2>No tenés cuenta? <Link to="#"></Link>Registráte </h2>
                         
                     </div>
-                    
                 </div>
-                
-            </div>}
+            </div>
         </>
     )
 }
