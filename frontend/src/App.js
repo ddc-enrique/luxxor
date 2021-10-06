@@ -8,7 +8,7 @@ import Admin from "./Admin/Admin"
 
 
 const App = () => {
-  return (
+  return (    
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Home} />
