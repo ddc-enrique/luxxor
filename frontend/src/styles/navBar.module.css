@@ -1,42 +1,29 @@
 header.headerContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     width: 100%;
-    padding: 1rem 0rem
 }
 
-header.headerContainer h1 {
-    font-size: 2.9rem;
+div.titleNav {
+    width: 15rem;
+    height: 8rem;
+    background-position: center;
+    background-size: cover;
 }
 
 nav.navContainer {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-between;
     width: 70%;
     align-items: center;
+    margin: 0 4rem;
 }
 
 nav.navContainerMobile {
     display: none;
 }
 
-
-span.orange {
-    color: #F99D22;
-    font-size: 2.9rem;
-}
-
-span.violet {
-    color: #7A5EA8;
-    font-size: 2.9rem;
-}
-
-span.violet:hover,
-span.orange:hover {
-    font-size: 3.5rem;
-    transition: all(1.5s);
-}
 
 div.icon {
     width: 3rem;
@@ -48,10 +35,10 @@ div.icon {
 
 div.dropDown {
     position: absolute;
-    right: 28.5rem;
-    top: 4.1rem;
+    right: 21.5rem;
+    top: 6.3rem;
     width: 7rem;
-    height: 4rem;
+    height: 5rem;
     background-color: #E3E5E6;
     border-top-left-radius: 1.5rem;
     border-bottom-left-radius: 1.5rem;
@@ -66,7 +53,15 @@ div.dropDown p {
     margin-bottom: 1rem;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
+nav.navContainer a {
+    font-size: 1.3rem
+}
+
+nav.navContainer a:hover {
+    color: #F99D22;
+}
+
+@media screen and (min-width: 375px) and (max-width: 767px) {
     header.headerContainer {
         justify-content: space-between;
     }

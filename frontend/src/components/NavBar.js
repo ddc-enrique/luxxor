@@ -20,12 +20,13 @@ const NavBar = () => {
     return(
         <header className={styles.headerContainer}>
             <Link to='/'>
-                <h1>Lu<span className={styles.orange}>x</span><span className={styles.violet}>x</span>or</h1>
+                {/* <h1>Lu<span className={styles.orange}>x</span><span className={styles.violet}>x</span>or</h1> */}
+                <div className={styles.titleNav} style={{backgroundImage: 'url("https://i.postimg.cc/fTBDVNKz/LUXXOR-unscreen.gif")'}}></div>
             </Link>
             <nav className={styles.navContainer}>
                 {history.location.pathname==="/" && 
                     <a href="#comoComprar">
-                       ¿Cómo Comprar?
+                        ¿Cómo Comprar?
                     </a>
                 }
                 {(history.location.pathname.length > 1) && 
@@ -41,7 +42,7 @@ const NavBar = () => {
                 </Link>
                 {history.location.pathname==="/" && 
                     <a href="#contacto">
-                       Contacto 
+                        Contacto 
                     </a>
                 }
                 {(history.location.pathname.length > 1) && 
@@ -89,6 +90,7 @@ const NavBar = () => {
                     <Link to="#" onClick={()=>setModalLogIn(!modalLogIn)}><p>Ingresar</p></Link>
                     {!modalLogIn && <SignIn/>}
                     <Link to="/registro"><p>Registrarme</p></Link>
+                    <Link to="/admin"><p>Admin</p></Link>
                 </div>}
         </header>
     )

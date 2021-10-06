@@ -5,6 +5,7 @@ import SignIn from "./components/SignIn"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
+import Admin from "./Admin/Admin"
 
 
 const App = () => {
@@ -13,9 +14,10 @@ const App = () => {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/registro" component={SignUp} />
-        <Route path="/producto" component={Product} />
+        <Route path="/producto" component={Product} /> 
         <Route path="/productos" component={Products}/>
-        {/* <Route path="/notFound" component={NotFound} />*/}
+        <Route path="/admin" component={Admin} /> 
+        {/* <Route path="/notFound" component={NotFound} /> */}
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

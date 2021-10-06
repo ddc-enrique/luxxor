@@ -1,22 +1,18 @@
-h2.subtitleContact {
-    font-size: 2.5rem;
-    text-align: center;
-}
-
 div.containerContact {
     display: flex;
-    justify-content: space-evenly;
+    flex-direction: column-reverse;
     align-items: center;
+    justify-content: center;
 }
 
 div.containerContact>* {
-    width: 40rem;
+    width: 50rem;
     height: 40rem;
 }
 
 form.formContact {
-    width: 40rem;
-    height: 25rem;
+    width: 45rem;
+    height: 28rem;
     background: #E3E5E6;
     border-radius: 1rem;
     box-shadow: 1px 1px 5px #75747461;
@@ -46,6 +42,10 @@ form.formContact input {
     border-bottom: 2px solid #bebed2;
 }
 
+form.formContact ::placeholder {
+    font-size: 1.1rem;
+}
+
 form.formContact input:focus {
     border-bottom: 2px solid #6c6c72;
 }
@@ -54,7 +54,7 @@ form.formContact p:before {
     content: attr(type);
     display: block;
     margin: 1.5rem 0 0;
-    font-size: 1rem;
+    font-size: 1.5rem;
     color: #5a5a5a;
 }
 
@@ -99,9 +99,10 @@ div.imagen {
     background-position: center;
     background-size: contain;
     background-repeat: no-repeat;
+    width: 80%;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
+@media screen and (min-width: 375px) and (max-width: 767px) {
     div.imagen {
         display: none;
     }

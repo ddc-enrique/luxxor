@@ -1,13 +1,7 @@
 import styles from '../styles/contact.module.css'
-var Carousel = require( '3d-react-carousal').Carousel;
 const Contact = () =>{
-    let slides = [
-        <img  src="https://i.postimg.cc/MGRPjDfG/nh_1.jpg" alt="1" />,
-        <img  src="https://i.postimg.cc/pTJssLZb/nh_2.jpg" alt="2" />  ,
-        <img  src="https://i.postimg.cc/kMwj8DGW/nh_3.jpg" alt="3" />   ]
 return(
     <> 
-        <h2 className={styles.subtitleContact }>Contactanos</h2>
         <div className={styles.containerContact}>
         <form id="contacto" class={styles.formContact}>
             <h2 data-anijs="if: click, do: rubberBand animated, to: .container-box className={styles.cardInfo}" >CONTACTO</h2>
@@ -20,7 +14,8 @@ return(
                 <span><img src='https://i.postimg.cc/vTNHk97p/mail.png' alt='icon' width='25'/> luxxor.tech@gmail.com</span> 
             </div>
         </form>
-        <Carousel slides={slides} autoplay={false} interval={1500}/>
+        <div className={styles.imagen} style={{backgroundImage: 'url("./assets/app.gif")'}}>
+        </div>
     </div>
     </>
 )
