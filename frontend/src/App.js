@@ -1,7 +1,6 @@
 import "./App.css"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
-import SignIn from "./components/SignIn"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
