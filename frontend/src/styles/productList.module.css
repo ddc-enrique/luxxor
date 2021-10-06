@@ -3,16 +3,22 @@
     justify-content: space-around;
 }
 
+.cardProduct{
+    background-color: red;
+
+}
+
 .containPrice{
     display:flex;
     flex-direction: row;
     justify-content:space-around;
 }
 
-.containProducts{
+.containerProducts{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap:wrap;
+
 }
 
 .photo{

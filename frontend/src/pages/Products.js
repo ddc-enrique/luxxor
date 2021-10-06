@@ -61,20 +61,35 @@ const Products = () => {
             </select>
           </div>
         </div>
-        <div className={styles.containProducts}>
+        <div className={styles.containerProducts}>
           <h2>PRODUCTOS</h2>
 
-          <div className={styles.containPrice}>
-            <p>282000</p>
-            <p>%10</p>
+          <div className={styles.cardProduct}>
+            <div className={styles.containPrice}>
+              <p>282000</p>
+              <p>%10</p>
+            </div>
+            <p>MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray</p>
+            <div
+              className={styles.photo}
+              style={{
+                backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
+              }}
+            ></div>
           </div>
-          <div
-            className={styles.photo}
-            style={{
-              backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-            }}
-          ></div>
-         
+          <div className={styles.cardProduct}>
+            <div className={styles.containPrice}>
+              <p>282000</p>
+              <p>%10</p>
+            </div>
+            <p>MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray</p>
+            <div
+              className={styles.photo}
+              style={{
+                backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
+              }}
+            ></div>
+          </div>
         </div>
       </div>
       <Footer />
