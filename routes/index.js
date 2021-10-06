@@ -9,12 +9,14 @@ const router = express.Router()
 
 router.route('/user/sign-up')
     .post(validatorControllers.validatorSignUp ,usersControllers.signUp)
+
 router.route('/user/sign-in')
     .post(usersControllers.signIn)
+
 router.route('/user/edit-profile/:id')
     .post( passport.authenticate('jwt', {session: false}), usersControllers.completeProfile)
-    .put( passport.authenticate('jwt', {session: false}), usersControllers.editProfile)
-
+    .put( passport.authenticate('jwt', {session: false}),validatorControllers.validatorCompleteProfile, usersControllers.editProfile)
+   
 router.route('/products')
     .get(productsControllers.getAllProducts)
     .post(productsControllers.addProduct)
