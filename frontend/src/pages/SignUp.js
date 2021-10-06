@@ -6,6 +6,7 @@ import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 import { GoogleLogin} from "react-google-login"
 import { Link } from "react-router-dom"
+import { Carousel } from "react-carousel-minimal"
 
 const SignUp = (props) => {
   const {signUp} = props

@@ -18,10 +18,10 @@ return (
             width="25rem"
             height="25rem"
             automatic={true}
-            dots={true}
+            dots={false}
             slideBackgroundColor="transparent"
             slideImageFit="cover"
-            thumbnails={true}
+            thumbnails={false}
     />
 )
 }

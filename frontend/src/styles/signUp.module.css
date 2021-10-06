@@ -81,22 +81,17 @@ div.inputPassContainer {
     width: 100%;
 }
 
-<<<<<<< HEAD
 div.inputPassContainer {
     display: flex;
     width: 100%;
 }
 
-=======
->>>>>>> origin/fernando
 img.imgForPass {
     height: 0.6rem;
     cursor: pointer;
     background: transparent;
     align-self: center;
 }
-<<<<<<< HEAD
-=======
 
 @media only screen and (min-width: 375px) {
     .inputTypes{
@@ -134,4 +129,3 @@ img.imgForPass {
   @media only screen and (min-width: 1440px) {
   
   }
->>>>>>> origin/fernando
