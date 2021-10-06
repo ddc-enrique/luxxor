@@ -43,7 +43,6 @@ div.textSign{
 	text-shadow:0px 1px 0px #7A5EA8;
     margin:1rem 0rem;
     margin-left:1rem;
-    
 }
 
 .inputTypes{
@@ -91,6 +90,25 @@ img.imgForPass {
     cursor: pointer;
     background: transparent;
     align-self: center;
+}
+
+div.buttonGoogle button {
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+    width: 14rem!important;
+    background-color:#7A5EA8!important;
+	border-radius:2em!important;
+    outline: none!important;
+	color:#ffffff!important;
+	font-size:1.53rem!important;
+	padding:1.45rem 2rem!important;
+	text-decoration:none!important;
+    height: 2rem!important;
+}
+
+div.buttonGoogle button div {
+    background-color: transparent!important
 }
 
 @media only screen and (min-width: 375px) {
