@@ -55,8 +55,15 @@ div.textSign{
     width: 30rem;
 }
 
+.location {
+    flex-direction: column!important;
+    
+    height: 10rem;
+}
+
 .location button{
-    margin:2rem 1rem
+    margin:1rem 1rem;
+    
 }
 
 .link{
@@ -90,6 +97,15 @@ img.imgForPass {
     cursor: pointer;
     background: transparent;
     align-self: center;
+}
+
+input.inputPhoto {
+    display: none;
+}
+
+label.labelInput {
+    align-self: center;
+    cursor: pointer;
 }
 
 div.buttonGoogle button {

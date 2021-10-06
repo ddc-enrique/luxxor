@@ -37,11 +37,18 @@ const SignUp = (props) => {
   }
 
   const newUserHandler = (e) => {
-    setNewUser({...newUser, [e.target.name]: e.target.value})
+    setNewUser({...newUser, [e.target.name]: e.target.name === "profilePic" ? e.target.files[0] : e.target.value})
   }
 
-  const enterNewUser = () =>{
-    signUp(newUser)
+  const enterNewUser = async () =>{
+    const FD = new FormData()
+      FD.append("firstName", newUser.firstName)
+      FD.append("lastName", newUser.lastName)
+      FD.append("password", newUser.password)
+      FD.append("eMail", newUser.eMail)
+      FD.append("profilePic", newUser.profilePic)
+
+      await signUp(FD)
 }
 
   const keyPressHandler = (e) => {
@@ -49,7 +56,6 @@ const SignUp = (props) => {
       signUp(newUser)
     }
  }
-
 
   const data = [
     {
@@ -138,25 +144,27 @@ const SignUp = (props) => {
               name="checkPassword"
               onKeyPress={keyPressHandler}
             />
+            <label className={styles.labelInput} for="inputPhoto"><img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif"/>Foto de perfil</label>
             <input
+              id="inputPhoto"
               onChange={newUserHandler}
-              type="text"
-              className={styles.inputTypes}
+              type="file"
+              className={styles.inputPhoto}
               placeholder="Foto de perfil"
               name="profilePic"
               defaultValue={newUser.profilePic}
             />
             <div className={styles.location}>
               <button onClick={enterNewUser} className={styles.buttonSign}>Registrarme</button>
-                <div className={styles.buttonGoogle}>
-                  <GoogleLogin 
-                      clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"
-                      buttonText="Registrarme"
-                      onSuccess={responseGoogle}
-                      onFailure={responseGoogle}
-                      cookiePolicy={"single_host_origin"}
-                  />
-                </div>
+              <div className={styles.buttonGoogle}>
+                <GoogleLogin 
+                    clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"
+                    buttonText="Registrarme"
+                    onSuccess={responseGoogle}
+                    onFailure={responseGoogle}
+                    cookiePolicy={"single_host_origin"}
+                />
+              </div>
             </div>
 
             <div className={styles.textSign}>
