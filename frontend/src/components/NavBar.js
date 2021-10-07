@@ -87,7 +87,7 @@ const NavBar = (props) => {
             <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/R0X4cphc/menu-1.png")'}}  onClick={clickHandlerMenu}></div>
                 { visible &&  <div className={styles.dropDown}>
                     <Link to="#" onClick={()=>setModalLogIn(!modalLogIn)}><p>Ingresar</p></Link>
-                    {!modalLogIn && <SignIn/>}
+                     <SignIn modalLogIn={modalLogIn}/>
                     <Link to="/registro"><p>Registrarme</p></Link>
                     <Link to="/admin"><p>Admin</p></Link>
                 </div>}

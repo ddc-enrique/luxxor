@@ -48,12 +48,11 @@ const SignUp = (props) => {
       FD.append("eMail", newUser.eMail)
       FD.append("profilePic", newUser.profilePic)
       await signUp(FD)
-    
 }
 
   const keyPressHandler = (e) => {
     if (e.key === "Enter") {
-      signUp(newUser)
+      enterNewUser()
     }
  }
 
