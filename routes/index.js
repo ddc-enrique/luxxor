@@ -20,6 +20,8 @@ router.route('/user/cambio-contrasenia/:id')
     .put(usersControllers.changePassword)
     
 router.route('/user/edit-profile/:id')
+    .get( passport.authenticate('jwt', {session: false}), 
+        usersControllers.getProfile)
     .post( passport.authenticate('jwt', {session: false}), 
         validatorControllers.validatorEditComplete, 
         usersControllers.completeProfile)

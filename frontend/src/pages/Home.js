@@ -6,10 +6,10 @@ import Main from "../components/Main"
 const Home = () => {
     return(
         <>
-        <Header/>
-        <Main/>
-        <Contact/>
-        <Footer/>
+            <Header/>
+            <Main/>
+            <Contact/>
+            <Footer/>
         </>
     )
 }

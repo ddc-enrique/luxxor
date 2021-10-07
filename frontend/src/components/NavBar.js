@@ -8,14 +8,14 @@ const NavBar = () => {
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(true)
     const [visibleMenu, setVisibleMenu] =useState(false)
+    const history = useHistory()
+
     const clickHandler= ()=>{
         setVisible(!visible)
     }
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
     }
-
-    const history = useHistory()
 
     return(
         <header className={styles.headerContainer}>
@@ -30,13 +30,10 @@ const NavBar = () => {
                     </a>
                 }
                 {(history.location.pathname.length > 1) && 
-                    <Link to='/home'>
+                    <Link to='/' >
                         ¿Cómo Comprar?
                     </Link>
                 }                
-                <Link to='/producto'>
-                    Producto
-                </Link>
                 <Link to='/productos'>
                     Productos
                 </Link>
@@ -46,7 +43,7 @@ const NavBar = () => {
                     </a>
                 }
                 {(history.location.pathname.length > 1) && 
-                    <Link to='/home'>
+                    <Link to='/' >
                         Contacto
                     </Link>
                 }
@@ -63,12 +60,12 @@ const NavBar = () => {
                             </a>
                     }
                     {(history.location.pathname.length > 1) && 
-                        <Link to='/home'>
+                        <Link to='/' >
                             ¿Cómo Comprar?
                         </Link>
                     }
-                    <Link to='/producto'>
-                        Producto
+                    <Link to='/productos'>
+                        Productos
                     </Link>
                     {history.location.pathname==="/" && 
                         <a href="#contacto">
@@ -76,7 +73,7 @@ const NavBar = () => {
                         </a>
                     }
                     {(history.location.pathname.length > 1) && 
-                        <Link to='/home'>
+                        <Link to='/' >
                             Contacto
                         </Link>
                     }

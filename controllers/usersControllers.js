@@ -182,8 +182,18 @@ const usersControllers = {
                 })})
         })
         .catch(err => handleError(res, err))     
-    }
+    },
 
+    getProfile: (req,res) => {
+        console.log("Received GET DATA USER Petition:" + Date())
+        
+        User.findById({_id:req.params.id})
+        .then( userFound => {
+            if( !userFound) throw new Error("No se encontro ningun usuario")
+            res.json({ success: true, response: { address: userFound.address, phone: userFound.phone} } )
+        })
+        .catch( err => handleError(res, err) )
+    }
 }
 
 module.exports = usersControllers
