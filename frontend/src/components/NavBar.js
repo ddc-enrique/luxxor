@@ -13,14 +13,13 @@ const NavBar = (props) => {
     const [visibleMenu, setVisibleMenu] =useState(false)
     const history = useHistory()
 
-
-    console.log(modalLogIn)
     const clickHandler= ()=>{
         setVisible(!visible)
     }
+
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
-        
+        setVisible(false)
     }
 
     return(
@@ -92,7 +91,6 @@ const NavBar = (props) => {
                 { visible &&  <div className={styles.dropDown}>
                     <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</p></Link>
                         {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn}/>}
-                    
                     <Link to="/registro"><p>Registrarme</p></Link>
                     <Link to="/admin"><p>Admin</p></Link>
                     
