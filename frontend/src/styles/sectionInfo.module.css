@@ -42,7 +42,7 @@ div.imgCard {
     background-size: cover;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
+@media screen and (min-width: 375px) and (max-width: 767px) {
     article.articleContainer {
         flex-direction: column;
     }

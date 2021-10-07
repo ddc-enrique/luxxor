@@ -7,11 +7,13 @@ import usersAction from "../redux/actions/usersAction"
 import { GoogleLogin} from "react-google-login"
 import { Link } from "react-router-dom"
 import { Carousel } from "react-carousel-minimal"
+import SignIn from "../components/SignIn"
 
 const SignUp = (props) => {
   const {signUp} = props
 
   const [check, setCheck] = useState(true)
+  const [modalLogIn, setModalLogIn] = useState(true)
   const [newUser, setNewUser] = useState({
     firstName: "",
     lastName: "",
@@ -159,7 +161,7 @@ const SignUp = (props) => {
 
             <div className={styles.textSign}>
               <h2>Tenes cuenta?</h2>
-              <Link to="/" className={styles.link}>
+              <Link to="#" onClick={()=>setModalLogIn(!modalLogIn)} className={styles.link}>
                 <h2> Ingresar aqui</h2>
               </Link>
             </div>
@@ -176,9 +178,11 @@ const SignUp = (props) => {
             slideBackgroundColor="trasnparent"
             slideImageFit="cover"
             thumbnails={false}
+            showNavBtn={false}
           />
         </div>
       </div>
+      {!modalLogIn && <SignIn />}
       <Footer />
     </>
   )

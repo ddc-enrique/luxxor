@@ -1,0 +1,21 @@
+.container{
+    display:flex;
+    justify-content: space-around;
+}
+
+.containPrice{
+    display:flex;
+    flex-direction: row;
+    justify-content:space-around;
+}
+
+.containProducts{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.photo{
+    width:10rem;
+    height:10rem
+}

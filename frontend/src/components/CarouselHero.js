@@ -13,15 +13,16 @@ const data = [
 
 return (
     <Carousel
-            data={data}
-            time={4000}
-            width="25rem"
-            height="25rem"
-            automatic={true}
-            dots={false}
-            slideBackgroundColor="transparent"
-            slideImageFit="cover"
-            thumbnails={false}
+        data={data}
+        time={4000}
+        width="25rem"
+        height="25rem"
+        automatic={true}
+        dots={false}
+        slideBackgroundColor="transparent"
+        slideImageFit="cover"
+        thumbnails={false}
+        showNavBtn={false}
     />
 )
 }

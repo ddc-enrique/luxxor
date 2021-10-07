@@ -1,61 +1,47 @@
 const User = require('../models/User')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-const nodemailer = require('nodemailer')
-
-const transport = nodemailer.createTransport({
-    port: 465,
-    host: 'smtp.gmail.com',
-    auth: {
-        user: process.env.MAIL,
-        pass: process.env.PASSWORD,
-    },
-    tls: { rejectUnauthorized: false }
-})
-
+const transport = require('../config/transport')
 const handleError = (res, err) =>{
-    // console.log(err.message)
     res.json({success: false, response: err.message})
 }
 
 const usersControllers = {
     signUp: (req, res) =>{
         console.log("Received Register User Petition:" + Date())
-        const { firstName, lastName, eMail, password, profilePic, google } = req.body
+        const { firstName, lastName, eMail, password, google } = req.body
+       /*  const { profilePic } = req.files */
        
         let hashedPass = bcryptjs.hashSync(password.trim())
         const adminUser = [ process.env.ADMIN1 ]
         let admin = adminUser.includes(eMail)
+        
         const newUser = new User({
             firstName: firstName.trim(),
             lastName: lastName.trim(),
             password : hashedPass,
             eMail: eMail.trim(),
-            profilePic: profilePic.trim(),
             google,
             admin
         })
-        let options = {
-            from: 'Luxxor <luxxor.tech@gmail.com>',
-            to: eMail,
-            subject: `Welcome to Luxxor ${lastName}, ${firstName}!`,
-            /* html: `<h1 style="color: violet%;">Bienvenido ${firstName} a Luxxor <h1> <a href="http://localhost:4000/api/user/verificate-account/${newUser._id}"><button>Valida Cuenta<button></a>`, */
-            html: `<h1 style="color: violet;">Bienvenido ${firstName} a Luxxor <h1> <a href="http://localhost:3000/"><button>Valida Cuenta<button></a>`,
-        }
+        /* let fileName = newUser.eMail + "." + profilePic.name.split(".")[profilePic.name.split.length-1]
+        newUser.profilePic = fileName
+
+        route = path.join(__dirname, "../assets")
+        profilePic.mv(`${route}/${fileName}`) */
+
         User.findOne({ eMail })
             .then( (userFound) => {
                 if(userFound) throw new Error("Usuario ya registrado")
                 newUser.save()
                     .then( (user) => {
-                        const token = jwt.sign({...newUser}, process.env.SECRETORKEY)
-                        transport.sendMail(options, (err, info) => {
-                            if (err) throw new Error(err)
-                            res.json({success: true, response: {profilePic: user.profilePic, firstName: user.firstName, lastName: user.lastName, eMail: user.eMail, token: token, admin: user.admin, _id:user._id}, responseMail: info})
-                    })
+                        const token = jwt.sign({...newUser}, process.env.SECRETORKEY) 
+                        res.json({success: true, response: {profilePic: user.profilePic, firstName: user.firstName, lastName: user.lastName, eMail: user.eMail, token: token, admin: user.admin, _id:user._id}})                  
                  })
             })
             .catch( err => handleError(res, err) )
     },
+
 
     signIn: (req, res) => {
         console.log("Received SIGN IN USER Petition:" + Date())
@@ -65,10 +51,10 @@ const usersControllers = {
             .then( (userFound) => {
                 if (!userFound) throw new Error (errMessage)
                 if (!google && userFound.google) throw new Error ("Por favor usar Google")
-                if (!userFound.validated) throw new Error("Verifique la cuenta via su email")
+                if (userFound.banned) throw new Error("Cuenta bloqueada")
                 if (!bcryptjs.compareSync(password, userFound.password)) throw new Error(errMessage)
                 const token = jwt.sign({...userFound}, process.env.SECRETORKEY)
-                res.json({success: true, response: {profilePic: userFound.profilePic, firstName: userFound.firstName, lastName: userFound.lastName, eMail: userFound.eMail, token: token, admin: userFound.admin, _id: userFound._id}})
+                res.json({success: true, response: {profilePic: userFound.profilePic, firstName: userFound.firstName, lastName: userFound.lastName, eMail: userFound.eMail, token: token, admin: userFound.admin, _id: userFound._id, dni:userFound.dni}})
             })
             .catch( err => handleError(res, err) )
     },
@@ -95,20 +81,121 @@ const usersControllers = {
             .then( (userUpdated) => res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName } }) )
             .catch( err => handleError(res, err) )
     },
-
-    verificateUser:(req,res)=>{
-        console.log("Received VERIFICATE USER Petition:" + Date())
+    pruebaMail:(req,res)=>{
+        const {eMail,firstName,lastName} = req.body
+        let options = {
+            from: 'Luxxor <luxxor.tech@gmail.com>',
+            to: eMail,
+            subject: `Cambio de contraseña ${lastName}, ${firstName}!`,
+           
+         html: `
+      <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+            <div style="width: 100%;margin:20px 0; text-align: center;">
+                <a href="http://localhost:3000/"><img src="https://i.postimg.cc/QxNK5h6Y/logo-Luxxor.png"" /></a>
+            </div>
+          <tr>
+            <td style="background-color: #dfdbdb;border-radius:20px;box-shadow: 0 5px 16px 0 #433e3e94">
+              <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif;border-radius:20px;">
+                <h1 style="color: #7A5EA8; margin: 0 0 7px">Cambio de Contraseña</h1>
+                <h2 style="color: #000; margin: 0 0 7px">¡Hola ${firstName} ${lastName}!</h2>
+                <p style="margin: 2px; font-size: 15px; color: #000">
+                           Te enviamos este e-mail para comunicarte que has solicitado el cambio de contraseña, haz click en el botón que aparece a continuación para cambiar tu contraseña:
+                </p>
+                <a href="http://localhost:3000/validar/"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Cambiar contraseña</button></a>
+                <h2 style="color:#e11919;">INFORMACION IMPORTANTE </h2>
+                <p style="margin: 2px; font-size: 15px; color: #000">
+                    Si tu no realizaste la solicitud de cambio de contraseña, haz click en el siguiente botón:
+                </p>
+                <a href="http://localhost:3000/validar/"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Bannear Cuenta</button></a>
+                <hr>
+                <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
+                
+              </td>
+          </tr>
+      </table>
+          `
+        }
+        transport.sendMail(options, (err, info) => {
+            if (err) {
+                return res.json({ success: false, response: err })
+            }
+            return res.json({ success: true, response: info })
+        })
+    },
+    banUser:(req,res)=>{
+        console.log("Received BAN USER Petition:" + Date())
         const _id = req.params.id
-        User.findOneAndUpdate({_id},{$set:{"validated":true}},{new:true})
+        User.findOneAndUpdate({_id},{$set:{"banned":true}},{new:true})
         .then(userFound=>{
             if(!userFound) throw new Error("Usuario no encontrado")
+            if(userFound.banned) throw new Error("Usuario ya bloqueado")
             res.json({ success: true, response: userFound })
         })
         .catch(err => handleError(res, err))
+    },
+    changePassword:(req,res)=>{
+        console.log("Received CHANGE PASSWORD Petition:" + Date())
+        console.log(req.body)
+        const {password,eMail} = req.body
+        let hashedPass = bcryptjs.hashSync(password.trim())
+
+        let mailChangePassword = {
+            from: 'Luxxor <luxxor.tech@gmail.com>',
+            to: eMail,
+            subject: `Cambio de contraseña!`,
+           
+         html: `
+      <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+            <div style="width: 100%;margin:20px 0; text-align: center;">
+                <a href="http://localhost:3000/"><img src="https://i.postimg.cc/QxNK5h6Y/logo-Luxxor.png"" /></a>
+            </div>
+          <tr>
+            <td style="background-color: #dfdbdb;border-radius:20px;box-shadow: 0 5px 16px 0 #433e3e94">
+              <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif;border-radius:20px;">
+                <h1 style="color: #7A5EA8; margin: 0 0 7px">Cambio de Contraseña</h1>
+                <h2 style="color: #000; margin: 0 0 7px">¡Hola!</h2>
+                <p style="margin: 2px; font-size: 15px; color: #000">
+                           Te enviamos este e-mail para comunicarte que has recuperado tu contraseña con exito!
+                </p>
+                <h2 style="color:#e11919;">INFORMACION IMPORTANTE </h2>
+                <p style="margin: 2px; font-size: 15px; color: #000">
+                    Si tu no realizaste la solicitud de cambio de contraseña, haz click en el siguiente botón:
+                </p>
+                <a href="http://localhost:3000/bloqueo-cuenta/"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Bloquear Cuenta</button></a>
+                <hr>
+                <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
+                
+              </td>
+          </tr>
+      </table>
+          `
+        }
+        User.findOne({eMail})
+        .then(userFound=>{
+            if(!userFound) throw new Error("Usuario no registrado")
+            userFound.password=hashedPass
+            userFound.save()
+            .then(userModified=>{
+                transport.sendMail(mailChangePassword, (err, info) => {
+                    if (err) throw new Error(err)
+                    res.json({ success: true, response: info })
+                })})
+        })
+        .catch(err => handleError(res, err))     
     }
-
-
 
 }
 
 module.exports = usersControllers
+
+ /* html:`<div style="width:70vw">
+                        <img style="margin:0rem auto"src="https://i.postimg.cc/QxNK5h6Y/logo-Luxxor.png"></img>
+                        <div style="padding: 2rem;width:50vw; margin:0rem auto; background-color:#dfdbdb; border-radius:10px">
+                            <h1 style="color: #7A5EA8;">Creacion de cuenta</h1>
+                            <h3 style="color: #545454">Estimado ${firstName} ${lastName}</h3>
+                            <p style="color: #545454;">¡Gracias por registrarse en Luxxor! Debera ir al siguiente enlace para validar su cuenta: </p>
+                            <a href="http://localhost:3000/validar/"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Validar Cuenta</button></a>
+
+                        </div>
+                    </div>
+            `, */

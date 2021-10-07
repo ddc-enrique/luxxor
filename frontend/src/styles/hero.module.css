@@ -3,9 +3,7 @@ div.heroContainer {
     min-height: 30rem;
     display: flex;
     align-items: center;
-    justify-content: center;
-    margin: auto;
-    gap: 2rem;
+    justify-content: center
 }
 
 div.heroContainer>* {
@@ -51,7 +49,7 @@ button.buttonHero {
     cursor: pointer;
 }
 
-@media (min-width: 375px) and (max-width: 767px) {
+@media screen and (min-width: 375px) and (max-width: 767px) {
     div.heroContainer {
         flex-direction: column;
         align-items: center;
@@ -82,7 +80,7 @@ button.buttonHero {
     }
 }
 
-@media (min-width: 768px) and (max-width: 1024px) {
+@media screen and (min-width: 768px) and (max-width: 1024px) {
     div.heroContainer>* {
         width: 45%;
         height: 27rem;
