@@ -68,7 +68,22 @@ const usersAction = {
             if (!response.data.success) throw new Error(response.data.response)
             return response.data.response
         }
+    },
+
+    sendMail:(eMail)=>{
+        return async (dispatch)=>{
+            let response =await axios.post("http://localhost:4000/api/user/mail-password",{eMail})
+            console.log(response)
+            return response.data.success
+        }
+    },
+    verifyId:(id)=>{
+        return async (dispatch)=>{
+            let response = await axios.get(`http://localhost:4000/api/user/verifyId/${id}`)
+            if(response.data.success) return response.data.success
+        }
     }
+    
 }
 
 export default usersAction

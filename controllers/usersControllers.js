@@ -112,7 +112,7 @@ const usersControllers = {
                     Si tu no realizaste la solicitud de cambio de contraseña, haz click en el siguiente botón:
                 </p>
                 <a href="http://localhost:3000/validar/"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Bannear Cuenta</button></a>
-                <hr>
+                <hr/>
                 <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
                 
               </td>
@@ -138,7 +138,7 @@ const usersControllers = {
             let mailBanned = {
                 from: 'Luxxor <luxxor.tech@gmail.com>',
                 to: userFound.eMail,
-                subject: `Cuenta Bloqueada ${userFound.firstName}!`,
+                subject: `Cuenta Bloqueada-${userFound.firstName} ${userFound.lastName}`,
                
                  html: `
                 <table style="max-width: 800px; padding: 10px; margin:0 auto; border-collapse: collapse;">
@@ -154,7 +154,7 @@ const usersControllers = {
                                     Te enviamos este e-mail para comunicarle que su cuenta ha sido bloqueada!
                                     Puede comunicarse a esta casilla de correo para recuperarla.
                             </p>                    
-                            <hr>
+                            <hr/>
                             <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
                             
                         </td>
@@ -204,7 +204,7 @@ const usersControllers = {
                     Si tu no realizaste la solicitud de cambio de contraseña, haz click en el siguiente botón:
                 </p>
                 <a href="http://localhost:3000/bloqueo-cuenta/"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Bloquear Cuenta</button></a>
-                <hr>
+                <hr/>
                 <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
                 
               </td>
@@ -232,7 +232,11 @@ const usersControllers = {
         User.findById({_id:req.params.id})
         .then( userFound => {
             if( !userFound) throw new Error("No se encontro ningun usuario")
-            res.json({ success: true, response: { address: userFound.address, phone: userFound.phone} } )
+            if(req.url.includes("verifyId")){
+                res.json({ success: true}) 
+            }else{
+                res.json({ success: true, response: { address: userFound.address, phone: userFound.phone} } )
+            }           
         })
         .catch( err => handleError(res, err) )
     },
@@ -240,7 +244,48 @@ const usersControllers = {
     verifyToken: (req, res) => {
         const {profilePic, firstName, lastName, eMail, admin, dni, _id} = req.user
         res.json({profilePic, firstName, lastName, eMail, admin, dni, id: _id})
-    }
+    },
+    sendMailPassword:(req,res)=>{
+        console.log("Received CHANGE PASSWORD Petition:" + Date())
+        eMail=req.body.eMail
+        User.findOne({eMail:eMail})
+        .then(userFound=>{
+            if( !userFound) throw new Error("No se encontro ningun usuario")
+            let mail = {
+                from: 'Luxxor <luxxor.tech@gmail.com>',
+                to: eMail,
+                subject: `Cambio de contraseña ${userFound.lastName}, ${userFound.firstName}!`,
+               
+             html: `
+                <table style="max-width: 700px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+                        <div style="width: 100%;margin:20px 0; text-align: center;">
+                            <a href="http://localhost:3000/"><img src="https://i.postimg.cc/QxNK5h6Y/logo-Luxxor.png"" /></a>
+                        </div>
+                    <tr>
+                        <td style="background-color: #dfdbdb;border-radius:20px;box-shadow: 0 5px 16px 0 #433e3e94">
+                        <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif;border-radius:20px;">
+                            <h1 style="color: #7A5EA8; margin: 0 0 7px">Cambio de Contraseña</h1>
+                            <h2 style="color: #000; margin: 0 0 7px">¡Hola ${userFound.firstName} ${userFound.lastName}!</h2>
+                            <p style="margin: 2px; font-size: 15px; color: #000">
+                                    Te enviamos este e-mail para comunicarte que has solicitado el cambio de contraseña, haz click en el botón que aparece a continuación para cambiar tu contraseña:
+                            </p>
+                            <a href="http://localhost:3000/cambio-contrasenia/${userFound._id}"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Cambiar contraseña</button></a>
+                            <hr/>
+                            <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
+                            
+                        </td>
+                    </tr>
+                </table>
+                    `
+            }
+            transport.sendMail(mail, (err, info) => {
+                if (err) throw new Error(err)
+                res.json({ success: true, response: info })
+            })
+
+        })
+        .catch( err => handleError(res, err) )
+    },
 
 }
 

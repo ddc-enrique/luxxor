@@ -18,8 +18,13 @@ router.route('/pruebaMail')
 router.route('/user/bloqueo-cuenta/:id')
     .put(usersControllers.banUser)
 
-router.route('/user/cambio-contrasenia/:id')
+router.route('/user/change-password/:id')
     .put(usersControllers.changePassword)
+
+router.route('/user/mail-password')
+    .post(usersControllers.sendMailPassword)
+router.route('/user/verifyId/:id')
+    .get(usersControllers.getProfile)
     
 router.route('/user/edit-profile/:id')
     .get( passport.authenticate('jwt', {session: false}), 
