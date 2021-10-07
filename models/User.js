@@ -15,7 +15,7 @@ const UserSchema = new mongoose.Schema({
     admin: { type: Boolean, default: false },
     google: { type: Boolean, default: false },
     banned: { type: Boolean, default: false},
-    wishList: [ String ]
+    wishList: [ {type: mongoose.Types.ObjectId, ref: "product"} ]
 })
 
 const User = mongoose.model("user", UserSchema)

@@ -4,7 +4,7 @@ import SignUp from "./pages/SignUp"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
-import Admin from "./Admin/Admin"
+import Admin from "./pages/Admin"
 import { useEffect } from "react"
 import usersAction from "./redux/actions/usersAction"
 import Error from "./pages/Error"
@@ -12,7 +12,7 @@ import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
 
 
-const App = ({ token, dni}) => {
+const App = (props) => {
 
   useEffect(() => {
     if (localStorage.getItem("token")){
@@ -29,8 +29,8 @@ const App = ({ token, dni}) => {
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
-        {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
-        {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
+        {(props.token && !props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
+        {(props.token && props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
         {/* <Route path="/notFound" component={NotFound} /> */}
         <Redirect to="/error" />
       </Switch>
