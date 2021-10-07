@@ -9,12 +9,7 @@ import toast, { Toaster } from 'react-hot-toast';
 
 const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
     let initialDataUser = completeAccount ? { firstName: "", lastName: "", city: "", zipCode: "", address: "", optional: "", phone: "" }
-        : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" }
-    // if(completeAccount){
-    //     initialDataUser = { firstName: "", lastName: "", city: "", zipCode: "", address: "", optional: "", phone: "" }
-    // } else {
-    //     initialDataUser = { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" }
-    // }    
+        : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" } 
     const [dataUser, setDataUser] = useState({ initialDataUser })
 
     useEffect( () => {
@@ -34,8 +29,13 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
         setDataUser({ ...dataUser, [e.target.name]: e.target.value})
     }
 
-    const sendData = e => {
+    const keyPressHandler = e => {
+        if(e.key === "Enter") updateDataUser()
+    }
+
+    const updateDataUser = e => {
         e.preventDefault()
+        console.log(dataUser)
     }
 
     return(
@@ -63,6 +63,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
                                             className={styles.inputDni} name='dni' type= 'number' placeholder='ej 44444444'
                                             defaultValue={dataUser.dni}
                                             onChange={inputHandler}
+                                            onKeyPress={keyPressHandler}
                                         />
                                     </p>
                                     <p className="error"></p>
@@ -75,6 +76,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
                                             name='firstName' type= 'text' placeholder='ej Juan'
                                             defaultValue={dataUser.firstName}
                                             onChange={inputHandler}
+                                            onKeyPress={keyPressHandler}
                                         />
                                     </p>
                                     <p className="error"></p>
@@ -87,6 +89,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
                                             name='lastName' type= 'text' placeholder='ej Garcia'
                                             defaultValue={dataUser.lastName}
                                             onChange={inputHandler}
+                                            onKeyPress={keyPressHandler}
                                         />
                                     </p>
                                     <p className="error"></p>
@@ -98,6 +101,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
                                         type= 'number'name='phone'  placeholder='ej 114587427'
                                         defaultValue={dataUser.phone}
                                         onChange={inputHandler}
+                                        onKeyPress={keyPressHandler}
                                     />
                                 </p>
                                 <p className="error"></p>
@@ -108,6 +112,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
                                         className={styles.inputCiudad} name='city' type= 'text' placeholder='ej Maípu, Mendoza.'
                                         defaultValue={dataUser.city}
                                         onChange={inputHandler}
+                                        onKeyPress={keyPressHandler}
                                     />
                                 </p>
                                 <p className="error"></p>
@@ -118,6 +123,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
                                         type= 'text' name='address'  placeholder='ej Salta 1234'
                                         defaultValue={dataUser.address}
                                         onChange={inputHandler}
+                                        onKeyPress={keyPressHandler}
                                     />
                                 </p>
                                 <p className="error"></p>
@@ -128,11 +134,12 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token }) => {
                                         type= 'text' name='optional' placeholder='ej casa o dpto / piso'
                                         defaultValue={dataUser.optional}
                                         onChange={inputHandler}
+                                        onKeyPress={keyPressHandler}
                                     />
                                 </p>
                                 <p className="error"></p>
                             </div>
-                            <button className={styles.buttonEnviar} onClick={sendData}>
+                            <button className={styles.buttonEnviar} onClick={updateDataUser}>
                                 {!completeAccount && "Enviar!"}
                                 {completeAccount && "Editar"}
                             </button>

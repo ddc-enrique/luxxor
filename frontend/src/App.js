@@ -22,6 +22,7 @@ const App = (props) => {
 
   return (    
     <BrowserRouter>
+      <EditProfile completeAccount={false} />
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/registro" component={SignUp} />
