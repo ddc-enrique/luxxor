@@ -1,26 +1,24 @@
 .divContainer {
-  padding: 1.5rem;
-  min-height: 100vh;
+  padding: 0 1rem;
 }
 header.headerAdmin {
-  background-color: #dadada;
-  margin: 1rem 0;
-  padding: 1rem;
-  border-radius: 0.9rem;
+  margin: 0.6rem 1rem;
+  height: 3rem;
+  border-bottom: 1px solid #d5d5d5;
 }
 
-header.headerAdmin h1 {
+/* header.headerAdmin h1 {
   font-size: 2.9rem;
-}
+} */
 
 span.orange {
   color: #f99d22;
-  font-size: 2.9rem;
+  /* font-size: 2.9rem; */
 }
 
 span.violet {
   color: #7a5ea8;
-  font-size: 2.9rem;
+  /* font-size: 2.9rem; */
 }
 
 .divContainer .navAdmin {
@@ -36,8 +34,11 @@ span.violet {
 }
 .containerAdmin {
   display: flex;
+  min-height: 85vh;
+}
+.containerAdmin .containerNav {
+  display: flex;
   align-items: center;
-  height: 85vh;
 }
 .containerAdmin .containerSections > * {
   border: 1px solid #dfdfdf;
@@ -49,9 +50,8 @@ span.violet {
 .containerAdmin .containerSections {
   display: flex;
   justify-content: space-around;
-  align-items: center;
   width: 100vw;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .navAdmin .icon {
@@ -59,17 +59,22 @@ span.violet {
   width: 3rem;
   background-position: center;
   background-size: 1.8rem;
+  background-color: #f3f3f3;
+  border-radius: 1rem;
   background-repeat: no-repeat;
+}
+.navAdmin .icon:hover {
+  background-color: #c4c4c4;
 }
 .addNew .icon,
 .search .icon,
 .lastAdded .icon {
-  height: 3rem;
-  width: 3rem;
+  height: 2.5rem;
+  width: 2.5rem;
   background-position: center;
-  background-size: 50%;
-  background-color: #ebebeb;
-  background-repeat: no-repeat;
+  background-size: 98%;
+  /* background-color: #ebebeb; */
+  /* background-repeat: no-repeat; */
   border-radius: 2rem;
   margin: 0 0.4rem;
 }
@@ -81,9 +86,9 @@ span.violet {
   padding-left: 0.5rem;
 }
 .navAdmin a span {
-  left: 3.5rem;
+  left: 2.5rem;
   position: absolute;
-  padding: 0.2rem 3rem;
+  padding: 1rem 3rem;
   opacity: 0;
   width: 0rem;
 }
@@ -96,6 +101,7 @@ span.violet {
   display: flex;
   min-height: 3rem;
   align-items: center;
+  width: 98%;
   padding: 0.2rem 0.5rem;
 }
 .containerSections .formNew {
@@ -137,9 +143,22 @@ div .photos {
   width: 6rem;
   background-position: center;
   background-size: contain;
-  opacity: 0.4;
-  background-size: 40%;
+  opacity: 0.5;
+  background-size: 26%;
   background-position: 84% 14%;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+div .file {
+  height: 6rem;
+  background-color: #dfdfdf;
+  width: 6rem;
+  background-position: center;
+  background-size: contain;
+  opacity: 0.2;
+  border-radius: 1rem;
+  background-size: 37%;
+  background-position: 50% 50%;
   background-repeat: no-repeat;
 }
 
@@ -157,7 +176,7 @@ label {
 .formNew .containerInputs {
   margin: 0.5rem 0;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
   align-items: center;
   width: 100%;
 }
@@ -184,10 +203,11 @@ label {
 
 .formNew textarea {
   resize: none;
-  border-radius: 0.5rem;
+  border-radius: 1rem;
   border: none;
   outline: none;
   width: 17rem !important;
+  height: 2rem;
   background-color: #dfdfdf;
 }
 .boxProduct {
@@ -208,9 +228,8 @@ label {
   max-height: 50% !important;
 }
 .containerProducts::-webkit-scrollbar-thumb {
-  background-color: #8b8b8b;
+  background-color: #dfdfdf;
   border-radius: 5px;
-  max-height: 50% !important;
 }
 
 .titleProduct {
