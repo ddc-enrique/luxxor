@@ -5,12 +5,21 @@ import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
 import Admin from "./Admin/Admin"
+import { useEffect } from "react"
+import usersAction from "./redux/actions/usersAction"
 import Error from "./pages/Error"
 import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
 
 
 const App = ({ token, dni}) => {
+
+  useEffect(() => {
+    if (localStorage.getItem("token")){
+      props.signWithLocal(localStorage.getItem("token"))
+    }
+  }, [])
+
   return (    
     <BrowserRouter>
       <Switch>
@@ -29,6 +38,10 @@ const App = ({ token, dni}) => {
   )
 }
 
+const mapDispatchToProps = {
+  signWithLocal: usersAction.signWithLocal
+}
+
 const mapStateToProps = (state) => {
   return {
     token: state.users.token,
@@ -36,4 +49,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

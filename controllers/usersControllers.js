@@ -2,20 +2,21 @@ const User = require('../models/User')
 const bcryptjs = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const transport = require('../config/transport')
+const path = require("path")
+
 const handleError = (res, err) =>{
     res.json({success: false, response: err.message})
 }
 
 const usersControllers = {
     signUp: (req, res) =>{
+        
         console.log("Received Register User Petition:" + Date())
         const { firstName, lastName, eMail, password, google } = req.body
-       /*  const { profilePic } = req.files */
-       
+        
         let hashedPass = bcryptjs.hashSync(password.trim())
         const adminUser = [ process.env.ADMIN1 ]
         let admin = adminUser.includes(eMail)
-        
         const newUser = new User({
             firstName: firstName.trim(),
             lastName: lastName.trim(),
@@ -24,12 +25,16 @@ const usersControllers = {
             google,
             admin
         })
-        /* let fileName = newUser.eMail + "." + profilePic.name.split(".")[profilePic.name.split.length-1]
-        newUser.profilePic = fileName
+        if (req.files) {
+            let fileName = newUser.eMail + "." + req.files.profilePic.name.split(".")[req.files.profilePic.name.split.length-1]
+                newUser.profilePic = fileName
 
-        route = path.join(__dirname, "../assets")
-        profilePic.mv(`${route}/${fileName}`) */
-
+            route = path.join(__dirname, "../assets")
+            req.files.profilePic.mv(`${route}/${fileName}`)
+        }else{
+            newUser.profilePic = req.body.profilePic
+        }
+        
         User.findOne({ eMail })
             .then( (userFound) => {
                 if(userFound) throw new Error("Usuario ya registrado")
@@ -37,7 +42,7 @@ const usersControllers = {
                     .then( (user) => {
                         const token = jwt.sign({...newUser}, process.env.SECRETORKEY) 
                         res.json({success: true, response: {profilePic: user.profilePic, firstName: user.firstName, lastName: user.lastName, eMail: user.eMail, token: token, admin: user.admin, _id:user._id}})                  
-                 })
+                    })
             })
             .catch( err => handleError(res, err) )
     },
@@ -122,6 +127,7 @@ const usersControllers = {
             return res.json({ success: true, response: info })
         })
     },
+
     banUser:(req,res)=>{
         console.log("Received BAN USER Petition:" + Date())
         const _id = req.params.id
@@ -133,6 +139,7 @@ const usersControllers = {
         })
         .catch(err => handleError(res, err))
     },
+
     changePassword:(req,res)=>{
         console.log("Received CHANGE PASSWORD Petition:" + Date())
         console.log(req.body)
@@ -193,19 +200,13 @@ const usersControllers = {
             res.json({ success: true, response: { address: userFound.address, phone: userFound.phone} } )
         })
         .catch( err => handleError(res, err) )
+    },
+    
+    verifyToken: (req, res) => {
+        const {profilePic, firstName, lastName, eMail, admin, dni, _id} = req.user
+        res.json({profilePic, firstName, lastName, eMail, admin, dni, id: _id})
     }
+
 }
 
 module.exports = usersControllers
-
- /* html:`<div style="width:70vw">
-                        <img style="margin:0rem auto"src="https://i.postimg.cc/QxNK5h6Y/logo-Luxxor.png"></img>
-                        <div style="padding: 2rem;width:50vw; margin:0rem auto; background-color:#dfdbdb; border-radius:10px">
-                            <h1 style="color: #7A5EA8;">Creacion de cuenta</h1>
-                            <h3 style="color: #545454">Estimado ${firstName} ${lastName}</h3>
-                            <p style="color: #545454;">¡Gracias por registrarse en Luxxor! Debera ir al siguiente enlace para validar su cuenta: </p>
-                            <a href="http://localhost:3000/validar/"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Validar Cuenta</button></a>
-
-                        </div>
-                    </div>
-            `, */
