@@ -9,8 +9,16 @@ const router = express.Router()
 
 router.route('/user/sign-up')
     .post(validatorControllers.validatorSignUp ,usersControllers.signUp)
+
 router.route('/user/sign-in')
     .post(validatorControllers.validatorSignIn, usersControllers.signIn)
+
+router.route('/pruebaMail')
+    .post(usersControllers.pruebaMail)    
+
+router.route('/user/cambio-contrasenia/:id')
+    .put(usersControllers.changePassword)
+    
 router.route('/user/edit-profile/:id')
     .post( passport.authenticate('jwt', {session: false}), 
         validatorControllers.validatorEditComplete, 
