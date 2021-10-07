@@ -1,11 +1,9 @@
-import { useState, useContext, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from '../styles/navBar.module.css'
 import { useHistory } from 'react-router'
 import SignIn from './SignIn'
 import { connect } from 'react-redux'
-import { UseContext } from './UseContext'
-import {UseProvider} from "./UseContext"
 
 const NavBar = (props) => {  
     const [visible, setVisible] =useState(false)

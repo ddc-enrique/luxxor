@@ -5,7 +5,6 @@ import { Link } from "react-router-dom"
 import {connect} from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 
-
 const SignIn = (props) => {
     const {signIn} = props  
     const [check, setCheck] = useState(true)
@@ -19,13 +18,23 @@ const SignIn = (props) => {
         signIn(userLog)
     }
     
-    const responseGoogle = (res)=>{
+    const responseGoogle = async (res)=>{
         let logUserWithGoogle ={
             eMail: res.profileObj.email,
             password: res.profileObj.googleId,
             google: true
         }
-        // signIn(logUserWithGoogle)
+        try {
+           let response = await signIn(logUserWithGoogle)
+           if (!response){
+               console.log("Error")
+           }else{
+                console.log("Bien")
+           }
+        }catch(e){
+            console.log(e)
+        }
+
     }
 
     

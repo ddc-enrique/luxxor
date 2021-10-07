@@ -143,6 +143,7 @@ const SignUp = (props) => {
               name="checkPassword"
               onKeyPress={keyPressHandler}
             />
+            {newUser.profilePic && <p >{newUser.profilePic.name}</p>}
             <label className={styles.labelInput} for="inputPhoto"><img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif"/>Foto de perfil</label>
             <input
               id="inputPhoto"
