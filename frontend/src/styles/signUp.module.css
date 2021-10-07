@@ -131,11 +131,22 @@ div.buttonGoogle button div {
     .inputTypes{
         width: 20rem;
     }
+    .containerCarousel h2{
+        margin:1rem 0rem;
+        margin-top:4rem;
+    }
   }
   
   
   @media only screen and (min-width: 425px) {
-    
+    .inputTypes{
+        width: 20rem;
+        font-size:1rem
+    }
+    .containerCarousel h2{
+        margin:1rem 0rem;
+        margin-top:4rem;
+    }
   }
   
   
@@ -148,6 +159,9 @@ div.buttonGoogle button div {
     .inputTypes{
         width: 30rem;
         font-size:1rem
+    }
+    .containerCarousel h2{
+        margin-bottom:1rem
     }
   }
   
