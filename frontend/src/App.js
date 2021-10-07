@@ -4,9 +4,13 @@ import SignUp from "./pages/SignUp"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
+<<<<<<< HEAD
 import Admin from "./Admin/Admin"
 import Error from "./pages/Error"
 import CompleteProfile from "./components/CompleteProfile"
+=======
+import Admin from "./pages/Admin"
+>>>>>>> origin/rivarola
 
 
 const App = () => {

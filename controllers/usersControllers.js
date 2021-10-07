@@ -44,7 +44,7 @@ const usersControllers = {
             .then( (userFound) => {
                 if (!userFound) throw new Error (errMessage)
                 if (!google && userFound.google) throw new Error ("Por favor usar Google")
-                if (!userFound.validated) throw new Error("Verifique la cuenta via su email")
+                if (!userFound.validated) throw new Error("Verifique la cuenta vía su email")
                 if (!bcryptjs.compareSync(password, userFound.password)) throw new Error(errMessage)
                 const token = jwt.sign({...userFound}, process.env.SECRETORKEY)
                 res.json({success: true, response: {profilePic: userFound.profilePic, firstName: userFound.firstName, lastName: userFound.lastName, eMail: userFound.eMail, token: token, admin: userFound.admin, _id: userFound._id}})
