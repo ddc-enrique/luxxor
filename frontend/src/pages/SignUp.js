@@ -33,7 +33,7 @@ const SignUp = (props) => {
       profilePic: res.profileObj.imageUrl,
       google: true,
     }
-    // signUp(newUserWithGoogle)
+    signUp(newUserWithGoogle)
   }
 
   const newUserHandler = (e) => {
@@ -47,8 +47,8 @@ const SignUp = (props) => {
       FD.append("password", newUser.password)
       FD.append("eMail", newUser.eMail)
       FD.append("profilePic", newUser.profilePic)
-
       await signUp(FD)
+    
 }
 
   const keyPressHandler = (e) => {

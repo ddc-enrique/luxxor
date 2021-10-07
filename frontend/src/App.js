@@ -5,9 +5,19 @@ import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
 import Admin from "./Admin/Admin"
+import { useEffect } from "react"
+import { connect } from "react-redux"
+import usersAction from "./redux/actions/usersAction"
 
 
-const App = () => {
+const App = (props) => {
+ 
+  useEffect(() => {
+    if (localStorage.getItem("token")){
+      props.signWithLocal(localStorage.getItem("token"))
+    }
+  }, [])
+  
   return (
     <BrowserRouter>
       <Switch>
@@ -23,4 +33,8 @@ const App = () => {
   )
 }
 
-export default App
+const mapDispatchToProps = {
+  signWithLocal: usersAction.signWithLocal
+}
+
+export default connect(null, mapDispatchToProps)(App)

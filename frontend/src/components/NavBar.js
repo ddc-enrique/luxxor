@@ -3,8 +3,10 @@ import { Link } from 'react-router-dom'
 import styles from '../styles/navBar.module.css'
 import { useHistory } from 'react-router'
 import SignIn from './SignIn'
+import { connect } from 'react-redux'
 
-const NavBar = () => {
+const NavBar = (props) => {
+
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(true)
     const [visibleMenu, setVisibleMenu] =useState(false)
@@ -95,4 +97,13 @@ const NavBar = () => {
         </header>
     )
 }
-export default NavBar
+
+const mapStateToProps = (state) => {
+    return {
+        profilePic: state.users.profilePic,
+        firstName: state.users.firstName,
+        lastName: state.users.lastName
+    }
+}
+
+export default connect(mapStateToProps)(NavBar)

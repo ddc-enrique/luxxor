@@ -2,6 +2,7 @@ const joi = require('joi')
 
 const validatorControllers = {
     validatorSignUp : (req, res, next) =>{
+        
         const schema = !req.body.google 
         ? joi.object({
                 firstName: joi.string().trim().min(2).max(35).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).required().messages({
@@ -28,11 +29,11 @@ const validatorControllers = {
                     "string.trim": "No se permiten espacios antes y después de la contraseña",
                     "string.pattern.base": 'La contraseña solo puede incluir letras, números ó los signos "!¡?¿_-."',
                 }),
-                profilePic: joi.string().trim().min(6).max(2048).required().messages({
-                    "string.max": "Máximo de 2048 caracteres",
-                    "string.min": "Mínimo de 6 caracteres",
-                    "string.trim": "No se permiten espacios antes y después de la imagen"
-                }),
+                // profilePic: joi.string().trim().min(6).max(2048).required().messages({
+                //     "string.max": "Máximo de 2048 caracteres",
+                //     "string.min": "Mínimo de 6 caracteres",
+                //     "string.trim": "No se permiten espacios antes y después de la imagen"
+                // }),
             })
         : joi.object({
             firstName: joi.string(),
