@@ -15,6 +15,9 @@ router.route('/user/sign-in')
 router.route('/pruebaMail')
     .post(usersControllers.pruebaMail)    
 
+router.route('/user/bloqueo-cuenta/:id')
+    .put(usersControllers.banUser)
+
 router.route('/user/cambio-contrasenia/:id')
     .put(usersControllers.changePassword)
     

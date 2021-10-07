@@ -64,47 +64,50 @@ const Admin = () => {
         </Link>
       </header>
       <div className={styles.containerAdmin}>
-        <nav className={styles.navAdmin}>
-          <Link to="/admin">
-            <div
-              className={styles.icon}
-              style={{
-                backgroundImage:
-                  "url('https://i.postimg.cc/CLBqjvWy/home.png')",
-              }}
-            ></div>{" "}
-            <span>Home</span>{" "}
-          </Link>
-          <Link to="#">
-            <div
-              className={styles.icon}
-              style={{
-                backgroundImage: "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
-              }}
-            ></div>
-            <span>Agregar Nuevo</span>{" "}
-          </Link>
-          <Link to="#">
-            <div
-              className={styles.icon}
-              style={{
-                backgroundImage:
-                  "url('https://i.postimg.cc/prynckrF/category.png')",
-              }}
-            ></div>
-            <span>Categorias</span>
-          </Link>
-          <Link to="#">
-            <div
-              className={styles.icon}
-              style={{
-                backgroundImage:
-                  "url('https://i.postimg.cc/Hx6ytFYm/product.png')",
-              }}
-            ></div>
-            <span>Productos</span>
-          </Link>
-        </nav>
+        <div className={styles.containerNav}>
+          <nav className={styles.navAdmin}>
+            <Link to="/admin">
+              <div
+                className={styles.icon}
+                style={{
+                  backgroundImage:
+                    "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                }}
+              ></div>
+              <span>Home</span>
+            </Link>
+            <Link to="#">
+              <div
+                className={styles.icon}
+                style={{
+                  backgroundImage:
+                    "url('https://i.postimg.cc/pLTnvRr7/brand.png)",
+                }}
+              ></div>
+              <span>Marcas</span>
+            </Link>
+            <Link to="#">
+              <div
+                className={styles.icon}
+                style={{
+                  backgroundImage:
+                    "url('https://i.postimg.cc/prynckrF/category.png')",
+                }}
+              ></div>
+              <span>Categorias</span>
+            </Link>
+            <Link to="#">
+              <div
+                className={styles.icon}
+                style={{
+                  backgroundImage:
+                    "url('https://i.postimg.cc/Hx6ytFYm/product.png')",
+                }}
+              ></div>
+              <span>Productos</span>
+            </Link>
+          </nav>
+        </div>
         <div className={styles.containerSections}>
           <section className={styles.addNew}>
             <div>
@@ -112,7 +115,7 @@ const Admin = () => {
                 className={styles.icon}
                 style={{
                   backgroundImage:
-                    "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                    "url('https://i.postimg.cc/0NLxdcNK/2-removebg-preview-4.png')",
                 }}
               ></div>
               <h3>Agregar nuevo</h3>
@@ -126,7 +129,15 @@ const Admin = () => {
                       "url('https://i.postimg.cc/k5dKMx10/img.png')",
                   }}
                 >
-                  <input type="file" name="name" />{" "}
+                  <div
+                    className={styles.file}
+                    style={{
+                      backgroundImage:
+                        "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
+                    }}
+                  >
+                    <input type="file" name="name" />
+                  </div>
                 </div>
                 <div
                   className={styles.photos}
@@ -135,7 +146,15 @@ const Admin = () => {
                       "url('https://i.postimg.cc/k5dKMx10/img.png')",
                   }}
                 >
-                  <input type="file" name="name" />{" "}
+                  <div
+                    className={styles.file}
+                    style={{
+                      backgroundImage:
+                        "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
+                    }}
+                  >
+                    <input type="file" name="name" />
+                  </div>
                 </div>
                 <div
                   className={styles.photos}
@@ -144,7 +163,15 @@ const Admin = () => {
                       "url('https://i.postimg.cc/k5dKMx10/img.png')",
                   }}
                 >
-                  <input type="file" name="name" />{" "}
+                  <div
+                    className={styles.file}
+                    style={{
+                      backgroundImage:
+                        "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
+                    }}
+                  >
+                    <input type="file" name="name" />
+                  </div>
                 </div>
               </div>
               <div className={styles.containerAllInputs}>
@@ -202,7 +229,7 @@ const Admin = () => {
                 className={styles.icon}
                 style={{
                   backgroundImage:
-                    "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                    "url('https://i.postimg.cc/h47DcVZB/search.png')",
                 }}
               ></div>
               <h3>Buscar</h3>
@@ -226,14 +253,14 @@ const Admin = () => {
                           className={styles.icon}
                           style={{
                             backgroundImage:
-                              "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                              "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
                           }}
                         ></div>
                         <div
                           className={styles.icon}
                           style={{
                             backgroundImage:
-                              "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                              "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
                           }}
                         ></div>
                       </div>
@@ -261,7 +288,7 @@ const Admin = () => {
                 className={styles.icon}
                 style={{
                   backgroundImage:
-                    "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                    "url('https://i.postimg.cc/Vv1mKVqW/reciente.png')",
                 }}
               ></div>
               <h3>Agregados Recientemente</h3>
@@ -281,14 +308,14 @@ const Admin = () => {
                           className={styles.icon}
                           style={{
                             backgroundImage:
-                              "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                              "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
                           }}
                         ></div>
                         <div
                           className={styles.icon}
                           style={{
                             backgroundImage:
-                              "url('https://i.postimg.cc/CLBqjvWy/home.png')",
+                              "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
                           }}
                         ></div>
                       </div>
