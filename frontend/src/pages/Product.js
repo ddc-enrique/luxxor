@@ -1,9 +1,8 @@
 import React from "react";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 import { Carousel } from "react-carousel-minimal";
-import styles from "../styles/products.module.css";
+import styles from "../styles/product.module.css";
 import { useState } from "react";
-import NavBar from "./NavBar";
 const Product = () => {
   const [modal, setModal] = useState(false);
   const [like, setLike] = useState(false);
@@ -39,7 +38,6 @@ const Product = () => {
   );
   return (
     <>
-    <NavBar/>
       <main className={styles.productsContainer}>
         <section>
           <h1>Soy la sección de recomendados</h1>

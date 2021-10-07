@@ -4,7 +4,7 @@ import SignUp from "./pages/SignUp"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
-import Admin from "./Admin/Admin"
+import Admin from "./pages/Admin"
 
 
 const App = () => {
