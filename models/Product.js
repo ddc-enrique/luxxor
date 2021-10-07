@@ -8,8 +8,8 @@ const ProductSchema = new mongoose.Schema({
     //principalPic: { type: String },
     photos: [ { type: String } ],
     dataSheet: [ { 
-        optionName: { type: String }, //Memoria Ram
-        optionValue: { type: String } // 8GB 
+        optionName: { type: String }, //Memoria Ram, Pantalla 
+        optionValue: { type: String } // 8GB, 14'
     } ],
     description: { type: String },
     discount: { type: Number, max: 70,default: 0}, //en porcentaje, si no existe no tiene descuento

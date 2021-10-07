@@ -84,7 +84,7 @@ button.buttonEnviar {
         width: 15rem;
     }
 
-    form.formContainerExito p {
+    form.formContainerExito div.field {
         margin-top: 1rem;
     }
 

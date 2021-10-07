@@ -36,6 +36,18 @@ const usersAction = {
 
             }
         }
+    },
+
+    getUserData: (id, token) => {
+        return async (dispatch) => {
+            let response = await axios.get(`http://localhost:4000/api/user/edit-profile/${id}`, {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            })
+            if (!response.data.success) throw new Error(response.data.response)
+            return response.data.response
+        }
     }
 }
 
