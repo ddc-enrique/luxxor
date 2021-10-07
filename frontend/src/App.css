@@ -1,38 +1,81 @@
-.App {
-  text-align: center;
+* {
+  margin: 0%;
+  padding: 0%;
+  font-family: 'Fredoka One', cursive;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+html {
+  scroll-behavior: smooth;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+body {
+  background-color: #F1F6F7;
+  color: #545454;
+}
+
+a {
+  text-decoration: none;
+  color: #545454;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  box-shadow: 1px 1px 10px #7a5ea8bd;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7A5EA8;
+  border-radius: .2rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7A5EA8;
+}
+
+@media only screen and (min-width: 375px) {
+  html {
+    font-size: 4vw;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.2rem;
+  }
+  
+}
+
+
+@media only screen and (min-width: 425px) {
+  html {
+    font-size: 4vw;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
 
-.App-link {
-  color: #61dafb;
-}
+@media only screen and (min-width: 576px) {}
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+
+@media only screen and (min-width: 768px) {
+  html {
+    font-size: 2vw;
   }
-  to {
-    transform: rotate(360deg);
+  ::-webkit-scrollbar {
+    width: 0.4rem;
   }
 }
+
+@media only screen and (min-width: 1024px) {
+  html {
+    font-size: 1vw;
+  }
+
+  ::-webkit-scrollbar {
+    width: 0.7rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {}
+
+/* #7A5EA8
+
+*/

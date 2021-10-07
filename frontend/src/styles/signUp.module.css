@@ -1,0 +1,165 @@
+.container{
+    display: flex;
+    justify-content:space-around;
+    flex-wrap: wrap;
+    margin:1rem 0rem
+}
+
+.containerForm{
+    display: flex;
+    justify-content:center;
+    flex-direction: column;
+}
+
+.container h1{
+    margin:2rem 0rem
+}
+
+.containerForm h1,.containerForm .location{
+    display:flex;
+    justify-content:center;
+    flex-direction: row;
+    align-items:center;
+}
+
+div.textSign{
+    display:flex;
+    justify-content:center;
+    flex-direction: row;
+    align-items: center;
+    margin:1rem 0rem
+}
+
+.buttonSign {
+	background-color:#7A5EA8;
+	border-radius:2em;
+    outline: none;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-size:1.5rem;
+	padding:0.5rem 1rem;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #7A5EA8;
+    margin:1rem 0rem;
+    margin-left:1rem;
+}
+
+.inputTypes{
+    outline:none;
+    background-color:transparent;
+    margin: 0.9rem 0rem ;
+    padding:1rem 0;
+    border-width: 0 0 3px 0;
+    border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1;
+    width: 30rem;
+}
+
+.location {
+    flex-direction: column!important;
+    
+    height: 10rem;
+}
+
+.location button{
+    margin:1rem 1rem;
+    
+}
+
+.link{
+    text-decoration: none;
+    margin: 0rem 1rem
+}
+
+.containerCarousel{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.containerCarousel h2{
+    margin-bottom:11rem
+}
+
+div.inputPassContainer {
+    display: flex;
+    width: 100%;
+}
+
+div.inputPassContainer {
+    display: flex;
+    width: 100%;
+}
+
+img.imgForPass {
+    height: 0.6rem;
+    cursor: pointer;
+    background: transparent;
+    align-self: center;
+}
+
+input.inputPhoto {
+    display: none;
+}
+
+label.labelInput {
+    align-self: center;
+    cursor: pointer;
+}
+
+div.buttonGoogle button {
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+    width: 14rem!important;
+    background-color:#7A5EA8!important;
+	border-radius:2em!important;
+    outline: none!important;
+	color:#ffffff!important;
+	font-size:1.53rem!important;
+	padding:1.45rem 2rem!important;
+	text-decoration:none!important;
+    height: 2rem!important;
+}
+
+div.buttonGoogle button div {
+    background-color: transparent!important
+}
+
+@media only screen and (min-width: 375px) {
+    .inputTypes{
+        width: 20rem;
+    }
+  }
+  
+  
+  @media only screen and (min-width: 425px) {
+    
+  }
+  
+  
+  @media only screen and (min-width: 576px) {
+    
+  }
+  
+  
+  @media only screen and (min-width: 768px) {
+    .inputTypes{
+        width: 30rem;
+        font-size:1rem
+    }
+  }
+  
+  
+  @media only screen and (min-width: 768px) {
+  
+  }
+  
+  @media only screen and (min-width: 1024px) {
+    
+  }
+  
+  @media only screen and (min-width: 1440px) {
+  
+  }

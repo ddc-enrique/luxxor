@@ -1,0 +1,130 @@
+div.containerContact {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+}
+
+div.containerContact>* {
+    width: 50rem;
+    height: 40rem;
+}
+
+form.formContact {
+    width: 40rem;
+    height: 25rem;
+    background: #E3E5E6;
+    border-radius: 1rem;
+    box-shadow: 1px 1px 5px #75747461;
+    padding: 1rem 2rem;
+    max-width: calc(100vw - 40px);
+    position: relative;
+    margin: 2rem;
+}
+
+form.formContact h2 {
+    margin: 0.5rem 0;
+    padding-bottom: 1rem;
+    width: 6rem;
+    color: #78788c;
+    border-bottom: 3px solid #78788c;
+}
+
+form.formContact input, form.formContact textarea {
+    width: 100%;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    background: none;
+    outline: none;
+    resize: none;
+    border: 0;
+    transition: all 0.3s;
+    border-bottom: 2px solid #bebed2;
+}
+
+form.formContact textarea {
+    height: 25%;
+}
+
+form.formContact textarea::-webkit-scrollbar-track {
+    background: #E3E5E6;
+    box-shadow: 1px 1px 10px #7a5ea8bd;
+}
+
+form.formContact ::placeholder {
+    font-size: 1.1rem;
+}
+
+form.formContact input:focus, form.formContact textarea:focus {
+    border-bottom: 2px solid #6c6c72;
+}
+
+form.formContact p:before {
+    content: attr(type);
+    display: block;
+    margin: 1.5rem 0 0;
+    font-size: 1.5rem;
+    color: #5a5a5a;
+}
+
+form.formContact button {
+    float: right;
+    padding: 0.5rem 1.5rem;
+    margin: 0.5rem 0 0;
+    border: 2px solid #78788c;
+    border-radius: 5px;
+    background: 0;
+    color: #5a5a6e;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+form.formContact button:hover {
+    background: #78788c;
+    color: #fff;
+}
+
+form.formContact div {
+    content: "Hi";
+    position: absolute;
+    bottom: -2rem;
+    right: -20px;
+    background: #7A5EA8;
+    color: #fff;
+    width: 25rem;
+    padding: 1rem 0.3rem 1rem 0;
+    border-radius: 0.8rem;
+    font-size: 0.9rem;
+    box-shadow: 10px 10px 40px -14px rgb(151, 149, 149);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form.formContact span {
+    margin: 0 0.5rem 0 0.5rem;
+}
+
+div.imagen {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 80%;
+}
+
+@media screen and (min-width: 375px) and (max-width: 767px) {
+    div.imagen {
+        display: none;
+    }
+
+    form.formContact div {
+        width: 20rem;
+        display: flex;
+        flex-direction: column;
+        padding: 0;
+    }
+
+    h2.subtitleContact {
+        font-size: 1.7rem;
+    }
+}
