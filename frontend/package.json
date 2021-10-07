@@ -6,7 +6,6 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "3d-react-carousal": "^4.0.2",
     "axios": "^0.22.0",
     "react": "^17.0.2",
     "react-carousel-minimal": "^1.4.1",
