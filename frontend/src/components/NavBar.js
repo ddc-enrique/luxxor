@@ -3,19 +3,21 @@ import { Link } from 'react-router-dom'
 import styles from '../styles/navBar.module.css'
 import { useHistory } from 'react-router'
 import SignIn from './SignIn'
+import { connect } from 'react-redux'
 
-const NavBar = () => {
+const NavBar = (props) => {
+
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(true)
     const [visibleMenu, setVisibleMenu] =useState(false)
+    const history = useHistory()
+
     const clickHandler= ()=>{
         setVisible(!visible)
     }
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
     }
-
-    const history = useHistory()
 
     return(
         <header className={styles.headerContainer}>
@@ -30,13 +32,10 @@ const NavBar = () => {
                     </a>
                 }
                 {(history.location.pathname.length > 1) && 
-                    <Link to='/home'>
+                    <Link to='/' >
                         ¿Cómo Comprar?
                     </Link>
                 }                
-                <Link to='/producto'>
-                    Producto
-                </Link>
                 <Link to='/productos'>
                     Productos
                 </Link>
@@ -46,7 +45,7 @@ const NavBar = () => {
                     </a>
                 }
                 {(history.location.pathname.length > 1) && 
-                    <Link to='/home'>
+                    <Link to='/' >
                         Contacto
                     </Link>
                 }
@@ -63,12 +62,12 @@ const NavBar = () => {
                             </a>
                     }
                     {(history.location.pathname.length > 1) && 
-                        <Link to='/home'>
+                        <Link to='/' >
                             ¿Cómo Comprar?
                         </Link>
                     }
-                    <Link to='/producto'>
-                        Producto
+                    <Link to='/productos'>
+                        Productos
                     </Link>
                     {history.location.pathname==="/" && 
                         <a href="#contacto">
@@ -76,7 +75,7 @@ const NavBar = () => {
                         </a>
                     }
                     {(history.location.pathname.length > 1) && 
-                        <Link to='/home'>
+                        <Link to='/' >
                             Contacto
                         </Link>
                     }
@@ -95,4 +94,13 @@ const NavBar = () => {
         </header>
     )
 }
-export default NavBar
+
+const mapStateToProps = (state) => {
+    return {
+        profilePic: state.users.profilePic,
+        firstName: state.users.firstName,
+        lastName: state.users.lastName
+    }
+}
+
+export default connect(mapStateToProps)(NavBar)

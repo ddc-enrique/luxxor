@@ -18,6 +18,11 @@ const Product = () => {
     },
     { image: "https://i.postimg.cc/JzBwmcnx/Nombre-9.png" },
   ];
+  const features = [
+    {optionName: "Duración de la batería", optionValue: "8hs"},
+    {optionName: "Memoria RAM", optionValue: "4 GB"},
+    {optionName: "Tamaño de la pantalla", optionValue: " 13.3'' "}
+  ]
   const likeCondition = like
     ? "https://i.postimg.cc/wMWsBC6s/megusta.png"
     : "https://i.postimg.cc/y6nRnZFY/megustalleno.png";
@@ -41,10 +46,7 @@ const Product = () => {
     <>
     <NavBar/>
       <main className={styles.productsContainer}>
-        <section>
-          <h1>Soy la sección de recomendados</h1>
-        </section>
-        <section>
+        <section className={styles.sectionProduct}>
           <div className={styles.info}>
             <p>Informática</p>
             <p>Oferta del día</p>
@@ -89,7 +91,7 @@ const Product = () => {
                         "url('https://i.postimg.cc/Gt3ydL1C/promociones.png')",
                     }}
                   ></div>
-                  <span>Ver todas las promociones</span>
+                  <p className={styles.promotionsP}>Ver todas las promociones</p>
                 </div>
                 <div className={styles.promotions}>
                   <div
@@ -163,6 +165,21 @@ const Product = () => {
               )}
             </div>
           </div>
+        </section>
+        <section className={styles.sectionDescription}>
+              <article>
+                    <h2>Ficha técnica</h2>
+                    <ul>
+                        {features.map(feat =><li>{feat.optionName} : {feat.optionValue}</li>)}
+                    </ul>
+              </article>
+              <article>
+                    <h2>Descripción</h2>
+                    <p>
+                        El formato perfecto para vos
+                        Al ser in-ear, mejoran la calidad del audio y son de tamaño pequeño para poder insertarse en tu oreja. Son ideales para acompañarte a la hora de hacer ejercicio mientras te sumergís en el mejor sonido envolvente..
+                    </p>
+              </article>
         </section>
       </main>
       <Footer />

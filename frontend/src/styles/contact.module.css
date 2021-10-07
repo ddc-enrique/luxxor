@@ -11,8 +11,8 @@ div.containerContact>* {
 }
 
 form.formContact {
-    width: 45rem;
-    height: 28rem;
+    width: 40rem;
+    height: 25rem;
     background: #E3E5E6;
     border-radius: 1rem;
     box-shadow: 1px 1px 5px #75747461;
@@ -30,7 +30,7 @@ form.formContact h2 {
     border-bottom: 3px solid #78788c;
 }
 
-form.formContact input {
+form.formContact input, form.formContact textarea {
     width: 100%;
     padding: 0.5rem;
     box-sizing: border-box;
@@ -42,11 +42,20 @@ form.formContact input {
     border-bottom: 2px solid #bebed2;
 }
 
+form.formContact textarea {
+    height: 25%;
+}
+
+form.formContact textarea::-webkit-scrollbar-track {
+    background: #E3E5E6;
+    box-shadow: 1px 1px 10px #7a5ea8bd;
+}
+
 form.formContact ::placeholder {
     font-size: 1.1rem;
 }
 
-form.formContact input:focus {
+form.formContact input:focus, form.formContact textarea:focus {
     border-bottom: 2px solid #6c6c72;
 }
 
@@ -63,6 +72,7 @@ form.formContact button {
     padding: 0.5rem 1.5rem;
     margin: 0.5rem 0 0;
     border: 2px solid #78788c;
+    border-radius: 5px;
     background: 0;
     color: #5a5a6e;
     cursor: pointer;
