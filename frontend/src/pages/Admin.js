@@ -1,6 +1,6 @@
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
 
@@ -77,6 +77,21 @@ const Admin = (props) => {
     {optionName: "", optionValue: ""},
   ])
 
+  const [categories, setCategories] = useState(props.categories)
+
+  useEffect(()=>{
+    console.log(props)
+    const getAllCategories = async () => {
+      if (!categories.length){
+        let response = await props.getCategories()
+        setCategories(response)
+      }
+    }
+    getAllCategories()
+
+  }, [])
+
+
   const newProductHandler = (index, e) => {
     const values = [...inputFields]
     if (e.target.name === "optionName") {
@@ -106,9 +121,7 @@ const Admin = (props) => {
    console.log(response)
   }
 
-
-
-
+  console.log(categories)
   return (
     <div className={styles.divContainer}>
       <header className={styles.headerAdmin}>
@@ -238,9 +251,14 @@ const Admin = (props) => {
                 <div className={styles.containerInputs}>
                   <label htmlFor="color">Categoria</label>
                   <select className={styles.select} name="category" onChange={(e)=>newProductHandler("index", e)}>
-                    <option value="informática">Informática</option>
-                    <option>Informática</option>
-                    <option>Informática</option>
+                    {categories.map(category=> (
+                      <option
+                        key={category._id}
+                        value={category._id}
+                      >
+                        {category.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
                 <div>
@@ -420,7 +438,14 @@ const Admin = (props) => {
 
 
 const mapDispatchToProps = {
-  addProduct: productsActions.addProduct
+  addProduct: productsActions.addProduct,
+  getCategories: productsActions.categories
 }
 
-export default connect(null, mapDispatchToProps)(Admin);
+const mapStateToProps = (state) => {
+  return {
+    categories: state.products.categories,
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Admin);

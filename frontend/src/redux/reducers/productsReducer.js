@@ -1,13 +1,18 @@
-const productsReducer = (state={brand: {}, category: {}}, action) => {
+const initialState = {
+    brands: [],
+    categories: []
+}
+const productsReducer = (state=initialState, action) => {
     switch (action.title) {
-        case "CATEGORY":
+        case "CATEGORIES":
             return {
                 ...state,
-                category: action.payload
+                categories: action.payload
             }
-        case "BRAND" :
+        case "BRANDS" :
             return {
-                brand: action.payload
+                ...state,
+                brands: action.payload
             }
         default:
             return state

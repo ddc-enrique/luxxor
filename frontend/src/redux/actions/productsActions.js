@@ -3,11 +3,13 @@ import Product from "../../components/Product"
 
 const productsActions = {
     categories: () =>{
+        console.log("Traeme las categories en redux")
         return async (dispatch) =>{
             try {
                 let response = await axios.get("http://localhost:4000/api/admin/categories")
+                if(!response.data.success) throw new Error(response.data.response)
                 dispatch({type: "CATEGORIES", payload: response})
-
+                return response.data.response
             }catch(e){
                 return({success: false, response: e})
             }
