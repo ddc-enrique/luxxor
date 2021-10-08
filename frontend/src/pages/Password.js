@@ -47,7 +47,8 @@ const Password = (props) =>{
                 }else{
                     alert("E-mail no registrado")
                 }
-            })           
+            })
+            .catch(e=>console.log(e))           
         }
     }
     

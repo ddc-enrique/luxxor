@@ -6,11 +6,14 @@ import SignIn from './SignIn'
 import { connect } from 'react-redux'
 import Password from '../pages/Password';
 import usersAction from '../redux/actions/usersAction'
+import ModalCart from './ModalCart';
+
 
 const NavBar = (props) => {  
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(false)
     const [modalPass,setmodalPass]=useState(false)
+    const [modalCart,setModalCart]=useState(false)
     const [visibleMenu, setVisibleMenu] =useState(false)
     const history = useHistory()
 
@@ -22,6 +25,9 @@ const NavBar = (props) => {
         setVisibleMenu(!visibleMenu)
         setVisible(false)
     }
+    const clickCart =()=>{
+        setModalCart(!modalCart)
+    }
 
     const logOut = () => {
         props.signOut()
@@ -32,37 +38,37 @@ const NavBar = (props) => {
     return(
         <header>
             <nav>
-            <Link to='/'>LUXXOR</Link>
-            <div className={styles.navIntermedio}>
-                {homeLocationsPathFlag && 
-                    <a href="#novedades">
-                        Novedades
-                    </a>
-                }
-                {!homeLocationsPathFlag && 
-                    <Link to='/novedades' >
-                        Novedades
+                <Link to='/'>LUXXOR</Link>
+                <div className={styles.navIntermedio}>
+                    {homeLocationsPathFlag && 
+                        <a href="#novedades">
+                            Novedades
+                        </a>
+                    }
+                    {!homeLocationsPathFlag && 
+                        <Link to='/novedades' >
+                            Novedades
+                        </Link>
+                    }                
+                    <Link to='/productos'>
+                        Productos
                     </Link>
-                }                
-                <Link to='/productos'>
-                    Productos
-                </Link>
-                {homeLocationsPathFlag && 
-                    <a href="#contacto">
-                        Contacto 
-                    </a>
-                }
-                {!homeLocationsPathFlag && 
-                    <Link to='/contacto' >
-                        Contacto
-                    </Link>
-                }
-            </div>
+                    {homeLocationsPathFlag && 
+                        <a href="#contacto">
+                            Contacto 
+                        </a>
+                    }
+                    {!homeLocationsPathFlag && 
+                        <Link to='/contacto' >
+                            Contacto
+                        </Link>
+                    }
+                </div>
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/pTZVv7n0/Diseño_sin_título_(66).png")'}} onClick={clickHandler}>
                 </div>
-                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}}>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}} onClick={clickCart}>
                 </div>
-                </nav>
+            </nav>
                 {visibleMenu && 
                     <nav className={styles.navContainerMobile}>
                         {homeLocationsPathFlag && 
@@ -103,8 +109,7 @@ const NavBar = (props) => {
                     {props.admin && <Link to="/admin"><p>Admin</p></Link>}
                 </div>}
                 {modalPass && <Password setmodalPass={setmodalPass} setVisible={setVisible}/>}
-                
-        
+                {modalCart && <ModalCart setModalCart={setModalCart}/>}
         </header>
     )
 }
