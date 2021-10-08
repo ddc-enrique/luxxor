@@ -23,8 +23,6 @@ const App = (props) => {
     }
   }, [])
 
-
-
   return (    
     <BrowserRouter>
       <Switch>
