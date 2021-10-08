@@ -55,7 +55,9 @@ const Password = (props) =>{
         <>
             <div className={styles.containerTotal}>
                 <div className={styles.containerForm}>
-                    <img className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
+                    <img onClick={()=>{
+                        props.setVisible(false)
+                        props.setmodalPass(false)}} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
                     <div className={styles.boxData} >
                         <div className={styles.boxTitle} >
                             <h3>Recupera tu contraseña</h3>

@@ -4,10 +4,12 @@ import styles from '../styles/navBar.module.css'
 import { useHistory } from 'react-router'
 import SignIn from './SignIn'
 import { connect } from 'react-redux'
+import Password from '../pages/Password';
 
 const NavBar = (props) => {  
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(false)
+    const [modalPass,setmodalPass]=useState(false)
     const [visibleMenu, setVisibleMenu] =useState(false)
     const history = useHistory()
 
@@ -89,11 +91,12 @@ const NavBar = (props) => {
             <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/R0X4cphc/menu-1.png")'}}  onClick={clickHandlerMenu}></div>
                 { visible &&  <div className={styles.dropDown}>
                     <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</p></Link>
-                        {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn}/>}
+                        {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible}/>}
                     <Link to="/registro"><p>Registrarme</p></Link>
                     {props.token && <Link to="/mi-cuenta">Mi Cuenta</Link>}
                     {props.admin && <Link to="/admin"><p>Admin</p></Link>}
                 </div>}
+                {modalPass && <Password setmodalPass={setmodalPass} setVisible={setVisible}/>}
                 
         </header>
     )

@@ -116,4 +116,12 @@ img.icono {
     cursor: pointer;
     align-self: flex-start;
 }
-
+ div.textPass{
+     width: 90%;
+     display: flex;
+     justify-content: flex-end
+ }
+ div.textPass h5{
+     text-decoration: underline;
+     cursor: pointer;
+ }

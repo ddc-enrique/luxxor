@@ -162,7 +162,7 @@ const usersControllers = {
                                 <h1 style="color: #7A5EA8; margin: 0 0 7px">Cambio de Contraseña realizado con exito.</h1>
                                 <h2 style="color: #000; margin: 0 0 7px">¡Hola ${userFound.lastName}, ${userFound.firstName}!</h2>
                                 <p style="margin: 2px; font-size: 15px; color: #000">
-                                        Te enviamos este e-mail para comunicarte que has recuperado tu contraseña con exito!
+                                        Te enviamos este e-mail para comunicarte que has cambiado tu contraseña con exito!
                                 </p>
                                 <h2 style="color:#e11919;">INFORMACION IMPORTANTE </h2>
                                 <p style="margin: 2px; font-size: 15px; color: #000">

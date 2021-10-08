@@ -8,6 +8,7 @@ import usersAction from "../redux/actions/usersAction"
 const SignIn = (props) => {
     const {signIn} = props  
     const [check, setCheck] = useState(true)
+    
     const [userLog, setUserLog] = useState({
         eMail: "",
         password: ""
@@ -47,12 +48,18 @@ const SignIn = (props) => {
            enterUser()
         }
      }
+    const clickModalPass=()=>{
+        props.setModalLogIn(!props.modalLogIn)
+        props.setmodalPass(true)
+     } 
 
     return (
         <>
             <div className={styles.container}>
                 <div className={styles.signContainer}>
-                    <img className={styles.icono} onClick={()=> props.setModalLogIn(!props.modalLogIn)} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
+                    <img className={styles.icono} onClick={()=>{
+                        props.setVisible(false)
+                         props.setModalLogIn(!props.modalLogIn)}} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
                     <h1>Iniciá sesion</h1>
                     <div className={styles.inputContainer}>
                         <input type="email" className={styles.input} placeholder="Ingrese su email" name="eMail" defaultValue={userLog.eMail} onChange={userLoginHandler} onKeyPress={keyPressHandler}/>
@@ -73,9 +80,12 @@ const SignIn = (props) => {
                         />
                     </div>
                     <div className={styles.textSign}>
-                        <h2>No tenés cuenta? <Link to="/registro"></Link>Registráte </h2>
-                        
+                        <h2>No tenés cuenta? <Link to="/registro"></Link>Registráte </h2>                       
                     </div>
+                    <div className={styles.textPass}>
+                        <h5 onClick={clickModalPass}>Olvide mi contraseña</h5>                       
+                    </div>
+                    
                 </div>
             </div>
         </>
