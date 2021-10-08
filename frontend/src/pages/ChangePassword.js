@@ -7,18 +7,20 @@ import Footer from "../components/Footer";
 
 const ChangePassword = (props) =>{
     const [check, setCheck] = useState(true)
+    const [eye, setEye] = useState(true)
     const [userData,setUserData]=useState({
         eMail:"",
         password:""
     })
     const refPass=useRef()
     useEffect(()=>{
-        props.verifyId(props.match.params.id)
+        props.verifyIdMail(props.match.params.id,"VERIFICAR USUARIO")
         .then(res=>{
             if(!res) props.history.push("/")
        })
     },[])
     let viewPassImg = !check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
+    let viewPassImg1 = !eye ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
     const inputHandler =(e)=>{
         setUserData({
             ...userData,
@@ -32,7 +34,16 @@ const ChangePassword = (props) =>{
         }else if(refPass.current.value!==userData.password){
             alert("la contraseña no coincide")
         }else{
-            //action
+            props.changePassword(userData.eMail,userData.password)
+            .then(res=>{
+                console.log(res)
+                if(res){
+                    alert("Su contraseña ha sido cambiada con exito")
+                    props.history.push("/")
+                }else{
+                    alert("error")
+                }
+            })
         }
     }
 
@@ -44,7 +55,6 @@ const ChangePassword = (props) =>{
                     <h2>Recupera tu contraseña</h2>
                     <hr/>
                     <div className={styles.boxInputs}>
-                        <p>Ingresa tu correo electronico:</p>
                         <input type="email" className={styles.input} placeholder="E-mail" name="eMail"  onChange={inputHandler} />
                         <div className={styles.inputPassContainer}>
                             <input
@@ -59,16 +69,15 @@ const ChangePassword = (props) =>{
                         <div className={styles.inputPassContainer}>
                             <input
                                 onChange={inputHandler}
-                                type={check ? "password" : "text"}
+                                type={eye ? "password" : "text"}
                                 className={styles.inputTypes}
                                 placeholder="Contraseña"
                                 name="password"
                             />
-                            <img onClick={()=>setCheck(!check)} className={styles.imgForPass} src={`https://i.postimg.cc/${viewPassImg}`} alt="..."/>
+                            <img onClick={()=>setEye(!eye)} className={styles.imgForPass} src={`https://i.postimg.cc/${viewPassImg1}`} alt="..."/>
                         </div>
-                    </div>
-                    <button onClick={submit}>ENVIAR</button>
-                    
+                        <button className={styles.buttonSend} onClick={submit}>ENVIAR</button>
+                    </div>                                       
                 </div>
             </section>
             <Footer/>
@@ -77,6 +86,7 @@ const ChangePassword = (props) =>{
 }
 
 const mapDispatchToProps ={
-    verifyId: usersAction.verifyId
+    verifyIdMail: usersAction.verifyIdMail,
+    changePassword:usersAction.changePassword
 }
 export default connect(null,mapDispatchToProps)(ChangePassword)

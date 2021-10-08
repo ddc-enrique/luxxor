@@ -12,18 +12,21 @@ router.route('/user/sign-up')
 router.route('/user/sign-in')
     .post(validatorControllers.validatorSignIn, usersControllers.signIn)
 
-router.route('/pruebaMail')
-    .post(usersControllers.pruebaMail)    
-
-router.route('/user/bloqueo-cuenta/:id')
+/* router.route('/pruebaMail')
+    .post(usersControllers.pruebaMail)     */
+router.route('/user/bann-user/:id')
     .put(usersControllers.banUser)
 
-router.route('/user/change-password/:id')
+router.route('/user/change-password')
     .put(usersControllers.changePassword)
 
-router.route('/user/mail-password')
+router.route('/user/mail-password/:id')
     .post(usersControllers.sendMailPassword)
+
 router.route('/user/verifyId/:id')
+    .get(usersControllers.getProfile)
+
+router.route('/user/verify-mail/:id')
     .get(usersControllers.getProfile)
     
 router.route('/user/edit-profile/:id')

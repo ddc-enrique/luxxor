@@ -12,6 +12,7 @@ import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
 import Password from "./pages/Password";
 import ChangePassword from "./pages/ChangePassword";
+import Banned from "./pages/Banned";
 
 
 const App = (props) => {
@@ -31,6 +32,7 @@ const App = (props) => {
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
+        <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
         {!props.token && <Route path="/password" component={Password}/>} 
         {(props.token && !props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}

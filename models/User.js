@@ -16,7 +16,7 @@ const UserSchema = new mongoose.Schema({
     google: { type: Boolean, default: false },
     banned: { type: Boolean, default: false},
     wishList: [ {type: mongoose.Types.ObjectId, ref: "product"} ],
-    mailSentBan:{ type: Boolean, default: false},
+    mailSentPassBan:{ type: Boolean, default: false},
 })
 
 const User = mongoose.model("user", UserSchema)
