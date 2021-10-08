@@ -83,6 +83,19 @@ const Admin = () => {
 
 
 
+  const [inputFields, setInputFields] = useState([
+    {optionName: "", optionValue: ""},
+  ])
+
+  const newInput = () =>{
+    setInputFields([...inputFields, {optionName: "", optionValue: ""}])
+  }
+
+  const removeInput = (index) =>{
+    const input = [...inputFields]
+    input.splice(index, 1)
+    setInputFields(input)
+  }
 
 
   return (
@@ -219,13 +232,23 @@ const Admin = () => {
                     <option>Informática</option>
                   </select>
                 </div>
-                <div className={styles.containerInputs}>
-                  <label htmlFor="optionName">Carácterística</label>
-                  <input id="optionName" type="number" name="optionName" onChange={newProductHandler} />
-                </div>
-                <div className={styles.containerInputs}>
-                  <label htmlFor="optionValue">Descripción de car.</label>
-                  <input id="optionValue" type="number" name="optionValue" onChange={newProductHandler} />
+                <div>
+                  <p onClick={newInput} style={{cursor: "pointer"}}>+ Agregar input</p>
+                  {inputFields.map((input, index)=>{
+                   return <div>
+                      <div className={styles.containerInputs}>
+                        <label htmlFor="optionName">Carácterística</label>
+                        <input id="optionName" type="text" name={input.optionName} onChange={newProductHandler} />
+                      </div>
+                      <div className={styles.containerInputs}>
+                        <label htmlFor="optionValue">Descripción de car.</label>
+                        <input id="optionValue" type="text" name={input.optionValue} onChange={newProductHandler} />
+                      </div>
+                      <p onClick={()=>removeInput(index)} style={{cursor: "pointer"}}>- Borrar input</p>
+                  </div>
+                  
+                  })}
+                  
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="description">Descripción</label>
