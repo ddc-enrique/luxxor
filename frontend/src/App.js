@@ -13,6 +13,7 @@ import { connect } from "react-redux"
 import Password from "./pages/Password";
 import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
+import { Home2 } from "./pages/Home2"
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
