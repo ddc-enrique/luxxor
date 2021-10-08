@@ -1,0 +1,113 @@
+div.divContainerExito,
+form.formContainerExito {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+div.divContainerCuenta,
+div.divContForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 0 2rem;
+}
+
+div.divContainerCuenta {
+    gap: 1.5rem;
+}
+
+div.divContainerCuenta span {
+    color: #FC914F;
+}
+
+input.inputCiudad {
+    margin-left: 1.7rem !important;
+}
+
+input.inputDni {
+    margin-left: 2.7rem !important;
+}
+
+form.formContainerExito input {
+    width: 20rem;
+    margin: 1rem;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    border: none;
+    border-bottom: 1px solid #75747461;
+    outline: none;
+}
+
+
+div.divContainerCuenta h2 {
+    font-size: 3rem;
+}
+
+div.divExito {
+    width: 10rem;
+    height: 10rem;
+    background-position: center;
+    background-size: cover;
+}
+
+div.divContForm {
+    box-shadow: 1px 1px 5px #75747461;
+    border-radius: .5rem;
+}
+
+div.divExitoImg {
+    background-position: center;
+    background-size: cover;
+    width: 20rem;
+    height: 20rem;
+}
+
+button.buttonEnviar {
+    border: none;
+    padding: 1rem 2rem;
+    background-color: #FC914F;
+    color: rgb(241, 246, 247);
+    border-radius: 0.5rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+    div.divContForm {
+        width: 80%;
+    }
+
+    form.formContainerExito input {
+        width: 15rem;
+    }
+
+    form.formContainerExito div.field {
+        margin-top: 1rem;
+    }
+
+    div.divContainerCuenta {
+        gap: .5rem
+    }
+
+    div.divContainerCuenta h2 {
+        font-size: 2rem;
+    }
+
+    div.divExito {
+        width: 7rem;
+        height: 5rem;
+    }
+
+    input.inputDni,
+    input.inputCiudad {
+        margin-left: 0.5rem !important;
+    }
+
+    div.divExitoImg {
+        display: none;
+    }
+}

@@ -55,8 +55,15 @@ div.textSign{
     width: 30rem;
 }
 
+.location {
+    flex-direction: column!important;
+    
+    height: 10rem;
+}
+
 .location button{
-    margin:2rem 1rem
+    margin:1rem 1rem;
+    
 }
 
 .link{
@@ -92,6 +99,15 @@ img.imgForPass {
     align-self: center;
 }
 
+input.inputPhoto {
+    display: none;
+}
+
+label.labelInput {
+    align-self: center;
+    cursor: pointer;
+}
+
 div.buttonGoogle button {
     display: flex!important;
     justify-content: center!important;
@@ -115,11 +131,22 @@ div.buttonGoogle button div {
     .inputTypes{
         width: 20rem;
     }
+    .containerCarousel h2{
+        margin:1rem 0rem;
+        margin-top:4rem;
+    }
   }
   
   
   @media only screen and (min-width: 425px) {
-    
+    .inputTypes{
+        width: 20rem;
+        font-size:1rem
+    }
+    .containerCarousel h2{
+        margin:1rem 0rem;
+        margin-top:4rem;
+    }
   }
   
   
@@ -132,6 +159,9 @@ div.buttonGoogle button div {
     .inputTypes{
         width: 30rem;
         font-size:1rem
+    }
+    .containerCarousel h2{
+        margin-bottom:1rem
     }
   }
   

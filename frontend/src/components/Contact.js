@@ -1,24 +1,17 @@
 import styles from '../styles/contact.module.css'
-const Contact = () =>{
-return(
-    <> 
+const Contact = ({ reference }) =>{
+    return(
         <div className={styles.containerContact}>
-        <form id="contacto" class={styles.formContact}>
-            <h2 data-anijs="if: click, do: rubberBand animated, to: .container-box className={styles.cardInfo}" >CONTACTO</h2>
-            <p type="Nombre:"><input placeholder="Escribe tu nombre"/></p>
-            <p type="Email:"><input type='mail' placeholder="Escribe tu email"/></p>
-            <p type="Mensaje:"><input type= 'text' placeholder="Me contacto con ustedes... "/></p>
-            <button>Enviar mensaje!</button>
-            <div>
-                <span><img src='https://i.postimg.cc/66j38JsY/contacto.png' alt='icon' width='28'/>  0800-555-2147</span>
-                <span><img src='https://i.postimg.cc/vTNHk97p/mail.png' alt='icon' width='25'/> luxxor.tech@gmail.com</span> 
-            </div>
-        </form>
-        <div className={styles.imagen} style={{backgroundImage: 'url("./assets/app.gif")'}}>
+            <form id="contacto" className={styles.formContact} ref={reference}>
+                    <p>CONTÁCTANOS</p>
+                    <input placeholder="Nombre"/>
+                    <input type='mail' placeholder="Email"/>
+                    <textarea type= 'text' placeholder="Mensaje"/>
+                    <button>Enviar mensaje!</button>
+            </form>
+            <div className={styles.imageContact} style={{backgroundImage: 'url("https://i.postimg.cc/SKYqgXsy/8a9591545481ca29b3f44f9ed47b7d23-removebg-preview.png")'}}></div>
         </div>
-    </div>
-    </>
-)
+    )
 }
 
 export default Contact

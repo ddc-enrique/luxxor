@@ -1,6 +1,100 @@
 .container{
     display:flex;
     justify-content: space-around;
+    /* flex-wrap:wrap */
+}
+
+.inputFilterContain{
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    margin-left: 1rem;
+    width: 30rem;
+}
+
+/* .inputFilterContain h2{
+    margin-top: 2.5rem;
+} */
+
+.switch{
+    margin:0.5rem 0rem
+}
+
+.switch label{
+    display: flex;
+    align-items: center;
+}
+
+label span{
+    margin-right: 0.5rem;
+}
+
+.inputsFilter{
+    display: flex;
+    justify-content: center;
+    flex-direction:column;
+    align-items:center;
+    margin:1rem 0rem
+}
+
+.inputsFilter h3{
+    margin:1rem 0rem;
+}
+
+.inputsFilter input,.inputsFilter select{
+    border: 1px solid #848484;
+	-webkit-border-radius: 2rem;
+	-moz-border-radius: 2rem;
+	border-radius: 2rem;
+	outline:0;
+	height:1.5rem;
+	width: 15rem;
+	padding-left:0.8rem;
+	padding-right:0.8rem;
+}
+
+.inputSelect{
+    /* margin:3rem 0rem; */
+    display:flex;
+    justify-content:flex-end;
+}
+
+ .inputSelect div{
+    margin-right: 3.5rem;
+} 
+
+.inputSelect h2{
+    margin-bottom:0.2rem;
+}
+
+.productsSection{
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+}
+
+.productsSection h2,.cardProduct p{
+    text-align:center;
+}
+
+.center{
+   display:flex;
+   justify-content: center;
+}
+
+.cardProduct p{
+    margin: 0.8rem 0rem;
+}
+
+.cardProduct{
+    display:flex;
+    justify-content:center;
+    flex-direction:column;
+    margin:1rem;
+    width:20rem;
+    background-color:#D3D3D3;
+    border-radius: 1rem;
+    padding: 0.2rem 0.5rem;
 }
 
 .containPrice{
@@ -9,13 +103,76 @@
     justify-content:space-around;
 }
 
-.containProducts{
+.containPrice p{
+    background-color: #f48f31;
+    color:white;
+    padding: 0.2rem 1rem;
+    border-radius:1rem
+}
+
+.containPrice span{
+    position:absolute;
+    background-color: #f48f31;
+    color:white;
+    margin-left: 2.75rem;
+    margin-top: 0.15rem;
+    padding: 0.2rem 0.6rem;
+    border-radius:1rem;
+}
+
+.containerProducts{
     display: flex;
-    justify-content: center;
-    flex-direction: column;
+    justify-content: space-around;
+    flex-wrap:wrap;
 }
 
 .photo{
-    width:10rem;
-    height:10rem
+    width:14rem;
+    height:10rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    border-radius: 1rem;
 }
+
+.btnViewMore{
+    background-color:#f48f31;
+	border-radius:2em;
+    outline: none;
+	/* display:inline-block; */
+	cursor:pointer;
+	color:#ffffff;
+	font-size:1.5rem;
+	padding:0.5rem 1rem;
+	text-decoration:none;
+	/* text-shadow:0px 1px 0px #7A5EA8; */
+    margin:1rem 0rem;
+    /* margin-left:1rem; */
+}
+
+.selectInput {
+	border: 0.05rem solid #848484;
+	border-radius: 2rem;
+	outline:0;
+	height:2rem;
+	width: 17rem;
+	padding-left:1rem;
+	padding-right:1rem;
+}
+
+@media only screen and (min-width: 375px) {
+  }
+  
+  
+  @media only screen and (max-width: 425px) {
+    .container{
+        display:flex;
+        justify-content: space-around;
+        flex-wrap:wrap 
+    }
+  }
+  
+  
+  @media only screen and (min-width: 576px) {
+    
+  }

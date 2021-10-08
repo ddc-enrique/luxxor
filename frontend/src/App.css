@@ -1,7 +1,10 @@
 * {
   margin: 0%;
   padding: 0%;
-  font-family: 'Fredoka One', cursive;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
@@ -14,10 +17,30 @@ a {
   color: #545454;
 }
 
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  /* box-shadow: 1px 1px 10px #7a5ea8bd; */
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7A5EA8;
+  border-radius: .2rem;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #7A5EA8;
+}
+
 @media only screen and (min-width: 375px) {
   html {
     font-size: 4vw;
   }
+
+  ::-webkit-scrollbar {
+    width: 0.2rem;
+  }
+
 }
 
 
@@ -35,15 +58,24 @@ a {
   html {
     font-size: 2vw;
   }
+
+  ::-webkit-scrollbar {
+    width: 0.4rem;
+  }
 }
-
-
-@media only screen and (min-width: 768px) {}
 
 @media only screen and (min-width: 1024px) {
   html {
     font-size: 1vw;
   }
+
+  ::-webkit-scrollbar {
+    width: 0.7rem;
+  }
 }
 
 @media only screen and (min-width: 1440px) {}
+
+/* #7A5EA8
+
+*/

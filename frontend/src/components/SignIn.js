@@ -1,35 +1,43 @@
-import {useState} from "react"
+import {useState, useContext} from "react"
 import { GoogleLogin} from "react-google-login"
 import styles from "../styles/signIn.module.css"
 import { Link } from "react-router-dom"
 import {connect} from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 
-
 const SignIn = (props) => {
-    const {signIn} = props
-
+    const {signIn} = props  
     const [check, setCheck] = useState(true)
-    const [modalLogIn, setModalLogIn] = useState(true)
     const [userLog, setUserLog] = useState({
         eMail: "",
         password: ""
     })
-    let viewPassImg = check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
+    let viewPassImg = !check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
 
     const enterUser = () =>{
         signIn(userLog)
     }
     
-    const responseGoogle = (res)=>{
+    const responseGoogle = async (res)=>{
         let logUserWithGoogle ={
             eMail: res.profileObj.email,
             password: res.profileObj.googleId,
             google: true
         }
-        // signIn(logUserWithGoogle)
+        try {
+           let response = await signIn(logUserWithGoogle)
+           if (!response){
+               console.log("Error")
+           }else{
+                console.log("Bien")
+           }
+        }catch(e){
+            console.log(e)
+        }
+
     }
 
+    
     const userLoginHandler = (e) => {
         setUserLog({...userLog, [e.target.name]: e.target.value})
     }
@@ -44,12 +52,12 @@ const SignIn = (props) => {
         <>
             <div className={styles.container}>
                 <div className={styles.signContainer}>
-                    <div className={styles.icono} onClick={()=> setModalLogIn(!modalLogIn)} style={{backgroundImage: "url('https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png')"}} ></div>
+                    <img className={styles.icono} onClick={()=> props.setModalLogIn(!props.modalLogIn)} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
                     <h1>Iniciá sesion</h1>
                     <div className={styles.inputContainer}>
                         <input type="email" className={styles.input} placeholder="Ingrese su email" name="eMail" defaultValue={userLog.eMail} onChange={userLoginHandler} onKeyPress={keyPressHandler}/>
                         <div className={styles.inputPassContainer}>
-                            <input className={styles.inputPass} type={!check ? "password" : "text"} placeholder="Ingrese su contraseña" name="password" defaultValue={userLog.password} onChange={userLoginHandler} onKeyPress={keyPressHandler}/>
+                            <input className={styles.inputPass} type={check ? "password" : "text"} placeholder="Ingrese su contraseña" name="password" defaultValue={userLog.password} onChange={userLoginHandler} onKeyPress={keyPressHandler}/>
                             <img onClick={()=>setCheck(!check)} className={styles.imgForPass} src={`https://i.postimg.cc/${viewPassImg}`} alt="..."/>
                         </div>
                         <button className={styles.buttonSign} onClick={enterUser}>Entrar</button>
@@ -65,7 +73,7 @@ const SignIn = (props) => {
                         />
                     </div>
                     <div className={styles.textSign}>
-                        <h2>No tenés cuenta? <Link to="#"></Link>Registráte </h2>
+                        <h2>No tenés cuenta? <Link to="/registro"></Link>Registráte </h2>
                         
                     </div>
                 </div>

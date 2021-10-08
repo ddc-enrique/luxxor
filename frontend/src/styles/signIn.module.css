@@ -4,6 +4,11 @@ div.container {
     position: fixed;
     top: 25%;
     left: 34%;
+    display: block;
+}
+
+div.none {
+    display: none;
 }
 
 div.signContainer {
@@ -105,11 +110,10 @@ div.buttonGoogle button div {
     
 }
 
-div.icono {
-    width: 3rem;
-    height: 3rem;
+img.icono {
+    width: 2rem;
+    height: 2rem;
     cursor: pointer;
+    align-self: flex-start;
 }
 
-
- 
