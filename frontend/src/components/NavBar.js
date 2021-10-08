@@ -6,6 +6,7 @@ import SignIn from './SignIn'
 import { connect } from 'react-redux'
 
 const NavBar = (props) => {
+    console.log(props)
 
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(true)
@@ -19,6 +20,7 @@ const NavBar = (props) => {
         setVisibleMenu(!visibleMenu)
     }
 
+    const homeLocationsPathFlag = [ "/como-comprar", "/contacto"].includes(history.location.pathname) || (history.location.pathname === "/")
     return(
         <header className={styles.headerContainer}>
             <Link to='/'>
@@ -26,26 +28,26 @@ const NavBar = (props) => {
                 <div className={styles.titleNav} style={{backgroundImage: 'url("https://i.postimg.cc/fTBDVNKz/LUXXOR-unscreen.gif")'}}></div>
             </Link>
             <nav className={styles.navContainer}>
-                {history.location.pathname==="/" && 
+                {homeLocationsPathFlag && 
                     <a href="#comoComprar">
                         ¿Cómo Comprar?
                     </a>
                 }
-                {(history.location.pathname.length > 1) && 
-                    <Link to='/' >
+                {!homeLocationsPathFlag && 
+                    <Link to='/como-comprar' >
                         ¿Cómo Comprar?
                     </Link>
                 }                
                 <Link to='/productos'>
                     Productos
                 </Link>
-                {history.location.pathname==="/" && 
+                {homeLocationsPathFlag && 
                     <a href="#contacto">
                         Contacto 
                     </a>
                 }
-                {(history.location.pathname.length > 1) && 
-                    <Link to='/' >
+                {!homeLocationsPathFlag && 
+                    <Link to='/contacto' >
                         Contacto
                     </Link>
                 }
@@ -55,27 +57,27 @@ const NavBar = (props) => {
                 </div>
             </nav>
                 {visibleMenu && 
-                <nav className={styles.navContainerMobile}>
-                    {history.location.pathname==="/" && 
-                            <a href="#comoComprar">
+                    <nav className={styles.navContainerMobile}>
+                        {homeLocationsPathFlag && 
+                        <a href="#comoComprar">
                             ¿Cómo Comprar?
-                            </a>
+                        </a>
                     }
-                    {(history.location.pathname.length > 1) && 
-                        <Link to='/' >
+                    {!homeLocationsPathFlag && 
+                        <Link to='/como-comprar' >
                             ¿Cómo Comprar?
                         </Link>
-                    }
+                    }                
                     <Link to='/productos'>
                         Productos
                     </Link>
-                    {history.location.pathname==="/" && 
+                    {homeLocationsPathFlag && 
                         <a href="#contacto">
                             Contacto 
                         </a>
                     }
-                    {(history.location.pathname.length > 1) && 
-                        <Link to='/' >
+                    {!homeLocationsPathFlag && 
+                        <Link to='/contacto' >
                             Contacto
                         </Link>
                     }
@@ -87,9 +89,10 @@ const NavBar = (props) => {
             <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/R0X4cphc/menu-1.png")'}}  onClick={clickHandlerMenu}></div>
                 { visible &&  <div className={styles.dropDown}>
                     <Link to="#" onClick={()=>setModalLogIn(!modalLogIn)}><p>Ingresar</p></Link>
-                     <SignIn modalLogIn={modalLogIn}/>
+                        <SignIn modalLogIn={modalLogIn}/>
                     <Link to="/registro"><p>Registrarme</p></Link>
-                    <Link to="/admin"><p>Admin</p></Link>
+                    {props.token && <Link to="/mi-cuenta">Mi Cuenta</Link>}
+                    {props.admin && <Link to="/admin"><p>Admin</p></Link>}
                 </div>}
         </header>
     )
@@ -99,7 +102,9 @@ const mapStateToProps = (state) => {
     return {
         profilePic: state.users.profilePic,
         firstName: state.users.firstName,
-        lastName: state.users.lastName
+        lastName: state.users.lastName,
+        token: state.users.token,
+        admin: state.users.admin
     }
 }
 

@@ -18,7 +18,8 @@ const usersReducer = (state = initState, action) =>{
                 lastName: action.payload.lastName, 
                 eMail: action.payload.eMail, 
                 admin: action.payload.admin, 
-                id: action.payload._id
+                id: action.payload._id,
+                token: action.payload.token
             }
         case "LOGOUT":
             localStorage.removeItem("token")
@@ -32,8 +33,17 @@ const usersReducer = (state = initState, action) =>{
                 dni: null, 
                 id: null
             }
-            default:
-                return state
+        case "UPDATE_USER":
+            return{
+                firstName: action.payload.firstName,
+                lastName: action.payload.lastName,
+            }
+        case "UPDATE_DNI":
+            return{
+                dni: action.payload.dni
+            }
+        default:
+            return state
     }
 }
 

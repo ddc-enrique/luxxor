@@ -58,6 +58,7 @@ const validatorControllers = {
                 "string.min": "Mínimo de 6 caracteres",
                 "string.email": "Se debe ingresar un email valido"
             }),
+            password: joi.any().optional(),
         })
         const validation = schema.validate(req.body, {abortEarly: false})
         if(!validation.error){
@@ -126,16 +127,17 @@ const validatorControllers = {
         if(!validation.error){
             next()
         }else{
-            res.json({success: false, errors: validation.error.details})
+            res.json({success: false, response: validation.error.details})
         }
     },
 
     validatorChangePassword: (req, res, next) => {
         const schema = joi.object({
-            eMail: joi.string().trim().min(6).max(255).email().required().messages({
+            password: joi.string().trim().min(4).max(255).pattern(/^[a-zA-Z\u00C0-\u017F0-9!¡?¿\-_.]*$/).required().messages({
                 "string.max": "Máximo de 255 caracteres",
-                "string.min": "Mínimo de 6 caracteres",
-                "string.email": "Se debe ingresar un email valido"
+                "string.min": "Mínimo de 4 caracteres",
+                "string.trim": "No se permiten espacios antes y después de la contraseña",
+                "string.pattern.base": 'La contraseña solo puede incluir letras, números ó los signos "!¡?¿_-."',
             }),
         })
         const validation = schema.validate(req.body, {abortEarly: false})

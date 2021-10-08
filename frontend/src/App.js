@@ -11,27 +11,30 @@ import Error from "./pages/Error"
 import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
 
-
 const App = (props) => {
-
+  const {token, dni, signWithLocal} = props
   useEffect(() => {
     if (localStorage.getItem("token")){
-      props.signWithLocal(localStorage.getItem("token"))
+      signWithLocal(localStorage.getItem("token"))
     }
   }, [])
 
+
+
   return (    
     <BrowserRouter>
-      <EditProfile completeAccount={false} />
+      {/* <EditProfile completeAccount={false} /> */}
       <Switch>
-        <Route exact path="/" component={Home} />
+        <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
+        <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
+        <Route path="/como-comprar" render={ () => <Home scrollTo={"#comoComprar"} /> } />
         <Route path="/registro" component={SignUp} />
         <Route path="/producto" component={Product} /> 
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
-        {(props.token && !props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
-        {(props.token && props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
+        {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
+        {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
         {/* <Route path="/notFound" component={NotFound} /> */}
         <Redirect to="/error" />
       </Switch>

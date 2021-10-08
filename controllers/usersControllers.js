@@ -73,7 +73,7 @@ const usersControllers = {
                 if (userFound) throw new Error ("DNI en uso")
                 User.findOneAndUpdate({ _id: req.params.id }, { ...req.body }, { new: true })
                     .then( (userUpdated) => {
-                        res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName } })
+                        res.json({ success: true, response: { dni: userUpdated.dni } })
                     } )
             })
             .catch( err => handleError(res, err) )
@@ -83,7 +83,7 @@ const usersControllers = {
         console.log("Received EDIT DATA USER Petition:" + Date())
 
         User.findOneAndUpdate({ _id: req.params.id }, {...req.body}, { new: true })
-            .then( (userUpdated) => res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName } }) )
+            .then( (userUpdated) => res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName} }) )
             .catch( err => handleError(res, err) )
     },
     pruebaMail:(req,res)=>{
