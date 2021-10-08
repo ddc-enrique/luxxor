@@ -14,6 +14,7 @@ import Password from "./pages/Password";
 import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
 import { Home2 } from "./pages/Home2"
+import { Product2 } from "./pages/Product2"
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
@@ -33,7 +34,7 @@ const App = (props) => {
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
         <Route path="/como-comprar" render={ () => <Home scrollTo={"#comoComprar"} /> } />
         <Route path="/registro" component={SignUp} />
-        <Route path="/producto" component={Product} /> 
+        <Route path="/producto" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
