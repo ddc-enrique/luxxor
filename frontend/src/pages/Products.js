@@ -2,7 +2,8 @@ import React, { useState } from "react"
 import Product from "../components/Product"
 import Navbar from "../components/NavBar"
 import Footer from "../components/Footer"
-import styles from "../styles/productList.module.css"
+// import styles from "../styles/productList.module.css"
+import styles from "../styles/productList2.module.css"
 import Switch from "react-switch"
 import { Link } from "react-router-dom"
 
@@ -135,8 +136,7 @@ const Products = () => {
               <div className={styles.containPrice}>
                 <p>$282000</p>
                 <div>
-                  <span>Off</span>
-                  <p>%10</p>
+                <p>%10 Off</p>
                 </div>
               </div>
               <p>
@@ -160,8 +160,7 @@ const Products = () => {
               <div className={styles.containPrice}>
                 <p>$282000</p>
                 <div>
-                  <span>Off</span>
-                  <p>%10</p>
+                  <p>%10 Off</p>
                 </div>
               </div>
               <p>
@@ -183,8 +182,7 @@ const Products = () => {
               <div className={styles.containPrice}>
                 <p>$282000</p>
                 <div>
-                  <span>Off</span>
-                  <p>%10</p>
+                <p>%10 Off</p>
                 </div>
               </div>
               <p>
@@ -206,8 +204,7 @@ const Products = () => {
               <div className={styles.containPrice}>
                 <p>$282000</p>
                 <div>
-                  <span>Off</span>
-                  <p>%10</p>
+                <p>%10 Off</p>
                 </div>
               </div>
               <p>
@@ -229,8 +226,7 @@ const Products = () => {
               <div className={styles.containPrice}>
                 <p>$282000</p>
                 <div>
-                  <span>Off</span>
-                  <p>%10</p>
+                <p>%10 Off</p>
                 </div>
               </div>
               <p>
@@ -252,8 +248,7 @@ const Products = () => {
               <div className={styles.containPrice}>
                 <p>$282000</p>
                 <div>
-                  <span>Off</span>
-                  <p>%10</p>
+                <p>%10 Off</p>
                 </div>
               </div>
               <p>

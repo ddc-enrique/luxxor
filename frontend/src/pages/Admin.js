@@ -1,6 +1,5 @@
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 const Admin = () => {
   const data = [
     {

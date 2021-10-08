@@ -229,7 +229,7 @@ label {
 }
 .containerProducts::-webkit-scrollbar-thumb {
   background-color: #dfdfdf;
-  border-radius: 5px;
+  border-radius: 5px!important;
 }
 
 .titleProduct {

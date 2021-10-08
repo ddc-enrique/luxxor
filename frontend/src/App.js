@@ -10,6 +10,7 @@ import usersAction from "./redux/actions/usersAction"
 import Error from "./pages/Error"
 import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
+import { Home2 } from "./pages/Home2"
 
 
 const App = (props) => {
@@ -31,7 +32,7 @@ const App = (props) => {
         <Route path="/error" component={Error} />
         {(props.token && !props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(props.token && props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
-        {/* <Route path="/notFound" component={NotFound} /> */}
+        <Route path="/notFound" component={NotFound} />
         <Redirect to="/error" />
       </Switch>
     </BrowserRouter>

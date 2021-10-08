@@ -49,9 +49,9 @@ const NavBar = (props) => {
                         Contacto
                     </Link>
                 }
-                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}} onClick={clickHandler}>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/R0TDV3LN/registrarse.png")'}} onClick={clickHandler}>
                 </div>
-                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/1z2c686R/Dise-o-sin-t-tulo-46.png")'}}>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/HWtSbcjy/1-1-removebg-preview.png")'}}>
                 </div>
             </nav>
                 {visibleMenu && 
