@@ -1,7 +1,10 @@
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-const Admin = () => {
+import { connect } from "react-redux";
+import productsActions from "../redux/actions/productsActions";
+
+const Admin = (props) => {
   const data = [
     {
       name: "Notebook",
@@ -60,41 +63,50 @@ const Admin = () => {
     price: "",
     color: "",
     photos: [],
-    dataSheet: {
+    dataSheet: [{
       optionName: "",
       optionValue: "",
-    },
+    }],
     description: "",
     discount: "",
     category: "",
     brand: ""
   })
 
+  const [inputFields, setInputFields] = useState([
+    {optionName: "", optionValue: ""},
+  ])
 
-  const newProductHandler = (e) => {
-    if (e.target.name === "optionName"){
-      setNewProduct({...newProduct, dataSheet: {optionName: e.target.value}})
+  const newProductHandler = (index, e) => {
+    const values = [...inputFields]
+    if (e.target.name === "optionName") {
+      values[index][e.target.name]=e.target.value
+      setNewProduct({...newProduct, dataSheet: [...values]})
     }else if  (e.target.name === "optionValue"){
-      setNewProduct({...newProduct, dataSheet: {optionValue: e.target.value}})
+      values[index][e.target.name]=e.target.value
+      setNewProduct({...newProduct, dataSheet: [...values]})
     }else
       setNewProduct({...newProduct, [e.target.name]: e.target.value})
   }
 
 
-
-  const [inputFields, setInputFields] = useState([
-    {optionName: "", optionValue: ""},
-  ])
-
   const newInput = () =>{
     setInputFields([...inputFields, {optionName: "", optionValue: ""}])
   }
+
 
   const removeInput = (index) =>{
     const input = [...inputFields]
     input.splice(index, 1)
     setInputFields(input)
   }
+
+  const addProductHandler = async () => {
+   let response = await props.addProduct(newProduct)
+   console.log(response)
+  }
+
+
 
 
   return (
@@ -221,11 +233,11 @@ const Admin = () => {
               <div className={styles.containerAllInputs}>
                 <div className={styles.containerInputs}>
                   <label htmlFor="name">Nombre</label>
-                  <input id="name" type="text" name="name" onChange={newProductHandler} />
+                  <input id="name" type="text" name="name" onChange={(e)=>newProductHandler("index", e)} />
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="color">Categoria</label>
-                  <select className={styles.select} onChange={newProductHandler}>
+                  <select className={styles.select} name="category" onChange={(e)=>newProductHandler("index", e)}>
                     <option value="informática">Informática</option>
                     <option>Informática</option>
                     <option>Informática</option>
@@ -234,14 +246,14 @@ const Admin = () => {
                 <div>
                   <p onClick={newInput} style={{cursor: "pointer"}}>+ Agregar input</p>
                   {inputFields.map((input, index)=>{
-                   return <div>
+                   return <div key={index}>
                       <div className={styles.containerInputs}>
                         <label htmlFor="optionName">Carácterística</label>
-                        <input id="optionName" type="text" name={input.optionName} onChange={newProductHandler} />
+                        <input id="optionName" type="text" name="optionName" onChange={(e)=>newProductHandler(index, e)} defaultValue={input.optionName}/>
                       </div>
                       <div className={styles.containerInputs}>
                         <label htmlFor="optionValue">Descripción de car.</label>
-                        <input id="optionValue" type="text" name={input.optionValue} onChange={newProductHandler} />
+                        <input id="optionValue" type="text" name="optionValue" onChange={(e)=>newProductHandler(index, e)} defaultValue={input.optionValue}/>
                       </div>
                       <p onClick={()=>removeInput(index)} style={{cursor: "pointer"}}>- Borrar input</p>
                   </div>
@@ -252,7 +264,7 @@ const Admin = () => {
                 <div className={styles.containerInputs}>
                   <label htmlFor="description">Descripción</label>
                   <textarea
-                    onChange={newProductHandler}
+                    onChange={(e)=>newProductHandler("index", e)}
                     id="description"
                     name="description"
                     resize="none"
@@ -262,26 +274,26 @@ const Admin = () => {
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="price">Precio</label>
-                  <input id="price" type="number" name="price" onChange={newProductHandler} />
+                  <input id="price" type="number" name="price" onChange={(e)=>newProductHandler("index", e)} />
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="discount">Descuento</label>
-                  <input id="discount" type="number" name="discount" onChange={newProductHandler}/>
+                  <input id="discount" type="number" name="discount" onChange={(e)=>newProductHandler("index", e)}/>
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="brand">Marca</label>
-                  <input id="brand" type="text" name="brand" onChange={newProductHandler}/>
+                  <input id="brand" type="text" name="brand" onChange={(e)=>newProductHandler("index", e)}/>
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="stock">Stock</label>
-                  <input id="stock" type="number" name="stock" onChange={newProductHandler}/>
+                  <input id="stock" type="number" name="stock" onChange={(e)=>newProductHandler("index", e)}/>
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="color">Color</label>
-                  <input id="color" type="text" name="color" onChange={newProductHandler}/>
+                  <input id="color" type="text" name="color" onChange={(e)=>newProductHandler("index", e)}/>
                 </div>
                 <div className={styles.containerInputs}>
-                  <button>Enviar</button>
+                  <button onClick={addProductHandler}>Enviar</button>
                 </div>
               </div>
             </div>
@@ -405,4 +417,10 @@ const Admin = () => {
     </div>
   );
 };
-export default Admin;
+
+
+const mapDispatchToProps = {
+  addProduct: productsActions.addProduct
+}
+
+export default connect(null, mapDispatchToProps)(Admin);

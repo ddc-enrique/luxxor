@@ -14,15 +14,16 @@ const productsControllers = {
         .catch(error=>res.json({success:false, response:error.message}))
     },
     addProduct:(req,res)=>{
+        console.log(req.body)
         console.log("Received ADD PRODUCTS Petition:" + Date())
-        const{name,stock,price,color,photos,dataSheet,description,discount,category,brand}=req.body
-        const {optionName,optionValue}=dataSheet
+        const{name,stock,price,color,photos,dataSheet,description,discount,category,brand}=req.body.product
+        
         const newProduct =new Product ({
-            name:name.trim(),
+            name,
             stock,
             price,
-            color:color.trim(),
-            photos:photos,
+            color,
+            photos,
             dataSheet,
             description,
             discount,

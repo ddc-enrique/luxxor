@@ -1,4 +1,5 @@
 import axios from "axios"
+import Product from "../../components/Product"
 
 const productsActions = {
     categories: () =>{
@@ -39,7 +40,7 @@ const productsActions = {
         }
     },
 
-    brand: () => {
+    brand: (id) => {
         return async (dispatch) =>{
             try {
                 let response = axios.get(`http://localhost:4000/api/admin/brand/${id}`)
@@ -81,6 +82,22 @@ const productsActions = {
         }
     },
 
+
+    addProduct: (product) =>{
+        console.log(product)
+        return async (dispatch) =>{
+            try {
+                let response = await axios.post("http://localhost:4000/api/products", {product})
+                if (response.data.success){
+                    return response.data
+                }else {
+                    return response.data
+                }
+            }catch(e){
+                return ({success: false, response: e})
+            }
+        }
+    }
 
 }
 export default productsActions
