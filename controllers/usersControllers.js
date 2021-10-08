@@ -123,16 +123,16 @@ const usersControllers = {
                 </table>
                     `
             }
-            userFound.banned=true
             userFound.mailSentPassBan=false
+            userFound.banned=true
             userFound.save()
-            .then(userModified=>{
+            .then((userUpdated)=>{
+                console.log("130",userUpdated)
                 transport.sendMail(mailBanned, (err, info) => {
                     if (err) throw new Error(err)
                     res.json({ success: true, response: info })
                 })
-            })
-            
+            })   
         })
         .catch(err => handleError(res, err))
     },

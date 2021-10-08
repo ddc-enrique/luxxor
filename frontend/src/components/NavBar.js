@@ -5,11 +5,13 @@ import { useHistory } from 'react-router'
 import SignIn from './SignIn'
 import { connect } from 'react-redux'
 import Password from '../pages/Password';
+import ModalCart from './ModalCart';
 
 const NavBar = (props) => {  
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(false)
     const [modalPass,setmodalPass]=useState(false)
+    const [modalCart,setModalCart]=useState(false)
     const [visibleMenu, setVisibleMenu] =useState(false)
     const history = useHistory()
 
@@ -20,6 +22,9 @@ const NavBar = (props) => {
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
         setVisible(false)
+    }
+    const clickCart =()=>{
+        setModalCart(!modalCart)
     }
 
     const homeLocationsPathFlag = [ "/como-comprar", "/contacto"].includes(history.location.pathname) || (history.location.pathname === "/")
@@ -55,7 +60,7 @@ const NavBar = (props) => {
                 }
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/R0TDV3LN/registrarse.png")'}} onClick={clickHandler}>
                 </div>
-                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/HWtSbcjy/1-1-removebg-preview.png")'}}>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/HWtSbcjy/1-1-removebg-preview.png")'}} onClick={clickCart}>
                 </div>
             </nav>
                 {visibleMenu && 
@@ -97,7 +102,7 @@ const NavBar = (props) => {
                     {props.admin && <Link to="/admin"><p>Admin</p></Link>}
                 </div>}
                 {modalPass && <Password setmodalPass={setmodalPass} setVisible={setVisible}/>}
-                
+                {modalCart && <ModalCart setModalCart={setModalCart}/>}
         </header>
     )
 }
