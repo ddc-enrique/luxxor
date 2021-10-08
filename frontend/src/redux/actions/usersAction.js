@@ -70,7 +70,42 @@ const usersAction = {
             if (!response.data.success) throw new Error(response.data.response)
             return response.data.response
         }
+    },
+
+    sendMail:(eMail)=>{
+        return async (dispatch)=>{
+            let response =await axios.post("http://localhost:4000/api/user/mail-password",{eMail})
+            console.log(response)
+            return response.data.success
+        }
+    },
+    verifyIdMail:(id,type)=>{
+        return async (dispatch)=>{
+            if(type==="VERIFICAR USUARIO"){
+                let response = await axios.get(`http://localhost:4000/api/user/verifyId/${id}`)
+                if(response.data.success) return response.data.success
+            }else{
+                let response = await axios.get(`http://localhost:4000/api/user/verify-mail/${id}`)
+                if(response.data.success){
+                    return response.data.success
+                }
+            }
+            
+        }
+    },
+    changePassword:(eMail,password)=>{
+        return async (dispatch)=>{
+            let response = await axios.put("http://localhost:4000/api/user/change-password",{eMail,password})
+            if(response.data.success) return response.data.success
+        }
+    },
+    banAccount:(id)=>{
+        return async (dispatch)=>{
+            let response = await axios.put(`http://localhost:4000/api/user/bann-user/${id}`)
+            if(response.data.success) return response.data.success
+        }
     }
+    
 }
 
 export default usersAction
