@@ -13,21 +13,26 @@ import { connect } from "react-redux"
 import Password from "./pages/Password";
 import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
-
+import { Home2 } from "./pages/Home2"
 
 const App = (props) => {
-
+  const {token, dni, signWithLocal} = props
   useEffect(() => {
     if (localStorage.getItem("token")){
-      props.signWithLocal(localStorage.getItem("token"))
+      signWithLocal(localStorage.getItem("token"))
     }
   }, [])
+
+
 
   return (    
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home} />
         {!props.token && <Route path="/registro" component={SignUp} />}
+        <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
+        <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
+        <Route path="/como-comprar" render={ () => <Home scrollTo={"#comoComprar"} /> } />
+        <Route path="/registro" component={SignUp} />
         <Route path="/producto" component={Product} /> 
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
@@ -35,9 +40,8 @@ const App = (props) => {
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
         {!props.token && <Route path="/password" component={Password}/>} 
-        {(props.token && !props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
-        {(props.token && props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
-        {/* <Route path="/notFound" component={NotFound} /> */}
+        {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
+        {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
         <Redirect to="/error" />
       </Switch>
     </BrowserRouter>

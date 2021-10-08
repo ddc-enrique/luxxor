@@ -1,19 +1,24 @@
-import {useState} from "react"
+import React, {useState, createContext} from "react"
 
-let useContext = React.createContext()
-let {Provider, Consumer} = useContext
+let UseContext = createContext()
+let {Provider, Consumer} = UseContext
 
 const UseProvider=({children})=>{
 
-    const [modalLog, setModalLog] = useState(true)
+    const [modalLog, setModalLog] = useState(true)   
+    const modalFalse = () => {
+        setModalLog(false)
+    }
 
-    const
+    const modalTrue = () => {
+        setModalLog(true)
+    }
 
     return (
-        <Provider value={}>
+        <Provider value={{modalLog, modalFalse, modalTrue}}>
             {children}
         </Provider>
     )
 }
 
-export {UseProvider, Consumer as useConsumer, useContext}
+export {UseProvider, Consumer , UseContext}

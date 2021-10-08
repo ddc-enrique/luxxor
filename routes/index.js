@@ -20,7 +20,7 @@ router.route('/user/bann-user/:id')
 router.route('/user/change-password')
     .put(usersControllers.changePassword)
 
-router.route('/user/mail-password/:id')
+router.route('/user/mail-password')
     .post(usersControllers.sendMailPassword)
 
 router.route('/user/verifyId/:id')

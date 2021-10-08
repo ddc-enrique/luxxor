@@ -1,38 +1,43 @@
-import {useState} from "react"
+import {useState, useContext} from "react"
 import { GoogleLogin} from "react-google-login"
 import styles from "../styles/signIn.module.css"
 import { Link } from "react-router-dom"
 import {connect} from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 
-
 const SignIn = (props) => {
-    const {signIn} = props
-    // let value =  props.modalLogIn ? true : false
-    // console.log(value)
-
+    const {signIn} = props  
     const [check, setCheck] = useState(true)
-    const [modalLogIn, setModalLogIn] = useState(true)
     const [userLog, setUserLog] = useState({
         eMail: "",
         password: ""
     })
     let viewPassImg = !check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
 
-    console.log(props.modalLogIn)
     const enterUser = () =>{
         signIn(userLog)
     }
     
-    const responseGoogle = (res)=>{
+    const responseGoogle = async (res)=>{
         let logUserWithGoogle ={
             eMail: res.profileObj.email,
             password: res.profileObj.googleId,
             google: true
         }
-        // signIn(logUserWithGoogle)
+        try {
+           let response = await signIn(logUserWithGoogle)
+           if (!response){
+               console.log("Error")
+           }else{
+                console.log("Bien")
+           }
+        }catch(e){
+            console.log(e)
+        }
+
     }
 
+    
     const userLoginHandler = (e) => {
         setUserLog({...userLog, [e.target.name]: e.target.value})
     }
@@ -45,9 +50,9 @@ const SignIn = (props) => {
 
     return (
         <>
-            {<div className={(!props.modalLogIn || !modalLogIn) ? styles.container : styles.none}>
+            <div className={styles.container}>
                 <div className={styles.signContainer}>
-                    <img className={styles.icono} onClick={()=> setModalLogIn(!modalLogIn)} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
+                    <img className={styles.icono} onClick={()=> props.setModalLogIn(!props.modalLogIn)} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
                     <h1>Iniciá sesion</h1>
                     <div className={styles.inputContainer}>
                         <input type="email" className={styles.input} placeholder="Ingrese su email" name="eMail" defaultValue={userLog.eMail} onChange={userLoginHandler} onKeyPress={keyPressHandler}/>
@@ -72,7 +77,7 @@ const SignIn = (props) => {
                         
                     </div>
                 </div>
-            </div>}
+            </div>
         </>
     )
 }
