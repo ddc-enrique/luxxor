@@ -59,7 +59,7 @@ const validatorControllers = {
                 "string.email": "Se debe ingresar un email valido"
             }),
             google: joi.boolean(),
-            password: joi.string(),
+            password: joi.any().optional(),
         })
         const validation = schema.validate(req.body, {abortEarly: false})
         if(!validation.error){
@@ -71,13 +71,15 @@ const validatorControllers = {
 
     validatorEditComplete: (req, res, next) => {
         const schema = joi.object({
-            firstName: joi.string().trim().min(2).max(35).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).required().messages({
+            firstName: req.method === "POST" ? joi.any().optional()
+            : joi.string().trim().min(2).max(35).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).required().messages({
                 "string.max": "Máximo de 35 caracteres",
                 "string.min": "Mínimo de 2 caracteres",
                 "string.trim": "No se permiten espacios antes y después del nombre",
                 "string.pattern.base": "No se permiten números"
             }),
-            lastName: joi.string().trim().min(2).max(35).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).required().messages({
+            lastName: req.method === "POST" ? joi.any().optional()
+            : joi.string().trim().min(2).max(35).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).required().messages({
                 "string.max": "Máximo de 35 caracteres",
                 "string.min": "Mínimo de 2 caracteres",
                 "string.trim": "No se permiten espacios antes y después del apellido",
@@ -96,37 +98,47 @@ const validatorControllers = {
                 "string.max": "Máximo de 15 números",
                 "string.pattern.base": 'El télefono puede incluir números, signo "+" ó guión "-"'
             }),
-            address: joi.object({
-                city: joi.string().trim().required().min(3).max(30).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).messages({
-                    "string.empty": "El campo ciudad es requerido",
-                    "string.min": "Mínimo de 3 caracteres",
-                    "string.max": "Máximo de 30 caracteres",
-                    "string.pattern.base": 'La ciudad solo puede incluir letras'
-                }),
-                zipCode: joi.number().integer().positive().less(10000).required().messages({
-                    "number.base":"El Código Postal debe ser un número",
-                    "number.integer": "El Código Postal debe ser un número entero",
-                    "number.positive": "El Código Postal debe ser un número positivo",
-                    "number.less": "El Código Postal debe ser un número de 4 cifras"
-                }),
-                street: joi.string().trim().required().min(5).max(40).pattern(/^[a-zA-Z\u00C0-\u017F0-9\/-\s]*$/).messages({
-                    "string.empty": "El campo dirección es requerido",
-                    "string.min": "Mínimo de 5 caracteres",
-                    "string.max": "Máximo de 40 caracteres",
-                    "string.pattern.base": 'La dirección puede incluir letras, números ó barra"/"'
-                }),
-                optional: !req.body.address.optional ? joi.any().optional()
-                : joi.string().trim().required().min(2).max(15).pattern(/^[a-zA-Z\u00C0-\u017F0-9\/-\s]*$/).messages({
-                    "string.empty": "El campo dirección es requerido",
-                    "string.min": "Mínimo de 2 caracteres",
-                    "string.max": "Máximo de 15 caracteres",
-                    "string.pattern.base": 'La dirección puede incluir letras, números ó barra"/"'
-                }),
+            city: joi.string().trim().required().min(3).max(30).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).messages({
+                "string.empty": "El campo ciudad es requerido",
+                "string.min": "Mínimo de 3 caracteres",
+                "string.max": "Máximo de 30 caracteres",
+                "string.pattern.base": 'La ciudad solo puede incluir letras'
             }),
-            profilePic: joi.string().trim().min(6).max(2048).required().messages({
-                "string.max": "Máximo de 2048 caracteres",
-                "string.min": "Mínimo de 6 caracteres",
-                "string.trim": "No se permiten espacios antes y después de la imagen"
+            zipCode: joi.number().integer().positive().less(10000).required().messages({
+                "number.base":"El Código Postal debe ser un número",
+                "number.integer": "El Código Postal debe ser un número entero",
+                "number.positive": "El Código Postal debe ser un número positivo",
+                "number.less": "El Código Postal debe ser un número de 4 cifras"
+            }),
+            address: joi.string().trim().required().min(5).max(40).pattern(/^[a-zA-Z\u00C0-\u017F0-9\/-\s]*$/).messages({
+                "string.empty": "El campo dirección es requerido",
+                "string.min": "Mínimo de 5 caracteres",
+                "string.max": "Máximo de 40 caracteres",
+                "string.pattern.base": 'La dirección puede incluir letras, números ó barra"/"'
+            }),
+            optional: !req.body.address.optional ? joi.any().optional()
+            : joi.string().trim().required().min(2).max(15).pattern(/^[a-zA-Z\u00C0-\u017F0-9\/-\s]*$/).messages({
+                "string.empty": "El campo dirección es requerido",
+                "string.min": "Mínimo de 2 caracteres",
+                "string.max": "Máximo de 15 caracteres",
+                "string.pattern.base": 'La dirección puede incluir letras, números ó barra"/"'
+            }),
+        })
+        const validation = schema.validate(req.body, {abortEarly: false})
+        if(!validation.error){
+            next()
+        }else{
+            res.json({success: false, response: validation.error.details})
+        }
+    },
+
+    validatorChangePassword: (req, res, next) => {
+        const schema = joi.object({
+            password: joi.string().trim().min(4).max(255).pattern(/^[a-zA-Z\u00C0-\u017F0-9!¡?¿\-_.]*$/).required().messages({
+                "string.max": "Máximo de 255 caracteres",
+                "string.min": "Mínimo de 4 caracteres",
+                "string.trim": "No se permiten espacios antes y después de la contraseña",
+                "string.pattern.base": 'La contraseña solo puede incluir letras, números ó los signos "!¡?¿_-."',
             }),
         })
         const validation = schema.validate(req.body, {abortEarly: false})

@@ -50,7 +50,7 @@ const usersAction = {
                         firstName: response.data.firstName,
                         lastName: response.data.lastName, 
                         eMail: response.data.eMail, 
-                        admin: response.data.profilePic, 
+                        admin: response.data.admin, 
                         id: response.data.id
                     }})
             }catch(e){
@@ -103,7 +103,25 @@ const usersAction = {
             let response = await axios.put(`http://localhost:4000/api/user/bann-user/${id}`)
             if(response.data.success) return response.data.success
         }
-    }
+    },
+    editDataUser: (id, flagEdit, token, dataUser) => {
+        return async (dispatch) => {
+            const url = `http://localhost:4000/api/user/edit-profile/${id}`
+            const headers = { Authorization: "Bearer " + token }
+            let response = flagEdit ? await axios.put(url, {...dataUser}, { headers } ) : await axios.post(url, {...dataUser}, { headers })
+            if(response.data.success){
+                if(flagEdit){
+                    dispatch({ type: "UPDATE_USER", 
+                    payload:{
+                        firstName: response.data.firstName,
+                        lastName: response.data.lastName,
+                    }})
+                } else {
+                    dispatch({ type: "UPDATE_DNI", dispatch: response.data.dni})
+                }
+            }
+        }
+    },
     
 }
 

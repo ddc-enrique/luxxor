@@ -32,8 +32,17 @@ const usersReducer = (state = initState, action) =>{
                 admin: null, 
                 id: null
             }
-            default:
-                return state
+        case "UPDATE_USER":
+            return{
+                firstName: action.payload.firstName,
+                lastName: action.payload.lastName,
+            }
+        case "UPDATE_DNI":
+            return{
+                dni: action.payload.dni
+            }
+        default:
+            return state
     }
 }
 
