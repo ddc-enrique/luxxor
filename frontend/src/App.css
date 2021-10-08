@@ -1,7 +1,6 @@
 * {
   margin: 0%;
   padding: 0%;
-  font-family: 'Fredoka One', cursive;
 }
 
 html {
@@ -41,7 +40,7 @@ a {
   ::-webkit-scrollbar {
     width: 0.2rem;
   }
-  
+
 }
 
 
@@ -59,6 +58,7 @@ a {
   html {
     font-size: 2vw;
   }
+
   ::-webkit-scrollbar {
     width: 0.4rem;
   }

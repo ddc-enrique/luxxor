@@ -30,20 +30,18 @@ const NavBar = (props) => {
 
     const homeLocationsPathFlag = [ "/como-comprar", "/contacto"].includes(history.location.pathname) || (history.location.pathname === "/")
     return(
-        <header className={styles.headerContainer}>
-            <Link to='/'>
-                {/* <h1>Lu<span className={styles.orange}>x</span><span className={styles.violet}>x</span>or</h1> */}
-                <div className={styles.titleNav} style={{backgroundImage: 'url("https://i.postimg.cc/fTBDVNKz/LUXXOR-unscreen.gif")'}}></div>
-            </Link>
-            <nav className={styles.navContainer}>
+        <header>
+            <nav>
+            <Link to='/'>LUXXOR</Link>
+            <div className={styles.navIntermedio}>
                 {homeLocationsPathFlag && 
-                    <a href="#comoComprar">
-                        ¿Cómo Comprar?
+                    <a href="#novedades">
+                        Novedades
                     </a>
                 }
                 {!homeLocationsPathFlag && 
-                    <Link to='/como-comprar' >
-                        ¿Cómo Comprar?
+                    <Link to='/novedades' >
+                        Novedades
                     </Link>
                 }                
                 <Link to='/productos'>
@@ -59,11 +57,12 @@ const NavBar = (props) => {
                         Contacto
                     </Link>
                 }
-                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/R0TDV3LN/registrarse.png")'}} onClick={clickHandler}>
+            </div>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/pTZVv7n0/Diseño_sin_título_(66).png")'}} onClick={clickHandler}>
                 </div>
-                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/HWtSbcjy/1-1-removebg-preview.png")'}}>
+                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}}>
                 </div>
-            </nav>
+                </nav>
                 {visibleMenu && 
                     <nav className={styles.navContainerMobile}>
                         {homeLocationsPathFlag && 
@@ -105,6 +104,7 @@ const NavBar = (props) => {
                 </div>}
                 {modalPass && <Password setmodalPass={setmodalPass} setVisible={setVisible}/>}
                 
+        
         </header>
     )
 }

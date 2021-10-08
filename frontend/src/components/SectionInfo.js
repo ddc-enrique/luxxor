@@ -1,30 +1,75 @@
 import styles from '../styles/sectionInfo.module.css'
 
 const SectionInfo = ({ reference })=>{
+    const images =[
+        "https://i.postimg.cc/m2DJ26Nr/OFERTA.png"
+    ]
     return(
-        <section id="comoComprar" className={styles.sectionContainer} ref={reference}> 
-            <h2>Como Comprar?</h2>
-            <article className={styles.articleContainer}>
-                <div className={styles.cardInfo} style={{backgroundImage: 'url("https://i.postimg.cc/ZqrngHc1/Dise-o-sin-t-tulo-51.png")'}}>
-                    <div className={styles.imgCard} style={{backgroundImage: 'url("https://i.postimg.cc/R0TDV3LN/registrarse.png")'}}></div>
-                    <p>
-                    Create una cuenta  y mira todos nuestras ofertas.
-                    </p>
-                </div>
-                <div className={styles.cardInfo} style={{backgroundImage: 'url("https://i.postimg.cc/ZqrngHc1/Dise-o-sin-t-tulo-51.png")'}}>
-                    <div className={styles.imgCard} style={{backgroundImage: 'url("https://i.postimg.cc/1zSdQ06k/producto2.png")'}}></div>
-                    <p>
-                    Elegí lo que te guste y agregalo al carrito.
-                    </p>
-                </div>
-                <div className={styles.cardInfo} style={{backgroundImage: 'url("https://i.postimg.cc/ZqrngHc1/Dise-o-sin-t-tulo-51.png")'}}>
-                    <div className={styles.imgCard} style={{backgroundImage: 'url("https://i.postimg.cc/Jn4dy1pK/tarjeta2.png")'}}></div>
-                    <p>
-                    Abona y recibilo en la comodidad de tu hogar.
-                    </p>
-                </div>
-            </article>
-        </section>
+        <section id="novedades" className={styles.sectionContainer} ref={reference}> 
+            <p>Novedades</p>
+            <div className={styles.container}>
+        <div className={styles.w3} className={styles.h2}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="nature"/>
+            </div>
+        
+        </div>
+        </div>
+    
+        <div className={styles.w3} className={styles.h3}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="people"/>
+            </div>
+        
+        </div>
+        </div>
+    
+        <div className={styles.h2}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="sport"/>
+            </div>
+        </div>
+        </div>
+        <div className={styles.w4} className={styles.h1}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="food"/>
+            </div>
+        </div>
+        </div>
+        <div className={styles.galleryContainer}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="travel"/>
+            </div>
+        </div>
+        </div>
+        <div className={styles.h2}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="art"/>
+            </div>
+        </div>
+        </div>
+        <div className={styles.w3}  className={styles.h2}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="cars"/>
+            </div>
+        </div>
+        </div>
+        <div className={styles.w2} className={styles.h2}>
+        <div className={styles.galleryItem}>
+            <div className={styles.image}>
+            <img src={images} alt="fitness"/>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
     )
 }
 export default SectionInfo

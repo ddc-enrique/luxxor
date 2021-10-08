@@ -20,7 +20,6 @@ export const Home2 = () => {
            <p>Auriculares externos inalámbricos con cancelación de ruido EXTRA BASS ™ con micrófono</p>
            </div>
            <div className={styles.photoPrincipal} style={{backgroundImage: 'url("https://i.postimg.cc/Jhmptvkj/1000x1000-1-removebg-preview-1.png")'}}></div>
-           {/* <div className={styles.photoPrincipal} style={{backgroundImage: 'url("https://i.postimg.cc/65YXwk14/01-WH-XB910-N-black-001-1-png-removebg-preview.png")'}}></div> */}
                 <h1>Luxxor</h1>
            </div>
         </div>

@@ -30,13 +30,14 @@ const App = (props) => {
         {!props.token && <Route path="/registro" component={SignUp} />}
         <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
-        <Route path="/como-comprar" render={ () => <Home scrollTo={"#comoComprar"} /> } />
+        <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
         <Route path="/registro" component={SignUp} />
         <Route path="/producto" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
+        <Route path="/home" component={Home2} />
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
         {!props.token && <Route path="/password" component={Password}/>} 
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
