@@ -7,7 +7,7 @@ import styles from "../styles/editProfile.module.css"
 import toast, { Toaster } from 'react-hot-toast';
 
 
-const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName, lastName }) => {
+const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName, lastName, editDataUser }) => {
     let initialDataUser = completeAccount ? { firstName: "", lastName: "", city: "", zipCode: "", address: "", optional: "", phone: "" }
         : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" } 
     const [dataUser, setDataUser] = useState(initialDataUser)
@@ -55,7 +55,6 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                     errors[err.path[0]] = err.message;
                 })
                 setErrorsValidation(errors);
-                showNotification = false;
             } else {
                 toast.error("Error de Conexión")
             }
