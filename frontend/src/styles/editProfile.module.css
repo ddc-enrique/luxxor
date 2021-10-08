@@ -73,6 +73,7 @@ button.buttonEnviar {
     color: rgb(241, 246, 247);
     border-radius: 0.5rem;
     font-size: 1.2rem;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

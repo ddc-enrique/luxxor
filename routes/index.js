@@ -12,11 +12,22 @@ router.route('/user/sign-up')
 router.route('/user/sign-in')
     .post(validatorControllers.validatorSignIn, usersControllers.signIn)
 
-router.route('/pruebaMail')
-    .post(usersControllers.pruebaMail)    
+/* router.route('/pruebaMail')
+    .post(usersControllers.pruebaMail)     */
+router.route('/user/bann-user/:id')
+    .put(usersControllers.banUser)
 
-router.route('/user/cambio-contrasenia/:id')
+router.route('/user/change-password')
     .put(usersControllers.changePassword)
+
+router.route('/user/mail-password')
+    .post(usersControllers.sendMailPassword)
+
+router.route('/user/verifyId/:id')
+    .get(usersControllers.getProfile)
+
+router.route('/user/verify-mail/:id')
+    .get(usersControllers.getProfile)
     
 router.route('/user/edit-profile/:id')
     .get( passport.authenticate('jwt', {session: false}), 

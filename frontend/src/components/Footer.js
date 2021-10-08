@@ -4,7 +4,7 @@ const Footer = ()=>{
     <footer className={styles.footerContainer}>
         <div className={styles.divContainer}>
             <div className={styles.navFooter}>
-            <a href="#comoComprar">Como Comprar?</a>
+            <a href="#comoComprar">Novedades</a>
             <a>Productos</a>
             <a href="#contacto">Contacto</a>
             </div>

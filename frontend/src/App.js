@@ -10,28 +10,38 @@ import usersAction from "./redux/actions/usersAction"
 import Error from "./pages/Error"
 import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
-
+import Password from "./pages/Password";
+import ChangePassword from "./pages/ChangePassword";
+import Banned from "./pages/Banned";
+import { Home2 } from "./pages/Home2"
+import { Product2 } from "./pages/Product2"
 
 const App = (props) => {
-
+  const {token, dni, signWithLocal} = props
   useEffect(() => {
     if (localStorage.getItem("token")){
-      props.signWithLocal(localStorage.getItem("token"))
+      signWithLocal(localStorage.getItem("token"))
     }
   }, [])
 
   return (    
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={Home} />
+        {!props.token && <Route path="/registro" component={SignUp} />}
+        <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
+        <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
+        <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
         <Route path="/registro" component={SignUp} />
-        <Route path="/producto" component={Product} /> 
+        <Route path="/producto" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
-        {(props.token && !props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
-        {(props.token && props.dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
-        {/* <Route path="/notFound" component={NotFound} /> */}
+        <Route path="/bloqueo-cuenta/:id" component={Banned}/>
+        <Route path="/home" component={Home2} />
+        <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
+       {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
+        {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
+        {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
         <Redirect to="/error" />
       </Switch>
     </BrowserRouter>
