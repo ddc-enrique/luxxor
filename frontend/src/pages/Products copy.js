@@ -1,20 +1,118 @@
-import React from "react"
+import React, { useState } from "react"
+import Product from "../components/Product"
 import Navbar from "../components/NavBar"
 import Footer from "../components/Footer"
 // import styles from "../styles/productList.module.css"
 import styles from "../styles/productList2.module.css"
+import Switch from "react-switch"
 import { Link } from "react-router-dom"
-import { connect } from "react-redux"
-import FilterProducts from "../components/FilterProducts"
 
-const Products = (props) => {
+const Products = () => {
+  const [checked, setChecked] = useState(false)
+  const data = [
+    {
+      name: "Notebook",
+      price: 12000,
+      color: "Grey",
+      photos: [
+        {
+          image: "https://i.postimg.cc/sg5jwZQH/Nombre-5.png",
+        },
+        {
+          image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png",
+        },
+        { image: "https://i.postimg.cc/JzBwmcnx/Nombre-9.png" },
+      ],
+      description:
+        "Fragmento de un escrito con unidad temática, que queda diferenciado del resto de fragmentos por un punto.",
+      discount: 20,
+      category: "Informática",
+      brand: "Nova",
+    },
+  ]
 
+  const handleChange = (checked) => {
+    setChecked(checked)
+  }
 
   return (
     <>
       <Navbar />
       <div className={styles.container}>
-        <FilterProducts />
+        <div className={styles.inputFilterContain}>
+          <h2>Filtrar por:</h2>
+          <div className={styles.inputsFilter}>
+            <h3>Marca</h3>
+            <div className={styles.switch}>
+              <label>
+                <span>Option 1</span>
+                <Switch
+                  onChange={handleChange}
+                  checked={checked}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  onColor={'#f48f31'}
+                />
+              </label>
+            </div>
+            <div className={styles.switch}>
+              <label>
+                <span>Option 1</span>
+                <Switch
+                  onChange={handleChange}
+                  checked={checked}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  onColor={'#f48f31'}
+                />
+              </label>
+            </div>
+            <div className={styles.switch}>
+              <label>
+                <span>Option 1</span>
+                <Switch
+                  onChange={handleChange}
+                  checked={checked}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  onColor={'#f48f31'}
+                />
+              </label>
+            </div>
+
+            {/* <input
+              type="text"
+              // className={styles.inputTypes}
+              placeholder="Marca"
+              name="marca"
+            /> */}
+            <h3>Categoria</h3>
+            <div className={styles.switch}>
+              <label>
+                <span>Option 1</span>
+                <Switch
+                  onChange={handleChange}
+                  checked={checked}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  onColor={'#f48f31'}
+                />
+              </label>
+            </div>
+            <div className={styles.switch}>
+              <label>
+                <span>Option 1</span>
+                <Switch
+                  onChange={handleChange}
+                  checked={checked}
+                  uncheckedIcon={false}
+                  checkedIcon={false}
+                  onColor={'#f48f31'}
+                />
+              </label>
+            </div>
+          </div>
+        </div>
         <div className={styles.productsSection}>
           <div className={styles.inputSelect}>
             <div>
@@ -176,15 +274,4 @@ const Products = (props) => {
   )
 }
 
-const mapDispatchToProps = {
-
-}
-
-const mapStateToProps = (state) => {
-  return{
-    brands: state.products,
-    categories: state.products,
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Products)
+export default Products
