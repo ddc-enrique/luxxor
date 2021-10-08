@@ -4,6 +4,7 @@ import { Carousel } from "react-carousel-minimal";
 import styles from "../styles/product.module.css";
 import { useState } from "react";
 const Product = () => {
+  
   const [modal, setModal] = useState(false);
   const [like, setLike] = useState(false);
   const [detailsOn, setDetailsOn] = useState(false);

@@ -229,6 +229,7 @@ const SignUp = (props) => {
               />
           </div>
           <small style={{ color: "red" }}>{errorPassChecked}&nbsp;</small>
+          {newUser.profilePic && <p >{newUser.profilePic.name}</p>}
           <label className={styles.labelInput} for="inputPhoto">
             <img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif" />
             Foto de perfil

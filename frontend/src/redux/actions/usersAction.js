@@ -9,7 +9,6 @@ const usersAction = {
                 let response = await axios.post("http://localhost:4000/api/user/sign-in", userSignIn)
                 console.log(response)
                 if(response.data.success){
-                    console.log(response.data.response)
                     dispatch({type: "SIGN", payload: response.data.response})
                 }else {
                     return response.data.errors

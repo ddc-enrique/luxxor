@@ -58,6 +58,8 @@ const validatorControllers = {
                 "string.min": "Mínimo de 6 caracteres",
                 "string.email": "Se debe ingresar un email valido"
             }),
+            google: joi.boolean(),
+            password: joi.string(),
         })
         const validation = schema.validate(req.body, {abortEarly: false})
         if(!validation.error){
