@@ -2,7 +2,9 @@
     display: flex;
     justify-content:space-around;
     flex-wrap: wrap;
-    margin:1rem 0rem
+    /* margin:1rem 0rem; */
+    color:white;
+    background:radial-gradient(circle, rgba(47,144,176,1) 0%, rgba(48,106,154,1) 55%, rgba(49,75,136,1) 73%, rgba(49,25,109,1) 100%);
 }
 
 .containerForm{
@@ -51,7 +53,8 @@ div.textSign{
     margin: 0.9rem 0rem ;
     padding:1rem 0;
     border-width: 0 0 3px 0;
-    border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1;
+    /* border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1; */
+    border-bottom-color:white;
     width: 30rem;
 }
 
