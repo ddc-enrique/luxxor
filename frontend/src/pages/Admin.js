@@ -78,9 +78,19 @@ const Admin = (props) => {
   ])
 
   const [categories, setCategories] = useState(props.categories)
+  const [brands, setBrands] = useState(props.brands)
+
 
   useEffect(()=>{
-    console.log(props)
+    
+    const getAllBrands = async () => {
+      if(!brands.length){
+        let response = await props.getBrands()
+        setBrands(response)
+      }
+    }
+    getAllBrands()
+
     const getAllCategories = async () => {
       if (!categories.length){
         let response = await props.getCategories()
@@ -91,6 +101,8 @@ const Admin = (props) => {
 
   }, [])
 
+  
+
 
   const newProductHandler = (index, e) => {
     const values = [...inputFields]
@@ -100,11 +112,21 @@ const Admin = (props) => {
     }else if  (e.target.name === "optionValue"){
       values[index][e.target.name]=e.target.value
       setNewProduct({...newProduct, dataSheet: [...values]})
-    }else
+    }else if (e.target.name === "photoOne"){
+      setNewProduct({...newProduct, photos: [...newProduct.photos, {photoOne: e.target.files[0]}]})
+    }else if (e.target.name === "photoTwo"){
+      setNewProduct({...newProduct, photos: [...newProduct.photos, {photoTwo: e.target.files[0]}]})
+    }else if (e.target.name === "photoThree"){
+      setNewProduct({...newProduct, photos: [...newProduct.photos, {photoThree: e.target.files[0]}]})
+
+    }else {
       setNewProduct({...newProduct, [e.target.name]: e.target.value})
+    }
+      
   }
 
-
+  console.log(newProduct.photos)
+  
   const newInput = () =>{
     setInputFields([...inputFields, {optionName: "", optionValue: ""}])
   }
@@ -117,11 +139,22 @@ const Admin = (props) => {
   }
 
   const addProductHandler = async () => {
-   let response = await props.addProduct(newProduct)
+    const FD = new FormData()
+    FD.append("name", newProduct.name)
+    FD.append("stock", newProduct.stock)
+    FD.append("price", newProduct.price)
+    FD.append("color", newProduct.color)
+    FD.append("photos", newProduct.photos)
+    FD.append("dataSheet", newProduct.dataSheet)
+    FD.append("description", newProduct.description)
+    FD.append("discount", newProduct.discount)
+    FD.append("category", newProduct.category)
+    FD.append("brand", newProduct.brand)
+   let response = await props.addProduct(FD)
    console.log(response)
   }
 
-  console.log(categories)
+
   return (
     <div className={styles.divContainer}>
       <header className={styles.headerAdmin}>
@@ -205,7 +238,7 @@ const Admin = (props) => {
                         "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
                     }}
                   >
-                    <input type="file" name="name" />
+                    <input type="file" name="photoOne" onChange={(e)=>newProductHandler("index", e)} />
                   </div>
                 </div>
                 <div
@@ -222,7 +255,7 @@ const Admin = (props) => {
                         "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
                     }}
                   >
-                    <input type="file" name="name" />
+                    <input type="file" name="photoTwo" onChange={(e)=>newProductHandler("index", e)}  />
                   </div>
                 </div>
                 <div
@@ -239,7 +272,7 @@ const Admin = (props) => {
                         "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
                     }}
                   >
-                    <input type="file" name="name" />
+                    <input type="file" name="photoThree" onChange={(e)=>newProductHandler("index", e)}  />
                   </div>
                 </div>
               </div>
@@ -254,7 +287,7 @@ const Admin = (props) => {
                     {categories.map(category=> (
                       <option
                         key={category._id}
-                        value={category._id}
+                        defaultValue={category._id}
                       >
                         {category.name}
                       </option>
@@ -299,8 +332,18 @@ const Admin = (props) => {
                   <input id="discount" type="number" name="discount" onChange={(e)=>newProductHandler("index", e)}/>
                 </div>
                 <div className={styles.containerInputs}>
-                  <label htmlFor="brand">Marca</label>
-                  <input id="brand" type="text" name="brand" onChange={(e)=>newProductHandler("index", e)}/>
+                <label htmlFor="brand">Marca</label>
+                  <select id="brand" className={styles.select} name="brand" onChange={(e)=>newProductHandler("index", e)}>
+                    {brands.map(brand=> (
+                      <option
+                        key={brand._id}
+                        defaultValue={brand._id}
+                      >
+                        {brand.name}
+                      </option>
+                    ))}
+                  </select>
+                  
                 </div>
                 <div className={styles.containerInputs}>
                   <label htmlFor="stock">Stock</label>
@@ -439,12 +482,14 @@ const Admin = (props) => {
 
 const mapDispatchToProps = {
   addProduct: productsActions.addProduct,
-  getCategories: productsActions.categories
+  getCategories: productsActions.categories,
+  getBrands: productsActions.brands
 }
 
 const mapStateToProps = (state) => {
   return {
     categories: state.products.categories,
+    brands: state.products.brands
   }
 }
 

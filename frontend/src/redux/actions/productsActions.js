@@ -3,7 +3,6 @@ import Product from "../../components/Product"
 
 const productsActions = {
     categories: () =>{
-        console.log("Traeme las categories en redux")
         return async (dispatch) =>{
             try {
                 let response = await axios.get("http://localhost:4000/api/admin/categories")
@@ -34,8 +33,13 @@ const productsActions = {
     brands: () => {
         return async (dispatch) =>{
             try {
-                let response = axios.get("http://localhost:4000/api/admin/brands")
-                dispatch({type: "BRANDS", payload: response})
+                let response = await axios.get("http://localhost:4000/api/admin/brands")
+                if(response.data.success) {
+                    dispatch({type: "BRANDS", payload: response})
+                    return response.data.response
+                }else {
+                    throw new Error(response.data.response)
+                }
             }catch(e){
                 return({success: false, response: e})
             }
@@ -86,10 +90,10 @@ const productsActions = {
 
 
     addProduct: (product) =>{
-        console.log(product)
+        
         return async (dispatch) =>{
             try {
-                let response = await axios.post("http://localhost:4000/api/products", {product})
+                let response = await axios.post("http://localhost:4000/api/products", product)
                 if (response.data.success){
                     return response.data
                 }else {

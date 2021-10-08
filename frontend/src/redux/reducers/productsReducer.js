@@ -4,15 +4,15 @@ const initialState = {
 }
 const productsReducer = (state=initialState, action) => {
     switch (action.title) {
+        case "BRANDS":
+            return {
+                ...state,
+                brands: action.payload
+            }
         case "CATEGORIES":
             return {
                 ...state,
                 categories: action.payload
-            }
-        case "BRANDS" :
-            return {
-                ...state,
-                brands: action.payload
             }
         default:
             return state
