@@ -14,7 +14,7 @@ const SignUp = (props) => {
   const { signUp } = props
 
   const [check, setCheck] = useState(true)
-  const [checkConfirm,setCheckConfirm]=useState(true)
+  const [checkConfirm, setCheckConfirm] = useState(true)
   const [modalLogIn, setModalLogIn] = useState(true)
   const [newUser, setNewUser] = useState({
     firstName: "",
@@ -24,13 +24,15 @@ const SignUp = (props) => {
     profilePic: "",
   })
   const [errorName, setErrorName] = useState(null)
-  const [errorLastName,setErrorLastName]=useState(null)
+  const [errorLastName, setErrorLastName] = useState(null)
   const [errorEmail, setErrorEmail] = useState(null)
   const [errorPass, setErrorPass] = useState(null)
-  const [errorPassChecked,setErrorPassCkecked]=useState(null)
+  const [errorPassChecked, setErrorPassCkecked] = useState(null)
 
   let viewPassImg = check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
-  let viewPassImgConfirm=checkConfirm?"5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
+  let viewPassImgConfirm = checkConfirm
+    ? "5NX1hj01/eyeOpen.png"
+    : "hPNgcgzm/EyeClose.png"
 
   const responseGoogle = (res) => {
     let newUserWithGoogle = {
@@ -73,33 +75,33 @@ const SignUp = (props) => {
             color: "#545454",
           },
         })
-      }else if(newUser.checkPassword !== newUser.password){
-        setErrorPassCkecked('No coinciden... vuelve a intentarlo')
+      } else if (newUser.checkPassword !== newUser.password) {
+        setErrorPassCkecked("No coinciden... vuelve a intentarlo")
       } else {
         const resp = await signUp(FD)
         if (resp) {
           console.log(resp)
-            setErrorName(
-              resp.find((err) => err.path[0] === "firstName")
-                ? resp.find((err) => err.path[0] === "firstName").message
-                : null
-            )
-            setErrorLastName(
-             resp.find((err) => err.path[0] === "lastName")
-               ? resp.find((err) => err.path[0] === "lastName").message
-               : null
-           )
-           setErrorEmail(
+          setErrorName(
+            resp.find((err) => err.path[0] === "firstName")
+              ? resp.find((err) => err.path[0] === "firstName").message
+              : null
+          )
+          setErrorLastName(
+            resp.find((err) => err.path[0] === "lastName")
+              ? resp.find((err) => err.path[0] === "lastName").message
+              : null
+          )
+          setErrorEmail(
             resp.find((err) => err.path[0] === "eMail")
               ? resp.find((err) => err.path[0] === "eMail").message
               : null
           )
-         
-           setErrorPass(
-             resp.find((err) => err.path[0] === "password")
-               ? resp.find((err) => err.path[0] === "password").message
-               : null
-           )
+
+          setErrorPass(
+            resp.find((err) => err.path[0] === "password")
+              ? resp.find((err) => err.path[0] === "password").message
+              : null
+          )
         } else {
           toast("Welcome", {
             icon: "👏",
@@ -109,7 +111,7 @@ const SignUp = (props) => {
               color: "#fff",
             },
           })
-          props.history.push('/')
+          props.history.push("/")
         }
       }
     } catch (error) {
@@ -163,6 +165,25 @@ const SignUp = (props) => {
     <>
       <Navbar />
       <div className={styles.container}>
+      <div className={styles.containerCarousel}>
+          <img
+            src="https://i.postimg.cc/SKYqgXsy/8a9591545481ca29b3f44f9ed47b7d23-removebg-preview.png"
+            alt="Auriculares"
+          />
+          {/* <h2>Testimonios de nuestros clientes</h2>
+          <Carousel
+            data={data}
+            time={2000}
+            width="42rem"
+            height="25rem"
+            automatic={true}
+            dots={false}
+            slideBackgroundColor="trasnparent"
+            slideImageFit="cover"
+            thumbnails={false}
+            showNavBtn={false}
+          /> */}
+        </div>
         <div className={styles.containerForm}>
           <h1>REGISTRATE</h1>
           <input
@@ -192,7 +213,7 @@ const SignUp = (props) => {
             defaultValue={newUser.eMail}
             onKeyPress={keyPressHandler}
           />
-           <small style={{ color: "red" }}>{errorEmail}&nbsp;</small>
+          <small style={{ color: "red" }}>{errorEmail}&nbsp;</small>
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
@@ -202,7 +223,7 @@ const SignUp = (props) => {
               name="password"
               defaultValue={newUser.password}
             />
-            
+
             <img
               onClick={() => setCheck(!check)}
               className={styles.imgForPass}
@@ -221,14 +242,14 @@ const SignUp = (props) => {
               onKeyPress={keyPressHandler}
             />
             <img
-                onClick={() => setCheckConfirm(!checkConfirm)}
-                className={styles.imgForPass}
-                src={`https://i.postimg.cc/${viewPassImgConfirm}`}
-                alt="..."
-              />
+              onClick={() => setCheckConfirm(!checkConfirm)}
+              className={styles.imgForPass}
+              src={`https://i.postimg.cc/${viewPassImgConfirm}`}
+              alt="..."
+            />
           </div>
           <small style={{ color: "red" }}>{errorPassChecked}&nbsp;</small>
-          {newUser.profilePic && <p >{newUser.profilePic.name}</p>}
+          {newUser.profilePic && <p>{newUser.profilePic.name}</p>}
           <label className={styles.labelInput} for="inputPhoto">
             <img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif" />
             Foto de perfil
@@ -243,13 +264,13 @@ const SignUp = (props) => {
             defaultValue={newUser.profilePic}
           />
           <div className={styles.location}>
-            <button onClick={enterNewUser} className={styles.buttonSign}>
+            <button onClick={enterNewUser} className={styles.btnSign}>
               Registrarme
             </button>
             <div className={styles.buttonGoogle}>
               <GoogleLogin
                 clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"
-                buttonText="Registrarme"
+                buttonText="Registrarme con Google"
                 onSuccess={responseGoogle}
                 onFailure={responseGoogle}
                 cookiePolicy={"single_host_origin"}
@@ -268,21 +289,7 @@ const SignUp = (props) => {
             </Link>
           </div>
         </div>
-        <div className={styles.containerCarousel}>
-          <h2>Testimonios de nuestros clientes</h2>
-          <Carousel
-            data={data}
-            time={2000}
-            width="42rem"
-            height="25rem"
-            automatic={true}
-            dots={false}
-            slideBackgroundColor="trasnparent"
-            slideImageFit="cover"
-            thumbnails={false}
-            showNavBtn={false}
-          />
-        </div>
+        
       </div>
       {!modalLogIn && <SignIn />}
       <Footer />

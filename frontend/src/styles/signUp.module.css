@@ -17,6 +17,12 @@
     margin:2rem 0rem
 }
 
+.containerForm h1{
+    background-color: rgb(248, 248, 240);
+    padding:1rem 0rem;
+    color:rgba(48,106,154,1) 
+}
+
 .containerForm h1,.containerForm .location{
     display:flex;
     justify-content:center;
@@ -32,9 +38,9 @@ div.textSign{
     margin:1rem 0rem
 }
 
-.buttonSign {
-	background-color:#7A5EA8;
-	border-radius:2em;
+.btnSign {
+	background-color:transparent;
+	/* border-radius:2em; */
     outline: none;
 	display:inline-block;
 	cursor:pointer;
@@ -45,9 +51,12 @@ div.textSign{
 	text-shadow:0px 1px 0px #7A5EA8;
     margin:1rem 0rem;
     margin-left:1rem;
+     border: none;
+    /* border-bottom-color:rgb(250, 212, 212)!important ; */
+    border-bottom: 0.25rem solid white;
 }
 
-.inputTypes{
+.inputTypes {
     outline:none;
     background-color:transparent;
     margin: 0.9rem 0rem ;
@@ -55,7 +64,12 @@ div.textSign{
     border-width: 0 0 3px 0;
     /* border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1; */
     border-bottom-color:white;
-    width: 30rem;
+    width: 32rem;
+    color:white
+}
+
+.inputTypes::placeholder{
+    color:white
 }
 
 .location {
@@ -71,7 +85,8 @@ div.textSign{
 
 .link{
     text-decoration: none;
-    margin: 0rem 1rem
+    margin: 0rem 1rem;
+    color:white
 }
 
 .containerCarousel{
@@ -115,15 +130,16 @@ div.buttonGoogle button {
     display: flex!important;
     justify-content: center!important;
     align-items: center!important;
-    width: 14rem!important;
-    background-color:#7A5EA8!important;
-	border-radius:2em!important;
+    width: 20rem!important;
+    background-color:rgba(233, 230, 230, 0.1)!important;
     outline: none!important;
 	color:#ffffff!important;
-	font-size:1.53rem!important;
-	padding:1.45rem 2rem!important;
+	font-size:1rem!important;
+	padding:1.45rem 0rem!important;
 	text-decoration:none!important;
     height: 2rem!important;
+    border: none!important;
+    border-bottom: 0.25rem solid white!important
 }
 
 div.buttonGoogle button div {
@@ -146,12 +162,13 @@ div.buttonGoogle button div {
         width: 20rem;
         font-size:1rem
     }
-    .containerCarousel h2{
-        margin:1rem 0rem;
-        margin-top:4rem;
-    }
   }
   
+  @media only screen and (max-width: 425px) {
+    .containerCarousel img{
+        display:none
+    }
+  }
   
   @media only screen and (min-width: 576px) {
     
