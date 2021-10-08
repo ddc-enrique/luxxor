@@ -6,7 +6,7 @@ import Product from "./components/Product"
 import Products from "./pages/Products"
 import Admin from "./Admin/Admin"
 import Error from "./pages/Error"
-import CompleteProfile from "./components/CompleteProfile"
+// import CompleteProfile from "./components/CompleteProfile"
 
 
 const App = () => {
@@ -20,7 +20,7 @@ const App = () => {
         <Route path="/productos" component={Products}/>
         <Route path="/admin" component={Admin} /> 
         <Route path="/error" component={Error} />
-        <Route path="/actualizar-datos" component={CompleteProfile} />
+        {/* <Route path="/actualizar-datos" component={CompleteProfile} /> */}
         <Redirect to="/error" />
       </Switch> 
     </BrowserRouter>
