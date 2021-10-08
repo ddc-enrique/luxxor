@@ -18,7 +18,6 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
             try{
                 let extraData = await getAddressAndPhone(id, token)                
                 setDataUser( {...extraData, firstName, lastName } )
-
             } catch(err) {
                 toast.error(err.message)
             }
@@ -43,12 +42,11 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
             if(response.success){ 
                 toast.success("Datos Actualizados con éxito ya puedes comprar")
                 completeAccount = true
-            } else {
-                throw new Error(response.response)
             }
         } catch(error) {
-            if (typeof error === 'string'){
-                toast.error(error.message)
+            console.log(typeof error)
+            if (typeof error === 'string' || error === "DNI en uso"){
+                toast.error(error)
             } else if (Array.isArray(error)){
                 let errors = {};
                 error.forEach(err=> {

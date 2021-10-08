@@ -10,11 +10,13 @@ const Home = ({  }) => {
     const contact = useRef({})
     const history = useHistory()
     
-    useEffect(()=>{
-        if(history.location.pathname.length > 1 && history.location.pathname === "/contacto") {
-            if (Object.entries(contact.current).length > 0) contact.current.scrollIntoView()
-        } else {
-            if (Object.entries(sectionInfo.current).length > 0) sectionInfo.current.scrollIntoView()
+    useEffect(()=>{        
+        if (history.location.pathname.length > 1) {
+            if (history.location.pathname === "/contacto") {
+                if (Object.entries(contact.current).length > 0) contact.current.scrollIntoView()
+            } else {
+                if (Object.entries(sectionInfo.current).length > 0) sectionInfo.current.scrollIntoView()
+            }
         }
 
     }, [])

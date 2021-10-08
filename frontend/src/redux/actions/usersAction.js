@@ -1,13 +1,10 @@
 import axios from "axios"
 
 const usersAction = {
-    signIn: (userSignIn) =>{
-        
+    signIn: (userSignIn) =>{        
         return async (dispatch, getState) =>{
             try {
-                console.log(userSignIn)
                 let response = await axios.post("http://localhost:4000/api/user/sign-in", userSignIn)
-                console.log(response)
                 if(response.data.success){
                     dispatch({type: "SIGN", payload: response.data.response})
                 }else {
@@ -24,7 +21,6 @@ const usersAction = {
             try {
                 let response = await axios.post("http://localhost:4000/api/user/sign-up", userSignUp)
                 if(response.data.success){
-                    console.log(response.data.response)
                     dispatch({type: "SIGN", payload: response.data.response})
                 }else {
                     return response.data.errors
@@ -51,7 +47,8 @@ const usersAction = {
                         lastName: response.data.lastName, 
                         eMail: response.data.eMail, 
                         admin: response.data.admin, 
-                        id: response.data.id
+                        _id: response.data.id,
+                        dni: response.data.dni
                     }})
             }catch(e){
                 dispatch({type: "LOGOUT"})
@@ -74,7 +71,6 @@ const usersAction = {
     sendMail:(eMail)=>{
         return async (dispatch)=>{
             let response =await axios.post("http://localhost:4000/api/user/mail-password",{eMail})
-            console.log(response)
             return response.data.success
         }
     },
@@ -119,9 +115,18 @@ const usersAction = {
                 } else {
                     dispatch({ type: "UPDATE_DNI", dispatch: response.data.dni})
                 }
+                return response.data
+            } else {
+                throw new Error(response.data.response)
             }
         }
     },
+
+    signOut: ()=>{
+        return (dispatch) => {
+            dispatch({ type:"LOGOUT" })
+        }
+    }
     
 }
 
