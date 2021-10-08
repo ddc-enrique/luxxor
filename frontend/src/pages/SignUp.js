@@ -164,8 +164,7 @@ const SignUp = (props) => {
       <Navbar />
       <div className={styles.container}>
         <div className={styles.containerForm}>
-          <h1>Crear cuenta</h1>
-          <h2>Completa con tus datos</h2>
+          <h1>REGISTRATE</h1>
           <input
             onChange={newUserHandler}
             className={styles.inputTypes}
