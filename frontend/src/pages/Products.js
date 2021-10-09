@@ -16,8 +16,8 @@ const Products = (props) => {
       if(!products.length) {
         try {
           let response = await props.getProducts()
-          if(!response.data.success) throw new Error()          
-          setProducts(response.data.response)  
+          if(!Array.isArray(response)) throw new Error(response.response)         
+          setProducts(response)
         } catch (error) {
           toast.error(error)
         }                
@@ -66,7 +66,7 @@ const Products = (props) => {
                   <div
                     className={styles.photo}
                     style={{
-                      backgroundImage: `url("https://localhost:4000/${product.photos[0]}`,
+                      backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`,
                     }}
                   ></div>
                 </div>

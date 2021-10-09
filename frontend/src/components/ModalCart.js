@@ -1,6 +1,6 @@
 import React,  { useState, useEffect, useRef }from "react";
-// import styles from "../styles/modalCart.module.css";
-import styles from "../styles/modal2.module.css";
+import styles from "../styles/modalCart.module.css";
+// import styles from "../styles/modal2.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
 import CardProductCart from "./CardProductCart";

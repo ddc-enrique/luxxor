@@ -65,9 +65,8 @@ const productsActions = {
         return async (dispatch) =>{
             try {
                 let response = await axios.get("http://localhost:4000/api/products")
-                if (response.data.success){
-                    dispatch({type: "PRODUCTS", payload: response.data.response})
-                }
+                if (!response.data.success) throw new Error(response.data.response)
+                dispatch({type: "PRODUCTS", payload: response.data.response})
                 return response.data.response
             }catch(e){
                 return({success: false, response: e})
