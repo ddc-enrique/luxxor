@@ -39,22 +39,81 @@ span.violet {
 .containerAdmin .containerNav {
   display: flex;
   align-items: center;
+  height: 49rem;
 }
 .containerAdmin .containerSections > * {
   border: 1px solid #dfdfdf;
-  border-radius: 1.5rem;
   background: white;
   min-height: 32rem;
   width: 30%;
 }
-.containerAdmin .containerSections {
+.containerAdmin .sectionBrandCategory {
   display: flex;
   justify-content: space-around;
   width: 100vw;
   min-height: 80vh;
+  border: 1px solid black;
+  align-items: center;
+  flex-direction: column;
 }
 
-.navAdmin .icon {
+.sectionBrandCategory>* {
+  border: 1px solid white;
+  background-color: white;
+}
+
+.containerAdmin .sectionBrandCategory {
+  display: flex;
+  justify-content: space-around;
+  width: 100vw;
+  min-height: 80vh;
+  border: 1px solid black;
+  align-items: center;
+  background-color: white;
+}
+.containerAdmin .sectionBrandCategory .containerCategory {
+  border: 1px solid #0000000f;
+  height: 10rem!important;
+  width: 82%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+}
+.loading {
+  min-height: 32rem;
+    width: 10rem;
+    background-image: url(https://i.postimg.cc/qRv8Dwtt/preloader3.gif);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: .5;
+}
+.containerAdmin .sectionBrandCategory .containerCategory .category {
+  border: 1px solid #e8e8e8;
+  height: 5rem;
+  display: flex;
+  width: 45rem;
+  justify-content: space-around;
+  align-items: center;
+  
+}
+.containerForm {
+  padding: 1rem;
+  width: 80%;
+}
+.containerForm div{
+  display: flex;
+    align-items: center;
+}
+
+.containerForm div:nth-child(2) {
+  border: 1px solid #e8e8e8;
+  padding: 1rem;
+  
+}
+
+.navAdmin .icon, .icon {
   height: 3rem;
   width: 3rem;
   background-position: center;
@@ -62,6 +121,10 @@ span.violet {
   background-color: #f3f3f3;
   border-radius: 1rem;
   background-repeat: no-repeat;
+  cursor: pointer;
+}
+.icon {
+  background-color: transparent;
 }
 .navAdmin .icon:hover {
   background-color: #c4c4c4;
@@ -110,7 +173,7 @@ span.violet {
 }
 
 .containerSections .formNew input,
-.search input {
+.search input, .containerInputs input {
   width: 17rem;
   outline: none;
   border: none;
@@ -173,17 +236,16 @@ label {
   width: 5rem !important;
 }
 
-.formNew .containerInputs {
+.formNew .containerInputs, .containerInputs {
   margin: 0.5rem 0;
   display: flex;
-  justify-content: flex-end;
   align-items: center;
   width: 100%;
 }
-.search .containerInputs > * {
+.search .containerInputs > *, .containerInputs >* {
   margin: 0 0.2rem;
 }
-.formNew .containerInputs > * {
+.formNew .containerInputs > *,.containerInputs>* {
   padding: 0 0.5rem;
   font-size: 0.9rem;
 }
@@ -219,7 +281,7 @@ label {
   padding: 0 1rem;
 }
 
-.containerProducts {
+.containerProducts, .containerCategory {
   overflow-y: auto;
   height: 34rem;
 }
@@ -238,10 +300,13 @@ label {
   padding: 0.5rem 0;
   align-items: center;
 }
-.titleProduct .cointanerEdit {
+.titleProduct .cointanerEdit, .cointanerEdit {
   display: flex;
 }
-.containerInputs button {
+.containerButton {
+  justify-content: flex-end;
+}
+.containerInputs button, .containerButton button {
   padding: 0.6rem !important;
   background-color: #dbdbdb;
   padding: 0.5rem;
@@ -251,7 +316,7 @@ label {
   text-align: center;
   cursor: pointer;
 }
-.containerInputs button:hover {
+.containerInputs button:hover, .containerButton button:hover {
   background-color: #bbbbbb;
 }
 .boxProduct .containerInfo {

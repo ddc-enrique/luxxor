@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
+import { NavAdmin } from "../components/NavAdmin";
 
 const Admin = (props) => {
   const data = [
@@ -84,7 +85,7 @@ const Admin = (props) => {
   const [productsFilt, setProductsFilt] = useState(props.products)
   const [productsFiltered, setProductsFiltered] = useState(props.products)
   const [render, setRender] = useState(false)
-
+  const [loading, setLoading] = useState(true)
   useEffect(()=>{
     
     const getAllProducts = async () => {
@@ -95,6 +96,7 @@ const Admin = (props) => {
         setProducts(response)
         setProductsFiltered(response)
         setProductsFilt(response)
+        setLoading(!loading)
       }
     }
     getAllProducts()
@@ -116,6 +118,7 @@ const Admin = (props) => {
     }
     getAllCategories()
 
+  
   }, [render])
   
   
@@ -213,50 +216,7 @@ const Admin = (props) => {
         </Link>
       </header>
       <div className={styles.containerAdmin}>
-        <div className={styles.containerNav}>
-          <nav className={styles.navAdmin}>
-            <Link to="/admin">
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/CLBqjvWy/home.png')",
-                }}
-              ></div>
-              <span>Home</span>
-            </Link>
-            <Link to="#">
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/pLTnvRr7/brand.png)",
-                }}
-              ></div>
-              <span>Marcas</span>
-            </Link>
-            <Link to="#">
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/prynckrF/category.png')",
-                }}
-              ></div>
-              <span>Categorias</span>
-            </Link>
-            <Link to="#">
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/Hx6ytFYm/product.png')",
-                }}
-              ></div>
-              <span>Productos</span>
-            </Link>
-          </nav>
-        </div>
+        <NavAdmin/>
         <div className={styles.containerSections}>
           <section className={styles.addNew}>
             <div>
@@ -427,7 +387,8 @@ const Admin = (props) => {
                 <input id="search" type="text"  onChange={handle}/>
               </div>
               <div className={styles.containerProducts}>
-                {productsFilt.map((product) => (
+                {loading ? <div className={styles.loading}></div> :
+                  productsFilt.map((product) => (
                   <div className={styles.boxProduct} >
                     <div className={styles.titleProduct}>
                       <div
@@ -472,7 +433,8 @@ const Admin = (props) => {
             </div>
             <div className={styles.containerAllInputs}>
               <div className={styles.containerProducts}>
-                {products.map((product, index) => (
+                {loading ? <div className={styles.loading}></div> :
+                  products.map((product, index) => (
                   <div className={styles.boxProduct} key={index}>
                     <div className={styles.titleProduct}>
                       <div
