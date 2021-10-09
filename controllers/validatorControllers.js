@@ -29,11 +29,11 @@ const validatorControllers = {
                     "string.trim": "No se permiten espacios antes y después de la contraseña",
                     "string.pattern.base": 'La contraseña solo puede incluir letras, números ó los signos "!¡?¿_-."',
                 }),
-                // profilePic: joi.string().trim().min(6).max(2048).required().messages({
-                //     "string.max": "Máximo de 2048 caracteres",
-                //     "string.min": "Mínimo de 6 caracteres",
-                //     "string.trim": "No se permiten espacios antes y después de la imagen"
-                // }),
+                profilePic: !req.body.optional ? joi.any().optional()
+                : joi.string().trim().required().min(2).messages({
+                    "string.empty": "El campo dirección es requerido",
+                    "string.min": "Mínimo de 2 caracteres",
+                }),
             })
         : joi.object({
             firstName: joi.string(),
@@ -116,7 +116,7 @@ const validatorControllers = {
                 "string.max": "Máximo de 40 caracteres",
                 "string.pattern.base": 'La dirección puede incluir letras, números ó barra"/"'
             }),
-            optional: !req.body.address.optional ? joi.any().optional()
+            optional: !req.body.optional ? joi.any().optional()
             : joi.string().trim().required().min(2).max(15).pattern(/^[a-zA-Z\u00C0-\u017F0-9\/-\s]*$/).messages({
                 "string.empty": "El campo dirección es requerido",
                 "string.min": "Mínimo de 2 caracteres",
