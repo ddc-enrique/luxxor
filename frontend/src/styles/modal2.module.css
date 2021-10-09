@@ -1,0 +1,114 @@
+div.containerTotal{
+    position: fixed;
+    top:0;
+    right: 0;
+    width: 30rem;
+    height: 100%;
+    z-index: 300;
+    /* overflow: scroll; */
+    text-align: left;
+    background-color: #f1f1f1;
+    box-shadow: -300px 0px 200vw 200vw #444343d1;
+  /*   background-color: #f1f1f1;
+    width: 40%;
+    height: 100%; 
+    position: fixed;
+    z-index: 3;
+    position: fixed; 
+    left: 70%;
+    display: block;
+    z-index: 3;
+    z-index: 3;
+    box-shadow: -300px 0px 200vw 200vw #444343d1; */
+}
+img.iconClose{
+    width: 2rem;
+    height: 2rem;
+    cursor:pointer;
+    margin:0.5rem 0 0 0.5rem;
+}
+div.photo{
+    width: 7rem;
+    height: 6rem;
+    background-size: 108% 106%;
+    background-repeat: no-repeat;
+}
+div.containerCart{
+    height: 100rem;
+    padding-left: 0.9rem;
+    background: rgb(47,144,176);
+    background: radial-gradient(circle, rgb(47 144 176) 0%, rgb(48 106 154 / 90%) 55%, rgb(49 75 136 / 91%) 96%);
+    color: white;
+    backdrop-filter: blur(23px);
+
+}
+div.containerCart h2 {
+    text-align: center;
+}
+
+div.containerSubTitle {
+    width: 87%;
+    border-top: 1px solid rgb(196, 192, 192);
+    border-bottom: 1px solid rgb(196, 192, 192);
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+}
+
+div.containerProductTotal {
+    width: 93%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    padding: 1rem 0.3rem;
+    /* background-color: rgba(163, 189, 189, 0.171); */
+    align-items: center;
+}
+
+div.price {
+    /* background-color: #f48f31; */
+    color: white;
+    text-align: center;
+    padding: 0.6rem;
+    font-size: 0.9rem;
+    width: 90%;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    border: 1px solid rgb(255, 255, 255);
+}
+div.price:hover {
+    background-color: #fff;
+    color: rgb(44, 44, 44);
+}
+div.containerProduct {
+    display: flex;
+    align-items: center;
+    grid-gap: 0.5rem;
+    grid-gap: 0.5rem;
+    grid-gap: 0.5rem;
+    gap: 0.5rem;
+    /* width: 97%; */
+    border: 1px solid #9b9b9b;
+    justify-content: space-around;
+    padding: 1rem;
+}
+.containerProductTetx {
+    padding: 0 1rem;
+    text-align: center;
+}
+div.counter {
+    border: 1px solid #c9c9c91a;
+    padding: 0.5rem;
+    display: flex;
+    grid-gap: 0.5rem;
+    gap: 0.5rem;
+    align-items: center;
+    justify-content: space-between;
+}
+div.icon{
+    height: 2rem;
+    width: 2rem;
+    background-position: center;
+    background-size: cover;
+}

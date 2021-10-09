@@ -1,6 +1,7 @@
 import {useState, useContext} from "react"
 import { GoogleLogin} from "react-google-login"
-import styles from "../styles/signIn.module.css"
+// import styles from "../styles/signIn.module.css"
+import styles from "../styles/signIn2.module.css"
 import { Link } from "react-router-dom"
 import {connect} from "react-redux"
 import usersAction from "../redux/actions/usersAction"

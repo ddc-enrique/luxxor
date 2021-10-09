@@ -1,5 +1,6 @@
 import React,  { useState, useEffect, useRef }from "react";
-import styles from "../styles/modalCart.module.css";
+// import styles from "../styles/modalCart.module.css";
+import styles from "../styles/modal2.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
 
@@ -24,7 +25,10 @@ const ModalCart = (props) =>{
                             backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
                         }}
                         ></div> */}
-                       <img width="90" src="https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg"/>
+                        <div className={styles.photo} style={{
+                      backgroundImage:
+                        "url('https://i.postimg.cc/65YXwk14/01-WH-XB910-N-black-001-1-png-removebg-preview.png')"
+                    }}></div>
                        <div className={styles.containerProductTetx}>
                            <p>MacBook Air 13.3</p>
                            <span>$ $282.000</span>
