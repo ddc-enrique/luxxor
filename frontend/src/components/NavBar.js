@@ -36,8 +36,8 @@ const NavBar = (props) => {
 
     const homeLocationsPathFlag = [ "/como-comprar", "/contacto"].includes(history.location.pathname) || (history.location.pathname === "/")
     return(
-        <header>
-            <nav>
+        <header className={styles.headerContainer}>
+            <nav className={styles.navWeb}>
                 <Link to='/'>LUXXOR</Link>
                 <div className={styles.navIntermedio}>
                     {homeLocationsPathFlag && 
@@ -68,38 +68,48 @@ const NavBar = (props) => {
                 </div>
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}} onClick={clickCart}>
                 </div>
-            </nav>
+                </nav>
                 {visibleMenu && 
                     <nav className={styles.navContainerMobile}>
                         {homeLocationsPathFlag && 
-                        <a href="#comoComprar">
-                            ¿Cómo Comprar?
+                        <a href="#novedades">
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/Df60XV7r/innovacion.png')"}}></div>
+                            <span>Novedades</span>
                         </a>
                     }
                     {!homeLocationsPathFlag && 
-                        <Link to='/como-comprar' >
-                            ¿Cómo Comprar?
+                        <Link to='/novedades' >
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/Df60XV7r/innovacion.png')"}}></div>
+                            <span>Novedades</span>
                         </Link>
                     }                
                     <Link to='/productos'>
-                        Productos
+                        <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/t4K4jpzj/abrir-caja.png')"}}></div>
+                        <span>Productos</span>
                     </Link>
                     {homeLocationsPathFlag && 
                         <a href="#contacto">
-                            Contacto 
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/8zMVLWL2/correo.png')"}}></div>
+                            <span>Contacto</span>
                         </a>
                     }
                     {!homeLocationsPathFlag && 
                         <Link to='/contacto' >
-                            Contacto
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/8zMVLWL2/correo.png')"}}></div>
+                            <span>Contacto</span>
                         </Link>
                     }
-                    <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/jjnwNZtm/Dise-o-sin-t-tulo-44.png")'}} onClick={clickHandler}>
-                    </div>
-                    <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/1z2c686R/Dise-o-sin-t-tulo-46.png")'}}>
-                    </div>
+                        <a>
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}onClick={clickHandler}></div>
+                            <span>Cuenta</span> 
+                        </a>
+                        <a>
+                            <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/Qtnz2xpg/carrito-de-compras.png")'}}>
+                            </div>
+                            <span>Carrito</span>
+                        </a>
                 </nav>}
-            <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/R0X4cphc/menu-1.png")'}}  onClick={clickHandlerMenu}></div>
+            <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/jj31jRt1/Diseño_sin_título_(59).png")'}}  onClick={clickHandlerMenu}></div>
                 { visible &&  <div className={styles.dropDown}>
                     {!props.token && <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</p></Link>}
                         {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible}/>}

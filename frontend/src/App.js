@@ -13,7 +13,6 @@ import { connect } from "react-redux"
 import Password from "./pages/Password";
 import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
-import { Home2 } from "./pages/Home2"
 import { Product2 } from "./pages/Product2"
 
 const App = (props) => {
@@ -37,7 +36,6 @@ const App = (props) => {
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
-        <Route path="/home" component={Home2} />
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}

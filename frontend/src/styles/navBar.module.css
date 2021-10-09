@@ -1,7 +1,7 @@
-nav.navContainer {
+header.headerContainer {
+    width: 100%;
+    padding: 1rem 0rem;
     display: flex;
-    justify-content: space-between;
-    height: 4rem;
 }
 
 .navIntermedio {
@@ -62,6 +62,12 @@ nav.navContainer a:hover {
     color: #F99D22;
 }
 
+.navWeb {
+    display: flex;
+    justify-content: space-between;
+    width: 97vw;
+}
+
 @media screen and (min-width: 375px) and (max-width: 767px) {
     header.headerContainer {
         justify-content: space-between;
@@ -72,30 +78,62 @@ nav.navContainer a:hover {
         margin-left: 1rem;
     }
 
-    nav.navContainer {
+    .navContainerMobile {
+        height: 20rem;
+        width: 20rem;
+    }
+
+    .navIntermedio,
+    nav.navWeb {
         display: none;
     }
 
     nav.navContainerMobile {
         display: flex;
-        height: 10rem;
+        min-height: 15rem;
         flex-direction: column;
-        justify-content: space-between;
-        background-color: #E3E5E6;
-        border-top-left-radius: 1.5rem;
-        border-bottom-left-radius: 1.5rem;
-        border-bottom-right-radius: 1.5rem;
-        padding: 1rem;
-        box-shadow: 1px 1px 5px #75747461;
+        align-items: flex-end;
         position: absolute;
         z-index: 1;
         right: 0.2rem;
         top: 4rem
     }
 
+    div.item {
+        display: flex;
+        align-items: center;
+    }
+
     div.icon {
-        width: 1.5rem;
-        height: 1.5rem;
+        height: 2rem;
+        width: 2rem;
+        background-position: center;
+        background-size: 1.3rem;
+        background-color: #f3f3f3dc;
+        border-radius: 50rem;
+        background-repeat: no-repeat;
+    }
+
+    .navContainerMobile a {
+        width: 11rem;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        /* border: 1px solid; */
+    }
+
+    .navContainerMobile a span {
+        position: absolute;
+        padding: 1rem 3rem;
+        font-size: 0.7rem;
+    }
+
+    .navContainerMobile a {
+        padding: 0.3rem;
+    }
+
+    .navContainerMobile a span:hover {
+        opacity: 1;
     }
 
     div.menu {
@@ -104,6 +142,8 @@ nav.navContainer a:hover {
         background-position: center;
         background-size: cover;
         cursor: pointer;
+        position: absolute;
+        right: 0.3rem;
     }
 
     div.dropDown {

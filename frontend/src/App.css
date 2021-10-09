@@ -8,8 +8,8 @@ html {
 }
 
 body {
-  background-color: #F1F6F7;
-  color: #545454;
+  background: rgb(47, 144, 176);
+  background: radial-gradient(circle, rgba(47, 144, 176, 1) 0%, rgba(48, 106, 154, 1) 55%, rgba(49, 75, 136, 1) 73%, rgba(49, 25, 109, 1) 100%);
 }
 
 a {
@@ -19,11 +19,10 @@ a {
 
 ::-webkit-scrollbar-track {
   background: #f1f1f1;
-  /* box-shadow: 1px 1px 10px #7a5ea8bd; */
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #7A5EA8;
+  background: #3e3e3e;
   border-radius: .2rem;
 }
 
