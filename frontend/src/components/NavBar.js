@@ -19,11 +19,13 @@ const NavBar = (props) => {
 
     const clickHandler= ()=>{
         setVisible(!visible)
+        console.log("hola")
+        
     }
-
+    console.log(visible)
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
-        setVisible(false)
+        // setVisible(false)
     }
     const clickCart =()=>{
         setModalCart(!modalCart)
@@ -40,7 +42,7 @@ const NavBar = (props) => {
             <nav className={styles.navWeb}>
                 <Link to='/'>LUXXOR</Link>
                 <div className={styles.navIntermedio}>
-                    {homeLocationsPathFlag && 
+                    {/* {homeLocationsPathFlag && 
                         <a href="#novedades">
                             Novedades
                         </a>
@@ -49,7 +51,7 @@ const NavBar = (props) => {
                         <Link to='/novedades' >
                             Novedades
                         </Link>
-                    }                
+                    }                 */}
                     <Link to='/productos'>
                         Productos
                     </Link>
@@ -71,7 +73,7 @@ const NavBar = (props) => {
                 </nav>
                 {visibleMenu && 
                     <nav className={styles.navContainerMobile}>
-                        {homeLocationsPathFlag && 
+                        {/* {homeLocationsPathFlag && 
                         <a href="#novedades">
                             <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/Df60XV7r/innovacion.png')"}}></div>
                             <span>Novedades</span>
@@ -82,7 +84,7 @@ const NavBar = (props) => {
                             <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/Df60XV7r/innovacion.png')"}}></div>
                             <span>Novedades</span>
                         </Link>
-                    }                
+                    }                 */}
                     <Link to='/productos'>
                         <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/t4K4jpzj/abrir-caja.png')"}}></div>
                         <span>Productos</span>
@@ -99,9 +101,8 @@ const NavBar = (props) => {
                             <span>Contacto</span>
                         </Link>
                     }
-                        <a>
-                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}onClick={clickHandler}></div>
-                            <span>Cuenta</span> 
+                        <a onClick={()=> {console.log("hola") ; setVisible(!visible)}}>
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
                         </a>
                         <a>
                             <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/Qtnz2xpg/carrito-de-compras.png")'}}>

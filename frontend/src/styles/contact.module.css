@@ -76,14 +76,20 @@ div.imageContact {
     background-size: cover;
 }
 
-
-
-
-
-
 @media screen and (min-width: 375px) and (max-width: 767px) {
     div.imageContact {
         display: none
+    }
+
+    p.subtitleContact {
+        font-size: 1.7rem;
+    }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+    div.imageContact {
+        background-size: contain;
+        background-repeat: no-repeat;
     }
 
     p.subtitleContact {
