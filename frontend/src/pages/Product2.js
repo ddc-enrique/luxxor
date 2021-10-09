@@ -2,10 +2,17 @@ import React from 'react'
 import { useState } from 'react';
 import NavBar from '../components/NavBar';
 import styles from "../styles/product.module.css";
-export const Product2 = () => {
+import { connect } from "react-redux";
+import shopCartActions from "../redux/actions/shopCartActions"
+
+const Product2 = (props) => {
   const [detailsOn, setDetailsOn] = useState(false);
   const [modal, setModal] = useState(false);
+  
+  console.log(props.cartProduct)
+
   const details = detailsOn &&(
+   
     <>
      <p>CARACTERÍSTICAS</p>
            <h2>Audífonos inalámbricos WF-XB700 con EXTRA BASS™</h2>
@@ -17,12 +24,20 @@ export const Product2 = () => {
                     1 Año de garantia oficial. 10 días para cambios y
                     devoluciones
                   </p>
-                  <button className={styles.cart}>AGREGAR AL CARRITO</button>
+                  <button onClick={()=>{
+                    props.addProduct(props.match.params.id)
+                  }}
+                  className={styles.cart}>AGREGAR AL CARRITO</button>
+                 
     </>
   )
     return (
         <>
-        {/* <NavBar/> */}
+           <button onClick={()=>{
+              props.deleteProduct(props.match.params.id)
+            }}
+            className={styles.cart}> ELIMINAR </button>
+           <NavBar/>
         <div className={styles.productsContainer}>
            <div className={styles.containerProduct}>
            <div className={styles.title}>
@@ -78,3 +93,15 @@ export const Product2 = () => {
         </>
     )
 }
+
+const mapStateToProps = (state) => {
+  return {
+    cartProduct:state.shopCart
+  }
+}
+const mapDispatchToProps ={
+  addProduct:shopCartActions.addToCart,
+  deleteProduct:shopCartActions.deleteToCart
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Product2)

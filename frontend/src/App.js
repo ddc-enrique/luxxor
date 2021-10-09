@@ -13,7 +13,7 @@ import { connect } from "react-redux"
 import Password from "./pages/Password";
 import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
-import { Product2 } from "./pages/Product2"
+import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
 
 const App = (props) => {
