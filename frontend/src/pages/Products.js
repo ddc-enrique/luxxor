@@ -76,9 +76,7 @@ const Products = (props) => {
                   </Link>
                 </div>
               </div>
-            ))
-
-            }
+            ))}
             <div className={styles.cardProduct}>
               <div className={styles.containPrice}>
                 <p>$282000</p>
@@ -101,116 +99,6 @@ const Products = (props) => {
                 <Link to="/producto">
                   <p className={styles.btnViewMore}>Ver +</p>
                 </Link>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                  <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
               </div>
             </div>
           </div>
