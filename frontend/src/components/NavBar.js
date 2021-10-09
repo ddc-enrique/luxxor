@@ -42,16 +42,6 @@ const NavBar = (props) => {
             <nav className={styles.navWeb}>
                 <Link to='/'>LUXXOR</Link>
                 <div className={styles.navIntermedio}>
-                    {/* {homeLocationsPathFlag && 
-                        <a href="#novedades">
-                            Novedades
-                        </a>
-                    }
-                    {!homeLocationsPathFlag && 
-                        <Link to='/novedades' >
-                            Novedades
-                        </Link>
-                    }                 */}
                     <Link to='/productos'>
                         Productos
                     </Link>
@@ -71,45 +61,33 @@ const NavBar = (props) => {
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}} onClick={clickCart}>
                 </div>
                 </nav>
-                {visibleMenu && 
+                {visibleMenu &&   
                     <nav className={styles.navContainerMobile}>
-                        {/* {homeLocationsPathFlag && 
-                        <a href="#novedades">
-                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/Df60XV7r/innovacion.png')"}}></div>
-                            <span>Novedades</span>
-                        </a>
-                    }
-                    {!homeLocationsPathFlag && 
-                        <Link to='/novedades' >
-                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/Df60XV7r/innovacion.png')"}}></div>
-                            <span>Novedades</span>
+                        <Link to='/productos'>
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/t4K4jpzj/abrir-caja.png')"}}></div>
+                            <span>Productos</span>
                         </Link>
-                    }                 */}
-                    <Link to='/productos'>
-                        <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/t4K4jpzj/abrir-caja.png')"}}></div>
-                        <span>Productos</span>
-                    </Link>
-                    {homeLocationsPathFlag && 
-                        <a href="#contacto">
-                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/8zMVLWL2/correo.png')"}}></div>
-                            <span>Contacto</span>
-                        </a>
-                    }
-                    {!homeLocationsPathFlag && 
-                        <Link to='/contacto' >
-                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/8zMVLWL2/correo.png')"}}></div>
-                            <span>Contacto</span>
-                        </Link>
-                    }
-                        <a onClick={()=> {console.log("hola") ; setVisible(!visible)}}>
-                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
-                        </a>
-                        <a>
-                            <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/Qtnz2xpg/carrito-de-compras.png")'}}>
-                            </div>
-                            <span>Carrito</span>
-                        </a>
-                </nav>}
+                        {homeLocationsPathFlag && 
+                            <a href="#contacto">
+                                <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/8zMVLWL2/correo.png')"}}></div>
+                                <span>Contacto</span>
+                            </a>
+                        }
+                        {!homeLocationsPathFlag && 
+                            <Link to='/contacto' >
+                                <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/8zMVLWL2/correo.png')"}}></div>
+                                <span>Contacto</span>
+                            </Link>
+                        }
+                            <a onClick={()=> {console.log("hola") ; setVisible(!visible)}}>
+                                <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
+                            </a>
+                            <a>
+                                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/Qtnz2xpg/carrito-de-compras.png")'}}>
+                                </div>
+                                <span>Carrito</span>
+                            </a>
+                    </nav>}
             <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/jj31jRt1/Diseño_sin_título_(59).png")'}}  onClick={clickHandlerMenu}></div>
                 { visible &&  <div className={styles.dropDown}>
                     {!props.token && <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</p></Link>}

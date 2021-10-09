@@ -1,4 +1,5 @@
 import styles from '../styles/sectionInfo.module.css'
+import Information from './Information'
 
 const SectionInfo = ({ reference })=>{
     const images =[
@@ -25,6 +26,7 @@ const SectionInfo = ({ reference })=>{
                             </div> 
                         </div>)}
                 </div>
+                <Information/>
         </section>
     )
 }
