@@ -76,6 +76,19 @@ button.buttonEnviar {
     cursor: pointer;
 }
 
+.formContainerExito .field .error{
+    display: block;
+    padding: .2rem;
+    background-color: red;
+    color: white;
+    border-radius: 1rem;
+    text-align: center;
+}
+
+.formContainerExito .field .errorPlaceholder{
+    height: .9rem;
+}
+
 @media screen and (max-width: 768px) {
     div.divContForm {
         width: 80%;

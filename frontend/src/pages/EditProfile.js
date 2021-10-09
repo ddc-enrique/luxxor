@@ -39,12 +39,16 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
         e.preventDefault()
         try{
             let response = await editDataUser(id, completeAccount, token, dataUser)
+            console.log(response)
             if(response.success){ 
-                toast.success("Datos Actualizados con éxito ya puedes comprar")
-                completeAccount = true
+                if(!completeAccount){
+                    toast.success("Datos Actualizados con éxito ya puedes comprar")
+                    completeAccount = true
+                } else {
+                    toast.success("Datos Actualizados con éxito")
+                }
             }
         } catch(error) {
-            console.log(typeof error)
             if (typeof error === 'string' || error === "DNI en uso"){
                 toast.error(error)
             } else if (Array.isArray(error)){
@@ -78,7 +82,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                 Actualiza tus datos para poder Comprar
                             </h3> */}
                             {!completeAccount  && 
-                                <div className="field">
+                                <div className={styles.field}>
                                     <p>DNI
                                         <input 
                                             className={styles.inputDni} name='dni' type= 'number' placeholder='ej 44444444'
@@ -86,12 +90,13 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                             onChange={inputHandler}
                                             onKeyPress={keyPressHandler}
                                         />
-                                    </p>
-                                    <p className="error">&nbsp;{errorsValidation["dni"]}</p>
+                                    </p>                                    
+                                    {!errorsValidation["dni"] && <div className={styles.errorPlaceholder}></div>}
+                                    {errorsValidation["dni"] && <p className={styles.error}>&nbsp;{errorsValidation["dni"]}</p>}
                                 </div>
                             }
                             {completeAccount  && 
-                                <div className="field">
+                                <div className={styles.field}>
                                     <p>Nombre
                                         <input 
                                             name='firstName' type= 'text' placeholder='ej Juan'
@@ -100,11 +105,12 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                             onKeyPress={keyPressHandler}
                                         />
                                     </p>
-                                    <p className="error">&nbsp;{errorsValidation["firstName"]}</p>
+                                    {!errorsValidation["firstName"] && <div className={styles.errorPlaceholder}></div>}
+                                    {errorsValidation["firstName"] && <p className={styles.error}>&nbsp;{errorsValidation["firstName"]}</p>}
                                 </div>
                             }
                             {completeAccount  && 
-                                <div className="field">
+                                <div className={styles.field}>
                                     <p>Apellido
                                         <input 
                                             name='lastName' type= 'text' placeholder='ej Garcia'
@@ -113,10 +119,11 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                             onKeyPress={keyPressHandler}
                                         />
                                     </p>
-                                    <p className="error">&nbsp;{errorsValidation["lastName"]}</p>
+                                    {!errorsValidation["lastName"] && <div className={styles.errorPlaceholder}></div>}
+                                    {errorsValidation["lastName"] && <p className={styles.error}>&nbsp;{errorsValidation["lastName"]}</p>}
                                 </div>
                             }
-                            <div className="field">
+                            <div className={styles.field}>
                                 <p>Teléfono
                                     <input 
                                         type='text' name='phone'  placeholder='ej 114587427'
@@ -125,9 +132,10 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                         onKeyPress={keyPressHandler}
                                     />
                                 </p>
-                                <p className="error">&nbsp;{errorsValidation["phone"]}</p>
+                                {!errorsValidation["phone"] && <div className={styles.errorPlaceholder}></div>}
+                                {errorsValidation["phone"] && <p className={styles.error}>&nbsp;{errorsValidation["phone"]}</p>}
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <p>Ciudad
                                     <input 
                                         className={styles.inputCiudad} name='city' type= 'text' placeholder='ej Maípu, Mendoza.'
@@ -136,9 +144,10 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                         onKeyPress={keyPressHandler}
                                     />
                                 </p>
-                                <p className="error">&nbsp;{errorsValidation["city"]}</p>
+                                {!errorsValidation["city"] && <div className={styles.errorPlaceholder}></div>}
+                                {errorsValidation["city"] && <p className={styles.error}>&nbsp;{errorsValidation["city"]}</p>}
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                     <p>Cod Postal
                                         <input 
                                             name='zipCode' type= 'number' placeholder='ej 5501'
@@ -147,9 +156,10 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                             onKeyPress={keyPressHandler}
                                         />
                                     </p>
-                                    <p className="error">&nbsp;{errorsValidation["zipCode"]}</p>
+                                    {!errorsValidation["zipCode"] && <div className={styles.errorPlaceholder}></div>}
+                                    {errorsValidation["zipCode"] && <p className={styles.error}>&nbsp;{errorsValidation["zipCode"]}</p>}
                                 </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <p>Dirección
                                     <input 
                                         type= 'text' name='address'  placeholder='ej Salta 1234'
@@ -158,9 +168,10 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                         onKeyPress={keyPressHandler}
                                     />
                                 </p>
-                                <p className="error">&nbsp;{errorsValidation["address"]}</p>
+                                {!errorsValidation["address"] && <div className={styles.errorPlaceholder}></div>}
+                                {errorsValidation["address"] && <p className={styles.error}>&nbsp;{errorsValidation["address"]}</p>}
                             </div>
-                            <div className="field">
+                            <div className={styles.field}>
                                 <p>Opcional
                                     <input 
                                         type= 'text' name='optional' placeholder='ej casa o dpto / piso'
@@ -169,7 +180,8 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                         onKeyPress={keyPressHandler}
                                     />
                                 </p>
-                                <p className="error">&nbsp;{errorsValidation["optional"]}</p>
+                                {!errorsValidation["optional"] && <div className={styles.errorPlaceholder}></div>}
+                                {errorsValidation["optional"] && <p className={styles.error}>&nbsp;{errorsValidation["optional"]}</p>}
                             </div>
                             <button className={styles.buttonEnviar} onClick={updateDataUser}>
                                 {!completeAccount && "Enviar!"}
