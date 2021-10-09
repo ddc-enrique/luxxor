@@ -15,21 +15,29 @@ const productsControllers = {
         .catch(error=>res.json({success:false, response:error.message}))
     },
 
-    addProduct:(req,res)=>{
-        
-        
-        console.log(req.body.photos)
+    addProduct:(req,res)=>{   
+           
         console.log("Received ADD PRODUCTS Petition:" + Date())
         const{name,stock,price,color,dataSheet,description,discount,category,brand}=req.body
-        
+        const{photos}=req.files
+        route = path.join(__dirname, "../assets/productsPhoto") 
+
+        console.log(dataSheet)
+    
+        let dataSheetToSave = dataSheet.map((data)=>{
+            let dataArray = data.split(",")
+            let optionName = dataArray[0]
+            let optionValue = dataArray[1]
+            return {optionName, optionValue}
+        })
+
         const newProduct =new Product ({
             name,
             stock,
             price,
             color,
-            
-            dataSheet,
             description,
+            dataSheet: dataSheetToSave,
             discount,
             category,
             brand 
@@ -37,6 +45,13 @@ const productsControllers = {
         Product.findOne({name})
         .then(productFound=>{
             if(productFound) throw new Error("Ya existe un Producto con ese mismo nombre")
+
+            photos.map((photo, index)=>{
+                let fileName = photo.md5 + "." + photo.name.split(".")[photo.name.split.length-1] 
+                newProduct.photos[index] = fileName
+                photo.mv(`${route}/${fileName}`)
+            })
+
              newProduct.save()
             .then(productSaved=>res.json({success:true,response:productSaved}))
         })

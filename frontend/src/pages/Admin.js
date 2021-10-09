@@ -77,11 +77,28 @@ const Admin = (props) => {
     {optionName: "", optionValue: ""},
   ])
 
+  
   const [categories, setCategories] = useState(props.categories)
   const [brands, setBrands] = useState(props.brands)
-
+  const [products, setProducts] = useState(props.products)
+  const [productsFilt, setProductsFilt] = useState(props.products)
+  const [productsFiltered, setProductsFiltered] = useState(props.products)
+  const [render, setRender] = useState(false)
 
   useEffect(()=>{
+    
+    const getAllProducts = async () => {
+      if(!products.length){
+        
+        let response = await props.getAllProducts()
+        console.log(response)
+        setProducts(response)
+        setProductsFiltered(response)
+        setProductsFilt(response)
+      }
+    }
+    getAllProducts()
+    
     
     const getAllBrands = async () => {
       if(!brands.length){
@@ -99,12 +116,15 @@ const Admin = (props) => {
     }
     getAllCategories()
 
-  }, [])
-
+  }, [render])
   
+  
+  const handle = (e) => {
+    setProductsFilt(productsFiltered.filter(item => (item.name.toLowerCase().startsWith(e.target.value.trim().toLowerCase()))))
+    
+  }
 
-
-  const newProductHandler = (index, e) => {
+  const newProductHandler = (index, e) => { 
     const values = [...inputFields]
     if (e.target.name === "optionName") {
       values[index][e.target.name]=e.target.value
@@ -113,6 +133,7 @@ const Admin = (props) => {
       values[index][e.target.name]=e.target.value
       setNewProduct({...newProduct, dataSheet: [...values]})
     }else if (e.target.name === "photoOne"){
+      
       setNewProduct({...newProduct, photos: [...newProduct.photos, {photoOne: e.target.files[0]}]})
     }else if (e.target.name === "photoTwo"){
       setNewProduct({...newProduct, photos: [...newProduct.photos, {photoTwo: e.target.files[0]}]})
@@ -125,12 +146,9 @@ const Admin = (props) => {
       
   }
 
-  console.log(newProduct.photos)
-  
   const newInput = () =>{
     setInputFields([...inputFields, {optionName: "", optionValue: ""}])
   }
-
 
   const removeInput = (index) =>{
     const input = [...inputFields]
@@ -138,20 +156,49 @@ const Admin = (props) => {
     setInputFields(input)
   }
 
+  const deleteProduct = (id) => {
+      props.deleteProductById(id)
+      .then(response=>{console.log(response)
+        if(!response.success){
+            console.log("Hubo un error") //poner tostada
+        }else {
+          setProducts(products.filter(product => product._id !== id))
+          setProductsFilt(productsFilt.filter(product => product._id !== id))
+          console.log("Se borró con éxito") //poner tostada
+        }
+      })
+  }
+
+
+
+
   const addProductHandler = async () => {
     const FD = new FormData()
     FD.append("name", newProduct.name)
     FD.append("stock", newProduct.stock)
     FD.append("price", newProduct.price)
     FD.append("color", newProduct.color)
-    FD.append("photos", newProduct.photos)
-    FD.append("dataSheet", newProduct.dataSheet)
+    FD.append("photos", newProduct.photos[0].photoOne)
+    FD.append("photos", newProduct.photos[1].photoTwo)
+    FD.append("photos", newProduct.photos[2].photoThree)
+    newProduct.dataSheet.map((data, index)=>{
+      return FD.append("dataSheet", [data.optionName, data.optionValue])
+    })
     FD.append("description", newProduct.description)
     FD.append("discount", newProduct.discount)
     FD.append("category", newProduct.category)
     FD.append("brand", newProduct.brand)
    let response = await props.addProduct(FD)
-   console.log(response)
+   if (!response.success) {
+     console.log("Error") //Poner tostada
+   }else {
+     console.log("Se creó el producto correctamente") //Poner tostada
+     props.getAllProducts()
+     .then(response=>{
+      setProducts(response)
+      setProductsFilt(response)
+     })
+   }
   }
 
 
@@ -287,7 +334,7 @@ const Admin = (props) => {
                     {categories.map(category=> (
                       <option
                         key={category._id}
-                        defaultValue={category._id}
+                        value={category._id}
                       >
                         {category.name}
                       </option>
@@ -337,7 +384,7 @@ const Admin = (props) => {
                     {brands.map(brand=> (
                       <option
                         key={brand._id}
-                        defaultValue={brand._id}
+                        value={brand._id}
                       >
                         {brand.name}
                       </option>
@@ -368,16 +415,20 @@ const Admin = (props) => {
                     "url('https://i.postimg.cc/h47DcVZB/search.png')",
                 }}
               ></div>
+
+
+
               <h3>Buscar</h3>
             </div>
+            
             <div className={styles.containerAllInputs}>
               <div className={styles.containerInputs}>
                 <label htmlFor="search">Buscar Producto</label>
-                <input id="search" type="text" name="search" />
+                <input id="search" type="text"  onChange={handle}/>
               </div>
               <div className={styles.containerProducts}>
-                {data.map((product, index) => (
-                  <div className={styles.boxProduct} key={index}>
+                {productsFilt.map((product) => (
+                  <div className={styles.boxProduct} >
                     <div className={styles.titleProduct}>
                       <div
                         className={styles.imageProduct}
@@ -393,6 +444,7 @@ const Admin = (props) => {
                           }}
                         ></div>
                         <div
+                          onClick={()=>deleteProduct(product._id)}
                           className={styles.icon}
                           style={{
                             backgroundImage:
@@ -401,18 +453,7 @@ const Admin = (props) => {
                         ></div>
                       </div>
                     </div>
-                    <p>{product.description}</p>
-                    <div className={styles.containerInfo}>
-                      <div>
-                        <p>{product.brand}</p>
-                      </div>
-                      <div>
-                        <p>{product.brand}</p>
-                      </div>
-                      <div>
-                        <p>$ {product.price} </p>
-                      </div>
-                    </div>
+                  
                   </div>
                 ))}
               </div>
@@ -431,7 +472,7 @@ const Admin = (props) => {
             </div>
             <div className={styles.containerAllInputs}>
               <div className={styles.containerProducts}>
-                {data.map((product, index) => (
+                {products.map((product, index) => (
                   <div className={styles.boxProduct} key={index}>
                     <div className={styles.titleProduct}>
                       <div
@@ -448,6 +489,7 @@ const Admin = (props) => {
                           }}
                         ></div>
                         <div
+                          onClick={()=>deleteProduct(product._id)}
                           className={styles.icon}
                           style={{
                             backgroundImage:
@@ -456,17 +498,9 @@ const Admin = (props) => {
                         ></div>
                       </div>
                     </div>
-                    <p>{product.description}</p>
+                    
                     <div className={styles.containerInfo}>
-                      <div>
-                        <p>{product.brand}</p>
-                      </div>
-                      <div>
-                        <p>{product.brand}</p>
-                      </div>
-                      <div>
-                        <p>$ {product.price} </p>
-                      </div>
+                     
                     </div>
                   </div>
                 ))}
@@ -480,16 +514,20 @@ const Admin = (props) => {
 };
 
 
+
 const mapDispatchToProps = {
   addProduct: productsActions.addProduct,
   getCategories: productsActions.categories,
-  getBrands: productsActions.brands
+  getBrands: productsActions.brands,
+  getAllProducts: productsActions.products,
+  deleteProductById: productsActions.deleteProduct,
 }
 
 const mapStateToProps = (state) => {
   return {
     categories: state.products.categories,
-    brands: state.products.brands
+    brands: state.products.brands,
+    products: state.products.products,
   }
 }
 

@@ -29,7 +29,7 @@ const usersControllers = {
             let fileName = newUser.eMail + "." + req.files.profilePic.name.split(".")[req.files.profilePic.name.split.length-1]
                 newUser.profilePic = fileName
 
-            route = path.join(__dirname, "../assets")
+            route = path.join(__dirname, "../assets/usersPhoto")
             req.files.profilePic.mv(`${route}/${fileName}`)
         }else{
             newUser.profilePic = req.body.profilePic

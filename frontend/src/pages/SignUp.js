@@ -54,6 +54,8 @@ const SignUp = (props) => {
     })
   }
 
+  console.log(newUser.profilePic)
+
   const enterNewUser = async () => {
     try {
       const FD = new FormData()
