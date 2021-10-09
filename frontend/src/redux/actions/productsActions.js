@@ -30,6 +30,17 @@ const productsActions = {
         }
     },
 
+    addCategory: (name) => {
+        return async () => {
+            try {
+                let res = await axios.post('http://localhost:4000/api/admin/categories', name)
+                return res
+            }catch(e){
+                console.log(e)
+            }
+        }
+    },
+
     brands: () => {
         return async (dispatch) =>{
             try {
