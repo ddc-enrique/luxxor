@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react"
 import toast, { Toaster } from "react-hot-toast"
 import { useHistory } from 'react-router'
-import Switch from "react-switch"
 import styles from "../styles/productList2.module.css"
 import { connect } from "react-redux"
 import productsActions from "../redux/actions/productsActions"
-import SwitchRadio from "./SwitchRadio"
 
 
 const FilterProducts = (props) => {

@@ -12,8 +12,8 @@ import toast, { Toaster } from "react-hot-toast"
 const Products = (props) => {
   const [products, setProducts] = useState([])
   const [filteredProducts, setFilteredProducts] = useState([])
-  const [sortedProducts, setSortedProducts] = useState([])
   const [updateOnSort, setUpdateOnSort] = useState(true)
+  const [loading, setLoading] = useState(true)
   useEffect(()=> {
     const getAllProducts = async() =>{
       if(!products.length) {
@@ -22,32 +22,32 @@ const Products = (props) => {
           if(!Array.isArray(response)) throw new Error(response.response)         
           setProducts(response)
           setFilteredProducts(response)
-          setSortedProducts(response)
         } catch (error) {
           toast.error(error)
         }                
       }
     }
     getAllProducts()
+    setLoading(false)
   },[])
 
   const sortProducts = (e) => {
     console.log(e.target.value)
     switch (e.target.value) {
       case "lowerPrice":
-        setSortedProducts(
+        setFilteredProducts(
           filteredProducts.sort((productA, productB) => productA.price - productB.price)
         )
         break;
 
       case "higherPrice":
-        setSortedProducts(
+        setFilteredProducts(
           filteredProducts.sort((productA, productB) => productB.price - productA.price)
         )
         break;
       
       case "A-Z":
-        setSortedProducts(
+        setFilteredProducts(
           filteredProducts.sort((productA, productB) => {
             if (productA.name > productB.name) {
               return 1;
@@ -61,7 +61,7 @@ const Products = (props) => {
         break;
 
       case "Z-A":
-        setSortedProducts(
+        setFilteredProducts(
           filteredProducts.sort((productA, productB) => {
             if (productA.name < productB.name) {
               return 1;
@@ -74,12 +74,28 @@ const Products = (props) => {
         )
         break;
 
-      case "mostRelevants": //NO ANDA BIEN        
+      case "mostRelevants":
+        setFilteredProducts(
+          filteredProducts.sort((productA, productB) => {
+            if (productA._id > productB._id) {
+              return 1;
+            }
+            if (productA._id < productB._id) {
+              return -1;
+            }
+            return 0;
+          })
+        )
+        break;
+
       default:
-        setSortedProducts(filteredProducts)
         break;
     }
     setUpdateOnSort(!updateOnSort)
+  }
+
+  if(loading){
+    return <div> Cargando...</div>
   }
 
   return (
@@ -136,30 +152,12 @@ const Products = (props) => {
                 </div>
               </div>
             ))}
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
+            {
+              !filteredProducts.length && 
+              <div className={styles.emptyProducts}>
+                <p>Ups! No tenemos productos que pasen ese filtro :(</p>
               </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <Link to="/producto">
-                  <p className={styles.btnViewMore}>Ver +</p>
-                </Link>
-              </div>
-            </div>
+            }
           </div>
         </div>
       </div>

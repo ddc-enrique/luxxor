@@ -86,8 +86,20 @@
       margin: 1rem 0;
   }
   .containerProducts {
-      border:1px solid black;
+    border:1px solid black;
+    flex: 1;
+    display: flex;
   }
+  .containerProducts .emptyProducts{
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .containerProducts .emptyProducts p{
+    display: block;
+  }
+
 @media only screen and (min-width: 800px) {
   .container {
     display: flex;
