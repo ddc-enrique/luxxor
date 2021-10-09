@@ -54,7 +54,7 @@ const Products = (props) => {
             {products.map(product => (
               <div className={styles.cardProduct}>
                 <div className={styles.containPrice}>
-                  <p>${product.price * (1-(product.discount/100))}</p>
+                  <p>${(product.price * (1-(product.discount/100))).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                   <div>
                     {product.discount>0 && <p>%{product.discount} Off</p>}
                   </div>
