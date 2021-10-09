@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Navbar from "../components/NavBar"
 import Footer from "../components/Footer"
 // import styles from "../styles/productList.module.css"
@@ -6,12 +6,29 @@ import styles from "../styles/productList2.module.css"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import FilterProducts from "../components/FilterProducts"
+import productsActions from "../redux/actions/productsActions"
+import toast, { Toaster } from "react-hot-toast"
 
 const Products = (props) => {
-
+  const [products, setProducts] = useState([])
+  useEffect(()=> {
+    const getAllProducts = async() =>{
+      if(!products.length) {
+        try {
+          let response = await props.getProducts()
+          if(!response.data.success) throw new Error()          
+          setProducts(response.data.response)  
+        } catch (error) {
+          toast.error(error)
+        }                
+      }
+    }
+    getAllProducts()
+  },[])
 
   return (
     <>
+      <Toaster />
       <Navbar />
       <div className={styles.container}>
         <FilterProducts />
@@ -34,6 +51,34 @@ const Products = (props) => {
             </div>
           </div>
           <div className={styles.containerProducts}>
+            {products.map(product => (
+              <div className={styles.cardProduct}>
+                <div className={styles.containPrice}>
+                  <p>${product.price * (1-(product.discount/100))}</p>
+                  <div>
+                    {product.discount>0 && <p>%{product.discount} Off</p>}
+                  </div>
+                </div>
+                <p>
+                  {product.name}
+                </p>
+                <div className={styles.center}>
+                  <div
+                    className={styles.photo}
+                    style={{
+                      backgroundImage: `url("https://localhost:4000/${product.photos[0]}`,
+                    }}
+                  ></div>
+                </div>
+                <div className={styles.center}>
+                  <Link to={`/producto/${product._id}`}>
+                    <p className={styles.btnViewMore}>Ver +</p>
+                  </Link>
+                </div>
+              </div>
+            ))
+
+            }
             <div className={styles.cardProduct}>
               <div className={styles.containPrice}>
                 <p>$282000</p>
@@ -177,7 +222,7 @@ const Products = (props) => {
 }
 
 const mapDispatchToProps = {
-
+  getProducts: productsActions.products,
 }
 
 const mapStateToProps = (state) => {

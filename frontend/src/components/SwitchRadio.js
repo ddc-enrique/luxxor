@@ -1,18 +1,16 @@
-import React ,{ useRef, useState}from 'react'
+import React ,{ useEffect, useRef, useState}from 'react'
 import Switch from "react-switch"
 import styles from "../styles/productList2.module.css"
 
 const SwitchRadio = (props) => {
-    const [checked, setChecked] = useState(false)
     const radioInput = useRef({})
+    const [checked, setChecked] = useState(radioInput.current.checked)
 
     const handleChange = (checked) => {
-        // setChecked(checked)
         radioInput.current.checked = !radioInput.current.checked
+        setChecked(radioInput.current.checked)
+        console.log(radioInput.current.dataset.fieldName)
     }
-
-    console.log(props.field.name)
-    console.log(radioInput.current.checked)
 
     return (
         <div 
@@ -20,20 +18,22 @@ const SwitchRadio = (props) => {
         >
             <label>
                 <span>{props.field.name}</span>
+                <input 
+                    type="radio"
+                    name="brand"
+                    ref={radioInput}
+                    onChange={handleChange}
+                    data-field-name={props.field.name}
+                    // style={{visibility: "hidden"}}
+                />
+                <Switch
+                    onChange={handleChange}
+                    checked={checked}
+                    uncheckedIcon={false}
+                    checkedIcon={false}
+                    onColor={'#f48f31'}
+                />
             </label>
-            <input 
-                type="radio"
-                name="brand"
-                ref={radioInput}
-                // style={{visibility: "hidden"}}
-            />
-            <Switch
-                onChange={handleChange}
-                checked={radioInput.current.checked}
-                uncheckedIcon={false}
-                checkedIcon={false}
-                onColor={'#f48f31'}
-            />
         </div>
     )
 }

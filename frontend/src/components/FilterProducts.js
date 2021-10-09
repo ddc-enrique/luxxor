@@ -41,48 +41,66 @@ const FilterProducts = (props) => {
         getAllCategories()
     }, [])
 
-    const handleChange = () => {
-
-    }
-
     return (
         <div className={styles.inputFilterContain}>
             <Toaster />
             <h2>Filtrar por:</h2>
             <div className={styles.inputsFilter}>
-                <h3>Marca</h3>
-                {brands.map( brand => (
-                    <SwitchRadio 
-                        key={brand._id}
-                        field={brand}
-                    />
-                ))}
-            <h3>Categoria</h3>
-            <div className={styles.switch}>
-              <label>
-                <span>Option 1</span>
-                <Switch
-                  onChange={handleChange}
-                  
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onColor={'#f48f31'}
-                />
-              </label>
+                    <h3>Marca</h3>
+                    <div
+                        className={styles.switchContainer}
+                    >
+                        <label htmlFor="allBrands">Todas</label>
+                        <input 
+                            type="radio"
+                            name="brand"
+                            id="allBrands"
+                            className={styles.switch}
+                            defaultChecked
+                        />
+                    </div>
+                    {brands.map( brand => (
+                        <div
+                            className={styles.switchContainer}
+                            key={brand._id}
+                        >
+                            <label htmlFor={brand._id}>{brand.name}</label>
+                            <input 
+                                type="radio"
+                                name="brand"
+                                id={brand._id}
+                                className={styles.switch}
+                            />
+                        </div>
+                    ))}
+                <h3>Categoria</h3>
+                    <div
+                        className={styles.switchContainer}
+                    >
+                        <label htmlFor="allCategories">Todas</label>
+                        <input 
+                            type="radio"
+                            name="category"
+                            id="allCategories"
+                            className={styles.switch}
+                            defaultChecked
+                        />
+                    </div>
+                    {categories.map( category => (
+                        <div
+                            className={styles.switchContainer}
+                            key={category._id}
+                        >
+                            <label htmlFor={category._id}>{category.name}</label>
+                            <input 
+                                type="radio"
+                                name="category"
+                                id={category._id}
+                                className={styles.switch}
+                            />
+                        </div>
+                    ))}
             </div>
-            <div className={styles.switch}>
-              <label>
-                <span>Option 1</span>
-                <Switch
-                  onChange={handleChange}
-                  
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onColor={'#f48f31'}
-                />
-              </label>
-            </div>
-          </div>
         </div>
     )
 

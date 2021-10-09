@@ -32,7 +32,7 @@ const App = (props) => {
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
         <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
         <Route path="/registro" component={SignUp} />
-        <Route path="/producto" component={Product2} /> 
+        <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
