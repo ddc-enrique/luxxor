@@ -1,31 +1,18 @@
-div.containerTotal{
+div.containerGeneral{
     position: fixed;
     top:0;
     right: 0;
     width: 30rem;
-    height: 100%;
+    height: 100% ;
     z-index: 300;
-    /* overflow: scroll; */
+    overflow: scroll;
     text-align: left;
     background-color: #f1f1f1;
     box-shadow: -300px 0px 200vw 200vw #444343d1;
-  /*   background-color: #f1f1f1;
-    width: 40%;
-    height: 100%; 
-    position: fixed;
-    z-index: 3;
-    position: fixed; 
-    left: 70%;
-    display: block;
-    z-index: 3;
-    z-index: 3;
-    box-shadow: -300px 0px 200vw 200vw #444343d1; */
+    padding:0 1rem;
 }
 div.containerCart{
-    width: 100%; 
-    height: 100rem;
     padding-left: 0.9rem;
-
 }
 img.iconClose{
     width: 2rem;
@@ -45,7 +32,7 @@ div.photo{
     background-size: cover;
     background-repeat: no-repeat;
 }
-div.containerSubTitle{
+div.containerSubTitle,div.containerTotal{
     width: 87%;
     border-top: 1px solid rgb(196, 192, 192);
     border-bottom: 1px solid  rgb(196, 192, 192);
@@ -58,10 +45,10 @@ div.containerProductTotal{
     width: 95%;
     display: flex;
     justify-content: space-between;
+    align-items: center;
     margin-bottom: 1rem;
     padding: 1rem 0.3rem;
-    background-color: rgba(163, 189, 189, 0.171);
-    align-items: center;
+    background-color: rgba(163, 189, 189, 0.171);    
 }
 img.imgProduct{
     width: 5rem;
@@ -83,10 +70,10 @@ div.icon{
     width: 2rem;
     background-position: center;
     background-size: cover;
+    cursor: pointer;
 }
 
 div.counter{
-    border: 1px solid #f0f0f0;
     padding: 0.5rem;
     display: flex;
     gap:0.5rem;
@@ -94,7 +81,7 @@ div.counter{
 }
 
 div.price{
-    background-color: #f48f31;
+    background-color: rgb(45, 20, 85);
     color: white;
     text-align: center;
     padding: 0.6rem;
@@ -110,3 +97,35 @@ div.counter span{
 /* span.spanSubtotal{
     width: 3rem;
 } */
+img.iconDelete{
+    width: 2.4rem;
+    margin-bottom: 0.2rem;
+    cursor: pointer;
+}
+div.containerSubTotal{
+    display: flex;
+    align-items: center;
+}
+div.containerSubTotalCart{
+    display: flex;
+    justify-content: space-between;
+}
+div.containerDisconts{
+    margin-top: 2rem;
+    width: 87%;
+    border-top: 1px solid rgb(196, 192, 192);
+    border-bottom: 1px solid  rgb(196, 192, 192);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    margin-bottom: 1rem;
+}
+div.containerShip{
+    margin-top: 2rem;
+}
+div.containerTotal{
+    margin-top: 2rem;
+    border-bottom:none;
+    color:rgb(45, 20, 85);;
+}

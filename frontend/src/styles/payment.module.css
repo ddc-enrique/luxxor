@@ -1,0 +1,37 @@
+div.container{
+    width: 100%;
+    min-height: 20rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+
+}
+.boxMethod{
+    border: 2px solid rgb(116, 106, 126);
+    width: 20%;
+    height: 10rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius:0.8rem;
+    cursor: pointer;
+    transition: 0.5s all
+}
+img.iconCard{
+    width: 5rem;
+    margin-bottom: 0.8rem;
+}
+img.iconPayPal{
+    width: 10rem;
+    margin-bottom: 1rem;
+}
+.boxMethod:hover{
+    transition: 0.5s all;
+    border: 2px solid rgb(33, 155, 26);
+    transform: scale(1.1);
+}
+h3.title{
+    margin-top: 1rem;
+    font-size: 1.5rem;
+}
