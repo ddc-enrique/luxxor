@@ -15,6 +15,7 @@ import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
 import { Home2 } from "./pages/Home2"
 import { Product2 } from "./pages/Product2"
+import Sale from "./pages/Sale";
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
@@ -39,6 +40,7 @@ const App = (props) => {
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/home" component={Home2} />
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
+        <Route path="/checkout" component={Sale}/>
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}

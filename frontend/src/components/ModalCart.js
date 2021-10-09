@@ -2,12 +2,13 @@ import React,  { useState, useEffect, useRef }from "react";
 import styles from "../styles/modalCart.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
+import CardProductCart from "./CardProductCart";
+import { Link } from "react-router-dom"
 
 const ModalCart = (props) =>{
-    const[counter,setCounter]=useState(0)
 
     return(
-        <div className={styles.containerTotal}>
+        <div className={styles.containerGeneral}>
             <div className={styles.containerCart}>
                 <img onClick={()=>props.setModalCart(false)} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
                 
@@ -16,46 +17,39 @@ const ModalCart = (props) =>{
                     <h3>PRODUCTO</h3>
                     <h3>SUBTOTAL</h3>
                 </div>
-                <div className={styles.containerProductTotal}>
-                    <div className={styles.containerProduct}>
-                        {/* <div
-                        className={styles.photo}
-                        style={{
-                            backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                        }}
-                        ></div> */}
-                       <img width="90" src="https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg"/>
-                       <div className={styles.containerProductTetx}>
-                           <p>MacBook Air 13.3</p>
-                           <span>$ $282.000</span>
-                           <div className={styles.counter}>
-                                <div
-                                    className={styles.icon}
-                                    style={{
-                                    backgroundImage:
-                                        "url('https://i.postimg.cc/63nKHn7j/3-removebg-preview-2.png')",
-                                    }}
-                                    onClick={() => setCounter(counter - 1)}
-                                ></div>
-                                <span>{counter}</span>
-                                <div
-                                    className={styles.icon}
-                                    style={{
-                                    backgroundImage:
-                                        "url('https://i.postimg.cc/0NLxdcNK/2-removebg-preview-4.png')",
-                                    }}
-                                    onClick={() => setCounter(counter + 1)}
-                                ></div>
-                                
-                            </div>                   
-                       </div>
-                       <span className={styles.spanSubtotal}>$282.000</span>
+                    <CardProductCart sale={false}/>
+                    <CardProductCart sale={false}/>    
+                    <Link to="/productos">
+                        <div className={styles.price}> <p>Agregar mas productos</p></div>
+                    </Link>
+                <div className={styles.containerDisconts}>
+                    <div className={styles.containerSubTotalCart}>
+                        <h3>Subtotal (sin envio):</h3>
+                        <span>$282.200</span>
                     </div>
-                    
+                    <div className={styles.containerSubTotalCart}>
+                        <h3>15%OFF</h3>
+                        <span>$42.330</span>
+                    </div>
                 </div>
-                <div className={styles.price}>            
-                    <p>Agregar mas productos</p>
+                <div className={styles.containerShip}>
+                    <h3>Seleccione una forma de entrega:</h3>
+                    <div>                   
+                        <input type="radio" id="pickIt" name="shipping" value={false} checked/>
+                        <label for="pickIt"> Retiro en Local</label>                   
+                    </div>
+                    <div>                
+                        <input type="radio" id="ship" name="shipping" value={true} />
+                        <label for="ship"> Envio a domicilio</label>                 
+                    </div>
                 </div>
+                <div className={styles.containerTotal}>
+                    <h3>TOTAL:</h3>
+                    <span>$</span>
+                </div>
+                <Link to="/checkout">
+                        <div className={styles.price}> <p>Finaliza Compra</p></div>
+                </Link>
             </div>
         </div>
     )
@@ -66,6 +60,6 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps ={
-    sendMail: usersAction.sendMail
+    
 }
 export default connect(mapStateToProps,mapDispatchToProps)(ModalCart)
