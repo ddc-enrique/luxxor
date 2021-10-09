@@ -12,6 +12,8 @@ const FilterProducts = (props) => {
     const history = useHistory()
     const [categories, setCategories] = useState(props.categories)
     const [brands, setBrands] = useState(props.brands)
+    const [activeBrand, setActiveBrand] = useState("allBrands")
+    const [activeCategory, setActiveCategory] = useState("allCategories")
 
     useEffect(()=>{    
         const getAllBrands = async () => {
@@ -41,6 +43,21 @@ const FilterProducts = (props) => {
         getAllCategories()
     }, [])
 
+    useEffect(() => {
+        console.log("Brand", activeBrand)
+        console.log("Category", activeCategory)
+        let flagAllBrands = activeBrand === "allBrands"
+        let flagAllCategories = activeCategory === "allCategories"
+        let fp = props.products.filter( product => {
+            if (flagAllBrands && flagAllCategories) return true
+            if(activeCategory === product.category._id && flagAllBrands) return true
+            if(activeBrand === product.brand._id && flagAllCategories) return true
+            if( activeCategory === product.category._id && activeBrand === product.brand._id ) return true
+            return false
+        })
+        props.setFilteredProducts(fp)
+    },[activeBrand, activeCategory])
+
     return (
         <div className={styles.inputFilterContain}>
             <Toaster />
@@ -56,6 +73,7 @@ const FilterProducts = (props) => {
                             name="brand"
                             id="allBrands"
                             className={styles.switch}
+                            onChange={ () => setActiveBrand("allBrands")}
                             defaultChecked
                         />
                     </div>
@@ -70,6 +88,7 @@ const FilterProducts = (props) => {
                                 name="brand"
                                 id={brand._id}
                                 className={styles.switch}
+                                onChange={ () => setActiveBrand(brand._id)}
                             />
                         </div>
                     ))}
@@ -83,6 +102,7 @@ const FilterProducts = (props) => {
                             name="category"
                             id="allCategories"
                             className={styles.switch}
+                            onChange={ () => setActiveCategory("allCategories")}
                             defaultChecked
                         />
                     </div>
@@ -97,6 +117,7 @@ const FilterProducts = (props) => {
                                 name="category"
                                 id={category._id}
                                 className={styles.switch}
+                                onChange={ () => setActiveCategory(category._id)}
                             />
                         </div>
                     ))}

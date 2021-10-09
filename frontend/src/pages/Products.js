@@ -11,6 +11,9 @@ import toast, { Toaster } from "react-hot-toast"
 
 const Products = (props) => {
   const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
+  const [sortedProducts, setSortedProducts] = useState([])
+  const [updateOnSort, setUpdateOnSort] = useState(true)
   useEffect(()=> {
     const getAllProducts = async() =>{
       if(!products.length) {
@@ -18,6 +21,8 @@ const Products = (props) => {
           let response = await props.getProducts()
           if(!Array.isArray(response)) throw new Error(response.response)         
           setProducts(response)
+          setFilteredProducts(response)
+          setSortedProducts(response)
         } catch (error) {
           toast.error(error)
         }                
@@ -26,33 +31,87 @@ const Products = (props) => {
     getAllProducts()
   },[])
 
+  const sortProducts = (e) => {
+    console.log(e.target.value)
+    switch (e.target.value) {
+      case "lowerPrice":
+        setSortedProducts(
+          filteredProducts.sort((productA, productB) => productA.price - productB.price)
+        )
+        break;
+
+      case "higherPrice":
+        setSortedProducts(
+          filteredProducts.sort((productA, productB) => productB.price - productA.price)
+        )
+        break;
+      
+      case "A-Z":
+        setSortedProducts(
+          filteredProducts.sort((productA, productB) => {
+            if (productA.name > productB.name) {
+              return 1;
+            }
+            if (productA.name < productB.name) {
+              return -1;
+            }
+            return 0;
+          })
+        )
+        break;
+
+      case "Z-A":
+        setSortedProducts(
+          filteredProducts.sort((productA, productB) => {
+            if (productA.name < productB.name) {
+              return 1;
+            }
+            if (productA.name > productB.name) {
+              return -1;
+            }
+            return 0;
+          })
+        )
+        break;
+
+      case "mostRelevants": //NO ANDA BIEN        
+      default:
+        setSortedProducts(filteredProducts)
+        break;
+    }
+    setUpdateOnSort(!updateOnSort)
+  }
+
   return (
     <>
       <Toaster />
       <Navbar />
       <div className={styles.container}>
-        <FilterProducts />
+        <FilterProducts 
+          setFilteredProducts={setFilteredProducts}
+          products={products}
+        />
         <div className={styles.productsSection}>
           <div className={styles.inputSelect}>
             <div>
             <h2>Ordenar por:</h2>
             <select
               name="precio"
-              // value={}
+              onChange={sortProducts}
               className={styles.selectInput}
               placeholder="precio"
             >
-              <option value="volvo"  default>Selecciona</option>
-              <option value="volvo">Mayor precio</option>
-              <option value="saab">Menor precio</option>
-              <option value="mercedes">A-Z</option>
-              <option value="audi">Z-A</option>
+              <option value="mostRelevants" default>Más Relevantes</option>
+              <option value="higherPrice">Mayor precio</option>
+              <option value="lowerPrice">Menor precio</option>
+              <option value="A-Z">A-Z</option>
+              <option value="Z-A">Z-A</option>
             </select>
             </div>
           </div>
           <div className={styles.containerProducts}>
-            {products.map(product => (
-              <div className={styles.cardProduct}>
+            {filteredProducts.map(product => (
+              <div className={styles.cardProduct} key={product._id}>
                 <div className={styles.containPrice}>
                   <p>${(product.price * (1-(product.discount/100))).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
                   <div>
