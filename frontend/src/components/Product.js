@@ -4,6 +4,8 @@ import { Carousel } from "react-carousel-minimal";
 import styles from "../styles/products.module.css";
 import { useState } from "react";
 import NavBar from "./NavBar";
+
+
 const Product = () => {
   const [modal, setModal] = useState(false);
   const [like, setLike] = useState(false);
@@ -187,4 +189,5 @@ const Product = () => {
   );
 };
 
-export default Product;
+
+export default Product

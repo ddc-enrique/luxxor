@@ -2,9 +2,9 @@ import React,  { useState, useEffect, useRef }from "react";
 import styles from "../styles/modalCart.module.css";
 // import styles from "../styles/modal2.module.css";
 import { connect } from "react-redux";
-import usersAction from "../redux/actions/usersAction";
 import CardProductCart from "./CardProductCart";
 import { Link } from "react-router-dom"
+import shopCartActions from "../redux/actions/shopCartActions"
 
 const ModalCart = (props) =>{
 
@@ -57,10 +57,11 @@ const ModalCart = (props) =>{
 }
 const mapStateToProps = (state) => {
     return {
-       
+      cartProduct:state.shopCart.cartProduct
     }
-}
-const mapDispatchToProps ={
-    
-}
+  }
+  const mapDispatchToProps ={
+    addProduct:shopCartActions.addToCart,
+    deleteProduct:shopCartActions.deleteToCart
+  }
 export default connect(mapStateToProps,mapDispatchToProps)(ModalCart)
