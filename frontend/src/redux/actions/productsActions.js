@@ -64,9 +64,11 @@ const productsActions = {
     products: () => {
         return async (dispatch) =>{
             try {
-                let response = axios.get("http://localhost:4000/api/products")
-
-                return response
+                let response = await axios.get("http://localhost:4000/api/products")
+                if (response.data.success){
+                    dispatch({type: "PRODUCTS", payload: response.data.response})
+                }
+                return response.data.response
             }catch(e){
                 return({success: false, response: e})
             }
@@ -76,7 +78,7 @@ const productsActions = {
     product: (id) => {
         return async (dispatch) =>{
             try {
-                let response = axios.get(`http://localhost:4000/api/product/${id}`)
+                let response = await axios.get(`http://localhost:4000/api/product/${id}`)
                 if (response.data.success) {
                     return response
                 }else {
@@ -90,7 +92,7 @@ const productsActions = {
 
 
     addProduct: (product) =>{
-        
+        console.log(product)  
         return async (dispatch) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/products", product)
@@ -99,6 +101,17 @@ const productsActions = {
                 }else {
                     return response.data
                 }
+            }catch(e){
+                return ({success: false, response: e})
+            }
+        }
+    },
+
+    deleteProduct: (id) =>{
+        return async (dispatch) => {
+            try {
+                let response = await axios.delete(`http://localhost:4000/api/product/${id}`)
+                    return response.data
             }catch(e){
                 return ({success: false, response: e})
             }

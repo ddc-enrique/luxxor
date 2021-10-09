@@ -1,9 +1,16 @@
 const initialState = {
     brands: [],
-    categories: []
+    categories: [],
+    products: [],
 }
 const productsReducer = (state=initialState, action) => {
+    
     switch (action.title) {
+        case "PRODUCTS":
+            return {
+                ...state,
+                products: action.payload,               
+            }     
         case "BRANDS":
             return {
                 ...state,
@@ -13,10 +20,10 @@ const productsReducer = (state=initialState, action) => {
             return {
                 ...state,
                 categories: action.payload
-            }
+            }       
         default:
-            return state
-    }
+            return state       
+    } 
 }
 
 export default productsReducer
