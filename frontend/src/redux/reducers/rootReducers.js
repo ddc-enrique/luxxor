@@ -6,7 +6,8 @@ import shopCartReducer from "./shopCartReducer"
 const rootReducers = combineReducers({
     users: usersReducer,
     products: productsReducer,
-    shopCart:shopCartReducer
+    shopCart:shopCartReducer,
+    
 })
 
 export default rootReducers
