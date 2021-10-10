@@ -49,36 +49,40 @@ span.violet {
 }
 .containerAdmin .sectionBrandCategory {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   width: 100vw;
-  min-height: 80vh;
-  border: 1px solid black;
-  align-items: center;
   flex-direction: column;
+  background-color: #ffffffe6;
+  padding: 1rem;
+  margin: 1rem;
 }
 
 .sectionBrandCategory>* {
-  border: 1px solid white;
-  background-color: white;
+  border: 1px solid #bfbfbf;
+
 }
 
-.containerAdmin .sectionBrandCategory {
+.containerAdmin .containerSections {
   display: flex;
   justify-content: space-around;
   width: 100vw;
   min-height: 80vh;
   border: 1px solid black;
   align-items: center;
-  background-color: white;
 }
-.containerAdmin .sectionBrandCategory .containerCategory {
+.containerAdmin .containerSections .containerCategory {
   border: 1px solid #0000000f;
   height: 10rem!important;
-  width: 82%;
+  width: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
+}
+.containerCategory {
+  height: 20rem!important;
+  padding: 1rem;
+  overflow-y: scroll;
 }
 .loading {
   min-height: 32rem;
@@ -89,18 +93,26 @@ span.violet {
     background-repeat: no-repeat;
     opacity: .5;
 }
-.containerAdmin .sectionBrandCategory .containerCategory .category {
+.containerAdmin .containerSections .containerCategory .category {
   border: 1px solid #e8e8e8;
   height: 5rem;
   display: flex;
   width: 45rem;
-  justify-content: space-around;
+  justify-content: space-between;
+    padding: 0 .5rem;
   align-items: center;
   
 }
+.category  {
+  border: 1px solid #b3b3b3;
+  /* width: 45rem; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 .5rem;
+}
 .containerForm {
   padding: 1rem;
-  width: 80%;
 }
 .containerForm div{
   display: flex;
@@ -108,9 +120,8 @@ span.violet {
 }
 
 .containerForm div:nth-child(2) {
-  border: 1px solid #e8e8e8;
+  border: 1px solid #999999;
   padding: 1rem;
-  
 }
 
 .navAdmin .icon, .icon {
@@ -263,7 +274,7 @@ label {
   border-bottom-left-radius: 1rem !important;
 }
 
-.formNew textarea {
+.formNew textarea, textarea {
   resize: none;
   border-radius: 1rem;
   border: none;
@@ -271,6 +282,7 @@ label {
   width: 17rem !important;
   height: 2rem;
   background-color: #dfdfdf;
+ padding: 0 2rem;
 }
 .boxProduct {
   border: 1px solid #e9e9e9;
@@ -281,7 +293,7 @@ label {
   padding: 0 1rem;
 }
 
-.containerProducts, .containerCategory {
+.containerProducts {
   overflow-y: auto;
   height: 34rem;
 }

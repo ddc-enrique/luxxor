@@ -23,6 +23,26 @@ useEffect(() => {
     }
         getCategories()
     }, [])
+    const sendCategory = async () => {
+      if(!category) {
+       alert("No puede estar vacio") 
+      } else {
+       let res = await props.addCategory(category)
+       if(!res.data.success) {
+         alert(res.data.response)
+       } else {
+         alert('Creado con éxito')
+         let response = await props.getCategories()
+         setCategories(response)
+       }
+      }
+     }
+     const deleteCategory = async (id,index) => {
+       let res = await props.deleteCategory(id)
+       console.log(res)
+       res.data.success && alert("Borrado con éxito")
+        setCategories(categories.splice(id,index))
+     }
   return (
     <div className={styles.divContainer}>
       <header className={styles.headerAdmin}>
@@ -52,7 +72,7 @@ useEffect(() => {
                   }}
                 ></div>
                 <div
-                  onClick={() => alert("borrar")}
+                  onClick={() => deleteCategory(category._id,index)}
                   className={styles.icon}
                   style={{
                     backgroundImage:
@@ -81,7 +101,7 @@ useEffect(() => {
               </div>
             </div>
             <div className={styles.containerButton}>
-              <button onClick={()=> props.addCategory(category)}>Enviar</button>
+              <button onClick={()=> sendCategory()}>Enviar</button>
             </div>
           </div>
         </div>
@@ -92,12 +112,13 @@ useEffect(() => {
 
 const mapStateToProps = (state) => {
     return {
-      Allcategories: state.products.categories,
+      allcategories: state.products.categories,
     }
 }
 
   const mapDispatchToProps = {
     getCategories: productsActions.categories,
-    addCategory: productsActions.addCategory
+    addCategory: productsActions.addCategory,
+    deleteCategory: productsActions.deleteCategory
   }
 export default connect(mapStateToProps,mapDispatchToProps)(Category)
