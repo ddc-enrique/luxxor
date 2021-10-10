@@ -128,16 +128,6 @@ const usersAction = {
             dispatch({ type:"LOGOUT" })
         }
     },
-
-    sendNewMessage: (newMessage) => {
-        console.log("estoy en el reducer")
-        return async () => {
-            let response = await axios.post("http://localhost:4000/api/contact", newMessage)
-            console.log(response)
-            if (!response.data.success) throw response.data.response
-            return response.data
-        }
-    },
     
 }
 

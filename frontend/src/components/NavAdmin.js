@@ -45,6 +45,16 @@ export const NavAdmin = () => {
               ></div>
               <span>Productos</span>
             </Link>
+            <Link to="/admin/messages">
+              <div
+                className={styles.icon}
+                style={{
+                  backgroundImage:
+                    "url('https://i.postimg.cc/Hx6ytFYm/product.png')",
+                }}
+              ></div>
+              <span>Mensajes</span>
+            </Link>
           </nav>
           </div>
 
