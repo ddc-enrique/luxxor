@@ -5,9 +5,47 @@ import { connect } from "react-redux";
 import CardProductCart from "./CardProductCart";
 import { Link } from "react-router-dom"
 import shopCartActions from "../redux/actions/shopCartActions"
-
+import productsActions from "../redux/actions/productsActions";
+ 
 const ModalCart = (props) =>{
+    const [products,setProducts]=useState([])
+    const[products2,setProducts2]=useState([])
+    const[loading,setLoading]=useState(true)
+    const[total,setTotal]=useState(0)
+    let aux
+    var aux_array=[]
+    console.log(total)
+    useEffect(()=>{
+        /* console.log(props.cartProduct) */
+        props.cartProduct.forEach(item=>{
+            props.product(item.productId)
+            .then((res)=>{
+                aux= {...res.data.response,quantity:item.quantity}
+              /*   products4=[...products,aux]
+                console.log(products4)
+                 setProducts(products4)  */
+                 /* aux_array=aux_array.push(aux)
+                 setProducts(aux_array) */
+                 setProducts2(products2.push(aux))
+                 setProducts(products2) 
+                 /* setLoading(!loading) */
+            })
+            .catch(e=>console.log(e))
+        }) 
+        setTimeout(()=>{
+            setLoading(!loading)  
+        },500)
+           
+    },[])
 
+   if(loading){
+        return(
+            <div className={styles.containerGeneral}>
+            <h1>LOADING</h1>
+            </div>
+            
+        )
+    } 
     return(
         <div className={styles.containerGeneral}>
             <div className={styles.containerCart}>
@@ -18,8 +56,16 @@ const ModalCart = (props) =>{
                     <h3>PRODUCTO</h3>
                     <h3>SUBTOTAL</h3>
                 </div>
-                    <CardProductCart sale={false}/>
-                    <CardProductCart sale={false}/>    
+                    {
+                        products.map(product=>{                          
+                            return(
+                                <>
+                                    <CardProductCart sale={false} product={product} deleteProduct={props.deleteProduct} setTotal={setTotal} total={total}/>
+                                {/* <h1>kjhkjhj</h1> */}
+                                </>
+                            )
+                        })
+                    }
                     <Link to="/productos">
                         <div className={styles.price}> <p>Agregar mas productos</p></div>
                     </Link>
@@ -36,17 +82,17 @@ const ModalCart = (props) =>{
                 <div className={styles.containerShip}>
                     <h3>Seleccione una forma de entrega:</h3>
                     <div>                   
-                        <input type="radio" id="pickIt" name="shipping" value={false} checked/>
-                        <label for="pickIt"> Retiro en Local</label>                   
+                        <input type="radio" id="pickIt" name="shipping" value={false} defaultChecked/>
+                        <label htmlFor="pickIt"> Retiro en Local</label>                   
                     </div>
                     <div>                
                         <input type="radio" id="ship" name="shipping" value={true} />
-                        <label for="ship"> Envio a domicilio</label>                 
+                        <label htmlFor="ship"> Envio a domicilio</label>                 
                     </div>
                 </div>
                 <div className={styles.containerTotal}>
                     <h3>TOTAL:</h3>
-                    <span>$</span>
+                    <span>${total}</span>
                 </div>
                 <Link to="/checkout">
                         <div className={styles.price}> <p>Finaliza Compra</p></div>
@@ -57,11 +103,13 @@ const ModalCart = (props) =>{
 }
 const mapStateToProps = (state) => {
     return {
-      cartProduct:state.shopCart.cartProduct
+    cartProduct:state.shopCart
     }
   }
   const mapDispatchToProps ={
-    addProduct:shopCartActions.addToCart,
-    deleteProduct:shopCartActions.deleteToCart
+   /*  addProduct:shopCartActions.addToCart, */
+    deleteProduct:shopCartActions.deleteToCart,
+    /* resetCart:shopCartActions.resetCart, */
+   product:productsActions.product  
   }
 export default connect(mapStateToProps,mapDispatchToProps)(ModalCart)

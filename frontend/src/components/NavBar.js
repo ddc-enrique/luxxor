@@ -18,10 +18,9 @@ const NavBar = (props) => {
     const history = useHistory()
 
     const clickHandler= ()=>{
-        setVisible(!visible)
-        alert("holi")
+        setVisible(!visible)  
     }
-    console.log(visible)
+
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
     }

@@ -25,6 +25,7 @@ const Product2 = (props) => {
                     devoluciones
                   </p>
                   <button onClick={()=>{
+                    console.log("hola")
                     props.addProduct(props.match.params.id)
                   }}
                   className={styles.cart}>AGREGAR AL CARRITO</button>
@@ -34,9 +35,17 @@ const Product2 = (props) => {
     return (
         <>
            <button onClick={()=>{
-              props.deleteProduct(props.match.params.id)
-            }}
-            className={styles.cart}> ELIMINAR </button>
+              props.deleteProduct(props.match.params.id,false)
+            }} className={styles.cart}> ELIMINAR </button>
+
+             <button onClick={()=>{
+              props.deleteProduct(props.match.params.id,true)
+            }}className={styles.cart}> ELIMINAR TODO </button>
+
+            <button onClick={()=>{
+              props.resetCart()
+            }}className={styles.cart}> ELIMINAR CARRITO </button>
+
            <NavBar/>
         <div className={styles.productsContainer}>
            <div className={styles.containerProduct}>
@@ -65,7 +74,7 @@ const Product2 = (props) => {
                   <p>1 Año de garantia oficial. 10 días para cambios y
                     devoluciones
                   </p>
-                  <button className={styles.cart}>AGREGAR AL CARRITO</button>
+                  <button  onClick={()=>{props.addProduct(props.match.params.id)}}className={styles.cart}>AGREGAR AL CARRITO</button>
 				  <button onClick={() => setModal(!modal)} className={styles.modalButton}>ESPECIFICACIONES</button>
            </div>
          
@@ -101,7 +110,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps ={
   addProduct:shopCartActions.addToCart,
-  deleteProduct:shopCartActions.deleteToCart
+  deleteProduct:shopCartActions.deleteToCart,
+  resetCart:shopCartActions.resetCart
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Product2)

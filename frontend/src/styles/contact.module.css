@@ -19,7 +19,7 @@ form.formContact {
     margin: 2rem;
 }
 
-form.formContact p {
+form.formContact p.headerContact {
     font-size: 1.3rem;
     padding: 1rem;
     width: 12rem;
@@ -54,6 +54,21 @@ form.formContact ::placeholder {
     font-size: 1.1rem;
     color: #e3e3e3;
 }
+
+form.formContact .eachInput .errorPlaceholder{
+    height: 1.1rem;
+    width: 100%;
+
+}
+
+form.formContact .eachInput .error{
+    display: block;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    padding: .2rem;
+    background-color: white;
+    color: red;
+    text-align: center;}
 
 form.formContact button {
     float: right;
