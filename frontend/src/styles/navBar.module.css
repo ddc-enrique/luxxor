@@ -165,6 +165,7 @@ p.cartLength {
         padding: 0;
     }
 
+    /* ///// */
 }
 
 @media screen and (min-width: 767px) and (max-width: 1024px) {
