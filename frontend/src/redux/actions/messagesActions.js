@@ -13,7 +13,7 @@ const messagesActions = {
         return async () => {
             let response = await axios.get("http://localhost:4000/api/admin/messages")
             if(!response.data.success) throw response.data.response
-            return response.data
+            return response.data.response
         }
     },
 }
