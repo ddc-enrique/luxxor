@@ -46,16 +46,21 @@
   transition-delay: 0s, 0s;
   box-shadow: inset 0 0 0 2.62857em gray !important;
   padding-left: .88rem;
+  /*15px*/
 }
 
 .inputsFilter .switchContainer .switch:before {
   display: inline-block;
   height: 1rem;
+  /*14px*/
   width: 1rem;
+  /*14px*/
   margin: 0.1rem;
+  /*3px*/
   margin-left: 0.18rem;
   background-color: #fff;
   border-radius: 2.1rem;
+  /*2.1em*/
   transition: all 0.1s ease 0.1s;
 }
 
@@ -67,6 +72,14 @@
 
 .inputsFilter .switchContainer .switch:before::after {
   transition: all 0.1s ease 0.05s;
+}
+
+
+
+.inputSelect {
+  display: flex;
+  justify-content: flex-end;
+
 }
 
 .selectInput {
@@ -93,17 +106,10 @@ div.container {
   display: block;
 }
 
-.pageContent {
-  display: grid;
-  grid-gap: 1rem;
-  padding: 1rem;
-  max-width: 1024px;
-  margin: 0 auto;
-}
-
 @media only screen and (min-width: 800px) {
   .container {
     display: flex;
+    /* border: 1px solid black; */
     justify-content: center;
     flex-wrap: wrap;
   }
@@ -112,6 +118,8 @@ div.container {
     display: flex;
     flex-direction: column;
     margin-top: 4.5rem;
+
+
   }
 
 
@@ -128,10 +136,6 @@ div.container {
 
   }
 
-  .inputsFilter2 {
-    display: none;
-  }
-
 
   .selectInput {
     border: 0.05rem solid #848484;
@@ -144,6 +148,23 @@ div.container {
     padding-right: 1rem;
   }
 
+}
+
+.pageContent {
+  display: grid;
+  grid-gap: 1rem;
+  padding: 1rem;
+  max-width: 1024px;
+  margin: 0 auto;
+}
+
+@media (min-width: 600px) {
+  .pageContent {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 800px) {
   .pageContent {
     grid-template-columns: repeat(4, 1fr);
   }
@@ -164,6 +185,12 @@ div.container {
   color: whitesmoke;
   /* background-color: whitesmoke; */
   box-shadow: 0 1px 1px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 10%), 0 4px 4px rgb(0 0 0 / 10%), 0 8px 8px rgb(0 0 0 / 10%), 0 16px 16px rgb(0 0 0 / 10%);
+}
+
+@media (min-width: 600px) {
+  .card {
+    height: 350px;
+  }
 }
 
 .card:before {
@@ -241,20 +268,9 @@ div.container {
 }
 
 .btn:focus {
+  outline: 1px dashed yellow;
   outline-offset: 3px;
 }
-
-
-@media (min-width: 600px) {
-  .pageContent {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .card {
-    height: 15rem;
-  }
-}
-
 
 @media (hover: hover) and (min-width: 600px) {
   .card:after {
@@ -304,101 +320,4 @@ div.container {
   .card:focus-within .content>*:not(.title) {
     transition-duration: 0s;
   }
-}
-
-@media screen and (max-width: 768px) {
-  .inputsFilter2 {
-    position: absolute;
-    z-index: 2;
-    background-color: #FFFFFF;
-  }
-
-  .inputSelect {
-    justify-content: center;
-  }
-
-  .inputSelect {
-    display: flex;
-    justify-content: flex-end;
-    margin-right: 1.5rem;
-  }
-
-  .inputFilterContain {
-    margin-left: 1rem;
-  }
-
-  .inputsFilter {
-    display: none;
-  }
-
-  .inputsFilter2 {
-    color: #545454;
-    border: 1px solid;
-    padding: 1rem;
-    margin-top: 1rem;
-  }
-
-  .inputsFilter2 .switchContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: .5rem 0;
-    width: 9rem;
-  }
-
-  .inputsFilter2 .switchContainer label {
-    width: auto !important;
-  }
-
-  .inputsFilter2 .switchContainer .switch {
-    position: relative;
-    appearance: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
-    width: 2.2rem !important;
-    height: 1.25rem;
-    border-radius: 2rem;
-    cursor: pointer;
-    background: #ccc;
-    transition: box-shadow 0.3s ease-in-out, padding 0.25s ease-in-out;
-    transition-delay: 0.1s, 0s;
-  }
-
-  .inputsFilter2 .switchContainer .switch:focus {
-    border: 0;
-    outline: 0;
-  }
-
-  .inputsFilter2 .switchContainer .switch:checked {
-    transition-delay: 0s, 0s;
-    box-shadow: inset 0 0 0 2.62857em gray !important;
-    padding-left: .88rem;
-    /*15px*/
-  }
-
-  .inputsFilter2 .switchContainer .switch:before {
-    display: inline-block;
-    height: 1rem;
-    /*14px*/
-    width: 1rem;
-    /*14px*/
-    margin: 0.1rem;
-    /*3px*/
-    margin-left: 0.18rem;
-    background-color: #fff;
-    border-radius: 2.1rem;
-    /*2.1em*/
-    transition: all 0.1s ease 0.1s;
-  }
-
-  .inputsFilter2 .switchContainer .switch:before,
-  .inputsFilter2 .switchContainer .switch:after {
-    content: "";
-    display: block;
-  }
-
-  .inputsFilter2 .switchContainer .switch:before::after {
-    transition: all 0.1s ease 0.05s;
-  }
-
 }

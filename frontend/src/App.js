@@ -17,8 +17,6 @@ import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
 import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
-import Category from "./components/Category"
-import Brand from "./components/Brand"
 import AdminMessages from "./pages/AdminMessages"
 
 const App = (props) => {
@@ -46,8 +44,7 @@ const App = (props) => {
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
-        <Route path="/checkout" component={Sale}/>
-        
+        <Route path="/checkout" component={Sale}/>        
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}

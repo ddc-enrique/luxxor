@@ -92,7 +92,7 @@ const CheckOutProducts = (props) =>{
 
 const mapStateToProps = (state) => {
     return {
-        cartProduct:state.shopCart
+        cartProduct:state.shopCart.shopCart
     }
 }
 const mapDispatchToProps ={
