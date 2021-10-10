@@ -106,8 +106,8 @@ span.violet {
 }
 
 .containerAdmin .containerMessages .tableBodyMessages .modalTextMessage .closeModalText {
-  width: 2rem;
-  height: 2rem;
+  width: 2rem !important;
+  height: 2rem !important;
   cursor: pointer;
   /* align-self: flex-end; */
   /* margin: 0.5rem 0; */

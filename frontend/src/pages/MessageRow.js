@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { PlusLg, XCircleFill } from 'react-bootstrap-icons'
 import Moment from 'react-moment'
 
 
@@ -19,14 +20,14 @@ const MessageRow = ({ message, deleteMessage, styles}) => {
                 {message.email}
             </td>
             <td
-                onClick={ () => {console.log(message.textMessage); setModal(true)}}
+                onClick={ () => setModal(true)}
                 className={styles.viewTextMessage}
             >
                 {/* <img
                     src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"
                     // className={styles.closeModalText}
                 /> */}
-                +
+                <PlusLg />
             </td>
             <td
                 onClick={()=> deleteMessage(message._id)}
@@ -36,14 +37,17 @@ const MessageRow = ({ message, deleteMessage, styles}) => {
             </td>
         { modal && 
             <div
-                className={styles.modalTextMessage}
-                onClick={() => setModal(false)}
+                className={styles.modalTextMessage}                
             >
                 <div>
                     <h4>Mensaje de {message.authorName}</h4>
-                    <img
+                    {/* <img
                         src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"
                         className={styles.closeModalText}
+                    /> */}
+                    <XCircleFill 
+                        className={styles.closeModalText}
+                        onClick={() => setModal(false)}
                     />
                 </div>
                 <p>Texto del Mensaje:</p>

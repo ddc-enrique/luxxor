@@ -6,6 +6,7 @@ import { NavAdmin } from "../components/NavAdmin";
 import messagesActions from "../redux/actions/messagesActions";
 import toast, { Toaster } from "react-hot-toast";
 import MessageRow from "./MessageRow";
+import { ArrowDown } from "react-bootstrap-icons";
 
 
 const AdminMessages = (props) => {
@@ -41,6 +42,10 @@ const AdminMessages = (props) => {
         }
     }
 
+    const sortBy = (e) => {
+        
+    }
+
     return (
         <div className={styles.divContainer}>
             <Toaster />
@@ -63,13 +68,20 @@ const AdminMessages = (props) => {
                             className={styles.headerTableMessages}
                         >
                             <tr>
-                                <th>
+                                <th
+                                    onClick={sortBy}
+                                >
                                     Dia
+                                    <ArrowDown />
                                 </th>
-                                <th>
+                                <th
+                                    onClick={sortBy}
+                                >
                                     Nombre
                                 </th>
-                                <th>
+                                <th
+                                    onClick={sortBy}
+                                >
                                     Email
                                 </th>
                                 <th>
