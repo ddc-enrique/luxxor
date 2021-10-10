@@ -1,16 +1,18 @@
 import axios from "axios"
 
 const shopCartAction={
-    addToCart:(id)=>{
+    addToCart:(id,price)=>{
+        console.log("entre")
+        console.log(price)
         return(dispatch)=>{
-            dispatch({type:'ADD', payload:id})
+            dispatch({type:'ADD', payload:{id,price}})
         }
     },
-    deleteToCart:(id,deleteAll)=>{
+    deleteToCart:(id,deleteAll,price,quantity)=>{
         return(dispatch)=>{
           deleteAll  
-            ? dispatch({type:'DELETE_ALL_QUANTITY', payload:id})
-            :dispatch({type:'DELETE', payload:id})            
+            ? dispatch({type:'DELETE_ALL_QUANTITY', payload:{id,price,quantity}})
+            :dispatch({type:'DELETE',payload:{id,price}})            
         }
     },
     resetCart:()=>{

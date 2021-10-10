@@ -27,7 +27,12 @@ const Products = (props) => {
         }                
       }
     }
-    getAllProducts()
+    if(props.products.length===0){
+      getAllProducts()
+    }else{
+      setProducts(props.products)
+    }
+    
     setLoading(false)
   },[])
 
@@ -160,6 +165,7 @@ const mapStateToProps = (state) => {
   return{
     brands: state.products,
     categories: state.products,
+    products:state.products.products
   }
 }
 
