@@ -4,6 +4,8 @@ import SignUp from "./pages/SignUp"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
+import Category from "./components/Category"
+import Brand from "./components/Brand"
 import Admin from "./pages/Admin"
 import { useEffect } from "react"
 import usersAction from "./redux/actions/usersAction"
@@ -15,8 +17,6 @@ import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
 import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
-import Category from "./components/Category"
-import Brand from "./components/Brand"
 import AdminMessages from "./pages/AdminMessages"
 
 const App = (props) => {
@@ -38,9 +38,9 @@ const App = (props) => {
         <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route exact path="/admin/messages" component={AdminMessages} />
+        <Route path="/admin/categorias" component={Category} />
+        <Route path="/admin/marcas" component={Brand} />
         <Route path="/admin" component={Admin} />
-        <Route path="/categorias" component={Category} />
-        <Route path="/marcas" component={Brand} />
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>

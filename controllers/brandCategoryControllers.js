@@ -32,6 +32,7 @@ const brandCategoryControllers={
     },
 
     editValueField:async (req,res)=>{
+        console.log(req.body)
         console.log("Received EDIT BRAND/CATEGORY Petition:" + Date())
         const flagBrand = req.url.includes('brand')
         const name= req.body.name

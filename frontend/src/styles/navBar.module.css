@@ -1,11 +1,10 @@
 header.headerContainer {
-    width: 100%;
-    padding: 1rem 0rem;
+    padding: 1rem 1rem;
     display: flex;
 }
 
 .navIntermedio {
-    width: 70rem;
+    width: 81rem;
     display: flex;
     justify-content: center;
 }
@@ -19,9 +18,7 @@ nav a {
 }
 
 nav a:hover {
-    border-bottom: 1px solid grey;
-    color: gray;
-    /* border-width: 1; */
+    color: #ffffff;
 }
 
 nav.navContainerMobile {
@@ -39,8 +36,9 @@ div.icon {
 
 div.dropDown {
     position: absolute;
-    right: 24rem;
+    /* right: -130rem; */
     top: 1rem;
+    right: 10rem;
     width: 15rem;
     height: 3rem;
     display: flex;
@@ -60,7 +58,14 @@ div.dropDown a {
 .navWeb {
     display: flex;
     justify-content: space-between;
-    width: 97vw;
+    width: 96vw;
+}
+
+p.cartLength {
+    text-align: center;
+    pad: 0 -0.5rem;
+    border-radius: 50px;
+    background-color: green;
 }
 
 @media screen and (min-width: 375px) and (max-width: 767px) {
@@ -85,10 +90,13 @@ div.dropDown a {
 
     nav.navContainerMobile {
         display: flex;
-        min-height: 15rem;
+        min-height: 10rem;
+        width: 10rem;
         flex-direction: column;
         align-items: flex-end;
         position: absolute;
+        background: #6d6a6a8a;
+        backdrop-filter: blur(1.5px);
         z-index: 1;
         right: 0.2rem;
         top: 4rem
@@ -99,7 +107,8 @@ div.dropDown a {
         align-items: center;
     }
 
-    div.icon {
+    div.icon,
+    div.dropDown div.icon {
         height: 2rem;
         width: 2rem;
         background-position: center;
@@ -146,11 +155,17 @@ div.dropDown a {
 
     div.dropDown {
         position: absolute;
-        right: 2.5rem;
+        right: 1rem;
         top: 9rem;
-        width: 11rem;
-        height: 3rem;
+        /* width: 11rem; */
+        flex-direction: row-reverse;
     }
+
+    div.dropDown a {
+        padding: 0;
+    }
+
+    /* ///// */
 }
 
 @media screen and (min-width: 767px) and (max-width: 1024px) {

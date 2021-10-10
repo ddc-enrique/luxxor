@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast"
 
 const CardProductCart = (props) =>{
    const {product}=props
+   console.log(product)
     const[counter,setCounter]=useState(product.quantity)
     console.log(product.price)
     /* setTotal(total+subTotalProduct) */

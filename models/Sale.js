@@ -5,7 +5,7 @@ const SaleSchema = new mongoose.Schema({
     user: { type: mongoose.Types.ObjectId, ref: "user" },
     shopCart: [{
         quantity: {type: Number },
-        product: { type: mongoose.Types.ObjectId, ref: "product" },
+        productId: { type: mongoose.Types.ObjectId, ref: "product" },
     }],
     amount: { type: Number },
     methodPayment: { type: String }, // Efectivo, Paypal, "stripe"

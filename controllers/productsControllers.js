@@ -2,6 +2,8 @@ const Product = require('../models/Product')
 const Category = require('../models/Category')
 const Brand = require('../models/Brand')
 const path = require("path")
+const Stripe = require("stripe")
+const stripe = new Stripe(process.env.KEY_STRIPE)
 
 const productsControllers = {
 
@@ -81,6 +83,23 @@ const productsControllers = {
         })
         .catch(error=> res.json({success: false, reponse:error.message}))
     },
+    productOnCart:async(req, res)=>{
+           console.log(req.body)
+        try {
+            let response = await stripe.paymentIntents.create({
+                amount: req.body.amount,
+                currency: "USD",
+                description: "Compré",
+                payment_method: req.body.id,
+                confirm: true
+            })
+         res.json({success: true, response})
+        }catch(e){
+            console.log(e)
+            res.json({message: e})
+        }
+           
+    }
 
 }
 

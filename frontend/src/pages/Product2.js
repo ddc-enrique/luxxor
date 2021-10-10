@@ -69,7 +69,7 @@ const Product2 = (props) => {
                     devoluciones
                   </p>
                   <button onClick={()=>{
-                    console.log("hola")
+                    
                     props.addProduct(props.match.params.id)
                   }}
                   className={styles.cart}>AGREGAR AL CARRITO</button>
