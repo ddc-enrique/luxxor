@@ -18,11 +18,9 @@ const NavBar = (props) => {
     const history = useHistory()
 
     const clickHandler= ()=>{
-        setVisible(!visible)
-        console.log("hola")
-        
+        setVisible(!visible)  
     }
-    console.log(visible)
+
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
         // setVisible(false)
@@ -79,7 +77,7 @@ const NavBar = (props) => {
                                 <span>Contacto</span>
                             </Link>
                         }
-                            <a onClick={()=> {console.log("hola") ; setVisible(!visible)}}>
+                            <a onClick={()=> {setVisible(!visible)}}>
                                 <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
                             </a>
                             <a>
