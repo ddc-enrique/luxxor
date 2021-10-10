@@ -1,12 +1,18 @@
-.inputFilterContain {
-  /* border: 1px solid black; */
-  padding: 1rem;
+.inputFilterContain h2,
+.inputSelect h2 {
+  color: #e3e3e3;
+  font-size: 1rem;
+}
+
+.inputsFilter2 {
+  display: none;
 }
 
 .inputsFilter {
-  /* border: 1px solid black; */
-  background-color: rgb(69 170 203);
+  color: #e3e3e3;
+  border: 1px solid;
   padding: 1rem;
+  margin-top: 0.5rem;
 }
 
 .inputsFilter .switchContainer {
@@ -19,7 +25,6 @@
 
 .inputsFilter .switchContainer label {
   width: auto !important;
-  /* margin-right: 1rem; */
 }
 
 .inputsFilter .switchContainer .switch {
@@ -28,11 +33,8 @@
   -moz-appearance: none;
   -webkit-appearance: none;
   width: 2.2rem !important;
-  /*35px*/
   height: 1.25rem;
-  /*20px*/
   border-radius: 2rem;
-  /**/
   cursor: pointer;
   background: #ccc;
   transition: box-shadow 0.3s ease-in-out, padding 0.25s ease-in-out;
@@ -76,20 +78,6 @@
   transition: all 0.1s ease 0.05s;
 }
 
-.productsSection {
-  border: 1px solid black;
-  /* display: flex;
-      flex-direction: column; */
-  /* padding: 1rem; */
-
-}
-
-.inputSelect {
-  display: flex;
-  justify-content: flex-end;
-
-}
-
 .selectInput {
   border: none;
   height: 3rem;
@@ -100,7 +88,7 @@
 div.container {
   width: 100%;
   display: flex;
-  background-color: sandybrown;
+  padding: 3rem 0;
 }
 
 .containerProducts .emptyProducts {
@@ -125,23 +113,9 @@ div.container {
   .inputFilterContain {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     margin-top: 4.5rem;
-    margin: 5.88rem 2rem;
-    width: 20rem;
   }
 
-  .inputsFilter {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-around;
-    margin: 1rem 0rem;
-    height: 23rem;
-    background-color: rgb(69 170 203);
-    color: #efefef;
-  }
 
   .productsSection {
     display: flex;
@@ -150,12 +124,10 @@ div.container {
   }
 
   .inputSelect {
-    margin: 3rem 0rem;
     display: flex;
     justify-content: flex-end;
-    margin: 1.2rem;
-    /* border: 1px solid; */
-    width: 64.5rem;
+    margin-right: 3rem;
+
   }
 
 
@@ -200,9 +172,13 @@ div.container {
   padding: 1rem;
   width: 80%;
   text-align: center;
+  background-size: 103% 38%;
+  background-position: center;
+  background-image: url('https://i.postimg.cc/Kz4h0KXr/produ.png');
+  background-repeat: no-repeat;
   color: whitesmoke;
-  background-color: whitesmoke;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1), 0 2px 2px rgba(0, 0, 0, 0.1), 0 4px 4px rgba(0, 0, 0, 0.1), 0 8px 8px rgba(0, 0, 0, 0.1), 0 16px 16px rgba(0, 0, 0, 0.1);
+  /* background-color: whitesmoke; */
+  box-shadow: 0 1px 1px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 10%), 0 4px 4px rgb(0 0 0 / 10%), 0 8px 8px rgb(0 0 0 / 10%), 0 16px 16px rgb(0 0 0 / 10%);
 }
 
 @media (min-width: 600px) {
@@ -270,7 +246,7 @@ div.container {
 
 .btn {
   cursor: pointer;
-  margin-top: 1.5rem;
+  margin-top: 15.5rem;
   padding: 0.75rem 1.5rem;
   font-size: 0.65rem;
   font-weight: bold;
@@ -338,4 +314,105 @@ div.container {
   .card:focus-within .content>*:not(.title) {
     transition-duration: 0s;
   }
+}
+
+@media screen and (max-width: 768px) {
+  .inputsFilter2 {
+    position: absolute;
+    z-index: 2;
+    background-color: blue;
+  }
+
+  .inputSelect {
+    justify-content: center;
+  }
+
+  .inputSelect {
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 1.5rem;
+  }
+
+  .inputFilterContain {
+    margin-left: 1rem;
+  }
+
+  .inputsFilter {
+    display: none;
+  }
+
+  .inputsFilter2 {
+    display: none;
+  }
+
+  .inputsFilter2 {
+    color: #e3e3e3;
+    border: 1px solid;
+    padding: 1rem;
+    margin-top: 0.5rem;
+  }
+
+  .inputsFilter2 .switchContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: .5rem 0;
+    width: 9rem;
+  }
+
+  .inputsFilter2 .switchContainer label {
+    width: auto !important;
+  }
+
+  .inputsFilter2 .switchContainer .switch {
+    position: relative;
+    appearance: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    width: 2.2rem !important;
+    height: 1.25rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    background: #ccc;
+    transition: box-shadow 0.3s ease-in-out, padding 0.25s ease-in-out;
+    transition-delay: 0.1s, 0s;
+  }
+
+  .inputsFilter2 .switchContainer .switch:focus {
+    border: 0;
+    outline: 0;
+  }
+
+  .inputsFilter2 .switchContainer .switch:checked {
+    transition-delay: 0s, 0s;
+    box-shadow: inset 0 0 0 2.62857em gray !important;
+    padding-left: .88rem;
+    /*15px*/
+  }
+
+  .inputsFilter2 .switchContainer .switch:before {
+    display: inline-block;
+    height: 1rem;
+    /*14px*/
+    width: 1rem;
+    /*14px*/
+    margin: 0.1rem;
+    /*3px*/
+    margin-left: 0.18rem;
+    background-color: #fff;
+    border-radius: 2.1rem;
+    /*2.1em*/
+    transition: all 0.1s ease 0.1s;
+  }
+
+  .inputsFilter2 .switchContainer .switch:before,
+  .inputsFilter2 .switchContainer .switch:after {
+    content: "";
+    display: block;
+  }
+
+  .inputsFilter2 .switchContainer .switch:before::after {
+    transition: all 0.1s ease 0.05s;
+  }
+
 }

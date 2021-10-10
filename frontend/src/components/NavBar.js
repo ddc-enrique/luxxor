@@ -19,13 +19,11 @@ const NavBar = (props) => {
 
     const clickHandler= ()=>{
         setVisible(!visible)
-        console.log("hola")
-        
+        alert("holi")
     }
     console.log(visible)
     const clickHandlerMenu= ()=>{
         setVisibleMenu(!visibleMenu)
-        // setVisible(false)
     }
     const clickCart =()=>{
         setModalCart(!modalCart)
@@ -79,7 +77,7 @@ const NavBar = (props) => {
                                 <span>Contacto</span>
                             </Link>
                         }
-                            <a onClick={()=> {console.log("hola") ; setVisible(!visible)}}>
+                            <a onClick={clickHandler}>
                                 <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
                             </a>
                             <a>

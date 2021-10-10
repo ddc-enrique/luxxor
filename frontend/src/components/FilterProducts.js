@@ -55,71 +55,135 @@ const FilterProducts = (props) => {
         })
         props.setFilteredProducts(fp)
     },[activeBrand, activeCategory])
+    const[visible, setVisible] = useState(false)
+        const clickHandlerFilter = () =>{
+            setVisible(!visible)
+        }
 
     return (
         <div className={styles.inputFilterContain}>
             <Toaster />
-            <h2>Filtrar por:</h2>
-            <div className={styles.inputsFilter}>
-                    <h3>Marca</h3>
-                    <div
-                        className={styles.switchContainer}
-                    >
-                        <label htmlFor="allBrands">Todas</label>
-                        <input 
-                            type="radio"
-                            name="brand"
-                            id="allBrands"
-                            className={styles.switch}
-                            onChange={ () => setActiveBrand("allBrands")}
-                            defaultChecked
-                        />
-                    </div>
-                    {brands.map( brand => (
+            <h2 onClick={clickHandlerFilter}>Filtrar:</h2>
+                <div className={styles.inputsFilter}>
+                        <h3>Marca</h3>
                         <div
                             className={styles.switchContainer}
-                            key={brand._id}
                         >
-                            <label htmlFor={brand._id}>{brand.name}</label>
+                            <label htmlFor="allBrands">Todas</label>
                             <input 
                                 type="radio"
                                 name="brand"
-                                id={brand._id}
+                                id="allBrands"
                                 className={styles.switch}
-                                onChange={ () => setActiveBrand(brand._id)}
+                                onChange={ () => setActiveBrand("allBrands")}
+                                defaultChecked
                             />
                         </div>
-                    ))}
-                <h3>Categoria</h3>
-                    <div
-                        className={styles.switchContainer}
-                    >
-                        <label htmlFor="allCategories">Todas</label>
-                        <input 
-                            type="radio"
-                            name="category"
-                            id="allCategories"
-                            className={styles.switch}
-                            onChange={ () => setActiveCategory("allCategories")}
-                            defaultChecked
-                        />
-                    </div>
-                    {categories.map( category => (
+                        {brands.map( brand => (
+                            <div
+                                className={styles.switchContainer}
+                                key={brand._id}
+                            >
+                                <label htmlFor={brand._id}>{brand.name}</label>
+                                <input 
+                                    type="radio"
+                                    name="brand"
+                                    id={brand._id}
+                                    className={styles.switch}
+                                    onChange={ () => setActiveBrand(brand._id)}
+                                />
+                            </div>
+                        ))}
+                    <h3>Categoria</h3>
                         <div
                             className={styles.switchContainer}
-                            key={category._id}
                         >
-                            <label htmlFor={category._id}>{category.name}</label>
+                            <label htmlFor="allCategories">Todas</label>
                             <input 
                                 type="radio"
                                 name="category"
-                                id={category._id}
+                                id="allCategories"
                                 className={styles.switch}
-                                onChange={ () => setActiveCategory(category._id)}
+                                onChange={ () => setActiveCategory("allCategories")}
+                                defaultChecked
                             />
                         </div>
-                    ))}
-            </div>
+                        {categories.map( category => (
+                            <div
+                                className={styles.switchContainer}
+                                key={category._id}
+                            >
+                                <label htmlFor={category._id}>{category.name}</label>
+                                <input 
+                                    type="radio"
+                                    name="category"
+                                    id={category._id}
+                                    className={styles.switch}
+                                    onChange={ () => setActiveCategory(category._id)}
+                                />
+                            </div>
+                        ))}
+                    </div>
+{ visible &&<div className={styles.inputsFilter2}>
+                        <h3>Marca</h3>
+                        <div
+                            className={styles.switchContainer}
+                        >
+                            <label htmlFor="allBrands">Todas</label>
+                            <input 
+                                type="radio"
+                                name="brand"
+                                id="allBrands"
+                                className={styles.switch}
+                                onChange={ () => setActiveBrand("allBrands")}
+                                defaultChecked
+                            />
+                        </div>
+                        {brands.map( brand => (
+                            <div
+                                className={styles.switchContainer}
+                                key={brand._id}
+                            >
+                                <label htmlFor={brand._id}>{brand.name}</label>
+                                <input 
+                                    type="radio"
+                                    name="brand"
+                                    id={brand._id}
+                                    className={styles.switch}
+                                    onChange={ () => setActiveBrand(brand._id)}
+                                />
+                            </div>
+                        ))}
+                    <h3>Categoria</h3>
+                        <div
+                            className={styles.switchContainer}
+                        >
+                            <label htmlFor="allCategories">Todas</label>
+                            <input 
+                                type="radio"
+                                name="category"
+                                id="allCategories"
+                                className={styles.switch}
+                                onChange={ () => setActiveCategory("allCategories")}
+                                defaultChecked
+                            />
+                        </div>
+                        {categories.map( category => (
+                            <div
+                                className={styles.switchContainer}
+                                key={category._id}
+                            >
+                                <label htmlFor={category._id}>{category.name}</label>
+                                <input 
+                                    type="radio"
+                                    name="category"
+                                    id={category._id}
+                                    className={styles.switch}
+                                    onChange={ () => setActiveCategory(category._id)}
+                                />
+                            </div>
+                        ))}
+                    </div>}
         </div>
     )
 
@@ -132,9 +196,8 @@ const mapDispatchToProps = {
 
 const mapStateToProps = (state) => {
     return{
-      brands: state.products.brands,
-      categories: state.products.categories,
+    brands: state.products.brands,
+    categories: state.products.categories,
     }
 }
-  
 export default connect(mapStateToProps, mapDispatchToProps)(FilterProducts)
