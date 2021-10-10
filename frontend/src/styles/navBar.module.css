@@ -1,11 +1,10 @@
-nav.navContainer {
+header.headerContainer {
+    padding: 1rem 1rem;
     display: flex;
-    justify-content: space-between;
-    height: 4rem;
 }
 
 .navIntermedio {
-    width: 70rem;
+    width: 81rem;
     display: flex;
     justify-content: center;
 }
@@ -19,9 +18,7 @@ nav a {
 }
 
 nav a:hover {
-    border-bottom: 1px solid grey;
-    color: gray;
-    border-width: 1;
+    color: #ffffff;
 }
 
 nav.navContainerMobile {
@@ -39,27 +36,36 @@ div.icon {
 
 div.dropDown {
     position: absolute;
-    right: 17rem;
-    top: 5.5rem;
-    width: 7rem;
-    height: 5rem;
-    background-color: #E3E5E6;
-    border-top-left-radius: 1.5rem;
-    border-bottom-left-radius: 1.5rem;
-    border-bottom-right-radius: 1.5rem;
-    padding: 1rem;
-    box-shadow: 1px 1px 5px #75747461;
-    z-index: 1;
+    /* right: -130rem; */
+    top: 1rem;
+    right: 10rem;
+    width: 15rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    color: #e3e3e3;
 }
 
-div.dropDown p {
+
+div.dropDown a {
+    text-transform: uppercase;
+    color: #e9e9e9c2;
+    font-size: .9rem
+}
+
+
+.navWeb {
+    display: flex;
+    justify-content: space-between;
+    width: 96vw;
+}
+
+p.cartLength {
     text-align: center;
-    margin-bottom: 1rem;
-}
-
-
-nav.navContainer a:hover {
-    color: #F99D22;
+    pad: 0 -0.5rem;
+    border-radius: 50px;
+    background-color: green;
 }
 
 @media screen and (min-width: 375px) and (max-width: 767px) {
@@ -72,30 +78,69 @@ nav.navContainer a:hover {
         margin-left: 1rem;
     }
 
-    nav.navContainer {
+    .navContainerMobile {
+        height: 20rem;
+        width: 20rem;
+    }
+
+    .navIntermedio,
+    nav.navWeb {
         display: none;
     }
 
     nav.navContainerMobile {
         display: flex;
-        height: 10rem;
+        min-height: 10rem;
+        width: 10rem;
         flex-direction: column;
-        justify-content: space-between;
-        background-color: #E3E5E6;
-        border-top-left-radius: 1.5rem;
-        border-bottom-left-radius: 1.5rem;
-        border-bottom-right-radius: 1.5rem;
-        padding: 1rem;
-        box-shadow: 1px 1px 5px #75747461;
+        align-items: flex-end;
         position: absolute;
+        background: #6d6a6a8a;
+        backdrop-filter: blur(1.5px);
         z-index: 1;
         right: 0.2rem;
         top: 4rem
     }
 
-    div.icon {
-        width: 1.5rem;
-        height: 1.5rem;
+    div.item {
+        display: flex;
+        align-items: center;
+    }
+
+    div.icon,
+    div.dropDown div.icon {
+        height: 2rem;
+        width: 2rem;
+        background-position: center;
+        background-size: 1.3rem;
+        background-color: #f3f3f3dc;
+        border-radius: 50rem;
+        background-repeat: no-repeat;
+    }
+
+    .navContainerMobile a {
+        width: 11rem;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+    }
+
+    .navContainerMobile a span {
+        position: absolute;
+        padding: 1rem 3rem;
+        font-size: 0.7rem;
+    }
+
+    div.dropDown p {
+        font-size: 0.7rem;
+    }
+
+    .navContainerMobile a {
+        padding: 0.3rem;
+    }
+
+    .navContainerMobile a span:hover {
+        opacity: 1;
     }
 
     div.menu {
@@ -104,10 +149,27 @@ nav.navContainer a:hover {
         background-position: center;
         background-size: cover;
         cursor: pointer;
+        position: absolute;
+        right: 0.3rem;
     }
 
     div.dropDown {
-        right: 10.5rem;
-        top: 11rem;
+        position: absolute;
+        right: 1rem;
+        top: 9rem;
+        /* width: 11rem; */
+        flex-direction: row-reverse;
+    }
+
+    div.dropDown a {
+        padding: 0;
+    }
+
+    /* ///// */
+}
+
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+    .navIntermedio {
+        width: 40rem;
     }
 }

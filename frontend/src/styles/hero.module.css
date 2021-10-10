@@ -1,4 +1,12 @@
-.containerHero {
+div.divContainer {
+    width: 100%;
+    min-height: 40rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.containerHero {
     height: 41rem;
     display: flex;
     justify-content: center;
@@ -22,51 +30,23 @@
     width: 17rem;
     position: absolute;
     left: 20rem;
-    bottom: 7rem;
-    /* background-color: #00000061; */
+    bottom: 6rem;
     border-radius: .5rem;
     padding: 1rem;
 }
 
-@media screen and (min-width: 375px) and (max-width: 767px) {
-    div.heroContainer {
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
+@media screen and (min-width: 375px) and (max-width: 768px) {
+    div.details {
+        display: none;
     }
 
-    div.heroContainer>* {
-        width: 90%;
-        height: 18rem
+    .containerHero .photoPrincipal {
+        height: 20rem;
+        width: 20rem;
     }
 
-    div.subtitleHero h2 {
-        font-size: 1.2rem;
-    }
-
-    div.subtitleHero {
-        height: 8rem;
-        align-items: center;
-    }
-
-    div.containerProducts {
-        background-position: 30%;
-    }
-
-    button.buttonHero {
-        padding: 0.5rem 1.5rem;
-        font-size: 1rem;
-    }
-}
-
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    div.heroContainer>* {
-        width: 45%;
-        height: 27rem;
-    }
-
-    div.subtitleHero h2 {
-        font-size: 2.5rem;
-        text-align: end
+    .containerHero h1 {
+        font-size: 6rem;
+        text-align: center;
     }
 }

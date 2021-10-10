@@ -4,6 +4,8 @@ import SignUp from "./pages/SignUp"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
 import Product from "./components/Product"
 import Products from "./pages/Products"
+import Category from "./components/Category"
+import Brand from "./components/Brand"
 import Admin from "./pages/Admin"
 import { useEffect } from "react"
 import usersAction from "./redux/actions/usersAction"
@@ -13,8 +15,9 @@ import { connect } from "react-redux"
 import Password from "./pages/Password";
 import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
-import { Home2 } from "./pages/Home2"
-import { Product2 } from "./pages/Product2"
+import Product2  from "./pages/Product2"
+import Sale from "./pages/Sale";
+import AdminMessages from "./pages/AdminMessages"
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
@@ -32,13 +35,16 @@ const App = (props) => {
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
         <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
         <Route path="/registro" component={SignUp} />
-        <Route path="/producto" component={Product2} /> 
+        <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
+        <Route exact path="/admin/messages" component={AdminMessages} />
+        <Route path="/admin/categorias" component={Category} />
+        <Route path="/admin/marcas" component={Brand} />
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
-        <Route path="/home" component={Home2} />
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
+        <Route path="/checkout" component={Sale}/>        
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}

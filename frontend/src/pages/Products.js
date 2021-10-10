@@ -1,271 +1,154 @@
-import React, { useState } from "react"
-import Product from "../components/Product"
+import React, { useEffect, useState } from "react"
 import Navbar from "../components/NavBar"
 import Footer from "../components/Footer"
 // import styles from "../styles/productList.module.css"
 import styles from "../styles/productList2.module.css"
-import Switch from "react-switch"
 import { Link } from "react-router-dom"
+import { connect } from "react-redux"
+import FilterProducts from "../components/FilterProducts"
+import productsActions from "../redux/actions/productsActions"
+import toast, { Toaster } from "react-hot-toast"
 
-const Products = () => {
-  const [checked, setChecked] = useState(false)
-  const data = [
-    {
-      name: "Notebook",
-      price: 12000,
-      color: "Grey",
-      photos: [
-        {
-          image: "https://i.postimg.cc/sg5jwZQH/Nombre-5.png",
-        },
-        {
-          image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png",
-        },
-        { image: "https://i.postimg.cc/JzBwmcnx/Nombre-9.png" },
-      ],
-      description:
-        "Fragmento de un escrito con unidad temática, que queda diferenciado del resto de fragmentos por un punto.",
-      discount: 20,
-      category: "Informática",
-      brand: "Nova",
-    },
-  ]
+const Products = (props) => {
+  const [products, setProducts] = useState([])
+  const [filteredProducts, setFilteredProducts] = useState([])
+  const [updateOnSort, setUpdateOnSort] = useState(true)
+  const [loading, setLoading] = useState(true)
+  useEffect(()=> {
+    const getAllProducts = async() =>{
+      if(!products.length) {
+        try {
+          let response = await props.getProducts()
+          if(!Array.isArray(response)) throw new Error(response.response)         
+          setProducts(response)
+          setFilteredProducts(response)
+        } catch (error) {
+          toast.error(error)
+        }                
+      }
+    }
+    if(props.products.length===0){
+      getAllProducts()
+    }else{
+      setProducts(props.products)
+    }
+    
+    setLoading(false)
+  },[])
 
-  const handleChange = (checked) => {
-    setChecked(checked)
+  const sortProducts = (e) => {
+    console.log(e.target.value)
+    switch (e.target.value) {
+      case "lowerPrice":
+        setFilteredProducts(
+          filteredProducts.sort((productA, productB) => productA.price - productB.price)
+        )
+        break;
+
+      case "higherPrice":
+        setFilteredProducts(
+          filteredProducts.sort((productA, productB) => productB.price - productA.price)
+        )
+        break;
+      
+      case "A-Z":
+        setFilteredProducts(
+          filteredProducts.sort((productA, productB) => {
+            if (productA.name > productB.name) {
+              return 1;
+            }
+            if (productA.name < productB.name) {
+              return -1;
+            }
+            return 0;
+          })
+        )
+        break;
+
+      case "Z-A":
+        setFilteredProducts(
+          filteredProducts.sort((productA, productB) => {
+            if (productA.name < productB.name) {
+              return 1;
+            }
+            if (productA.name > productB.name) {
+              return -1;
+            }
+            return 0;
+          })
+        )
+        break;
+
+      case "mostRelevants":
+        setFilteredProducts(
+          filteredProducts.sort((productA, productB) => {
+            if (productA._id > productB._id) {
+              return 1;
+            }
+            if (productA._id < productB._id) {
+              return -1;
+            }
+            return 0;
+          })
+        )
+        break;
+
+      default:
+        break;
+    }
+    setUpdateOnSort(!updateOnSort)
+  }
+
+  if(loading){
+    return <div> Cargando...</div>
   }
 
   return (
     <>
+      <Toaster />
       <Navbar />
       <div className={styles.container}>
-        <div className={styles.inputFilterContain}>
-          <h2>Filtrar por:</h2>
-          <div className={styles.inputsFilter}>
-            <h3>Marca</h3>
-            <div className={styles.switch}>
-              <label>
-                <span>Option 1</span>
-                <Switch
-                  onChange={handleChange}
-                  checked={checked}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onColor={'#f48f31'}
-                />
-              </label>
-            </div>
-            <div className={styles.switch}>
-              <label>
-                <span>Option 1</span>
-                <Switch
-                  onChange={handleChange}
-                  checked={checked}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onColor={'#f48f31'}
-                />
-              </label>
-            </div>
-            <div className={styles.switch}>
-              <label>
-                <span>Option 1</span>
-                <Switch
-                  onChange={handleChange}
-                  checked={checked}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onColor={'#f48f31'}
-                />
-              </label>
-            </div>
-
-            {/* <input
-              type="text"
-              // className={styles.inputTypes}
-              placeholder="Marca"
-              name="marca"
-            /> */}
-            <h3>Categoria</h3>
-            <div className={styles.switch}>
-              <label>
-                <span>Option 1</span>
-                <Switch
-                  onChange={handleChange}
-                  checked={checked}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onColor={'#f48f31'}
-                />
-              </label>
-            </div>
-            <div className={styles.switch}>
-              <label>
-                <span>Option 1</span>
-                <Switch
-                  onChange={handleChange}
-                  checked={checked}
-                  uncheckedIcon={false}
-                  checkedIcon={false}
-                  onColor={'#f48f31'}
-                />
-              </label>
-            </div>
-          </div>
-        </div>
+        <FilterProducts 
+          setFilteredProducts={setFilteredProducts}
+          products={products}
+        />
         <div className={styles.productsSection}>
           <div className={styles.inputSelect}>
             <div>
             <h2>Ordenar por:</h2>
             <select
               name="precio"
-              // value={}
+              onChange={sortProducts}
               className={styles.selectInput}
               placeholder="precio"
             >
-              <option value="volvo"  default>Selecciona</option>
-              <option value="volvo">Mayor precio</option>
-              <option value="saab">Menor precio</option>
-              <option value="mercedes">A-Z</option>
-              <option value="audi">Z-A</option>
+              <option value="mostRelevants" default>Más Relevantes</option>
+              <option value="higherPrice">Mayor precio</option>
+              <option value="lowerPrice">Menor precio</option>
+              <option value="A-Z">A-Z</option>
+              <option value="Z-A">Z-A</option>
             </select>
             </div>
           </div>
-          <div className={styles.containerProducts}>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
+          <div className={styles.pageContent}>
+            {filteredProducts.map(product => (
+                    <div class={styles.card}style={{
+                      backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`,
+                    }} >
+                        <div class={styles.content}>
+                            <h2 class={styles.title}>{product.name}</h2>
+                            {product.discount>0 && <p>%{product.discount} Off</p>}
+                            <p class={styles.copy}>${(product.price * (1-(product.discount/100))).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <Link to={`/producto/${product._id}`}> <button class={styles.btn}>Ver +</button></Link>
+                      </div>
+                    </div>
+            ))}
+            {
+              !filteredProducts.length && 
+              <div className={styles.emptyProducts}>
+                <p>Ups! No tenemos productos que pasen ese filtro :(</p>
               </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <Link to="/producto">
-                  <p className={styles.btnViewMore}>Ver +</p>
-                </Link>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                  <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
-            <div className={styles.cardProduct}>
-              <div className={styles.containPrice}>
-                <p>$282000</p>
-                <div>
-                <p>%10 Off</p>
-                </div>
-              </div>
-              <p>
-                MacBook Air 13.3 Apple M1 8GB 512GB SSD MacOS X 11 Space Gray
-              </p>
-              <div className={styles.center}>
-                <div
-                  className={styles.photo}
-                  style={{
-                    backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                  }}
-                ></div>
-              </div>
-              <div className={styles.center}>
-                <p className={styles.btnViewMore}>Ver +</p>
-              </div>
-            </div>
+            }
           </div>
         </div>
       </div>
@@ -274,4 +157,16 @@ const Products = () => {
   )
 }
 
-export default Products
+const mapDispatchToProps = {
+  getProducts: productsActions.products,
+}
+
+const mapStateToProps = (state) => {
+  return{
+    brands: state.products,
+    categories: state.products,
+    products:state.products.products
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Products)

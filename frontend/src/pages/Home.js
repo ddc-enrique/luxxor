@@ -3,8 +3,8 @@ import { useHistory } from "react-router"
 import Contact from "../components/Contact"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
+import Hero from "../components/Hero"
 import SectionInfo from "../components/SectionInfo"
-import styles from "../styles/home2.module.css"
 
 const Home = ({  }) => {
     const sectionInfo = useRef({})
@@ -23,12 +23,12 @@ const Home = ({  }) => {
     }, [])
 
     return(
-        <div className={styles.containerHome}>
+        <>
             <Header/>
             <SectionInfo reference={sectionInfo} />
             <Contact reference={contact} />
             <Footer/>
-        </div>
+        </>
     )
 }
 

@@ -4,6 +4,7 @@ const usersControllers = require('../controllers/usersControllers')
 const productsControllers = require('../controllers/productsControllers')
 const brandCategoryControllers= require('../controllers/brandCategoryControllers')
 const validatorControllers = require('../controllers/validatorControllers')
+const messagesControllers = require('../controllers/messagesControllers')
 
 const router = express.Router()
 
@@ -52,6 +53,9 @@ router.route('/product/:id')
     .put(productsControllers.editProduct)
     .delete(productsControllers.deleteProduct)
 
+router.route('/checkout')
+    .post(productsControllers.productOnCart)
+    
 router.route('/admin/brands')
     .get(brandCategoryControllers.getAll)
     .post(brandCategoryControllers.addValueField)
@@ -70,6 +74,13 @@ router.route('/admin/category/:id')
     .put(brandCategoryControllers.editValueField)
     .delete(brandCategoryControllers.deleteValueField)
 
+router.route('/admin/messages')
+    .get(messagesControllers.getAllMessages)
+router.route('/admin/message/:id')
+    .delete(messagesControllers.deleteMessage)
 
+router.route('/contact')
+    .post(validatorControllers.validatorSendNewMessage,
+        messagesControllers.sendNewMessage)
 
 module.exports = router

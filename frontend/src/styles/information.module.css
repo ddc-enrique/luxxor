@@ -1,0 +1,54 @@
+div.divContainerInfo {
+    width: 100%;
+    min-height: 20rem;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+}
+
+div.cardInfo {
+    width: 25%;
+    height: 15rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+div.divImageInfo {
+    width: 9rem;
+    height: 6.5rem;
+    background-position: center;
+    background-size: cover;
+}
+
+.cardInfo p.titleCard {
+    font-size: 1.3rem;
+}
+
+.cardInfo p.cardText {
+    font-size: 1rem;
+    text-transform: none;
+}
+
+@media screen and (max-width: 768px) {
+    div.divContainerInfo {
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 1rem;
+    }
+
+    div.cardInfo {
+        width: 50%;
+        min-height: 15rem;
+    }
+
+    .cardInfo p.titleCard {
+        font-size: 0.7rem;
+    }
+
+    .cardInfo p.cardText {
+        font-size: 0.7rem;
+        text-transform: none;
+    }
+}

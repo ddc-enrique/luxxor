@@ -148,6 +148,35 @@ const validatorControllers = {
             res.json({success: false, errors: validation.error.details})
         }
     },
+
+    validatorSendNewMessage: (req, res, next) => {
+        const schema = joi.object({
+            authorName: joi.string().trim().min(2).max(50).pattern(/^[a-zA-Z\u00C0-\u017F\s]*$/).required().messages({
+                "string.empty": "El campo nombre es requerido",
+                "string.max": "Máximo de 50 caracteres",
+                "string.min": "Mínimo de 5 caracteres",
+                "string.trim": "No se permiten espacios antes y después del nombre",
+                "string.pattern.base": "No se permiten números"
+            }),
+            email: joi.string().trim().min(6).max(255).email().required().messages({
+                "string.empty": "El campo email es requerido",
+                "string.max": "Máximo de 255 caracteres",
+                "string.min": "Mínimo de 6 caracteres",
+                "string.email": "Se debe ingresar un email valido"
+            }),
+            textMessage: joi.string().trim().min(10).max(1000).required().messages({
+                "string.empty": "El campo mensaje es requerido",
+                "string.max": "Es un mensaje muy largo, envialo en 2 partes si lo necesitás",
+                "string.min": "Es un mensaje muy corto, contanos más",
+            })
+        })
+        const validation = schema.validate(req.body, {abortEarly: false})
+        if(!validation.error){
+            next()
+        }else{
+            res.json({success: false, response: validation.error.details})
+        }
+    }
 }
 
 module.exports = validatorControllers

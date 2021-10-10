@@ -19,7 +19,7 @@ form.formContact {
     margin: 2rem;
 }
 
-form.formContact p {
+form.formContact p.headerContact {
     font-size: 1.3rem;
     padding: 1rem;
     width: 12rem;
@@ -52,15 +52,29 @@ form.formContact textarea::-webkit-scrollbar-track {
 
 form.formContact ::placeholder {
     font-size: 1.1rem;
-    color: #444444;
+    color: #e3e3e3;
 }
+
+form.formContact .eachInput .errorPlaceholder{
+    height: 1.1rem;
+    width: 100%;
+
+}
+
+form.formContact .eachInput .error{
+    display: block;
+    border-bottom-right-radius: .5rem;
+    border-bottom-left-radius: .5rem;
+    padding: .2rem;
+    background-color: white;
+    color: red;
+    text-align: center;}
 
 form.formContact button {
     float: right;
     padding: 0.5rem 1.5rem;
     margin: 0.5rem 0 0;
     border: 2px solid #e3e3e3;
-    border-radius: 5px;
     background: 0;
     color: #e3e3e3;
     cursor: pointer;
@@ -77,20 +91,23 @@ div.imageContact {
     background-size: cover;
 }
 
-
-
-
-
-
 @media screen and (min-width: 375px) and (max-width: 767px) {
-    form.formContact div {
-        width: 20rem;
-        display: flex;
-        flex-direction: column;
-        padding: 0;
+    div.imageContact {
+        display: none
     }
 
-    h2.subtitleContact {
+    p.subtitleContact {
+        font-size: 1.7rem;
+    }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1024px) {
+    div.imageContact {
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    p.subtitleContact {
         font-size: 1.7rem;
     }
 }

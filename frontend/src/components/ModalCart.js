@@ -1,13 +1,54 @@
 import React,  { useState, useEffect, useRef }from "react";
 import styles from "../styles/modalCart.module.css";
+// import styles from "../styles/modal2.module.css";
 import { connect } from "react-redux";
-import usersAction from "../redux/actions/usersAction";
-
+import CardProductCart from "./CardProductCart";
+import { Link } from "react-router-dom"
+import shopCartActions from "../redux/actions/shopCartActions"
+import productsActions from "../redux/actions/productsActions";
+ 
 const ModalCart = (props) =>{
-    const[counter,setCounter]=useState(0)
+    const [products,setProducts]=useState([])
+    const[products2,setProducts2]=useState([])
+    const[loading,setLoading]=useState(true)
+    const[total,setTotal]=useState(0)
+    let aux
+    console.log(props.total)
+    useEffect(()=>{
+        /* console.log(props.cartProduct) */
+        props.cartProduct.forEach(item=>{
+            props.product(item.productId)
+            .then((res)=>{
+                aux= {...res.data.response,quantity:item.quantity}
+              /*   products4=[...products,aux]
+                console.log(products4)
+                 setProducts(products4)  */
+                 /* aux_array=aux_array.push(aux)
+                 setProducts(aux_array) */
+                 setProducts2(products2.push(aux))
+                 setProducts(products2) 
+                 /* setLoading(!loading) */
+            })
+            .catch(e=>console.log(e))
+        }) 
+        setTimeout(()=>{
+            setLoading(!loading)  
+        },500)
+           
+    },[])
 
+    console.log(products)
+
+   if(loading){
+        return(
+            <div className={styles.containerGeneral}>
+            <h1>LOADING</h1>
+            </div>
+            
+        )
+    } 
     return(
-        <div className={styles.containerTotal}>
+        <div className={styles.containerGeneral}>
             <div className={styles.containerCart}>
                 <img onClick={()=>props.setModalCart(false)} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
                 
@@ -16,56 +57,62 @@ const ModalCart = (props) =>{
                     <h3>PRODUCTO</h3>
                     <h3>SUBTOTAL</h3>
                 </div>
-                <div className={styles.containerProductTotal}>
-                    <div className={styles.containerProduct}>
-                        {/* <div
-                        className={styles.photo}
-                        style={{
-                            backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
-                        }}
-                        ></div> */}
-                       <img width="90" src="https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg"/>
-                       <div className={styles.containerProductTetx}>
-                           <p>MacBook Air 13.3</p>
-                           <span>$ $282.000</span>
-                           <div className={styles.counter}>
-                                <div
-                                    className={styles.icon}
-                                    style={{
-                                    backgroundImage:
-                                        "url('https://i.postimg.cc/63nKHn7j/3-removebg-preview-2.png')",
-                                    }}
-                                    onClick={() => setCounter(counter - 1)}
-                                ></div>
-                                <span>{counter}</span>
-                                <div
-                                    className={styles.icon}
-                                    style={{
-                                    backgroundImage:
-                                        "url('https://i.postimg.cc/0NLxdcNK/2-removebg-preview-4.png')",
-                                    }}
-                                    onClick={() => setCounter(counter + 1)}
-                                ></div>
-                                
-                            </div>                   
-                       </div>
-                       <span className={styles.spanSubtotal}>$282.000</span>
+                    {
+                        products.map(product=>{                          
+                            return(
+                                <>
+                                    <CardProductCart sale={false} product={product} deleteProduct={props.deleteProduct} setTotal={setTotal} total={total}/>
+                                {/* <h1>kjhkjhj</h1> */}
+                                </>
+                            )
+                        })
+                    }
+                    <Link to="/productos">
+                        <div className={styles.price}> <p>Agregar mas productos</p></div>
+                    </Link>
+                <div className={styles.containerDisconts}>
+                    <div className={styles.containerSubTotalCart}>
+                        <h3>Subtotal (sin envio):</h3>
+                        <span>${props.total}</span>
                     </div>
-                    
+                    <div className={styles.containerSubTotalCart}>
+                        <h3>15%OFF</h3>
+                        <span>$42.330</span>
+                    </div>
                 </div>
-                <div className={styles.price}>            
-                    <p>Agregar mas productos</p>
+                <div className={styles.containerShip}>
+                    <h3>Seleccione una forma de entrega:</h3>
+                    <div>                   
+                        <input type="radio" id="pickIt" name="shipping" value={false} defaultChecked/>
+                        <label htmlFor="pickIt"> Retiro en Local</label>                   
+                    </div>
+                    <div>                
+                        <input type="radio" id="ship" name="shipping" value={true} />
+                        <label htmlFor="ship"> Envio a domicilio-Entrega a partir de 5 dias hábiles</label>                 
+                    </div>
                 </div>
+                <div className={styles.containerTotal}>
+                    <h3>TOTAL:</h3>
+                    <span>${props.total}</span>
+                </div>
+                <Link to="/checkout">
+                        <div className={styles.price}> <p>Finaliza Compra</p></div>
+                </Link>
             </div>
         </div>
     )
 }
 const mapStateToProps = (state) => {
     return {
-       
+    cartProduct:state.shopCart.shopCart,
+    total:state.shopCart.total
     }
-}
-const mapDispatchToProps ={
-    sendMail: usersAction.sendMail
-}
+  }
+  const mapDispatchToProps ={
+   /*  addProduct:shopCartActions.addToCart, */
+    deleteProduct:shopCartActions.deleteToCart,
+    /* resetCart:shopCartActions.resetCart, */
+   product:productsActions.product  
+  }
+  
 export default connect(mapStateToProps,mapDispatchToProps)(ModalCart)

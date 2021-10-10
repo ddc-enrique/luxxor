@@ -105,6 +105,7 @@ const usersAction = {
             const url = `http://localhost:4000/api/user/edit-profile/${id}`
             const headers = { Authorization: "Bearer " + token }
             let response = flagEdit ? await axios.put(url, {...dataUser}, { headers } ) : await axios.post(url, {...dataUser}, { headers })
+            console.log("respuesta en action", response.data)
             if(response.data.success){
                 if(flagEdit){
                     dispatch({ type: "UPDATE_USER", 
@@ -117,7 +118,7 @@ const usersAction = {
                 }
                 return response.data
             } else {
-                throw new Error(response.data.response)
+                throw response.data.response
             }
         }
     },
@@ -126,7 +127,7 @@ const usersAction = {
         return (dispatch) => {
             dispatch({ type:"LOGOUT" })
         }
-    }
+    },
     
 }
 

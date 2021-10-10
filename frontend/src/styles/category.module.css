@@ -1,0 +1,7 @@
+
+div.containerCategory {
+    min-height: 100vh;
+    border: 1px solid black;
+    width: 100vw;
+    background-color: rgb(247, 232, 232);
+}

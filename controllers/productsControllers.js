@@ -2,6 +2,8 @@ const Product = require('../models/Product')
 const Category = require('../models/Category')
 const Brand = require('../models/Brand')
 const path = require("path")
+const Stripe = require("stripe")
+const stripe = new Stripe(process.env.KEY_STRIPE)
 
 const productsControllers = {
 
@@ -15,21 +17,29 @@ const productsControllers = {
         .catch(error=>res.json({success:false, response:error.message}))
     },
 
-    addProduct:(req,res)=>{
-        
-        
-        console.log(req.body.photos)
+    addProduct:(req,res)=>{   
+           
         console.log("Received ADD PRODUCTS Petition:" + Date())
         const{name,stock,price,color,dataSheet,description,discount,category,brand}=req.body
-        
+        const{photos}=req.files
+        route = path.join(__dirname, "../assets/productsPhoto") 
+
+        console.log(dataSheet)
+    
+        let dataSheetToSave = dataSheet.map((data)=>{
+            let dataArray = data.split(",")
+            let optionName = dataArray[0]
+            let optionValue = dataArray[1]
+            return {optionName, optionValue}
+        })
+
         const newProduct =new Product ({
             name,
             stock,
             price,
             color,
-            
-            dataSheet,
             description,
+            dataSheet: dataSheetToSave,
             discount,
             category,
             brand 
@@ -37,6 +47,13 @@ const productsControllers = {
         Product.findOne({name})
         .then(productFound=>{
             if(productFound) throw new Error("Ya existe un Producto con ese mismo nombre")
+
+            photos.map((photo, index)=>{
+                let fileName = photo.md5 + "." + photo.name.split(".")[photo.name.split.length-1] 
+                newProduct.photos[index] = fileName
+                photo.mv(`${route}/${fileName}`)
+            })
+
              newProduct.save()
             .then(productSaved=>res.json({success:true,response:productSaved}))
         })
@@ -58,7 +75,7 @@ const productsControllers = {
         .catch(error=> res.json({success: false, response:error.message}))
     },
     getOneProduct:(req,res)=>{
-        console.log("Received DELETE PRODUCTS Petition:" + Date())
+        console.log("Received GET ONE PRODUCTS Petition:" + Date())
         Product.findById(req.params.id)
         .then( productFound => {
             if(!productFound) throw new Error("No se encontro ningun Producto")
@@ -66,6 +83,23 @@ const productsControllers = {
         })
         .catch(error=> res.json({success: false, reponse:error.message}))
     },
+    productOnCart:async(req, res)=>{
+           console.log(req.body)
+        try {
+            let response = await stripe.paymentIntents.create({
+                amount: req.body.amount,
+                currency: "USD",
+                description: "Compré",
+                payment_method: req.body.id,
+                confirm: true
+            })
+         res.json({success: true, response})
+        }catch(e){
+            console.log(e)
+            res.json({message: e})
+        }
+           
+    }
 
 }
 
