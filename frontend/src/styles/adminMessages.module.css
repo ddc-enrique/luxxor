@@ -57,11 +57,63 @@ span.violet {
   width: 86%;
   background-color: tomato;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .containerAdmin .containerMessages .headerMessages {
   padding: 1rem;
 }
 
+.containerAdmin .containerMessages .tableMessages{
+  width: 90%;
+}
 
+/* .containerAdmin .containerMessages .tableMessages tbody tr{
+  margin-top: .5rem;
+} */
+
+.containerAdmin .containerMessages .tableMessages tbody tr td{
+  text-align: center;
+  padding: .5rem 0;
+}
+
+.containerAdmin .containerMessages .tableMessages tbody tr td.deleteMessage,
+.containerAdmin .containerMessages .tableMessages tbody tr td.viewTextMessage{
+  cursor: pointer;
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage {
+  z-index: 1;
+  position: absolute;
+  width: 60vw;
+  height: 40vh;
+  top: 10vh;
+  left: 20vw;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: blue;
+  color: white;
+  display: flex;
+  flex-direction: column;
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage div{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage .closeModalText {
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  /* align-self: flex-end; */
+  /* margin: 0.5rem 0; */
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage p.textBody {
+  flex-grow: 1;
+  margin-top: 1rem;
+}

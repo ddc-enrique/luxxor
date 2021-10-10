@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
+import messagesActions from '../redux/actions/messagesActions'
 import usersAction from '../redux/actions/usersAction'
 import styles from '../styles/contact.module.css'
 const Contact = ({ reference, sendNewMessage }) =>{
@@ -98,7 +99,7 @@ const Contact = ({ reference, sendNewMessage }) =>{
 }
 
 const mapDispatchToProps = {
-    sendNewMessage: usersAction.sendNewMessage,
+    sendNewMessage: messagesActions.sendNewMessage,
 }
 
 export default connect(null, mapDispatchToProps)(Contact)

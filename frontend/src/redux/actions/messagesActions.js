@@ -16,6 +16,14 @@ const messagesActions = {
             return response.data.response
         }
     },
+
+    deleteMessage: (id) => {
+        return async () => {
+            let response = await axios.delete(`http://localhost:4000/api/admin/message/${id}`)
+            if(!response.data.success) throw response.data.response
+            return response.data
+        }
+    }
 }
 
 export default messagesActions

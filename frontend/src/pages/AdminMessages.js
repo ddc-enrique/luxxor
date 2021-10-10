@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import { NavAdmin } from "../components/NavAdmin";
 import messagesActions from "../redux/actions/messagesActions";
 import toast, { Toaster } from "react-hot-toast";
+import MessageRow from "./MessageRow";
 
 
 const AdminMessages = (props) => {
@@ -26,6 +27,20 @@ const AdminMessages = (props) => {
         if(!messages.length) getAllMessages()
     }, [])
 
+    const deleteMessage = async(id) =>{
+        try {
+            let response = await props.removeMessage(id)
+            if(response.success) {
+                toast('Mensaje Eliminado', { icon: '🗑️',})
+                setMessages(messages.filter(message => message._id != id))
+            }else{
+                throw response.response
+            }
+        } catch (error) {
+            toast.error("No se pudo eliminar el mensaje, intentelo más tarde")
+        }
+    }
+
     return (
         <div className={styles.divContainer}>
             <Toaster />
@@ -41,16 +56,43 @@ const AdminMessages = (props) => {
                 <NavAdmin/>
                 <div className={styles.containerMessages}>
                     <h2 className={styles.headerMessages}>Mensajes desde la sección Contacto</h2>
-                    <div className={styles.containerNewMessages}>
-                    {messages.map(message => (
-                        <div 
-                            className={styles.eachMessage}
-                            key={message._id}
+                    <table
+                        className={styles.tableMessages}
+                    >
+                        <thead
+                            className={styles.headerTableMessages}
                         >
-                            {message.textMessage}
-                        </div>
-                    ))}
-                    </div>
+                            <tr>
+                                <th>
+                                    Dia
+                                </th>
+                                <th>
+                                    Nombre
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                <th>
+                                    Ver Más
+                                </th>
+                                <th>
+                                    Eliminar
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody
+                            className={styles.tableBodyMessages}
+                        >
+                        {messages.map(message => (
+                            <MessageRow
+                                key={message._id}
+                                message={message}
+                                deleteMessage={deleteMessage}
+                                styles={styles}
+                            />                            
+                        ))}
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -59,7 +101,8 @@ const AdminMessages = (props) => {
 }
 
 const mapDispatchToProps = {
-    getMessages: messagesActions.getAllMessages
+    getMessages: messagesActions.getAllMessages,
+    removeMessage: messagesActions.deleteMessage
 }
 
 export default connect (null, mapDispatchToProps)(AdminMessages)
