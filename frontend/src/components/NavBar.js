@@ -76,8 +76,16 @@ const NavBar = (props) => {
                                 <span>Contacto</span>
                             </Link>
                         }
-                            <a onClick={clickHandler}>
+                            <a>
+                                <div className={styles.dropDown}>
                                 <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
+                                        {!props.token && <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</p></Link>}
+                                            {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible}/>}
+                                        {!props.token && <Link to="/registro"><p>Registrarme</p></Link>}
+                                        {props.token && <Link to="#"><p onClick={logOut}>Cerrar Sesión</p></Link> }
+                                        {props.token && <Link to="/mi-cuenta">Mi Cuenta</Link>}
+                                        {props.admin && <Link to="/admin"><p>Admin</p></Link>}
+                                    </div>
                             </a>
                             <a>
                                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/Qtnz2xpg/carrito-de-compras.png")'}}>

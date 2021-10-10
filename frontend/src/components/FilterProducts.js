@@ -124,66 +124,66 @@ const FilterProducts = (props) => {
                             </div>
                         ))}
                     </div>
-{ visible &&<div className={styles.inputsFilter2}>
-                        <h3>Marca</h3>
-                        <div
-                            className={styles.switchContainer}
-                        >
-                            <label htmlFor="allBrands">Todas</label>
-                            <input 
-                                type="radio"
-                                name="brand"
-                                id="allBrands"
-                                className={styles.switch}
-                                onChange={ () => setActiveBrand("allBrands")}
-                                defaultChecked
-                            />
-                        </div>
-                        {brands.map( brand => (
-                            <div
-                                className={styles.switchContainer}
-                                key={brand._id}
-                            >
-                                <label htmlFor={brand._id}>{brand.name}</label>
-                                <input 
-                                    type="radio"
-                                    name="brand"
-                                    id={brand._id}
-                                    className={styles.switch}
-                                    onChange={ () => setActiveBrand(brand._id)}
-                                />
-                            </div>
-                        ))}
-                    <h3>Categoria</h3>
-                        <div
-                            className={styles.switchContainer}
-                        >
-                            <label htmlFor="allCategories">Todas</label>
-                            <input 
-                                type="radio"
-                                name="category"
-                                id="allCategories"
-                                className={styles.switch}
-                                onChange={ () => setActiveCategory("allCategories")}
-                                defaultChecked
-                            />
-                        </div>
-                        {categories.map( category => (
-                            <div
-                                className={styles.switchContainer}
-                                key={category._id}
-                            >
-                                <label htmlFor={category._id}>{category.name}</label>
-                                <input 
-                                    type="radio"
-                                    name="category"
-                                    id={category._id}
-                                    className={styles.switch}
-                                    onChange={ () => setActiveCategory(category._id)}
-                                />
-                            </div>
-                        ))}
-                    </div>}
+                {visible &&<div className={styles.inputsFilter2}>
+                                        <h3>Marca</h3>
+                                        <div
+                                            className={styles.switchContainer}
+                                        >
+                                            <label htmlFor="allBrands">Todas</label>
+                                            <input 
+                                                type="radio"
+                                                name="brand"
+                                                id="allBrands"
+                                                className={styles.switch}
+                                                onChange={ () => setActiveBrand("allBrands")}
+                                                defaultChecked
+                                            />
+                                        </div>
+                                        {brands.map( brand => (
+                                            <div
+                                                className={styles.switchContainer}
+                                                key={brand._id}
+                                            >
+                                                <label htmlFor={brand._id}>{brand.name}</label>
+                                                <input 
+                                                    type="radio"
+                                                    name="brand"
+                                                    id={brand._id}
+                                                    className={styles.switch}
+                                                    onChange={ () => setActiveBrand(brand._id)}
+                                                />
+                                            </div>
+                                        ))}
+                                    <h3>Categoria</h3>
+                                        <div
+                                            className={styles.switchContainer}
+                                        >
+                                            <label htmlFor="allCategories">Todas</label>
+                                            <input 
+                                                type="radio"
+                                                name="category"
+                                                id="allCategories"
+                                                className={styles.switch}
+                                                onChange={ () => setActiveCategory("allCategories")}
+                                                defaultChecked
+                                            />
+                                        </div>
+                                        {categories.map( category => (
+                                            <div
+                                                className={styles.switchContainer}
+                                                key={category._id}
+                                            >
+                                                <label htmlFor={category._id}>{category.name}</label>
+                                                <input 
+                                                    type="radio"
+                                                    name="category"
+                                                    id={category._id}
+                                                    className={styles.switch}
+                                                    onChange={ () => setActiveCategory(category._id)}
+                                                />
+                                            </div>
+                                        ))}
+                </div>}
         </div>
     )
 
