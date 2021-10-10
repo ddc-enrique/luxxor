@@ -17,6 +17,8 @@ const NavBar = (props) => {
     const [visibleMenu, setVisibleMenu] =useState(false)
     const history = useHistory()
 
+    
+
     const clickHandler= ()=>{
         setVisible(!visible)  
     }
@@ -32,6 +34,7 @@ const NavBar = (props) => {
         props.signOut()
         if(history.location.pathname === "/mi-cuenta") history.push("/")
     }
+
 
     const homeLocationsPathFlag = [ "/como-comprar", "/contacto"].includes(history.location.pathname) || (history.location.pathname === "/")
     return(
@@ -56,6 +59,7 @@ const NavBar = (props) => {
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/pTZVv7n0/Diseño_sin_título_(66).png")'}} onClick={clickHandler}>
                 </div>
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}} onClick={clickCart}>
+                    <p className={styles.cartLength}>{props.cartProduct.length}</p>
                 </div>
                 </nav>
                 {visibleMenu &&   
@@ -89,6 +93,7 @@ const NavBar = (props) => {
                             </a>
                             <a>
                                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/Qtnz2xpg/carrito-de-compras.png")'}}>
+                                    
                                 </div>
                                 <span>Carrito</span>
                             </a>
@@ -98,7 +103,7 @@ const NavBar = (props) => {
                     {!props.token && <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar </p></Link>}
                         {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible}/>}
                     {!props.token && <Link to="/registro"><p>Registrarme</p></Link>}
-                    {props.token && <Link to="#"><p onClick={logOut}>Cerrar Sesión</p></Link> }
+                    {props.token && <Link to="#"><p onClick={logOut}>Cerrar Sesión</p></Link>}
                     {props.token && <Link to="/mi-cuenta">Mi Cuenta</Link>}
                     {props.admin && <Link to="/admin"><p>Admin</p></Link>}
                 </div>}
@@ -118,7 +123,8 @@ const mapStateToProps = (state) => {
         firstName: state.users.firstName,
         lastName: state.users.lastName,
         token: state.users.token,
-        admin: state.users.admin
+        admin: state.users.admin,
+        cartProduct:state.shopCart,
     }
 }
 

@@ -1,9 +1,10 @@
 import React,  { useState, useEffect}from "react";
 import styles from "../styles/payment.module.css";
 import { connect } from "react-redux";
+import ModalPaymentMethod from "./ModalPaymentMethod"
 
 const Payment = (props) =>{
-    
+    const [modalPayment, setModalPayment] = useState(false)
 
     return(
         <>
@@ -21,6 +22,11 @@ const Payment = (props) =>{
                     <img className={styles.iconPayPal} src="https://i.postimg.cc/wB3fP0Sz/paypalcopy.png"/>
                     <h3>Pay Pal</h3>
                 </div>
+                <div onClick={()=>setModalPayment(!modalPayment)} className={styles.boxMethod}>
+                    <img className={styles.iconPayPal} src="https://www.ayudamercadopago.com.ar/img/tarjeta.credito.png"/>
+                    <h3>Tarjetas</h3>
+                </div>
+                {modalPayment &&  <ModalPaymentMethod modalPayment={modalPayment} setModalPayment={setModalPayment}/>}
             </div>
         </>
     )

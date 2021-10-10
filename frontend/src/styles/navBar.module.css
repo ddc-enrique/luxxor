@@ -61,6 +61,13 @@ div.dropDown a {
     width: 96vw;
 }
 
+p.cartLength {
+    text-align: center;
+    pad: 0 -0.5rem;
+    border-radius: 50px;
+    background-color: green;
+}
+
 @media screen and (min-width: 375px) and (max-width: 767px) {
     header.headerContainer {
         justify-content: space-between;

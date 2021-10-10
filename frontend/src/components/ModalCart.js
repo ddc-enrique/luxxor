@@ -38,6 +38,8 @@ const ModalCart = (props) =>{
            
     },[])
 
+    console.log(products)
+
    if(loading){
         return(
             <div className={styles.containerGeneral}>
@@ -112,4 +114,5 @@ const mapStateToProps = (state) => {
     /* resetCart:shopCartActions.resetCart, */
    product:productsActions.product  
   }
+  
 export default connect(mapStateToProps,mapDispatchToProps)(ModalCart)

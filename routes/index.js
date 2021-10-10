@@ -53,6 +53,9 @@ router.route('/product/:id')
     .put(productsControllers.editProduct)
     .delete(productsControllers.deleteProduct)
 
+router.route('/checkout')
+    .post(productsControllers.productOnCart)
+    
 router.route('/admin/brands')
     .get(brandCategoryControllers.getAll)
     .post(brandCategoryControllers.addValueField)

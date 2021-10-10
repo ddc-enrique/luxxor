@@ -1,0 +1,10 @@
+form.form {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.element {
+    padding: 2rem;
+    background-color: rgba(128, 128, 128, 0.253);
+}

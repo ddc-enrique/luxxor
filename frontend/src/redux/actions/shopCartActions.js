@@ -1,3 +1,5 @@
+import axios from "axios"
+
 const shopCartAction={
     addToCart:(id)=>{
         return(dispatch)=>{
@@ -13,6 +15,12 @@ const shopCartAction={
     },
     resetCart:()=>{
         return (dispatch)=>dispatch({type:'RESET_CART'})
+    },
+    payCart:(id, amount)=>{
+        return async (dispatch)=>{
+            let response = await axios.post("http://localhost:4000/api/checkout", id, amount)
+            console.log(response)
+        }
     }
 
 }
