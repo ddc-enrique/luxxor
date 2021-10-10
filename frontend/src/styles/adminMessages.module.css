@@ -70,9 +70,10 @@ span.violet {
   width: 90%;
 }
 
-/* .containerAdmin .containerMessages .tableMessages tbody tr{
-  margin-top: .5rem;
-} */
+.containerAdmin .containerMessages .tableMessages .tableBodyMessages{
+  height: 60vh;
+  overflow-y: scroll;
+}
 
 .containerAdmin .containerMessages .tableMessages tbody tr td{
   text-align: center;

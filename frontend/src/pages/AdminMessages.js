@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import { NavAdmin } from "../components/NavAdmin";
 import messagesActions from "../redux/actions/messagesActions";
 import toast, { Toaster } from "react-hot-toast";
-import MessageRow from "./MessageRow";
+import MessageRow from "../components/MessageRow";
 import { ArrowDown } from "react-bootstrap-icons";
 
 
@@ -43,7 +43,7 @@ const AdminMessages = (props) => {
     }
 
     const sortBy = (e) => {
-        
+
     }
 
     return (
@@ -75,12 +75,10 @@ const AdminMessages = (props) => {
                                     <ArrowDown />
                                 </th>
                                 <th
-                                    onClick={sortBy}
                                 >
                                     Nombre
                                 </th>
                                 <th
-                                    onClick={sortBy}
                                 >
                                     Email
                                 </th>

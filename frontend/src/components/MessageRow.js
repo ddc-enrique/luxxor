@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { PlusLg, XCircleFill } from 'react-bootstrap-icons'
+import { PlusLg, TrashFill, XCircleFill } from 'react-bootstrap-icons'
 import Moment from 'react-moment'
 
 
@@ -33,7 +33,7 @@ const MessageRow = ({ message, deleteMessage, styles}) => {
                 onClick={()=> deleteMessage(message._id)}
                 className={styles.deleteMessage}
             >
-                Eliminar
+                <TrashFill />
             </td>
         { modal && 
             <div
