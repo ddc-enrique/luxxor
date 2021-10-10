@@ -1,11 +1,10 @@
 header.headerContainer {
-    width: 100%;
-    padding: 1rem 0rem;
+    padding: 1rem 1rem;
     display: flex;
 }
 
 .navIntermedio {
-    width: 70rem;
+    width: 81rem;
     display: flex;
     justify-content: center;
 }
@@ -19,9 +18,7 @@ nav a {
 }
 
 nav a:hover {
-    border-bottom: 1px solid grey;
-    color: gray;
-    /* border-width: 1; */
+    color: #ffffff;
 }
 
 nav.navContainerMobile {
@@ -39,8 +36,9 @@ div.icon {
 
 div.dropDown {
     position: absolute;
-    right: 24rem;
+    /* right: -130rem; */
     top: 1rem;
+    right: 10rem;
     width: 15rem;
     height: 3rem;
     display: flex;
@@ -60,7 +58,7 @@ div.dropDown a {
 .navWeb {
     display: flex;
     justify-content: space-between;
-    width: 97vw;
+    width: 96vw;
 }
 
 @media screen and (min-width: 375px) and (max-width: 767px) {

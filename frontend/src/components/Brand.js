@@ -2,27 +2,54 @@ import React from "react";
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import styles from "../styles/category.module.css";
 import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
 import { connect } from "react-redux";
 const Brand = (props) => {
-const [categories, setCategories] = useState(props.categories)
-const [loading, setLoading] = useState(true)
-const [category, setCategory] = useState('')
-useEffect(() => {
-    const getCategories = async () => {
-        try {
-            let res = await props.getCategories()
-        setCategories(res)
-        } catch(e) {
-            console.log(e)
-        } finally {
-            setLoading(!loading)
-        }
+  const [brands, setBrands] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [editOpen, setEditOpen] = useState("");
+  const [brand, setBrand] = useState("");
+  useEffect(() => {
+    const getBrands = async () => {
+      try {
+        let res = await props.getBrands();
+        setBrands(res);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(!loading);
+      }
+    };
+    getBrands();
+  }, []);
+
+  const sendBrand = async () => {
+    if (!brand) {
+      alert("No puede estar vacio");
+    } else {
+      let res = await props.addBrand(brand);
+      if (!res.data.success) {
+        alert(res.data.response);
+      } else {
+        alert("Creado con éxito");
+        let resp = await props.getBrands();
+        setBrands(resp);
+      }
     }
-        getCategories()
-    }, [])
+  };
+
+  const editBrand = async (id) => {
+    let res = await props.editBrand(id, { name: brand });
+    let resp = await props.getBrands();
+    setBrands(resp);
+  };
+  const deleteBrand = async (id, index) => {
+    let res = await props.deleteBrand(id);
+    console.log(res);
+    res.data.success && alert("Borrado con éxito");
+    setBrands(brands.splice(id, index));
+  };
   return (
     <div className={styles.divContainer}>
       <header className={styles.headerAdmin}>
@@ -36,6 +63,55 @@ useEffect(() => {
       <div className={styles.containerAdmin}>
         <NavAdmin />
         <div className={styles.sectionBrandCategory}>
+          <div className={styles.containerCategory}>
+            <h2>Marcas</h2>
+            {loading ? (
+              <div className={styles.loading}></div>
+            ) : !brands ? (
+              <h1>No hay Marcas cargadas</h1>
+            ) : (
+              brands.map((brand, index) => (
+                <div key={index} className={styles.category}>
+                  <h3>
+                    {editOpen === brand.name ? (
+                      <>
+                        <textarea
+                          name="name"
+                          onChange={(e) => setBrand(e.target.value)}
+                        >
+                          {brand.name}
+                        </textarea>
+                        <button onClick={() => editBrand(brand._id)}>✔️</button>
+                        <button onClick={() => setEditOpen(!editOpen)}>
+                          ✖️
+                        </button>
+                      </>
+                    ) : (
+                      brand.name
+                    )}
+                  </h3>
+                  <div className={styles.cointanerEdit}>
+                    <div
+                      onClick={() => setEditOpen(brand.name)}
+                      className={styles.icon}
+                      style={{
+                        backgroundImage:
+                          "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
+                      }}
+                    ></div>
+                    <div
+                      onClick={() => deleteBrand(brand._id, index)}
+                      className={styles.icon}
+                      style={{
+                        backgroundImage:
+                          "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
           <div className={styles.containerForm}>
             <div>
               <div
@@ -45,46 +121,20 @@ useEffect(() => {
                     "url('https://i.postimg.cc/h47DcVZB/search.png')",
                 }}
               ></div>
-              <h3>Cargar Nueva Marca</h3>
+              <h3>Cargar nueva Marca</h3>
             </div>
             <div className={styles.containerAllInputs}>
               <div className={styles.containerInputs}>
                 <label htmlFor="name">Nombre</label>
-                <input id="name" type="text" name="name" onChange={(e) => setCategory({name:e.target.value})}/>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  onChange={(e) => setBrand({ name: e.target.value })}
+                />{" "}
+                <button onClick={() => sendBrand()}>Enviar</button>
               </div>
             </div>
-            <div className={styles.containerButton}>
-              <button onClick={()=> props.addCategory(category)}>Enviar</button>
-            </div>
-          </div>
-          <div className={styles.containerCategory}>
-            <h2>Marcas</h2>
-            {loading ? <div className={styles.loading}></div> : !categories ? <h1>No hay marcas cargadas</h1> :
-                categories.map((category,index) => (
-                <div key={index} className={styles.category}>
-              <h3>{category.name}</h3>
-              <div className={styles.cointanerEdit}>
-                <div
-                  onClick={() => alert("edit")}
-                  className={styles.icon}
-                  style={{
-                    backgroundImage:
-                      "url('https://i.postimg.cc/bN0rQQhh/editar.png')"
-                  }}
-                ></div>
-                <div
-                  onClick={() => alert("borrar")}
-                  className={styles.icon}
-                  style={{
-                    backgroundImage:
-                      "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                  }}
-                ></div>
-              </div>
-            </div>
-            )) }
-            
-            
           </div>
         </div>
       </div>
@@ -93,13 +143,15 @@ useEffect(() => {
 };
 
 const mapStateToProps = (state) => {
-    return {
-      Allcategories: state.products.categories,
-    }
-}
+  return {
+    allBrands: state.products.brands,
+  };
+};
 
-  const mapDispatchToProps = {
-    getCategories: productsActions.categories,
-    addCategory: productsActions.addCategory
-  }
-export default connect(mapStateToProps,mapDispatchToProps)(Brand)
+const mapDispatchToProps = {
+  getBrands: productsActions.brands,
+  editBrand: productsActions.editBrand,
+  addBrand: productsActions.addBrand,
+  deleteBrand: productsActions.deleteBrand,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Brand);
