@@ -73,7 +73,7 @@ const productsControllers = {
         .catch(error=> res.json({success: false, response:error.message}))
     },
     getOneProduct:(req,res)=>{
-        console.log("Received DELETE PRODUCTS Petition:" + Date())
+        console.log("Received GET ONE PRODUCTS Petition:" + Date())
         Product.findById(req.params.id)
         .then( productFound => {
             if(!productFound) throw new Error("No se encontro ningun Producto")

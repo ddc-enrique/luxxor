@@ -127,7 +127,7 @@ const usersAction = {
         return (dispatch) => {
             dispatch({ type:"LOGOUT" })
         }
-    }
+    },
     
 }
 

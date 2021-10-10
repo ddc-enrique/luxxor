@@ -27,7 +27,12 @@ const Products = (props) => {
         }                
       }
     }
-    getAllProducts()
+    if(props.products.length===0){
+      getAllProducts()
+    }else{
+      setProducts(props.products)
+    }
+    
     setLoading(false)
   },[])
 
@@ -125,32 +130,18 @@ const Products = (props) => {
             </select>
             </div>
           </div>
-          <div className={styles.containerProducts}>
+          <div className={styles.pageContent}>
             {filteredProducts.map(product => (
-              <div className={styles.cardProduct} key={product._id}>
-                <div className={styles.containPrice}>
-                  <p>${(product.price * (1-(product.discount/100))).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                  <div>
-                    {product.discount>0 && <p>%{product.discount} Off</p>}
-                  </div>
-                </div>
-                <p>
-                  {product.name}
-                </p>
-                <div className={styles.center}>
-                  <div
-                    className={styles.photo}
-                    style={{
+                    <div class={styles.card}style={{
                       backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`,
-                    }}
-                  ></div>
-                </div>
-                <div className={styles.center}>
-                  <Link to={`/producto/${product._id}`}>
-                    <p className={styles.btnViewMore}>Ver +</p>
-                  </Link>
-                </div>
-              </div>
+                    }} >
+                        <div class={styles.content}>
+                            <h2 class={styles.title}>{product.name}</h2>
+                            {product.discount>0 && <p>%{product.discount} Off</p>}
+                            <p class={styles.copy}>${(product.price * (1-(product.discount/100))).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <Link to={`/producto/${product._id}`}> <button class={styles.btn}>Ver +</button></Link>
+                      </div>
+                    </div>
             ))}
             {
               !filteredProducts.length && 
@@ -174,6 +165,7 @@ const mapStateToProps = (state) => {
   return{
     brands: state.products,
     categories: state.products,
+    products:state.products.products
   }
 }
 

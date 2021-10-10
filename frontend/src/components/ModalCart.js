@@ -13,6 +13,7 @@ const ModalCart = (props) =>{
     const[loading,setLoading]=useState(true)
     const[total,setTotal]=useState(0)
     let aux
+    console.log(props.total)
     useEffect(()=>{
         /* console.log(props.cartProduct) */
         props.cartProduct.forEach(item=>{
@@ -70,7 +71,7 @@ const ModalCart = (props) =>{
                 <div className={styles.containerDisconts}>
                     <div className={styles.containerSubTotalCart}>
                         <h3>Subtotal (sin envio):</h3>
-                        <span>$282.200</span>
+                        <span>${props.total}</span>
                     </div>
                     <div className={styles.containerSubTotalCart}>
                         <h3>15%OFF</h3>
@@ -85,12 +86,12 @@ const ModalCart = (props) =>{
                     </div>
                     <div>                
                         <input type="radio" id="ship" name="shipping" value={true} />
-                        <label htmlFor="ship"> Envio a domicilio</label>                 
+                        <label htmlFor="ship"> Envio a domicilio-Entrega a partir de 5 dias hábiles</label>                 
                     </div>
                 </div>
                 <div className={styles.containerTotal}>
                     <h3>TOTAL:</h3>
-                    <span>${total}</span>
+                    <span>${props.total}</span>
                 </div>
                 <Link to="/checkout">
                         <div className={styles.price}> <p>Finaliza Compra</p></div>
@@ -101,7 +102,8 @@ const ModalCart = (props) =>{
 }
 const mapStateToProps = (state) => {
     return {
-    cartProduct:state.shopCart.shopCart
+    cartProduct:state.shopCart.shopCart,
+    total:state.shopCart.total
     }
   }
   const mapDispatchToProps ={

@@ -1,0 +1,67 @@
+.divContainer {
+  padding: 0 1rem;
+}
+header.headerAdmin {
+  margin: 0.6rem 1rem;
+  height: 3rem;
+  border-bottom: 1px solid #d5d5d5;
+}
+
+/* header.headerAdmin h1 {
+  font-size: 2.9rem;
+} */
+
+span.orange {
+  color: #f99d22;
+  /* font-size: 2.9rem; */
+}
+
+span.violet {
+  color: #7a5ea8;
+  /* font-size: 2.9rem; */
+}
+
+.divContainer .navAdmin {
+  width: 4rem;
+  height: 25rem;
+  display: flex;
+  padding: 1rem;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  justify-content: space-around;
+  background-color: white;
+  box-shadow: 1px 1px 3px #cacaca;
+}
+.containerAdmin {
+  display: flex;
+  min-height: 85vh;
+}
+.containerAdmin .containerNav {
+  display: flex;
+  align-items: center;
+  height: 49rem;
+}
+
+.loading {
+  min-height: 32rem;
+    width: 10rem;
+    background-image: url(https://i.postimg.cc/qRv8Dwtt/preloader3.gif);
+    background-size: 50%;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: .5;
+}
+
+.containerAdmin .containerMessages {
+  height: 80vh;
+  width: 86%;
+  background-color: tomato;
+  display: flex;
+  justify-content: center;
+}
+
+.containerAdmin .containerMessages .headerMessages {
+  padding: 1rem;
+}
+
+

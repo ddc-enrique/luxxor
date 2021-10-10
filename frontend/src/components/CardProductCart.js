@@ -7,12 +7,11 @@ import toast, { Toaster } from "react-hot-toast"
 const CardProductCart = (props) =>{
    const {product}=props
     const[counter,setCounter]=useState(product.quantity)
-    const subTotalProduct=useRef(null)
-    console.log(product)
+    console.log(product.price)
     /* setTotal(total+subTotalProduct) */
     const addProductHandler=()=>{
         if(counter<product.stock){
-            props.addProduct(product._id)
+            props.addProduct(product._id,product.price)
             setCounter(counter+1)
         }else{
             toast("No hay mas unidades a la venta", {
@@ -27,13 +26,11 @@ const CardProductCart = (props) =>{
     }
     const deleteProductHandler=()=>{
         if(counter>1){
-            props.deleteProduct(product._id,false)
+            props.deleteProduct(product._id,false,product.price)
             setCounter(counter-1)
         }
     }
-    if(subTotalProduct.current){
-        props.setTotal(subTotalProduct.current.value) 
-    }
+
     
 
     return(
@@ -70,8 +67,8 @@ const CardProductCart = (props) =>{
                 </div>
             </div>
             <div className={styles.containerSubTotal}>
-                    <span ref={subTotalProduct} className={styles.inputSubtotal}>{" "+counter*product.price}</span>
-                    <img onClick={() => props.deleteProduct(product._id,true)} className={styles.iconDelete} src='https://i.postimg.cc/1zysmTqh/bin.png'/>                           
+                    <span  className={styles.inputSubtotal}>{" "+counter*product.price}</span>
+                    <img onClick={() => props.deleteProduct(product._id,true,product.price,counter)} className={styles.iconDelete} src='https://i.postimg.cc/1zysmTqh/bin.png'/>                           
             </div>
             <Toaster position="top-center" reverseOrder={false} />
         </div>
@@ -83,7 +80,8 @@ const mapStateToProps = (state) => {
 }
 const mapDispatchToProps ={
     addProduct:shopCartActions.addToCart,
-    resetCart:shopCartActions.resetCart
+    resetCart:shopCartActions.resetCart,
+    deleteProduct:shopCartActions.deleteToCart
   }
 
 export default connect(mapStateToProps,mapDispatchToProps)(CardProductCart)

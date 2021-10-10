@@ -17,6 +17,7 @@ import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
 import Category from "./components/Category"
 import Brand from "./components/Brand"
+import AdminMessages from "./pages/AdminMessages"
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
@@ -36,6 +37,7 @@ const App = (props) => {
         <Route path="/registro" component={SignUp} />
         <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
+        <Route exact path="/admin/messages" component={AdminMessages} />
         <Route path="/admin" component={Admin} />
         <Route path="/categorias" component={Category} />
         <Route path="/marcas" component={Brand} />
@@ -43,6 +45,7 @@ const App = (props) => {
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
         <Route path="/checkout" component={Sale}/>
+        
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
