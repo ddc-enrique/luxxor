@@ -1,5 +1,5 @@
 const shopCartAction={
-    addToCart:(id)=>{
+    addToCart:(id,price)=>{
         return(dispatch)=>{
             dispatch({type:'ADD', payload:id})
         }

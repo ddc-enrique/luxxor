@@ -13,8 +13,6 @@ const ModalCart = (props) =>{
     const[loading,setLoading]=useState(true)
     const[total,setTotal]=useState(0)
     let aux
-    var aux_array=[]
-    console.log(total)
     useEffect(()=>{
         /* console.log(props.cartProduct) */
         props.cartProduct.forEach(item=>{
@@ -103,7 +101,7 @@ const ModalCart = (props) =>{
 }
 const mapStateToProps = (state) => {
     return {
-    cartProduct:state.shopCart
+    cartProduct:state.shopCart.shopCart
     }
   }
   const mapDispatchToProps ={
