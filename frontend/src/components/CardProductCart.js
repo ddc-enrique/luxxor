@@ -5,6 +5,7 @@ import shopCartActions from "../redux/actions/shopCartActions"
 
 const CardProductCart = (props) =>{
    const {product}=props
+   console.log(product)
     const[counter,setCounter]=useState(product.quantity)
     const subTotalProduct=useRef(null)
     /* setTotal(total+subTotalProduct) */
