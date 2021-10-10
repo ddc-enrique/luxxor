@@ -90,7 +90,7 @@ const NavBar = (props) => {
                     </nav>}
             <div className={styles.menu} style={{backgroundImage: 'url("https://i.postimg.cc/jj31jRt1/Diseño_sin_título_(59).png")'}}  onClick={clickHandlerMenu}></div>
                 { visible &&  <div className={styles.dropDown}>
-                    {!props.token && <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</p></Link>}
+                    {!props.token && <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar </p></Link>}
                         {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible}/>}
                     {!props.token && <Link to="/registro"><p>Registrarme</p></Link>}
                     {props.token && <Link to="#"><p onClick={logOut}>Cerrar Sesión</p></Link> }

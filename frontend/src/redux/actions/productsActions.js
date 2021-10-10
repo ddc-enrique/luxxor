@@ -40,6 +40,16 @@ const productsActions = {
             }
         }
     },
+    editCategory: (id,category) =>{
+        return async () => {
+            try {
+                let res = await axios.put(`http://localhost:4000/api/admin/category/${id}`, {...category})
+                    return res
+            }catch(e){
+               console.log(e)
+            }
+        }
+    },
     deleteCategory: (id) =>{
         return async () => {
             try {
@@ -60,10 +70,10 @@ const productsActions = {
             }
         }
     },
-    editBrand: (id,name) =>{
+    editBrand: (id,brand) =>{
         return async () => {
             try {
-                let res = await axios.put(`http://localhost:4000/api/admin/brand/${id}`, name)
+                let res = await axios.put(`http://localhost:4000/api/admin/brand/${id}`, {...brand})
                     return res
             }catch(e){
                console.log(e)

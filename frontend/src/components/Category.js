@@ -7,42 +7,51 @@ import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
 import { connect } from "react-redux";
 const Category = (props) => {
-const [categories, setCategories] = useState(props.categories)
-const [loading, setLoading] = useState(true)
-const [category, setCategory] = useState('')
-useEffect(() => {
+  const [categories, setCategories] = useState(props.categories);
+  const [loading, setLoading] = useState(true);
+  const [category, setCategory] = useState("");
+  const [editOpen, setEditOpen] = useState("");
+  useEffect(() => {
     const getCategories = async () => {
-        try {
-            let res = await props.getCategories()
-        setCategories(res)
-        } catch(e) {
-            console.log(e)
-        } finally {
-            setLoading(!loading)
-        }
-    }
-        getCategories()
-    }, [])
-    const sendCategory = async () => {
-      if(!category) {
-       alert("No puede estar vacio") 
-      } else {
-       let res = await props.addCategory(category)
-       if(!res.data.success) {
-         alert(res.data.response)
-       } else {
-         alert('Creado con éxito')
-         let response = await props.getCategories()
-         setCategories(response)
-       }
+      try {
+        let res = await props.getCategories();
+        setCategories(res);
+      } catch (e) {
+        console.log(e);
+      } finally {
+        setLoading(!loading);
       }
-     }
-     const deleteCategory = async (id,index) => {
-       let res = await props.deleteCategory(id)
-       console.log(res)
-       res.data.success && alert("Borrado con éxito")
-        setCategories(categories.splice(id,index))
-     }
+    };
+    getCategories();
+  }, []);
+  const sendCategory = async () => {
+    if (!category) {
+      alert("No puede estar vacio");
+    } else {
+      let res = await props.addCategory(category);
+      if (!res.data.success) {
+        alert(res.data.response);
+      } else {
+        alert("Creado con éxito");
+        let response = await props.getCategories();
+        setCategories(response);
+      }
+    }
+  };
+  const editCategory = async (id) => {
+    let res = await props.editCategory(id, { name: category });
+    if (res.data.success) {
+      let resp = await props.getCategories();
+      setCategories(resp);
+    } else {
+      alert(res.data.response);
+    }
+  };
+  const deleteCategory = async (id, index) => {
+    let res = await props.deleteCategory(id);
+    res.data.success && alert("Borrado con éxito");
+    setCategories(categories.splice(id, index));
+  };
   return (
     <div className={styles.divContainer}>
       <header className={styles.headerAdmin}>
@@ -58,30 +67,54 @@ useEffect(() => {
         <div className={styles.sectionBrandCategory}>
           <div className={styles.containerCategory}>
             <h2>Categorias</h2>
-            {loading ? <div className={styles.loading}></div> : !categories ? <h1>No hay categorías cargadas</h1> :
-                categories.map((category,index) => (
+            {loading ? (
+              <div className={styles.loading}></div>
+            ) : !categories ? (
+              <h1>No hay categorías cargadas</h1>
+            ) : (
+              categories.map((category, index) => (
                 <div key={index} className={styles.category}>
-              <h3>{category.name}</h3>
-              <div className={styles.cointanerEdit}>
-                <div
-                  onClick={() => alert("edit")}
-                  className={styles.icon}
-                  style={{
-                    backgroundImage:
-                      "url('https://i.postimg.cc/bN0rQQhh/editar.png')"
-                  }}
-                ></div>
-                <div
-                  onClick={() => deleteCategory(category._id,index)}
-                  className={styles.icon}
-                  style={{
-                    backgroundImage:
-                      "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                  }}
-                ></div>
-              </div>
-            </div>
-            )) }
+                  <h3>
+                    {editOpen === category.name ? (
+                      <>
+                        <textarea
+                          name="name"
+                          onChange={(e) => setCategory(e.target.value)}
+                        >
+                          {category.name}
+                        </textarea>
+                        <button onClick={() => editCategory(category._id)}>
+                          ✔️
+                        </button>
+                        <button onClick={() => setEditOpen(!editOpen)}>
+                          ✖️
+                        </button>
+                      </>
+                    ) : (
+                      category.name
+                    )}
+                  </h3>
+                  <div className={styles.cointanerEdit}>
+                    <div
+                      onClick={() => setEditOpen(category.name)}
+                      className={styles.icon}
+                      style={{
+                        backgroundImage:
+                          "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
+                      }}
+                    ></div>
+                    <div
+                      onClick={() => deleteCategory(category._id, index)}
+                      className={styles.icon}
+                      style={{
+                        backgroundImage:
+                          "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              ))
+            )}
           </div>
           <div className={styles.containerForm}>
             <div>
@@ -97,11 +130,14 @@ useEffect(() => {
             <div className={styles.containerAllInputs}>
               <div className={styles.containerInputs}>
                 <label htmlFor="name">Nombre</label>
-                <input id="name" type="text" name="name" onChange={(e) => setCategory({name:e.target.value})}/>
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  onChange={(e) => setCategory({ name: e.target.value })}
+                />
+                <button onClick={() => sendCategory()}>Enviar</button>
               </div>
-            </div>
-            <div className={styles.containerButton}>
-              <button onClick={()=> sendCategory()}>Enviar</button>
             </div>
           </div>
         </div>
@@ -111,14 +147,15 @@ useEffect(() => {
 };
 
 const mapStateToProps = (state) => {
-    return {
-      allcategories: state.products.categories,
-    }
-}
+  return {
+    allcategories: state.products.categories,
+  };
+};
 
-  const mapDispatchToProps = {
-    getCategories: productsActions.categories,
-    addCategory: productsActions.addCategory,
-    deleteCategory: productsActions.deleteCategory
-  }
-export default connect(mapStateToProps,mapDispatchToProps)(Category)
+const mapDispatchToProps = {
+  getCategories: productsActions.categories,
+  addCategory: productsActions.addCategory,
+  editCategory: productsActions.editCategory,
+  deleteCategory: productsActions.deleteCategory,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Category);
