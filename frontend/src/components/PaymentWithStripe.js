@@ -25,7 +25,7 @@ const PaymentCheckout = (props) => {
             try {
                 await props.payCart({
                     id,
-                    amount: props.total
+                    amount: props.total * 100
                 })                
                 props.setPayment("Tarjet de Crédito")
                 props.setScreen(3)

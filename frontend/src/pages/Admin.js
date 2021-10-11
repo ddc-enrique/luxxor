@@ -72,7 +72,6 @@ const Admin = (props) => {
  
   const handle = (e) => {
     setProductsFilt(productsFiltered.filter(item => (item.name.toLowerCase().startsWith(e.target.value.trim().toLowerCase()))))
-    
   }
 
   const newProductHandler = (index, e) => { 

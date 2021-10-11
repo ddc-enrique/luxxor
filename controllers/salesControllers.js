@@ -120,7 +120,17 @@ const salesControllers = {
 
     getAllSales: (req, res) => { // para que el admin obtenga todas las ventas
 
+    },
+
+    getOneSale: (req, res) => {
+        console.log(req)
+        Sale.find({user: req.params.id}).populate("shopCart.productId")
+        .then(saleFound => {
+            if (!saleFound) throw new Error("No tiene compras")
+            res.json({success: true, response: saleFound})
+        }).catch((error)=> res.json({success: false, response: error.message}))
     }
+
 }
 
 module.exports = salesControllers

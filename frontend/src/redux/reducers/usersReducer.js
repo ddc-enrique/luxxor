@@ -6,7 +6,8 @@ const initialState = {
     token: null, 
     admin: null, 
     dni: null, 
-    id: null
+    id: null,
+    google: null
 }
 const usersReducer = (state = initialState, action) =>{
     switch (action.type) {
@@ -21,7 +22,8 @@ const usersReducer = (state = initialState, action) =>{
                 admin: action.payload.admin, 
                 id: action.payload._id,
                 token: action.payload.token,
-                dni: action.payload.dni
+                dni: action.payload.dni,
+                google: action.payload.google
             }
         case "LOGOUT":
             localStorage.removeItem("token")
