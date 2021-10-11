@@ -2,6 +2,7 @@ import React,  { useState, useEffect}from "react";
 import styles from "../styles/payment.module.css";
 import { connect } from "react-redux";
 import ModalPaymentMethod from "./ModalPaymentMethod"
+import Paypal from "./Paypal"
 
 const Payment = (props) =>{
     const [modalPayment, setModalPayment] = useState(false)
@@ -25,7 +26,7 @@ const Payment = (props) =>{
                     <h3>Transferencia Bancaria</h3>
                 </div>
                 <div className={styles.boxMethod}>
-                    <Paypal 
+                    <Paypal
                         setScreen={props.setScreen} 
                         setPayment={props.setPayment}
                         toast={props.toast}

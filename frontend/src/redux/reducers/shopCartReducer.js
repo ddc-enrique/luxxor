@@ -9,10 +9,10 @@ const shopCartReducer=(state=initialState ,action)=>{
         let productFound = state.shopCart.find((item) => item.productId === action.payload.id);
             let aux_shopCart_add=state.shopCart.map(item=>
                 item.productId===action.payload.id
-                    ?{productId:item.productId,quantity: item.quantity + 1}
+                    ?{productId:item.productId,quantity: item.quantity + 1,name:action.payload.name,productPrice:action.payload.price}
                     :item    
             )
-            let aux_shopCart_add_2=[...state.shopCart,{productId:action.payload.id,quantity:1}]
+            let aux_shopCart_add_2=[...state.shopCart,{productId:action.payload.id,quantity:1,name:action.payload.name,productPrice:action.payload.price}]
             let subtotal_add=state.subtotal+action.payload.price
             let total_add=parseFloat((state.total+((action.payload.price)*(100-action.payload.discount)/100)).toFixed(2))
 
