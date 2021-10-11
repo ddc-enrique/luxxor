@@ -43,7 +43,6 @@ header.headerAdmin h1 {
 
 .containerAdmin .containerSections>* {
   border: 1px solid #dfdfdf;
-  background: white;
   min-height: 32rem;
   width: 30%;
 }
@@ -55,7 +54,6 @@ header.headerAdmin h1 {
   min-height: 80vh;
   align-items: center;
   flex-direction: column;
-  background-color: #ffffff;
   padding: 1rem;
   margin: 1rem;
 }
@@ -71,17 +69,20 @@ header.headerAdmin h1 {
   justify-content: space-around;
   width: 100vw;
   min-height: 80vh;
-  align-items: center;
+  /* align-items: center; */
+  color: white;
 }
 
 .containerAdmin .sectionBrandCategory .containerCategory {
-  border: 1px solid #0000000f;
-  height: 10rem !important;
+  border: 1px solid #f1f1f1f7;
+  height: 16rem !important;
   width: 82%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
+  background-color: white;
+  color: #464646;
 }
 
 .loading {
@@ -95,12 +96,12 @@ header.headerAdmin h1 {
 }
 
 .containerAdmin .sectionBrandCategory .containerCategory .category {
-  border: 1px solid #e8e8e8;
+  border: .8px solid #bfbfbf82;
   height: 5rem;
   display: flex;
-  width: 45rem;
+  width: 94%;
   justify-content: space-between;
-    padding: 0 .5rem;
+  padding: 0 .5rem;
   align-items: center;
 
 }
