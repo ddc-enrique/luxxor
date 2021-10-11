@@ -31,7 +31,7 @@ const SectionInfo = (props)=>{
                     { products.reverse().map((product) =>
                         <div key={product._id} className={styles.galleryItem}>
                             <div className={styles.image}>
-                                <div className={styles.divImage} style={{backgroundImage: `url("http://localhost:4000/logo.png")`}} alt="nature">
+                                <div className={styles.divImage} style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}} alt="nature">
                             </div>
                             <div className={styles.descriptionContainer}>
                                     <div className={styles.descriptionFirst}><p>{product.name}</p></div>
