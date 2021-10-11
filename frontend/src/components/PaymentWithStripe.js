@@ -4,6 +4,7 @@ import styles from "../styles/stripe.module.css";
 import { connect } from "react-redux";
 import shopCartAction from "../redux/actions/shopCartActions";
 import toast from "react-hot-toast";
+import shopCartActions from "../redux/actions/shopCartActions";
 
 const stripePromisse = loadStripe("pk_test_51Jj1qDLyz3SCpT0O3dmugpTo4iA2C78CtOPdxQlVspZixLw1sOHMezxnQrmRJCQKUtocOMDMizxW3YraU9Rli0KL00RpThZaav")
 
@@ -27,6 +28,7 @@ const PaymentCheckout = (props) => {
                     amount: props.total
                 })                
                 props.setPayment("Tarjet de Crédito")
+                props.resetCart()
                 props.setScreen(3)
             } catch (error) {
                 props.toast.error("No se pudo realizar el pago con tarjeta, intente más tarde o con otro método")
@@ -55,7 +57,8 @@ const PaymentWithStripe = (props) => {
 }
 
 const mapDispatchToProps = {
-    payCart: shopCartAction.payCart
+    payCart: shopCartAction.payCart,
+    resetCart:shopCartActions.resetCart,
 }
 
 const mapStateToProps = (state) => {

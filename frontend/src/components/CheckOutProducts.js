@@ -48,7 +48,6 @@ const CheckOutProducts = (props) =>{
                     return(
                         <>
                             <CardProductCart sale={false} product={product} deleteProduct={props.deleteProduct} setTotal={setTotal} total={total}/>
-                        {/* <h1>kjhkjhj</h1> */}
                         </>
                     )
                 })

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
+import shopCartActions from "../redux/actions/shopCartActions"
+
 
 
 const Paypal = (props) => {
@@ -28,6 +30,7 @@ const Paypal = (props) => {
             onApprove: async (data, actions) => {
                 await actions.order.capture()
                 props.setPayment("PayPal")
+                props.resetCart()
                 props.setScreen(3)
             },
             onError: (err) => {
@@ -49,6 +52,10 @@ const mapStateToProps = (state) =>{
     return{
         total: state.shopCart.total
     }
+}
+
+const mapDispatchToProps ={
+    resetCart:shopCartActions.resetCart,
 }
 
 export default connect(mapStateToProps)(Paypal)

@@ -64,8 +64,9 @@ const Product2 = (props) => {
       setProduct(props.products.find(product=> product._id===props.match.params.id))
     }
   },[])
-
+ 
   const addProductHandler=()=>{
+    console.log(product.price)
     props.addProduct(props.match.params.id,product.price,product.discount,product.name)
   }
 

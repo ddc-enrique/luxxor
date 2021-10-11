@@ -14,6 +14,17 @@ const Sale = (props) =>{
     const[screen,setScreen]=useState(1)
     useEffect(()=>{
         window.scrollTo(0,0)
+        if(!props.token){
+            toast("Deberas loguearte para finaliza la compra", {
+                icon: "🚫",
+                style: {
+                  borderRadius: "1rem",
+                  background: "#fff",
+                  color: "#545454",
+                },
+            })
+            props.history.push("/registro")   
+        }
         if(!props.dni){
             toast("Completa tu perfil para finalizar la compra", {
                 icon: "🚫",
@@ -23,7 +34,7 @@ const Sale = (props) =>{
                   color: "#545454",
                 },
             })
-            /* props.history.push("/mi-cuenta")   */
+            props.history.push("/mi-cuenta")   
         }
 
     })
@@ -70,7 +81,8 @@ const Sale = (props) =>{
 
 const mapStateToProps = (state) => {
     return {
-        dni: state.users.dni,      
+        dni: state.users.dni,     
+        token:SVGMetadataElement.users.token, 
     }
 }
 const mapDispatchToProps ={

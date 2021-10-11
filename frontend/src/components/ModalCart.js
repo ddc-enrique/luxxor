@@ -14,6 +14,8 @@ const ModalCart = (props) =>{
     const[loading,setLoading]=useState(true)
     const[total,setTotal]=useState(0)
     let aux
+    console.log(props.subtotal)
+    console.log(props.total)
     useEffect(()=>{
         
         props.cartProduct.forEach(item=>{

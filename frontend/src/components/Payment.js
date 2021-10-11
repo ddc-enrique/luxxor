@@ -4,11 +4,13 @@ import { connect } from "react-redux";
 import ModalPaymentMethod from "./ModalPaymentMethod"
 import Paypal from "./Paypal"
 import {  CashStack, CreditCard, Receipt } from 'react-bootstrap-icons'
+import shopCartActions from "../redux/actions/shopCartActions"
 const Payment = (props) =>{
     const [modalPayment, setModalPayment] = useState(false)
 
     const chooseCash = () => {
         props.setPayment("Efectivo")
+        props.resetCart()
         props.setScreen(3)
     }
 
@@ -60,6 +62,6 @@ const mapStateToProps = (state) => {
     }
 }
 const mapDispatchToProps ={
-    
+    resetCart:shopCartActions.resetCart,
 }
 export default connect(mapStateToProps,mapDispatchToProps)(Payment)

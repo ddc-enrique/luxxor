@@ -16,7 +16,7 @@ const salesControllers = {
             tableBody+=`<tr>
                 <td style="color:#FFF;text-align: center">${item.name}</td>
                 <td style="color:#FFF;text-align: center">${item.quantity}</td>
-                <td style="color:#FFF;text-align: end">${item.productPrice}</td>
+                <td style="color:#FFF;text-align: end">${item.productPrice * item.quantity}</td>
             </tr>`
         })
       !shipping 
@@ -63,7 +63,7 @@ const salesControllers = {
             let mailSale = {
                 from: 'Luxxor <luxxor.tech@gmail.com>',
                 to: userFound.eMail,
-                subject: `Compra #${numberOrder}aprobada`,
+                subject: `Compra #${numberOrder} aprobada`,
                 html: `
                     <table style="max-width: 800px; padding: 10px; margin:0 auto; border-collapse: collapse;">
                         <tr>
@@ -71,7 +71,7 @@ const salesControllers = {
                                 background: radial-gradient(circle, rgba(47,144,176,1) 0%, rgba(48,106,154,1) 55%, rgba(49,75,136,1) 96%);box-shadow: 0 5px 16px 0 #433e3e94">
                                 <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif;border-radius:20px;">
                                 <h1 style="color: #FFF; margin-left:500px;font-size:2.4rem;">LUXXOR</h1>
-                                <h1 style="color: #FFF; margin: 0 0 7px">CONFIRMACION DE COMPRA</h1>
+                                <h1 style="color: #FFF; margin: 0 0 7px">CONFIRMACION DE COMPRA #${numberOrder}</h1>
                                 <h2 style="color: #FFF; margin: 0 0 7px">Hola ${userFound.lastName}, ${userFound.firstName}:</h2>
                                 <p style="margin: 2px; font-size: 15px; color: #FFF">
                                     ${textSaleMail}
