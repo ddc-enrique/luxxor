@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
 
 
@@ -21,19 +20,18 @@ const Paypal = (props) => {
                     intent: 'CAPTURE',
                     purchase_units: [
                         {description: `Compra en Luxxor el dia ${fecha.toLocaleDateString()}`, amount: {
-                            // value: props.total, currency_code: 'USD'
-                            value: 10, currency_code: 'USD'
+                            value: props.total, currency_code: 'USD'
                         }},
                     ]
                 })
             },
             onApprove: async (data, actions) => {
                 await actions.order.capture()
+                props.setPayment("PayPal")
                 props.setScreen(3)
             },
             onError: (err) => {
-                toast.error("No se pudo realizar el pago con PayPal, intente más tarde o con otro método")
-                console.log(err)
+                props.toast.error("No se pudo realizar el pago con PayPal, intente más tarde o con otro método")
             }
         }).render(paypal.current)
     }, [])
