@@ -178,12 +178,11 @@ const productsActions = {
         }
     },
 
-    editProduct: (id) =>{
+    editProduct: (id, productToEdit) =>{
         return async (dispatch) => {
             try {
-                let response = await axios.put(`http://localhost:4000/api/product/${id}`)
-                console.log(response)
-
+                let response = await axios.put(`http://localhost:4000/api/product/${id}`, productToEdit)
+                return response
             }catch(e){
                 return ({success: false, response: e})
             }
