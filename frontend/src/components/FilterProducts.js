@@ -42,8 +42,6 @@ const FilterProducts = (props) => {
     }, [])
 
     useEffect(() => {
-        console.log("Brand", activeBrand)
-        console.log("Category", activeCategory)
         let flagAllBrands = activeBrand === "allBrands"
         let flagAllCategories = activeCategory === "allCategories"
         let fp = props.products.filter( product => {

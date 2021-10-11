@@ -10,7 +10,7 @@ const Paypal = (props) => {
             fundingSource: window.paypal.FUNDING.PAYPAL,
             style: {
                 layout:  'vertical',
-                color:   'blue',
+                color:   'white',
                 shape:   'rect',
                 label:   'paypal',
                 // tagline: 'true',
