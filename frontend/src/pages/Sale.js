@@ -7,9 +7,9 @@ import toast, { Toaster } from "react-hot-toast"
 import CardProductCart from "../components/CardProductCart";
 import CheckOutProducts from "../components/CheckOutProducts";
 import Payment from "../components/Payment";
+import ConfirmedSale from "../components/ConfirmedSale";
 
 const Sale = (props) =>{
-    const [clickBuy,setClickBuy]= useState(false)
     const [payment,setPayment]= useState(false)
     const[screen,setScreen]=useState(1)
     useEffect(()=>{
@@ -31,12 +31,12 @@ const Sale = (props) =>{
     switch(screen){
         case 1:
             componentToRender= <CheckOutProducts setScreen= {setScreen} />
-             break
+            break
         case 2:
-            componentToRender= <Payment setScreen={setScreen}/>
+            componentToRender= <Payment setScreen={setScreen} setPayment={setPayment} toast={toast}/>
             break
         case 3:
-            componentToRender=<div><h1>COMPRA EXITOSA</h1></div>
+            componentToRender= <ConfirmedSale payment={payment}/>
             break 
 
     }

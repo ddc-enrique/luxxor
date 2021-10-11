@@ -50,6 +50,7 @@ const usersControllers = {
 
     signIn: (req, res) => {
         console.log("Received SIGN IN USER Petition:" + Date())
+        console.log(req.body)
         const { eMail, password, google } = req.body
         const errMessage = "Email y/o contraseña incorrectos"
         User.findOne({ eMail })
@@ -254,6 +255,27 @@ const usersControllers = {
         .catch( err => handleError(res, err) )
     },
 
+    verifyAdmin: (req, res, next) => {
+        if(req.user.admin){
+            next()
+        } else {
+            res.json({ success: false, response: "Admin permissions required"})
+        }
+    },
+
+    // saveNewSale: (req, res) => {
+    //     console.log("Received SAVE NEW SALE Petition:" + Date())
+    //     // const {userId, amount, shopCart, shipping, methodPayment} = req.body
+    //     console.log(req.body)
+    //     // console.log(req.user)
+    //     res.json({ success: true })
+    // },
+
+    saveNewSale: (req, res) => {
+        console.log("Received SAVE NEW SALE Petition:" + Date())
+        console.log(req.body)
+        res.json({ success: true, response: req.body })
+    },
 }
 
 module.exports = usersControllers
