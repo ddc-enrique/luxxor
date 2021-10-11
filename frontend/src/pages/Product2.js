@@ -66,7 +66,7 @@ const Product2 = (props) => {
   },[])
 
   const addProductHandler=()=>{
-    props.addProduct(props.match.params.id,product.price,product.discount)
+    props.addProduct(props.match.params.id,product.price,product.discount,product.name)
   }
 
   const details = detailsOn &&(
@@ -82,10 +82,7 @@ const Product2 = (props) => {
                     1 Año de garantia oficial. 10 días para cambios y
                     devoluciones
                   </p>
-                  <button onClick={()=>{
-                    
-                    props.addProduct(props.match.params.id)
-                  }}
+                  <button onClick={addProductHandler}
                   className={styles.cart}>AGREGAR AL CARRITO</button>
                  
     </>

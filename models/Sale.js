@@ -9,7 +9,8 @@ const SaleSchema = new mongoose.Schema({
     }],
     amount: { type: Number },
     methodPayment: { type: String }, // Efectivo, Paypal, "stripe"
-    shipping: { type: Boolean } //true si es envio, false si retira por local
+    shipping: { type: Boolean }, //true si es envio, false si retira por local
+    numberOrder:{type: Number}
 })
 
 const Sale = mongoose.model("sale", SaleSchema)

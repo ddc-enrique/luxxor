@@ -11,7 +11,7 @@ const CardProductCart = (props) =>{
     /* setTotal(total+subTotalProduct) */
     const addProductHandler=()=>{
         if(counter<product.stock){
-            props.addProduct(product._id,product.price,product.discount)
+            props.addProduct(product._id,product.price,product.discount,product.name)
             setCounter(counter+1)
         }else{
             toast("No hay mas unidades a la venta", {
