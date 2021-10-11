@@ -52,7 +52,8 @@ const usersAction = {
                         eMail: response.data.eMail, 
                         admin: response.data.admin, 
                         _id: response.data.id,
-                        dni: response.data.dni
+                        dni: response.data.dni,
+                        google: response.data.google
                     }})
             }catch(e){
                 dispatch({type: "LOGOUT"})

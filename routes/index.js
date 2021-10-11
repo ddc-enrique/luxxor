@@ -41,6 +41,9 @@ router.route('/user/edit-profile/:id')
         validatorControllers.validatorEditComplete, 
         usersControllers.editProfile)
 
+router.route("/user/myshopping/:id")
+    .get(salesControllers.getOneSale)
+
 router.route("/verifyToken")
     .get(passport.authenticate("jwt", { session: false }),
         usersControllers.verifyToken)
