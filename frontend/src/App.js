@@ -18,12 +18,16 @@ import Banned from "./pages/Banned";
 import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
 import AdminMessages from "./pages/AdminMessages"
+import shopCartActions from "./redux/actions/shopCartActions"
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
   useEffect(() => {
     if (localStorage.getItem("token")){
       signWithLocal(localStorage.getItem("token"))
+    }
+    if(localStorage.getItem('shopCart') && localStorage.getItem('subtotal') && localStorage.getItem('subtotal')){
+      props.loadShopInLs(localStorage.getItem('shopCart'),localStorage.getItem('subtotal'),localStorage.getItem('total'))
     }
   }, [])
 
@@ -44,8 +48,7 @@ const App = (props) => {
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
-        <Route path="/checkout" component={Sale}/>
-        
+        <Route path="/checkout" component={Sale}/>        
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
@@ -56,7 +59,8 @@ const App = (props) => {
 }
 
 const mapDispatchToProps = {
-  signWithLocal: usersAction.signWithLocal
+  signWithLocal: usersAction.signWithLocal,
+  loadShopInLs:shopCartActions.loadShopInLs
 }
 
 const mapStateToProps = (state) => {

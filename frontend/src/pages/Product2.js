@@ -52,7 +52,7 @@ const Product2 = (props) => {
   console.log(product)
 
   const addProductHandler=()=>{
-    {props.addProduct(props.match.params.id,product.price)}
+    props.addProduct(props.match.params.id,product.price,product.discount)
   }
 
   const details = detailsOn &&(

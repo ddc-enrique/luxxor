@@ -6,13 +6,11 @@ import toast, { Toaster } from "react-hot-toast"
 
 const CardProductCart = (props) =>{
    const {product}=props
-   console.log(product)
     const[counter,setCounter]=useState(product.quantity)
-    console.log(product.price)
     /* setTotal(total+subTotalProduct) */
     const addProductHandler=()=>{
         if(counter<product.stock){
-            props.addProduct(product._id,product.price)
+            props.addProduct(product._id,product.price,product.discount)
             setCounter(counter+1)
         }else{
             toast("No hay mas unidades a la venta", {
@@ -27,7 +25,7 @@ const CardProductCart = (props) =>{
     }
     const deleteProductHandler=()=>{
         if(counter>1){
-            props.deleteProduct(product._id,false,product.price)
+            props.deleteProduct(product._id,false,product.price,counter,product.discount)
             setCounter(counter-1)
         }
     }
@@ -69,7 +67,7 @@ const CardProductCart = (props) =>{
             </div>
             <div className={styles.containerSubTotal}>
                     <span  className={styles.inputSubtotal}>{" "+counter*product.price}</span>
-                    <img onClick={() => props.deleteProduct(product._id,true,product.price,counter)} className={styles.iconDelete} src='https://i.postimg.cc/1zysmTqh/bin.png'/>                           
+                    <img onClick={() => props.deleteProduct(product._id,true,product.price,counter,product.discount)} className={styles.iconDelete} src='https://i.postimg.cc/1zysmTqh/bin.png'/>                           
             </div>
             <Toaster position="top-center" reverseOrder={false} />
         </div>
