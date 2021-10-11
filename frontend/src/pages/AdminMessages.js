@@ -1,16 +1,18 @@
-import styles from "../styles/adminMessages.module.css"
+import styles from "../styles/admin.module.css"
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { NavAdmin } from "../components/NavAdmin";
 import messagesActions from "../redux/actions/messagesActions";
 import toast, { Toaster } from "react-hot-toast";
-import MessageRow from "./MessageRow";
-import { ArrowDown } from "react-bootstrap-icons";
+import MessageRow from "../components/MessageRow";
+import { ArrowDown, Trash } from "react-bootstrap-icons";
+
 
 
 const AdminMessages = (props) => {
     const [messages, setMessages] = useState([])
+
     
     useEffect(() => {
         const getAllMessages = async() => {
@@ -27,7 +29,7 @@ const AdminMessages = (props) => {
         }        
         if(!messages.length) getAllMessages()
     }, [])
-
+    
     const deleteMessage = async(id) =>{
         try {
             let response = await props.removeMessage(id)

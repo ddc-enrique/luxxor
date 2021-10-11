@@ -8,19 +8,13 @@ header.headerAdmin {
   border-bottom: 1px solid #d5d5d5;
 }
 
-/* header.headerAdmin h1 {
-  font-size: 2.9rem;
-} */
-
-span.orange {
-  color: #f99d22;
-  /* font-size: 2.9rem; */
+header.headerAdmin h1 {
+  font-size: 1.7rem;
+  color: #fff;
+  text-transform: uppercase;
 }
 
-span.violet {
-  color: #7a5ea8;
-  /* font-size: 2.9rem; */
-}
+
 
 .divContainer .navAdmin {
   width: 4rem;
@@ -36,7 +30,9 @@ span.violet {
 
 .containerAdmin {
   display: flex;
-  min-height: 85vh;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 50vh;
 }
 
 .containerAdmin .containerNav {
@@ -70,11 +66,11 @@ span.violet {
 .containerAdmin .sectionBrandCategory {
   display: flex;
   justify-content: space-around;
-  width: 100vw;
-  min-height: 80vh;
-  border: 1px solid black;
+  width: 85vw;
+  min-height: 70vh;
   align-items: center;
-  background-color: white;
+  background-color: #ffffffb0;
+  border: none;
 }
 
 .containerAdmin .sectionBrandCategory .containerCategory {
@@ -110,6 +106,7 @@ span.violet {
 .containerForm {
   padding: 1rem;
   width: 80%;
+
 }
 
 .containerForm div {
@@ -387,4 +384,110 @@ label {
   border-radius: 0.5rem;
   background-size: cover;
   background-position: center;
+}
+
+.containerAdmin .containerMessages {
+  min-height: 60vh;
+  width: 86%;
+  color: #545454;
+  background-color: #ffffffbd;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.containerAdmin .containerMessages .headerMessages {
+  padding: 2rem;
+}
+
+.containerAdmin .containerMessages .tableMessages {
+  width: 90%;
+}
+
+.containerAdmin .containerMessages .tableMessages tbody tr td {
+  text-align: center;
+  padding: .5rem 0;
+}
+
+.containerAdmin .containerMessages .tableMessages tbody tr td.deleteMessage,
+.containerAdmin .containerMessages .tableMessages tbody tr td.viewTextMessage {
+  cursor: pointer;
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage {
+  z-index: 1;
+  position: absolute;
+  width: 40vw;
+  min-height: 30vh;
+  top: 15vh;
+  left: 30vw;
+  padding: 1rem;
+  border-radius: 1rem;
+  background-color: #314183;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 1px 1px 4px 0px #302a2a;
+
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage .closeModalText {
+  width: 2rem !important;
+  height: 2rem !important;
+  cursor: pointer;
+}
+
+.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage p.textBody {
+  flex-grow: 1;
+  margin-top: 1rem;
+}
+
+
+.modal {
+  min-height: 10rem;
+  width: 26rem;
+  border-radius: 1rem;
+  position: absolute;
+  top: 30%;
+  left: 40%;
+  width: 13rem;
+  background-color: #fff;
+  box-shadow: 12px 0px 100vw 55vw #26262673;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  -webkit-backdrop-filter: blur(21px);
+  backdrop-filter: blur(49px);
+  color: #302a2a;
+  gap: 0.5rem;
+}
+
+button.confirmButton,
+button.cancelButton {
+  border: none;
+  padding: 0.5rem;
+  background-color: rgb(104, 167, 11);
+  color: #fff;
+}
+
+button.cancelButton {
+  background-color: tomato;
+}
+
+div.buttonsModal {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal h3 {
+  margin: 1rem 0;
 }
