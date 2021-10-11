@@ -18,7 +18,7 @@ const Product2 = (props) => {
 
   useEffect(()=>{
     window.scrollTo(0,0)
-    if(props.products.length===0){
+    if(props.products.length){
       props.product(props.match.params.id)
       .then((res)=>{
         if(!res.data.success){
@@ -32,8 +32,8 @@ const Product2 = (props) => {
           })
         }else{
           setProduct(res.data.response)
+          setLoading(!loading)
         }
-        setLoading(!loading) 
       })
      
       .catch(error=>{
@@ -157,8 +157,9 @@ const Product2 = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cartProduct:state.shopCart,
-    products:state.products.products
+    cartProduct: state.shopCart,
+    products: state.products.products,
+    brands: state.products.brands
   }
 }
 const mapDispatchToProps ={

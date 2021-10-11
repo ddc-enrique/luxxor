@@ -57,7 +57,7 @@ const NavBar = (props) => {
                     }
                 </div>
                 {props.token?
-                <div className={styles.icon} style={{backgroundImage: `url(${props.profilePic})`}} onClick={clickHandler}></div>                
+                <div className={styles.icon} style={{backgroundImage: `url(http://localhost:4000/${props.profilePic})`}} onClick={clickHandler}></div>                
                 :<div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/pTZVv7n0/Diseño_sin_título_(66).png")'}} onClick={clickHandler}></div>
                 }
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}} onClick={clickCart}>

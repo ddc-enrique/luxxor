@@ -3,9 +3,9 @@ const initialState = {
     categories: [],
     products: [],
 }
-const productsReducer = (state=initialState, action) => {
+const productsReducer = (state = initialState, action) => {
     
-    switch (action.title) {
+    switch (action.type) {
         case "PRODUCTS":
             return {
                 ...state,
@@ -14,12 +14,12 @@ const productsReducer = (state=initialState, action) => {
         case "BRANDS":
             return {
                 ...state,
-                brands: action.payload
+                brands: action.payload,
             }
         case "CATEGORIES":
             return {
                 ...state,
-                categories: action.payload
+                categories: action.payload,
             }       
         default:
             return state       
