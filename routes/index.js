@@ -46,41 +46,65 @@ router.route("/verifyToken")
 
 router.route('/products')
     .get(productsControllers.getAllProducts)
-    .post(productsControllers.addProduct)
+    .post(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        productsControllers.addProduct)
 
 router.route('/product/:id')
     .get(productsControllers.getOneProduct)
-    .put(productsControllers.editProduct)
-    .delete(productsControllers.deleteProduct)
+    .put(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        productsControllers.editProduct)
+    .delete(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        productsControllers.deleteProduct)
 
 router.route('/checkout')
     .post(productsControllers.productOnCart)
     
 router.route('/admin/brands')
     .get(brandCategoryControllers.getAll)
-    .post(brandCategoryControllers.addValueField)
+    .post(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        brandCategoryControllers.addValueField)
     
 router.route('/admin/brand/:id')
     .get(brandCategoryControllers.getOneValueField)
-    .put(brandCategoryControllers.editValueField)
-    .delete(brandCategoryControllers.deleteValueField)
+    .put(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        brandCategoryControllers.editValueField)
+    .delete(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        brandCategoryControllers.deleteValueField)
 
 router.route('/admin/categories')
     .get(brandCategoryControllers.getAll)
-    .post(brandCategoryControllers.addValueField)
+    .post(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        brandCategoryControllers.addValueField)
 
 router.route('/admin/category/:id')
     .get(brandCategoryControllers.getOneValueField)
-    .put(brandCategoryControllers.editValueField)
-    .delete(brandCategoryControllers.deleteValueField)
+    .put(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        brandCategoryControllers.editValueField)
+    .delete(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        brandCategoryControllers.deleteValueField)
 
 router.route('/admin/messages')
     .get(messagesControllers.getAllMessages)
 router.route('/admin/message/:id')
-    .delete(messagesControllers.deleteMessage)
+    .delete(passport.authenticate("jwt", { session: false }),
+        usersControllers.verifyAdmin,
+        messagesControllers.deleteMessage)
 
 router.route('/contact')
     .post(validatorControllers.validatorSendNewMessage,
         messagesControllers.sendNewMessage)
+
+router.route('/verify-admin')
+        .get(passport.authenticate('jwt', {session: false}), 
+        usersControllers.verifyAdmin)
 
 module.exports = router

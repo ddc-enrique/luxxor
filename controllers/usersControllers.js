@@ -254,6 +254,10 @@ const usersControllers = {
         .catch( err => handleError(res, err) )
     },
 
+    verifyAdmin: (req, res, next) => {
+        console.log(req.user.admin)
+    }
+
 }
 
 module.exports = usersControllers
