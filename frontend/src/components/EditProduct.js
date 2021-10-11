@@ -50,7 +50,7 @@ const EditProduct = (props) => {
       }
 
   const handleEdit = async () => {
-    let response = await props.editProduct(props.id, productToEdit)
+    let response = await props.editProduct(props.id, productToEdit, props.token)
     if (response.data.success){
         props.setRender(!props.render)
         console.log("Se actualizó con éxito")//poner tostada
@@ -143,6 +143,11 @@ const mapDispatchToProps = {
     getBrands: productsActions.brands,
 }
 
+const mapStateToProps = (state) => {
+    return{
+        token: state.users.token
+    }
+}
 
 
-export default connect(null, mapDispatchToProps)(EditProduct)
+export default connect(mapStateToProps, mapDispatchToProps)(EditProduct)

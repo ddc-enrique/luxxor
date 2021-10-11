@@ -28,7 +28,7 @@ const Category = (props) => {
     if (!category) {
       alert("No puede estar vacio");
     } else {
-      let res = await props.addCategory(category);
+      let res = await props.addCategory(category, props.token);
       if (!res.data.success) {
         alert(res.data.response);
       } else {
@@ -39,7 +39,7 @@ const Category = (props) => {
     }
   };
   const editCategory = async (id) => {
-    let res = await props.editCategory(id, { name: category });
+    let res = await props.editCategory(id, { name: category }, props.token);
     if (res.data.success) {
       let resp = await props.getCategories();
       setCategories(resp);
@@ -48,7 +48,7 @@ const Category = (props) => {
     }
   };
   const deleteCategory = async (id, index) => {
-    let res = await props.deleteCategory(id);
+    let res = await props.deleteCategory(id, props.token);
     res.data.success && alert("Borrado con éxito");
     setCategories(categories.splice(id, index));
   };
@@ -149,6 +149,7 @@ const Category = (props) => {
 const mapStateToProps = (state) => {
   return {
     allcategories: state.products.categories,
+    token: state.users.token
   };
 };
 
