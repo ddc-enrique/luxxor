@@ -3,9 +3,9 @@ const Information = () => {
     return(
         <div className={styles.divContainerInfo}>
             <div className={styles.cardInfo}>
-                <p className={styles.titleCard}>¡CUOTAS SIN INTERÉS!</p>
+                <p className={styles.titleCard}>¡VARIOS MEDIOS DE PAGO!</p>
                 <div className={styles.divImageInfo} style={{backgroundImage: 'url("https://i.postimg.cc/YSDGN5j5/Diseño_sin_título_(64).png")'}}></div>
-                <p className={styles.cardText}>En productos seleccionados</p>
+                <p className={styles.cardText}>Elegí el que más te guste</p>
             </div>
             <div className={styles.cardInfo}>
                 <p className={styles.titleCard}>ENVÍOS A TODO EL PAÍS</p>

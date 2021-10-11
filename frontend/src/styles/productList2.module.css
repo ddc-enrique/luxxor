@@ -186,7 +186,8 @@ div.container {
 
 @media (min-width: 600px) {
   .card {
-    height: 350px;
+    height: 25rem;
+    width: 13rem;
   }
 }
 

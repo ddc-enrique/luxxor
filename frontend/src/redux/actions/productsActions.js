@@ -86,7 +86,7 @@ const productsActions = {
                 let res = await axios.delete(`http://localhost:4000/api/admin/brand/${id}`)
                     return res
             }catch(e){
-               console.log(e)
+            console.log(e)
             }
         }
     },

@@ -7,6 +7,7 @@ import shopCartActions from "../redux/actions/shopCartActions"
 import toast, { Toaster } from "react-hot-toast"
 import productsActions from "../redux/actions/productsActions"
 import Moment from 'react-moment'
+import { Carousel } from 'react-carousel-minimal'
 // import 'moment-timezone'
 
 const Product2 = (props) => {
@@ -15,7 +16,19 @@ const Product2 = (props) => {
   const [modal, setModal] = useState(false);
   const [loading,setLoading]=useState(true)
   const date = new Date()
+  const data = [
+    {
+        image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png", name: 'nombre del producto'
+    },
+    {
+      image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png", name: 'nombre del producto'
+  },
+  {
+    image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png", name: 'nombre del producto'
+},
 
+
+]
   useEffect(()=>{
     window.scrollTo(0,0)
     if(props.products.length===0){
@@ -35,7 +48,6 @@ const Product2 = (props) => {
         }
         setLoading(!loading) 
       })
-     
       .catch(error=>{
         setLoading(!loading)
         console.log(error)
@@ -48,7 +60,6 @@ const Product2 = (props) => {
           }
         })
       })
-   
     }else{
       setProduct(props.products.find(product=> product._id===props.match.params.id))
     }
@@ -94,7 +105,7 @@ const Product2 = (props) => {
         <div className={styles.productsContainer}>
            <div className={styles.containerProduct}>
            <div className={styles.title}>
-           <p>Informática</p>
+           <p>{product.category}</p>
            <h2>{product.name}</h2>
            <p className={styles.detailDescription}>Diseño elegante y plegable</p>
            <p className={styles.cart}>SONY</p> {/* POPULAR BRAND */}
@@ -144,13 +155,19 @@ const Product2 = (props) => {
                   )
                 })
               }
-					  </ul>
-						 <h3>DESCRIPCIÓN</h3>
-						 <p>{product.description}</p>
-					 </div>
+					</ul>
+              <h3>DESCRIPCIÓN</h3>
+              <p>{product.description}</p>
+					</div>
                 </div>
               )}
-           <Toaster position="top-center" reverseOrder={false} />
+          <Toaster position="top-center" reverseOrder={false} />
+          <div className={styles.divRecomendados}>
+            <h3>También te puede interesar..</h3>
+            <div className={styles.divContainerPics}>
+              {data.map((product)=><div className={styles.picRecomendados} style={{backgroundImage:`url('${product.image}')`}}> <p>{product.name}</p></div>)}
+            </div>
+          </div>
         </>
     )
 }
