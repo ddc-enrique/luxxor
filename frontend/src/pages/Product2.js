@@ -46,8 +46,9 @@ const Product2 = (props) => {
       setLoading(false)
     }
   },[])
-
+ 
   const addProductHandler=()=>{
+    console.log(product.price)
     props.addProduct(props.match.params.id,product.price,product.discount,product.name)
   }
   console.log(product.category)

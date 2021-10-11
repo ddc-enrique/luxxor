@@ -14,6 +14,8 @@ const ModalCart = (props) =>{
     const[loading,setLoading]=useState(true)
     const[total,setTotal]=useState(0)
     let aux
+    console.log(props.subtotal)
+    console.log(props.total)
     useEffect(()=>{
         
         props.cartProduct.forEach(item=>{
@@ -29,7 +31,12 @@ const ModalCart = (props) =>{
             setLoading(!loading)  
         },500)
     },[])
+    console.log(products)
 
+     const DeleteProductModalCart=(id,deleteAll,price,quantity,discount)=>{
+        props.deleteProduct(id,deleteAll,price,quantity,discount)
+        setProducts(products.filter(product=>product._id!==id))
+    } 
    if(loading){
         return(
             <div className={styles.containerGeneral}>
@@ -61,7 +68,7 @@ const ModalCart = (props) =>{
                         products.map(product=>{                          
                             return(
                                 <>
-                                    <CardProductCart sale={false} product={product} deleteProduct={props.deleteProduct} setTotal={setTotal} total={total}/>
+                                    <CardProductCart sale={false} product={product} deleteProduct={props.deleteProduct} setTotal={setTotal} total={total} DeleteProductModalCart={DeleteProductModalCart}/>
                                 {/* <h1>kjhkjhj</h1> */}
                                 </>
                             )

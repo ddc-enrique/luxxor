@@ -4,6 +4,7 @@ import styles from "../styles/stripe.module.css";
 import { connect } from "react-redux";
 import shopCartAction from "../redux/actions/shopCartActions";
 import toast from "react-hot-toast";
+import shopCartActions from "../redux/actions/shopCartActions";
 
 const stripePromisse = loadStripe("pk_test_51Jj1qDLyz3SCpT0O3dmugpTo4iA2C78CtOPdxQlVspZixLw1sOHMezxnQrmRJCQKUtocOMDMizxW3YraU9Rli0KL00RpThZaav")
 
@@ -55,7 +56,8 @@ const PaymentWithStripe = (props) => {
 }
 
 const mapDispatchToProps = {
-    payCart: shopCartAction.payCart
+    payCart: shopCartAction.payCart,
+    resetCart:shopCartActions.resetCart,
 }
 
 const mapStateToProps = (state) => {
