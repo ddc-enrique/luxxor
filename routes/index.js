@@ -65,8 +65,9 @@ router.route('/checkout')
     
 router.route('/admin/brands')
     .get(brandCategoryControllers.getAll)
-    .post(passport.authenticate("jwt", { session: false }),
-        usersControllers.verifyAdmin,
+    .post(
+        // passport.authenticate("jwt", { session: false }),
+        // usersControllers.verifyAdmin,
         brandCategoryControllers.addValueField)
     
 router.route('/admin/brand/:id')
