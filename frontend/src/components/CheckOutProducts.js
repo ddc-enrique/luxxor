@@ -15,7 +15,7 @@ const CheckOutProducts = (props) =>{
     const[total,setTotal]=useState(0)
     let aux
     var aux_array=[]
-    console.log(total)
+    console.log(props.cartProduct)
     useEffect(()=>{
         /* console.log(props.cartProduct) */
         props.cartProduct.forEach(item=>{

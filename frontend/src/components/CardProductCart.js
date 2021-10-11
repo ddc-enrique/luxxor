@@ -3,6 +3,7 @@ import styles from "../styles/modalCart.module.css";
 import { connect } from "react-redux";
 import shopCartActions from "../redux/actions/shopCartActions"
 import toast, { Toaster } from "react-hot-toast"
+import {  PlusCircle, DashCircle, X} from 'react-bootstrap-icons'
 
 const CardProductCart = (props) =>{
    const {product}=props
@@ -46,28 +47,15 @@ const CardProductCart = (props) =>{
                     <p>{product.name}</p>
                     <span>$ {" "+product.price}</span>
                     <div className={styles.counter}>
-                        <div className={styles.icon}
-                            style={{
-                            backgroundImage:
-                                "url('https://i.postimg.cc/63nKHn7j/3-removebg-preview-2.png')",
-                            }}
-                            onClick={deleteProductHandler}></div>
+                        <DashCircle onClick={deleteProductHandler} className={styles.iconClose}/>
                         <span>{counter}</span>
-                        <div
-                            className={styles.icon}
-                            style={{
-                            backgroundImage:
-                                "url('https://i.postimg.cc/0NLxdcNK/2-removebg-preview-4.png')",
-                            }}
-                            onClick= {addProductHandler}
-                        ></div>
-                        
+                         <PlusCircle onClick={addProductHandler} className={styles.iconClose}/>
                     </div>                   
                 </div>
             </div>
             <div className={styles.containerSubTotal}>
-                    <span  className={styles.inputSubtotal}>{" "+counter*product.price}</span>
-                    <img onClick={() => props.deleteProduct(product._id,true,product.price,counter,product.discount)} className={styles.iconDelete} src='https://i.postimg.cc/1zysmTqh/bin.png'/>                           
+                    <span  className={styles.inputSubtotal}>${" "+counter*product.price}</span>
+                    <X onClick={() => props.deleteProduct(product._id,true,product.price,counter,product.discount)} className={styles.iconClose}/>
             </div>
             <Toaster position="top-center" reverseOrder={false} />
         </div>
