@@ -255,7 +255,11 @@ const usersControllers = {
     },
 
     verifyAdmin: (req, res, next) => {
-        console.log(req.user.admin)
+        if(req.user.admin){
+            next()
+        } else {
+            res.json({ success: false, response: "Admin permissions required"})
+        }
     }
 
 }
