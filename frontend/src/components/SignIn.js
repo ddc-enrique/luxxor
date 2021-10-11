@@ -29,9 +29,8 @@ const SignIn = (props) => {
         try {
            let response = await signIn(logUserWithGoogle)
            if (!response){
-               console.log("Error")
-           }else{
-                console.log("Bien")
+            props.setModalLogIn(!props.modalLogIn)
+            props.istory.push('/')
            }
         }catch(e){
             console.log(e)

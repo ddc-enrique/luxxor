@@ -34,7 +34,7 @@ const App = (props) => {
         <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
         <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
-        <Route path="/registro" component={SignUp} />
+        {/* <Route path="/registro" component={SignUp} /> */}
         <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route exact path="/admin/messages" component={AdminMessages} />
@@ -48,7 +48,7 @@ const App = (props) => {
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
-        <Redirect to="/error" />
+        <Redirect to="/" />
       </Switch>
     </BrowserRouter>
   )
