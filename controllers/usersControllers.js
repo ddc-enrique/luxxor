@@ -50,7 +50,6 @@ const usersControllers = {
 
     signIn: (req, res) => {
         console.log("Received SIGN IN USER Petition:" + Date())
-        console.log(req.body)
         const { eMail, password, google } = req.body
         const errMessage = "Email y/o contraseña incorrectos"
         User.findOne({ eMail })
