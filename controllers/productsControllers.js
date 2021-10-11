@@ -23,8 +23,6 @@ const productsControllers = {
         const{name,stock,price,color,dataSheet,description,discount,category,brand}=req.body
         const{photos}=req.files
         route = path.join(__dirname, "../assets/productsPhoto") 
-
-        console.log(dataSheet)
     
         let dataSheetToSave = dataSheet.map((data)=>{
             let dataArray = data.split(",")
@@ -62,7 +60,6 @@ const productsControllers = {
     editProduct:(req,res)=>{
         console.log("Received EDIT PRODUCTS Petition:" + Date())
         const _id = req.params.id
-        console.log(req.body)
         Product.findOneAndUpdate({_id},{...req.body},{new:true})
         .then(editedProduct=>res.json({success:true,response:editedProduct}))
         .catch(error=>res.json({success:false,response:error.message}))
