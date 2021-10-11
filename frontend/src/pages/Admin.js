@@ -108,7 +108,7 @@ const Admin = (props) => {
   }
 
   const deleteProduct = (id) => {
-      props.deleteProductById(id)
+      props.deleteProductById(id, props.token)
       .then(response=>{
         if(!response.success){
             console.log("Hubo un error") //poner tostada
@@ -143,7 +143,7 @@ const EditProductComp = (props) => {
     FD.append("discount", newProduct.discount)
     FD.append("category", newProduct.category)
     FD.append("brand", newProduct.brand)
-   let response = await props.addProduct(FD)
+   let response = await props.addProduct(FD, props.token)
    if (!response.success) {
      console.log("Error") //Poner tostada
    }else {
@@ -438,7 +438,6 @@ const mapDispatchToProps = {
   getBrands: productsActions.brands,
   getAllProducts: productsActions.products,
   deleteProductById: productsActions.deleteProduct,
-  editProduct: productsActions.editProduct,
 }
 
 const mapStateToProps = (state) => {
@@ -446,6 +445,7 @@ const mapStateToProps = (state) => {
     categories: state.products.categories,
     brands: state.products.brands,
     products: state.products.products,
+    token: state.users.token
   }
 }
 
