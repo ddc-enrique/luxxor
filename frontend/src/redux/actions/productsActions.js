@@ -176,6 +176,18 @@ const productsActions = {
                 return ({success: false, response: e})
             }
         }
+    },
+
+    editProduct: (id) =>{
+        return async (dispatch) => {
+            try {
+                let response = await axios.put(`http://localhost:4000/api/product/${id}`)
+                console.log(response)
+
+            }catch(e){
+                return ({success: false, response: e})
+            }
+        }
     }
 
 }

@@ -4,59 +4,9 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
 import { NavAdmin } from "../components/NavAdmin";
+import EditProduct from "../components/EditProduct";
 
 const Admin = (props) => {
-  const data = [
-    {
-      name: "Notebook",
-      price: 120000,
-      stock: 100,
-      color: "red",
-      photos: [
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-      ],
-      dataShets: [{ optionName: "Memoria Ram", optionValue: "8GB" }],
-      description: "La mejor notebook del universo",
-      discount: 10,
-      category: "Informática",
-      brand: "HP",
-    },
-    {
-      name: "Notebook",
-      price: 120000,
-      stock: 100,
-      color: "red",
-      photos: [
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-      ],
-      dataShets: [{ optionName: "Memoria Ram", optionValue: "8GB" }],
-      description: "La mejor notebook del universo",
-      discount: 10,
-      category: "Informática",
-      brand: "HP",
-    },
-    {
-      name: "Notebook",
-      price: 120000,
-      stock: 100,
-      color: "red",
-      photos: [
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-      ],
-      dataShets: [{ optionName: "Memoria Ram", optionValue: "8GB" }],
-      description: "La mejor notebook del universo",
-      discount: 10,
-      category: "Informática",
-      brand: "HP",
-    },
-  ];
-
 
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -84,7 +34,9 @@ const Admin = (props) => {
   const [products, setProducts] = useState(props.products)
   const [productsFilt, setProductsFilt] = useState(props.products)
   const [productsFiltered, setProductsFiltered] = useState(props.products)
+  const [productId, setProductId] = useState(null)
   const [render, setRender] = useState(false)
+  const [modalEdit, setModalEdit] = useState(false)
   const [loading, setLoading] = useState(true)
   useEffect(()=>{
     
@@ -92,7 +44,6 @@ const Admin = (props) => {
       if(!products.length){
         
         let response = await props.getAllProducts()
-        console.log(response)
         setProducts(response)
         setProductsFiltered(response)
         setProductsFilt(response)
@@ -161,7 +112,7 @@ const Admin = (props) => {
 
   const deleteProduct = (id) => {
       props.deleteProductById(id)
-      .then(response=>{console.log(response)
+      .then(response=>{
         if(!response.success){
             console.log("Hubo un error") //poner tostada
         }else {
@@ -171,9 +122,14 @@ const Admin = (props) => {
         }
       })
   }
+  
+const EditProductComp = (props) => {
+    props.setModalEdit(true) 
+    return (modalEdit && <EditProduct setModalEdit={props.setModalEdit} id={props.productId} brands={brands} categories={categories}/>)
+}
+  
 
-
-
+  console.log(modalEdit)
 
   const addProductHandler = async () => {
     const FD = new FormData()
@@ -398,6 +354,7 @@ const Admin = (props) => {
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>
                         <div
+                          onClick={()=>{setProductId(product._id); setModalEdit(!modalEdit)}}
                           className={styles.icon}
                           style={{
                             backgroundImage:
@@ -414,9 +371,10 @@ const Admin = (props) => {
                         ></div>
                       </div>
                     </div>
-                  
+
                   </div>
                 ))}
+                {modalEdit && <EditProductComp productId={productId} setModalEdit={setModalEdit}/>}
               </div>
             </div>
           </section>
@@ -466,6 +424,7 @@ const Admin = (props) => {
                     </div>
                   </div>
                 ))}
+                
               </div>
             </div>
           </section>
@@ -483,6 +442,7 @@ const mapDispatchToProps = {
   getBrands: productsActions.brands,
   getAllProducts: productsActions.products,
   deleteProductById: productsActions.deleteProduct,
+  editProduct: productsActions.editProduct,
 }
 
 const mapStateToProps = (state) => {

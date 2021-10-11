@@ -124,7 +124,7 @@ const mapStateToProps = (state) => {
         lastName: state.users.lastName,
         token: state.users.token,
         admin: state.users.admin,
-        cartProduct:state.shopCart,
+        cartProduct:state.shopCart.shopCart,
     }
 }
 
