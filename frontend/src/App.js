@@ -18,12 +18,16 @@ import Banned from "./pages/Banned";
 import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
 import AdminMessages from "./pages/AdminMessages"
+import shopCartActions from "./redux/actions/shopCartActions"
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
   useEffect(() => {
     if (localStorage.getItem("token")){
       signWithLocal(localStorage.getItem("token"))
+    }
+    if(localStorage.getItem('shopCart') && localStorage.getItem('subtotal') && localStorage.getItem('subtotal')){
+      props.loadShopInLs(localStorage.getItem('shopCart'),localStorage.getItem('subtotal'),localStorage.getItem('total'))
     }
   }, [])
 
@@ -55,7 +59,8 @@ const App = (props) => {
 }
 
 const mapDispatchToProps = {
-  signWithLocal: usersAction.signWithLocal
+  signWithLocal: usersAction.signWithLocal,
+  loadShopInLs:shopCartActions.loadShopInLs
 }
 
 const mapStateToProps = (state) => {

@@ -13,7 +13,6 @@ const ModalCart = (props) =>{
     const[loading,setLoading]=useState(true)
     const[total,setTotal]=useState(0)
     let aux
-    console.log(props.total)
     useEffect(()=>{
         
         props.cartProduct.forEach(item=>{
@@ -63,11 +62,11 @@ const ModalCart = (props) =>{
                 <div className={styles.containerDisconts}>
                     <div className={styles.containerSubTotalCart}>
                         <h3>Subtotal (sin envio):</h3>
-                        <span>${props.total}</span>
+                        <span>${props.subtotal}</span>
                     </div>
                     <div className={styles.containerSubTotalCart}>
-                        <h3>15%OFF</h3>
-                        <span>$42.330</span>
+                        <h3>{props.total>0 ? parseFloat((100-props.total*100/props.subtotal).toFixed(2))+ " % OFF": "- %"}</h3>
+                        <span>$ {props.total}</span>
                     </div>
                 </div>
                 <div className={styles.containerShip}>
@@ -95,7 +94,8 @@ const ModalCart = (props) =>{
 const mapStateToProps = (state) => {
     return {
     cartProduct:state.shopCart.shopCart,
-    total:state.shopCart.total
+    total:state.shopCart.total,
+    subtotal:state.shopCart.subtotal
     }
   }
   const mapDispatchToProps ={

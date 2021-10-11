@@ -55,7 +55,7 @@ const Product2 = (props) => {
   },[])
 
   const addProductHandler=()=>{
-    {props.addProduct(props.match.params.id,product.price)}
+    props.addProduct(props.match.params.id,product.price,product.discount)
   }
 
   const details = detailsOn &&(
