@@ -2,7 +2,7 @@ div.container {
     width: 100%;
     height: 100%;
     position: fixed;
-    top: 25%;
+    top: 15%;
     left: 34%;
 }
 
@@ -19,8 +19,6 @@ div.editContainer {
     border-radius: 15px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
 }
 
 div.button {
@@ -30,3 +28,11 @@ div.button {
 .close {
     cursor: pointer;
 }
+
+.containerInputs {
+    margin: 0.5rem 0;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+

@@ -31,7 +31,7 @@ const Product2 = (props) => {
 ]
   useEffect(()=>{
     window.scrollTo(0,0)
-    if(props.products.length===0){
+    if(props.products.length){
       props.product(props.match.params.id)
       .then((res)=>{
         if(!res.data.success){
@@ -45,8 +45,8 @@ const Product2 = (props) => {
           })
         }else{
           setProduct(res.data.response)
+          setLoading(!loading)
         }
-        setLoading(!loading) 
       })
       .catch(error=>{
         setLoading(!loading)
@@ -66,7 +66,7 @@ const Product2 = (props) => {
   },[])
 
   const addProductHandler=()=>{
-    props.addProduct(props.match.params.id,product.price,product.discount)
+    props.addProduct(props.match.params.id,product.price,product.discount,product.name)
   }
 
   const details = detailsOn &&(
@@ -82,10 +82,7 @@ const Product2 = (props) => {
                     1 Año de garantia oficial. 10 días para cambios y
                     devoluciones
                   </p>
-                  <button onClick={()=>{
-                    
-                    props.addProduct(props.match.params.id)
-                  }}
+                  <button onClick={addProductHandler}
                   className={styles.cart}>AGREGAR AL CARRITO</button>
                  
     </>
@@ -174,8 +171,9 @@ const Product2 = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cartProduct:state.shopCart,
-    products:state.products.products
+    cartProduct: state.shopCart,
+    products: state.products.products,
+    brands: state.products.brands
   }
 }
 const mapDispatchToProps ={

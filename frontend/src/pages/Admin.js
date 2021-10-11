@@ -42,12 +42,11 @@ const Admin = (props) => {
     
     const getAllProducts = async () => {
       if(!products.length){
-        
         let response = await props.getAllProducts()
         setProducts(response)
         setProductsFiltered(response)
         setProductsFilt(response)
-        setLoading(!loading)
+        setLoading(false)
       }
     }
     getAllProducts()
@@ -68,11 +67,9 @@ const Admin = (props) => {
       }
     }
     getAllCategories()
+  }, [])
 
-  
-  }, [render])
-  
-  
+ 
   const handle = (e) => {
     setProductsFilt(productsFiltered.filter(item => (item.name.toLowerCase().startsWith(e.target.value.trim().toLowerCase()))))
     
@@ -125,11 +122,10 @@ const Admin = (props) => {
   
 const EditProductComp = (props) => {
     props.setModalEdit(true) 
-    return (modalEdit && <EditProduct setModalEdit={props.setModalEdit} id={props.productId} brands={brands} categories={categories}/>)
+    return (modalEdit && <EditProduct  setModalEdit={props.setModalEdit} id={props.productId} brands={brands} categories={categories}/>)
 }
   
 
-  console.log(modalEdit)
 
   const addProductHandler = async () => {
     const FD = new FormData()
@@ -245,7 +241,7 @@ const EditProductComp = (props) => {
                   <input id="name" type="text" name="name" onChange={(e)=>newProductHandler("index", e)} />
                 </div>
                 <div className={styles.containerInputs}>
-                  <label htmlFor="color">Categoria</label>
+                  <label htmlFor="category">Categoria</label>
                   <select className={styles.select} name="category" onChange={(e)=>newProductHandler("index", e)}>
                     {categories.map(category=> (
                       <option
@@ -374,7 +370,7 @@ const EditProductComp = (props) => {
 
                   </div>
                 ))}
-                {modalEdit && <EditProductComp productId={productId} setModalEdit={setModalEdit}/>}
+                {modalEdit && <EditProductComp  productId={productId} setModalEdit={setModalEdit}/>}
               </div>
             </div>
           </section>
@@ -392,7 +388,7 @@ const EditProductComp = (props) => {
             <div className={styles.containerAllInputs}>
               <div className={styles.containerProducts}>
                 {loading ? <div className={styles.loading}></div> :
-                  products.map((product, index) => (
+                  productsFiltered.slice(0,4).reverse().map((product, index) => (
                   <div className={styles.boxProduct} key={index}>
                     <div className={styles.titleProduct}>
                       <div
