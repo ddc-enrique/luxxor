@@ -34,16 +34,32 @@ const SignUp = (props) => {
     ? "5NX1hj01/eyeOpen.png"
     : "hPNgcgzm/EyeClose.png"
 
-  const responseGoogle = (res) => {
-    let newUserWithGoogle = {
-      firstName: res.profileObj.givenName,
-      lastName: res.profileObj.familyName,
-      eMail: res.profileObj.email,
-      password: res.profileObj.googleId,
-      profilePic: res.profileObj.imageUrl,
-      google: true,
+  const responseGoogle = async (res) => {
+    try{
+      let newUserWithGoogle = {
+        firstName: res.profileObj.givenName,
+        lastName: res.profileObj.familyName,
+        eMail: res.profileObj.email,
+        password: res.profileObj.googleId,
+        profilePic: res.profileObj.imageUrl,
+        google: true,
+      }
+      
+      const response = await signUp(newUserWithGoogle)
+      if(response === 'Usuario ya registrado'){
+        toast("Usuario ya registrado", {
+          icon: "🚫",
+          style: {
+            borderRadius: "1rem",
+            background: "#fff",
+            color: "#545454",
+          },
+        })
+      }
+    }catch(error){
+
     }
-    signUp(newUserWithGoogle)
+    
   }
 
   const newUserHandler = (e) => {
@@ -53,8 +69,6 @@ const SignUp = (props) => {
         e.target.name === "profilePic" ? e.target.files[0] : e.target.value,
     })
   }
-
-  console.log(newUser.profilePic)
 
   const enterNewUser = async () => {
     try {

@@ -5,13 +5,17 @@ import styles from "../styles/product.module.css";
 import { connect } from "react-redux";
 import shopCartActions from "../redux/actions/shopCartActions"
 import toast, { Toaster } from "react-hot-toast"
-import productsActions from "../redux/actions/productsActions";
+import productsActions from "../redux/actions/productsActions"
+import Moment from 'react-moment'
+// import 'moment-timezone'
 
 const Product2 = (props) => {
   const [detailsOn, setDetailsOn] = useState(false);
   const [product,setProduct]=useState({})
   const [modal, setModal] = useState(false);
   const [loading,setLoading]=useState(true)
+  const date = new Date()
+
   useEffect(()=>{
     window.scrollTo(0,0)
     if(props.products.length===0){
@@ -49,7 +53,6 @@ const Product2 = (props) => {
       setProduct(props.products.find(product=> product._id===props.match.params.id))
     }
   },[])
-  console.log(product)
 
   const addProductHandler=()=>{
     {props.addProduct(props.match.params.id,product.price)}
@@ -62,7 +65,7 @@ const Product2 = (props) => {
            <h2>{product.name}</h2>
            <p>$ {" "+product.price}</p>
            <span>Ver todas las promociones</span>
-           <p>Te llega a partir de <span className={styles.orange}>Mañana 6 de Octubre</span>
+           <p>Te llega a partir de <span className={styles.orange}><Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> </span>
                   </p>
                   <p>
                     1 Año de garantia oficial. 10 días para cambios y
@@ -110,7 +113,8 @@ const Product2 = (props) => {
            <h2>{product.name}</h2>
            <p>${" "+product.price}</p>
            <span>Ver todas las promociones</span>
-           <p>Te llega a partir de <span className={styles.orange}>Mañana 6 de Octubre</span>
+           {/* <Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> */}
+           <p>Te llega a partir de <span className={styles.orange}><Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> </span>
                   </p>
                   <p>1 Año de garantia oficial. 10 días para cambios y
                     devoluciones
