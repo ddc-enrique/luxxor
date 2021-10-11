@@ -7,46 +7,26 @@ import shopCartActions from "../redux/actions/shopCartActions"
 import toast, { Toaster } from "react-hot-toast"
 import productsActions from "../redux/actions/productsActions"
 import Moment from 'react-moment'
-import { Carousel } from 'react-carousel-minimal'
-// import 'moment-timezone'
+
 
 const Product2 = (props) => {
   const [detailsOn, setDetailsOn] = useState(false);
-  const [product,setProduct]=useState({})
+  const [product,setProduct]=useState({category:{_id : 1}})
+  const [products,setProducts]=useState([])
   const [modal, setModal] = useState(false);
   const [loading,setLoading]=useState(true)
   const date = new Date()
-  const data = [
-    {
-        image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png", name: 'nombre del producto'
-    },
-    {
-      image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png", name: 'nombre del producto'
-  },
-  {
-    image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png", name: 'nombre del producto'
-},
 
-
-]
   useEffect(()=>{
     window.scrollTo(0,0)
-    if(props.products.length){
-      props.product(props.match.params.id)
+    if(!props.products.length){
+      props.products()
       .then((res)=>{
-        if(!res.data.success){
-          toast("Disculpe,tenemos problemas tecnicos,vuelva en unos minutos.", {
-            icon: "🚫",
-            style: {
-              borderRadius: "1rem",
-              background: "#fff",
-              color: "#545454",
-            }
-          })
-        }else{
-          setProduct(res.data.response)
+          let productAux = res.find(product=> product._id===props.match.params.id)
+          setProduct(productAux)
+          setProducts(res)
           setLoading(!loading)
-        }
+        
       })
       .catch(error=>{
         setLoading(!loading)
@@ -62,13 +42,17 @@ const Product2 = (props) => {
       })
     }else{
       setProduct(props.products.find(product=> product._id===props.match.params.id))
+      setProducts(props.products)
+      setLoading(false)
     }
   },[])
 
   const addProductHandler=()=>{
     props.addProduct(props.match.params.id,product.price,product.discount,product.name)
   }
-
+  console.log(product.category)
+  const arrayRecom =products.filter(item => item.category._id === product.category._id && item._id !== product._id)
+  console.log(arrayRecom)
   const details = detailsOn &&(
    
     <>
@@ -95,6 +79,7 @@ const Product2 = (props) => {
         </>
     )
   }
+  console.log(product)
     return (
         <>
 
@@ -102,10 +87,10 @@ const Product2 = (props) => {
         <div className={styles.productsContainer}>
            <div className={styles.containerProduct}>
            <div className={styles.title}>
-           <p>{product.category}</p>
+           <p>{product.category.name}</p>
            <h2>{product.name}</h2>
-           <p className={styles.detailDescription}>Diseño elegante y plegable</p>
-           <p className={styles.cart}>SONY</p> {/* POPULAR BRAND */}
+           <p className={styles.detailDescription}>{product.dataSheet[0].optionValue}</p>
+           <p className={styles.cart}>{product.brand.name}</p>
            </div>
            <div className={styles.photo} style={{
                       backgroundImage:
@@ -119,8 +104,8 @@ const Product2 = (props) => {
 		   </div>
            <div className={styles.descriptionWeb}>
            <h2>{product.name}</h2>
-           <p>${" "+product.price}</p>
-           <span>Ver todas las promociones</span>
+           <p className={styles.price}>${" "+product.price}</p>
+           <p className={styles.copy}>Precio con descuento: ${(product.price * (1-(product.discount/100))).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
            {/* <Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> */}
            <p>Te llega a partir de <span className={styles.orange}><Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> </span>
                   </p>
@@ -161,13 +146,23 @@ const Product2 = (props) => {
           <Toaster position="top-center" reverseOrder={false} />
           <div className={styles.divRecomendados}>
             <h3>También te puede interesar..</h3>
-            <div className={styles.divContainerPics}>
-              {data.map((product)=><div className={styles.picRecomendados} style={{backgroundImage:`url('${product.image}')`}}> <p>{product.name}</p></div>)}
+            <div className={styles.containerPicItems}>
+              {arrayRecom.map((item, index) =>
+                <div key={index} className={styles.galleryItem}>
+                <div className={styles.imageItem}>
+                <div className={styles.divImage}  style={{backgroundImage: `url(http://localhost:4000/productsPhoto/${item.photos[0]})`}} alt="pic">
+                </div>
+                <div className={styles.descriptionItem}><p>{item.name}</p><p>$  {item.price}</p></div>
+                </div> 
+                </div>
+                )}
+
             </div>
           </div>
         </>
     )
 }
+
 
 const mapStateToProps = (state) => {
   return {
@@ -179,6 +174,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps ={
   addProduct:shopCartActions.addToCart,
   product:productsActions.product,
+  products: productsActions.products
 
 }
 

@@ -170,24 +170,25 @@ div.container {
 .card {
   position: relative;
   display: flex;
+  height: 25rem;
+  width: 15rem;
   align-items: flex-end;
   overflow: hidden;
   padding: 1rem;
   width: 80%;
   text-align: center;
-  background-size: 103% 38%;
+  background-size: 77% 53%;
   background-position: center;
-  background-image: url('https://i.postimg.cc/Kz4h0KXr/produ.png');
+  background-image: url(https://i.postimg.cc/Kz4h0KXr/produ.png);
   background-repeat: no-repeat;
   color: whitesmoke;
-  /* background-color: whitesmoke; */
   box-shadow: 0 1px 1px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 10%), 0 4px 4px rgb(0 0 0 / 10%), 0 8px 8px rgb(0 0 0 / 10%), 0 16px 16px rgb(0 0 0 / 10%);
 }
 
 @media (min-width: 600px) {
   .card {
     height: 25rem;
-    width: 13rem;
+    width: 15rem;
   }
 }
 

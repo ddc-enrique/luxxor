@@ -73,7 +73,7 @@ const productsControllers = {
     },
     getOneProduct:(req,res)=>{
         console.log("Received GET ONE PRODUCTS Petition:" + Date())
-        Product.findById(req.params.id)
+        Product.findById(req.params.id).populate('brand').populate('category') 
         .then( productFound => {
             if(!productFound) throw new Error("No se encontro ningun Producto")
             res.json({success:true, response:productFound})
