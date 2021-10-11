@@ -17,8 +17,6 @@ import ChangePassword from "./pages/ChangePassword";
 import Banned from "./pages/Banned";
 import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
-import Category from "./components/Category"
-import Brand from "./components/Brand"
 import AdminMessages from "./pages/AdminMessages"
 
 const App = (props) => {

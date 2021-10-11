@@ -1,0 +1,32 @@
+div.container {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 25%;
+    left: 34%;
+}
+
+div.data {
+    display: flex;
+    flex-direction: column;
+}
+
+div.editContainer {
+    background-color: #EFEAEA;
+    width: 35rem;
+    height: 40rem;
+    box-shadow: 12px 0px 100vw 55vw #444343d1;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+div.button {
+    display: flex;
+}
+
+.close {
+    cursor: pointer;
+}

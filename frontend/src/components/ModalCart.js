@@ -15,36 +15,26 @@ const ModalCart = (props) =>{
     let aux
     console.log(props.total)
     useEffect(()=>{
-        /* console.log(props.cartProduct) */
+        
         props.cartProduct.forEach(item=>{
             props.product(item.productId)
             .then((res)=>{
                 aux= {...res.data.response,quantity:item.quantity}
-              /*   products4=[...products,aux]
-                console.log(products4)
-                 setProducts(products4)  */
-                 /* aux_array=aux_array.push(aux)
-                 setProducts(aux_array) */
                  setProducts2(products2.push(aux))
                  setProducts(products2) 
-                 /* setLoading(!loading) */
             })
             .catch(e=>console.log(e))
         }) 
         setTimeout(()=>{
             setLoading(!loading)  
         },500)
-           
     },[])
-
-    console.log(products)
 
    if(loading){
         return(
             <div className={styles.containerGeneral}>
             <h1>LOADING</h1>
             </div>
-            
         )
     } 
     return(
@@ -114,5 +104,5 @@ const mapStateToProps = (state) => {
     /* resetCart:shopCartActions.resetCart, */
    product:productsActions.product  
   }
-  
+
 export default connect(mapStateToProps,mapDispatchToProps)(ModalCart)

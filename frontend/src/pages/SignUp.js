@@ -9,12 +9,15 @@ import { Link } from "react-router-dom"
 import { Carousel } from "react-carousel-minimal"
 import SignIn from "../components/SignIn"
 import toast, { Toaster } from "react-hot-toast"
+import Password from "./Password"
 
 const SignUp = (props) => {
   const { signUp } = props
-
+  const [visible, setVisible] =useState(false)
   const [check, setCheck] = useState(true)
   const [checkConfirm, setCheckConfirm] = useState(true)
+  const [modalPass,setmodalPass]=useState(false)
+
   const [modalLogIn, setModalLogIn] = useState(true)
   const [newUser, setNewUser] = useState({
     firstName: "",
@@ -293,7 +296,8 @@ const SignUp = (props) => {
         </div>
         
       </div>
-      {!modalLogIn && <SignIn />}
+      {!modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible} />}
+      {modalPass && <Password setmodalPass={setmodalPass} setVisible={setVisible}/>}
       <Footer />
       <Toaster position="top-center" reverseOrder={false} />
     </>
