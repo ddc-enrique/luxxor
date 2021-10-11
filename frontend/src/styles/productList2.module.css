@@ -56,15 +56,11 @@
 .inputsFilter .switchContainer .switch:before {
   display: inline-block;
   height: 1rem;
-  /*14px*/
   width: 1rem;
-  /*14px*/
   margin: 0.1rem;
-  /*3px*/
   margin-left: 0.18rem;
   background-color: #fff;
   border-radius: 2.1rem;
-  /*2.1em*/
   transition: all 0.1s ease 0.1s;
 }
 
@@ -97,10 +93,11 @@ div.container {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid black;
 }
 
 .containerProducts .emptyProducts p {
-  display: block;
+  font-size: 5rem;
 }
 
 @media only screen and (min-width: 800px) {
@@ -153,8 +150,32 @@ div.container {
   padding: 1rem;
   max-width: 1024px;
   margin: 0 auto;
+  min-height: 27rem;
+  align-items: center;
+  justify-content: center;
 }
-
+.emptyProducts p {
+  color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    font-weight: 600;
+    width: 45rem;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(79px);
+    background-color: #ffffff24;
+    text-align: center;
+}
+.emptyProducts {
+  width: 146%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-image: url(https://i.postimg.cc/mrCmTyHY/PRODUCTO-removebg-preview.png);
+  background-size: 47% 93%;
+  background-position: 96%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
+}
 @media (min-width: 600px) {
   .pageContent {
     grid-template-columns: repeat(2, 1fr);
@@ -163,7 +184,7 @@ div.container {
 
 @media (min-width: 800px) {
   .pageContent {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
   }
 }
 
