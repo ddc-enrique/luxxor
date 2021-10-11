@@ -90,16 +90,17 @@ p.cartLength {
 
     nav.navContainerMobile {
         display: flex;
-        min-height: 10rem;
         width: 10rem;
         flex-direction: column;
         align-items: flex-end;
         position: absolute;
-        background: #6d6a6a8a;
+        height: 14rem;
+        background: #020414e0;
+        -webkit-backdrop-filter: blur(1.5px);
         backdrop-filter: blur(1.5px);
-        z-index: 1;
+        z-index: 2;
         right: 0.2rem;
-        top: 4rem
+        top: 4rem;
     }
 
     div.item {
