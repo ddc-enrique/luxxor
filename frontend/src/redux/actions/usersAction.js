@@ -5,6 +5,8 @@ const usersAction = {
         return async (dispatch, getState) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/user/sign-in", userSignIn)
+                if(response.data.response === 'Email y/o contraseña incorrectos' || response.data.response === 'Por favor usar Google')return response.data.response
+                
                 if(response.data.success){
                     dispatch({type: "SIGN", payload: response.data.response})
                 }else {
