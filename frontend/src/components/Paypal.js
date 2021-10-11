@@ -30,7 +30,6 @@ const Paypal = (props) => {
             onApprove: async (data, actions) => {
                 await actions.order.capture()
                 props.setPayment("PayPal")
-                props.resetCart()
                 props.setScreen(3)
             },
             onError: (err) => {

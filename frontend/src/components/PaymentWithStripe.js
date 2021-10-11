@@ -28,7 +28,6 @@ const PaymentCheckout = (props) => {
                     amount: props.total
                 })                
                 props.setPayment("Tarjet de Crédito")
-                props.resetCart()
                 props.setScreen(3)
             } catch (error) {
                 props.toast.error("No se pudo realizar el pago con tarjeta, intente más tarde o con otro método")

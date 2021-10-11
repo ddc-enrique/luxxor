@@ -4,7 +4,6 @@
   flex-direction: column;
   padding: 1rem;
   justify-content: center;
-  background-image: url('https://i.postimg.cc/ryjKWhwG/fondo.jpg');
   background-position: center;
   background-size: cover;
 }
@@ -191,7 +190,6 @@ div.picRecomendados p {
     flex-direction: column;
     padding: 1rem;
     justify-content: center;
-    background-image: url('https://i.postimg.cc/ryjKWhwG/fondo.jpg');
     background-position: center;
     background-size: cover;
   }

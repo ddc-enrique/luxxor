@@ -41,7 +41,7 @@ const Sale = (props) =>{
     let componentToRender
     switch(screen){
         case 1:
-            componentToRender= <CheckOutProducts setScreen= {setScreen} />
+            componentToRender= <CheckOutProducts setScreen={setScreen} />
             break
         case 2:
             componentToRender= <Payment setScreen={setScreen} setPayment={setPayment} toast={toast}/>
@@ -57,13 +57,13 @@ const Sale = (props) =>{
             <NavBar/>
             <section className={styles.sectionSale}>             
             <div className={styles.navCarrito}>
-                <div>
+                <div onClick={() => setScreen(1)} style={{borderBottomColor: screen === 1 && 'grey'}}>
                     <p>Paso 1</p> 
                 </div>
-                <div>
+                <div onClick={() => screen === 3 && setScreen(2)} style={{borderBottomColor: screen === 2 && 'grey'}}>
                     <p>Paso 2</p> 
                 </div>
-                <div>
+                <div style={{borderBottomColor: screen === 3 && 'grey'}}>
                     <p>Paso 3</p> 
                 </div>              
             </div>
@@ -82,7 +82,7 @@ const Sale = (props) =>{
 const mapStateToProps = (state) => {
     return {
         dni: state.users.dni,     
-        token:SVGMetadataElement.users.token, 
+        token:state.users.token, 
     }
 }
 const mapDispatchToProps ={

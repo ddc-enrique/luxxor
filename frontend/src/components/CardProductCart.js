@@ -55,8 +55,9 @@ const CardProductCart = (props) =>{
             </div>
             <div className={styles.containerSubTotal}>
                     <span  className={styles.inputSubtotal}>${" "+(counter*product.price).toFixed(2)}</span>
-                    <X onClick={() => props.deleteProduct(product._id,true,product.price,counter,product.discount)} className={styles.iconClose}/>
+                    
             </div>
+            <X onClick={() => props.DeleteProductModalCart(product._id,true,product.price,counter,product.discount)} className={styles.iconClose}/>
             <Toaster position="top-center" reverseOrder={false} />
         </div>
     )

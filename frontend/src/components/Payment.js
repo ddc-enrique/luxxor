@@ -10,7 +10,6 @@ const Payment = (props) =>{
 
     const chooseCash = () => {
         props.setPayment("Efectivo")
-        props.resetCart()
         props.setScreen(3)
     }
 
