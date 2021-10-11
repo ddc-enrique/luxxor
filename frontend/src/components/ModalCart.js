@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import CardProductCart from "./CardProductCart";
 import { Link } from "react-router-dom"
 import shopCartActions from "../redux/actions/shopCartActions"
+import {  XCircleFill } from 'react-bootstrap-icons'
 import productsActions from "../redux/actions/productsActions";
  
 const ModalCart = (props) =>{
@@ -32,16 +33,26 @@ const ModalCart = (props) =>{
    if(loading){
         return(
             <div className={styles.containerGeneral}>
-            <h1>LOADING</h1>
+            <div className={styles.loading}></div>
             </div>
         )
     } 
     return(
         <div className={styles.containerGeneral}>
             <div className={styles.containerCart}>
-                <img onClick={()=>props.setModalCart(false)} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
-                
+                {/* <img onClick={()=>props.setModalCart(false)} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/> */}
+                <XCircleFill onClick={()=>props.setModalCart(false)} className={styles.iconClose}/>
                 <h2>Carrito de Compras</h2>
+               { !products.length ?
+               (<>
+                    <p>Tu carrito está vacío</p>
+                    <p>¿No sabés qué comprar? ¡Miles de productos te esperan!</p>
+                    <Link to="/productos">
+                        <div className={styles.price}> <p>Ver productos</p></div>
+                    </Link>
+               </>
+                ) : (
+                        <>
                 <div className={styles.containerSubTitle}>
                     <h3>PRODUCTO</h3>
                     <h3>SUBTOTAL</h3>
@@ -87,6 +98,9 @@ const ModalCart = (props) =>{
                 <Link to="/checkout">
                         <div className={styles.price}> <p>Finaliza Compra</p></div>
                 </Link>
+                    </>
+                    )
+                }
             </div>
         </div>
     )
