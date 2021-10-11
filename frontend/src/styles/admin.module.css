@@ -53,7 +53,6 @@ header.headerAdmin h1 {
   justify-content: space-around;
   width: 100vw;
   min-height: 80vh;
-  border: 1px solid black;
   align-items: center;
   flex-direction: column;
 }
@@ -63,14 +62,13 @@ header.headerAdmin h1 {
   background-color: white;
 }
 
-.containerAdmin .sectionBrandCategory {
+.containerAdmin .sectionBrandCategory,
+.containerAdmin .containerSections {
   display: flex;
   justify-content: space-around;
-  width: 85vw;
-  min-height: 70vh;
+  width: 100vw;
+  min-height: 80vh;
   align-items: center;
-  background-color: #ffffffb0;
-  border: none;
 }
 
 .containerAdmin .sectionBrandCategory .containerCategory {
