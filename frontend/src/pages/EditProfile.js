@@ -77,9 +77,6 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                     <div className={styles.divContForm}>
                         <div className={styles.divExitoImg} style={{backgroundImage: 'url("https://i.postimg.cc/Kz4h0KXr/psvr-overview-hardware-column-image-01-ps4-en-06jan20-removebg-preview.png")'}}></div>
                         <form className={styles.formContainerExito}>
-                            {/* <h3>
-                                Actualiza tus datos para poder Comprar
-                            </h3> */}
                             {!completeAccount  && 
                                 <div className={styles.field}>
                                     <p>DNI

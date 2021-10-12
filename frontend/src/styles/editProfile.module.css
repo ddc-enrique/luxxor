@@ -90,10 +90,10 @@ form.formContainerExito p {
 .formContainerExito .field .error {
     display: block;
     padding: .2rem;
-    background-color: red;
-    color: white;
-    border-radius: 1rem;
-    text-align: center;
+    background-color: #e3e3e3;
+    color: red;
+    width: max-content;
+    padding: 0.3rem;
 }
 
 .formContainerExito .field .errorPlaceholder {

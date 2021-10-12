@@ -37,9 +37,8 @@
 
 .containerProduct .photo {
   background-position: center;
-  background-size: 22rem;
+  background-size: 16rem;
   background-repeat: no-repeat;
-  /* background-image: url(https://i.postimg.cc/Jhmptvkj/1000x1000-1-removebg-preview-1.png); */
   filter: drop-shadow(-17px 15px 26px rgba(92, 92, 92, 0.55));
   width: 100%;
   height: 15rem;
@@ -125,6 +124,7 @@ div.divRecomendados {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem 0rem;
 }
 
 div.divRecomendados h3 {
@@ -170,7 +170,7 @@ div.picRecomendados p {
 
 @media only screen and (min-width: 768px) {
   .containerProduct .photo {
-    background-size: 32rem;
+    background-size: 23rem;
     height: 22rem;
   }
 
@@ -350,7 +350,7 @@ div.containerPicItems {
 }
 
 .galleryItem .imageItem div.divImage {
-  width: 60%;
+  width: 50%;
   background-size: cover;
   background-position: center;
   cursor: pointer;
