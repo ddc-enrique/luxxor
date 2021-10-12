@@ -243,7 +243,7 @@ div.picRecomendados p {
     background-image: url(https://i.postimg.cc/Jhmptvkj/1000x1000-1-removebg-preview-1.png);
     height: 100%;
     filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
-
+    width: 50%;
   }
 
   .containerProduct .cart {
