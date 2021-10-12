@@ -144,7 +144,7 @@ const Products = (props) => {
             {
               !filteredProducts.length && 
               <div className={styles.emptyProducts}>
-                <p>Ups! No tenemos productos que pasen ese filtro :(</p>
+                <p>Ups! No hay resultado para tu busqueda. ¡Intenta otro!</p>
               </div>
             }
           </div>

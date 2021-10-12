@@ -68,6 +68,7 @@ const EditProduct = (props) => {
                     className={styles.close}
                     onClick={()=>props.setModalEdit(false)}
                 />  
+                    <h3>Editar Producto</h3>
                     <div className={styles.containerInputs}>
                         <label htmlFor="name">Nombre</label>
                         <input defaultValue={product.name} onChange={(e)=>productToEditHandler("index", e)} name="name"/>

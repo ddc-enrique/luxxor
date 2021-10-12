@@ -6,6 +6,21 @@ import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
 import { connect } from "react-redux";
+import {
+  House,
+  PlusCircle,
+  DashCircle,
+  X,
+  ColumnsGap,
+  Bag,
+  Tag,
+  ChatDots,
+  Search,
+  XCircle,
+  ClockFill,
+  Pen,
+  CheckCircle,
+} from "react-bootstrap-icons";
 const Category = (props) => {
   const [categories, setCategories] = useState(props.categories);
   const [loading, setLoading] = useState(true);
@@ -83,34 +98,28 @@ const Category = (props) => {
                         >
                           {category.name}
                         </textarea>
-                        <button onClick={() => editCategory(category._id)}>
-                          ✔️
-                        </button>
-                        <button onClick={() => setEditOpen(!editOpen)}>
-                          ✖️
-                        </button>
+                        <CheckCircle
+                          className={styles.icon}
+                          onClick={() => editCategory(category._id)}
+                        />
+                        <XCircle
+                          className={styles.icon}
+                          onClick={() => setEditOpen(!editOpen)}
+                        />
                       </>
                     ) : (
                       category.name
                     )}
                   </h3>
                   <div className={styles.cointanerEdit}>
-                    <div
+                    <Pen
+                      className={styles.icon}
                       onClick={() => setEditOpen(category.name)}
+                    />
+                    <XCircle
                       className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
-                      }}
-                    ></div>
-                    <div
                       onClick={() => deleteCategory(category._id, index)}
-                      className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                      }}
-                    ></div>
+                    />
                   </div>
                 </div>
               ))
@@ -118,13 +127,6 @@ const Category = (props) => {
           </div>
           <div className={styles.containerForm}>
             <div>
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/h47DcVZB/search.png')",
-                }}
-              ></div>
               <h3>Cargar Nueva Categoria</h3>
             </div>
             <div className={styles.containerAllInputs}>
@@ -149,7 +151,7 @@ const Category = (props) => {
 const mapStateToProps = (state) => {
   return {
     allcategories: state.products.categories,
-    token: state.users.token
+    token: state.users.token,
   };
 };
 

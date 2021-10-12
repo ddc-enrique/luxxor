@@ -1,3 +1,10 @@
+import {
+  CheckCircle,
+  XCircle,
+  ClockFill,
+  Pen,
+  PlusCircle,
+} from "react-bootstrap-icons";
 import React from "react";
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
@@ -81,32 +88,28 @@ const Brand = (props) => {
                         >
                           {brand.name}
                         </textarea>
-                        <button onClick={() => editBrand(brand._id)}>✔️</button>
-                        <button onClick={() => setEditOpen(!editOpen)}>
-                          ✖️
-                        </button>
+                        <CheckCircle
+                          className={styles.icon}
+                          onClick={() => editBrand(brand._id)}
+                        />
+                        <XCircle
+                          className={styles.icon}
+                          onClick={() => setEditOpen(!editOpen)}
+                        />
                       </>
                     ) : (
                       brand.name
                     )}
                   </h3>
                   <div className={styles.cointanerEdit}>
-                    <div
+                    <Pen
+                      className={styles.icon}
                       onClick={() => setEditOpen(brand.name)}
+                    />
+                    <XCircle
                       className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
-                      }}
-                    ></div>
-                    <div
                       onClick={() => deleteBrand(brand._id, index)}
-                      className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                      }}
-                    ></div>
+                    />
                   </div>
                 </div>
               ))
@@ -114,13 +117,6 @@ const Brand = (props) => {
           </div>
           <div className={styles.containerForm}>
             <div>
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/h47DcVZB/search.png')",
-                }}
-              ></div>
               <h3>Cargar nueva Marca</h3>
             </div>
             <div className={styles.containerAllInputs}>
@@ -131,7 +127,7 @@ const Brand = (props) => {
                   type="text"
                   name="name"
                   onChange={(e) => setBrand({ name: e.target.value })}
-                />{" "}
+                />
                 <button onClick={() => sendBrand()}>Enviar</button>
               </div>
             </div>
@@ -145,7 +141,7 @@ const Brand = (props) => {
 const mapStateToProps = (state) => {
   return {
     allBrands: state.products.brands,
-    token: state.users.token
+    token: state.users.token,
   };
 };
 

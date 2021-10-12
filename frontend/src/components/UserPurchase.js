@@ -9,6 +9,7 @@ import { Link } from "react-router-dom"
 const UserPurchase = (props) => {
     //https://i.postimg.cc/ZRKk8wv4/nh-2-removebg-preview-1.png
     const [myProducts, setMyProducts] = useState()
+
     const [error, setError] = useState("")
 
     useEffect(()=> {

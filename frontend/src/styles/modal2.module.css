@@ -9,17 +9,6 @@ div.containerTotal{
     text-align: left;
     background-color: #f1f1f1;
     box-shadow: -300px 0px 200vw 200vw #444343d1;
-  /*   background-color: #f1f1f1;
-    width: 40%;
-    height: 100%; 
-    position: fixed;
-    z-index: 3;
-    position: fixed; 
-    left: 70%;
-    display: block;
-    z-index: 3;
-    z-index: 3;
-    box-shadow: -300px 0px 200vw 200vw #444343d1; */
 }
 img.iconClose{
     width: 2rem;

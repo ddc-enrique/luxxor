@@ -3,6 +3,7 @@ import Information from './Information'
 import productsActions from '../redux/actions/productsActions'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const SectionInfo = (props)=>{
     const {reference, products} = props
@@ -28,8 +29,9 @@ const SectionInfo = (props)=>{
         <section id="novedades" className={styles.sectionContainer} ref={reference}> 
                 <p>Novedades</p>
                 <div className={styles.container}>
-                    { products.reverse().map((product) =>
-                        <div key={product._id} className={styles.galleryItem}>
+                    { products.reverse().splice(0 , 6).map((product) =>
+                    <Link key={product._id} to={`/producto/${product._id}`}>
+                        <div  className={styles.galleryItem}>
                             <div className={styles.image}>
                                 <div className={styles.divImage} style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}} alt="nature">
                             </div>
@@ -42,7 +44,8 @@ const SectionInfo = (props)=>{
                                 </div>
                             </div>
                         </div> 
-                        </div>)}
+                        </div> 
+                        </Link> )}
                 </div>
                 <Information/>
         </section>

@@ -70,6 +70,7 @@ div.containerProductTotal{
     margin-bottom: 1rem;
     padding: 1rem 0.3rem;
     background-color: rgba(163, 189, 189, 0.171);
+    font-size: 0.8rem;
 }
 img.imgProduct{
     width: 5rem;

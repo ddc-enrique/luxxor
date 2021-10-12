@@ -7,16 +7,18 @@ import shopCartActions from "../redux/actions/shopCartActions"
 import toast, { Toaster } from "react-hot-toast"
 import productsActions from "../redux/actions/productsActions"
 import Moment from 'react-moment'
+import { Link } from 'react-router-dom';
 
 
 const Product2 = (props) => {
   const [detailsOn, setDetailsOn] = useState(false);
   const [product,setProduct]=useState({category:{_id : 1}})
+  const [prodRecomen, setProdRecomen] = useState(false)
   const [products,setProducts]=useState([])
   const [modal, setModal] = useState(false);
   const [loading,setLoading]=useState(true)
   const date = new Date()
-
+// console.log(product)
   useEffect(()=>{
     window.scrollTo(0,0)
     if(!props.products.length){
@@ -46,11 +48,14 @@ const Product2 = (props) => {
       setLoading(false)
     }
   },[])
- 
+  useEffect(()=>{
+      console.log('rerenderizo')
+      setProduct(products.find(product=> product._id===props.match.params.id))
+  }, [prodRecomen])
+
   const addProductHandler=()=>{
     props.addProduct(props.match.params.id,product.price,product.discount,product.name)
   }
-  console.log(product.category)
   const arrayRecom =products.filter(item => item.category._id === product.category._id && item._id !== product._id)
   const details = detailsOn &&(
    
@@ -146,13 +151,15 @@ const Product2 = (props) => {
             <h3>También te puede interesar..</h3>
             <div className={styles.containerPicItems}>
               {arrayRecom.map((item, index) =>
-                <div key={index} className={styles.galleryItem}>
-                <div className={styles.imageItem}>
-                <div className={styles.divImage}  style={{backgroundImage: `url(http://localhost:4000/productsPhoto/${item.photos[0]})`}} alt="pic">
-                </div>
-                <div className={styles.descriptionItem}><p>{item.name}</p><p>$  {item.price}</p></div>
-                </div> 
-                </div>
+                <Link key={index}  to={`/producto/${item._id}`} onClick={() =>{ setProdRecomen(!prodRecomen); console.log('onClick')}}>
+                    <div className={styles.galleryItem}>
+                    <div className={styles.imageItem}>
+                    <div className={styles.divImage}  style={{backgroundImage: `url(http://localhost:4000/productsPhoto/${item.photos[0]})`}} alt="pic">
+                    </div>
+                    <div className={styles.descriptionItem}><p>{item.name}</p><p> ${(item.price * (1-(product.discount/100))).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p></div>
+                    </div> 
+                    </div>
+                </Link>
                 )}
 
             </div>

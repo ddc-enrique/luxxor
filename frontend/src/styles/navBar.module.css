@@ -17,7 +17,7 @@ nav a {
 
 }
 
-nav a:hover {
+.navWeb a:hover, .dropDown a:hover {
     color: #ffffff;
 }
 
@@ -32,6 +32,8 @@ div.icon {
     background-position: center;
     background-size: cover;
     cursor: pointer;
+    border: 1px solid #ffffff2e;
+    border-radius: 2rem;
 }
 
 div.dropDown {
@@ -39,7 +41,7 @@ div.dropDown {
     /* right: -130rem; */
     top: 1rem;
     right: 10rem;
-    width: 15rem;
+    width: 20rem;
     height: 3rem;
     display: flex;
     align-items: center;
@@ -172,7 +174,7 @@ p.cartLength {
         padding: 0;
     }
 
-    /* ///// */
+
 }
 
 @media screen and (min-width: 767px) and (max-width: 1024px) {
