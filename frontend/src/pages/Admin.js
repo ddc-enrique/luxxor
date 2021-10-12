@@ -4,59 +4,9 @@ import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
 import { NavAdmin } from "../components/NavAdmin";
+import EditProduct from "../components/EditProduct";
 
 const Admin = (props) => {
-  const data = [
-    {
-      name: "Notebook",
-      price: 120000,
-      stock: 100,
-      color: "red",
-      photos: [
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-      ],
-      dataShets: [{ optionName: "Memoria Ram", optionValue: "8GB" }],
-      description: "La mejor notebook del universo",
-      discount: 10,
-      category: "Informática",
-      brand: "HP",
-    },
-    {
-      name: "Notebook",
-      price: 120000,
-      stock: 100,
-      color: "red",
-      photos: [
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-      ],
-      dataShets: [{ optionName: "Memoria Ram", optionValue: "8GB" }],
-      description: "La mejor notebook del universo",
-      discount: 10,
-      category: "Informática",
-      brand: "HP",
-    },
-    {
-      name: "Notebook",
-      price: 120000,
-      stock: 100,
-      color: "red",
-      photos: [
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-        "https://i.postimg.cc/wT9pxqqt/1000x1000_1-removebg-preview.png",
-      ],
-      dataShets: [{ optionName: "Memoria Ram", optionValue: "8GB" }],
-      description: "La mejor notebook del universo",
-      discount: 10,
-      category: "Informática",
-      brand: "HP",
-    },
-  ];
-
 
   const [newProduct, setNewProduct] = useState({
     name: "",
@@ -84,19 +34,19 @@ const Admin = (props) => {
   const [products, setProducts] = useState(props.products)
   const [productsFilt, setProductsFilt] = useState(props.products)
   const [productsFiltered, setProductsFiltered] = useState(props.products)
+  const [productId, setProductId] = useState(null)
   const [render, setRender] = useState(false)
+  const [modalEdit, setModalEdit] = useState(false)
   const [loading, setLoading] = useState(true)
   useEffect(()=>{
     
     const getAllProducts = async () => {
       if(!products.length){
-        
         let response = await props.getAllProducts()
-        console.log(response)
         setProducts(response)
         setProductsFiltered(response)
         setProductsFilt(response)
-        setLoading(!loading)
+        setLoading(false)
       }
     }
     getAllProducts()
@@ -117,14 +67,11 @@ const Admin = (props) => {
       }
     }
     getAllCategories()
+  }, [])
 
-  
-  }, [render])
-  
-  
+ 
   const handle = (e) => {
     setProductsFilt(productsFiltered.filter(item => (item.name.toLowerCase().startsWith(e.target.value.trim().toLowerCase()))))
-    
   }
 
   const newProductHandler = (index, e) => { 
@@ -160,8 +107,8 @@ const Admin = (props) => {
   }
 
   const deleteProduct = (id) => {
-      props.deleteProductById(id)
-      .then(response=>{console.log(response)
+      props.deleteProductById(id, props.token)
+      .then(response=>{
         if(!response.success){
             console.log("Hubo un error") //poner tostada
         }else {
@@ -171,8 +118,12 @@ const Admin = (props) => {
         }
       })
   }
-
-
+  
+const EditProductComp = (props) => {
+    props.setModalEdit(true) 
+    return (modalEdit && <EditProduct  setModalEdit={props.setModalEdit} id={props.productId} brands={brands} categories={categories}/>)
+}
+  
 
 
   const addProductHandler = async () => {
@@ -191,7 +142,7 @@ const Admin = (props) => {
     FD.append("discount", newProduct.discount)
     FD.append("category", newProduct.category)
     FD.append("brand", newProduct.brand)
-   let response = await props.addProduct(FD)
+   let response = await props.addProduct(FD, props.token)
    if (!response.success) {
      console.log("Error") //Poner tostada
    }else {
@@ -289,7 +240,7 @@ const Admin = (props) => {
                   <input id="name" type="text" name="name" onChange={(e)=>newProductHandler("index", e)} />
                 </div>
                 <div className={styles.containerInputs}>
-                  <label htmlFor="color">Categoria</label>
+                  <label htmlFor="category">Categoria</label>
                   <select className={styles.select} name="category" onChange={(e)=>newProductHandler("index", e)}>
                     {categories.map(category=> (
                       <option
@@ -398,6 +349,7 @@ const Admin = (props) => {
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>
                         <div
+                          onClick={()=>{setProductId(product._id); setModalEdit(!modalEdit)}}
                           className={styles.icon}
                           style={{
                             backgroundImage:
@@ -414,9 +366,10 @@ const Admin = (props) => {
                         ></div>
                       </div>
                     </div>
-                  
+
                   </div>
                 ))}
+                {modalEdit && <EditProductComp  productId={productId} setModalEdit={setModalEdit}/>}
               </div>
             </div>
           </section>
@@ -434,7 +387,7 @@ const Admin = (props) => {
             <div className={styles.containerAllInputs}>
               <div className={styles.containerProducts}>
                 {loading ? <div className={styles.loading}></div> :
-                  products.map((product, index) => (
+                  productsFiltered.slice(0,4).reverse().map((product, index) => (
                   <div className={styles.boxProduct} key={index}>
                     <div className={styles.titleProduct}>
                       <div
@@ -466,6 +419,7 @@ const Admin = (props) => {
                     </div>
                   </div>
                 ))}
+                
               </div>
             </div>
           </section>
@@ -490,6 +444,7 @@ const mapStateToProps = (state) => {
     categories: state.products.categories,
     brands: state.products.brands,
     products: state.products.products,
+    token: state.users.token
   }
 }
 

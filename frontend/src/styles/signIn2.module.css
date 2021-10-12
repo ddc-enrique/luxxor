@@ -5,6 +5,7 @@ div.container {
     top: 24%;
     left: 35%;
     display: block;
+    z-index: 10;
 }
 div.signContainer {
     background-color: rgb(30 88 106 / 9%);

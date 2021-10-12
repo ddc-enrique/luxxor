@@ -1,6 +1,7 @@
 import React, { useEffect, useRef } from 'react'
-import toast, { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
+import shopCartActions from "../redux/actions/shopCartActions"
+
 
 
 const Paypal = (props) => {
@@ -11,7 +12,7 @@ const Paypal = (props) => {
             fundingSource: window.paypal.FUNDING.PAYPAL,
             style: {
                 layout:  'vertical',
-                color:   'blue',
+                color:   'white',
                 shape:   'rect',
                 label:   'paypal',
                 // tagline: 'true',
@@ -21,19 +22,18 @@ const Paypal = (props) => {
                     intent: 'CAPTURE',
                     purchase_units: [
                         {description: `Compra en Luxxor el dia ${fecha.toLocaleDateString()}`, amount: {
-                            // value: props.total, currency_code: 'USD'
-                            value: 10, currency_code: 'USD'
+                            value: props.total, currency_code: 'USD'
                         }},
                     ]
                 })
             },
             onApprove: async (data, actions) => {
                 await actions.order.capture()
+                props.setPayment("PayPal")
                 props.setScreen(3)
             },
             onError: (err) => {
-                toast.error("No se pudo realizar el pago con PayPal, intente más tarde o con otro método")
-                console.log(err)
+                props.toast.error("No se pudo realizar el pago con PayPal, intente más tarde o con otro método")
             }
         }).render(paypal.current)
     }, [])
@@ -51,6 +51,10 @@ const mapStateToProps = (state) =>{
     return{
         total: state.shopCart.total
     }
+}
+
+const mapDispatchToProps ={
+    resetCart:shopCartActions.resetCart,
 }
 
 export default connect(mapStateToProps)(Paypal)

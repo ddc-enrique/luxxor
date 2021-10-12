@@ -65,7 +65,12 @@ p.cartLength {
     text-align: center;
     pad: 0 -0.5rem;
     border-radius: 50px;
-    background-color: green;
+    width: 1rem;
+    height: 1rem;
+    background-color: #cdcdcd;
+    padding: .1rem;
+    color: #424242c7;
+    margin-left: 2rem;
 }
 
 @media screen and (min-width: 375px) and (max-width: 767px) {
@@ -90,16 +95,17 @@ p.cartLength {
 
     nav.navContainerMobile {
         display: flex;
-        min-height: 10rem;
         width: 10rem;
         flex-direction: column;
         align-items: flex-end;
         position: absolute;
-        background: #6d6a6a8a;
-        backdrop-filter: blur(1.5px);
-        z-index: 1;
+        height: 14rem;
+        left: 14.5rem;
+        -webkit-backdrop-filter: blur(1.5px);
+        backdrop-filter: blur(23.5px);
+        z-index: 2;
         right: 0.2rem;
-        top: 4rem
+        top: 4rem;
     }
 
     div.item {
@@ -127,8 +133,9 @@ p.cartLength {
 
     .navContainerMobile a span {
         position: absolute;
-        padding: 1rem 3rem;
+        padding: 1rem 2rem;
         font-size: 0.7rem;
+        width: 7rem;
     }
 
     div.dropDown p {

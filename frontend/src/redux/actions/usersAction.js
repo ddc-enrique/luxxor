@@ -5,6 +5,8 @@ const usersAction = {
         return async (dispatch, getState) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/user/sign-in", userSignIn)
+                if(response.data.response === 'Email y/o contraseña incorrectos' || response.data.response === 'Por favor usar Google')return response.data.response
+                
                 if(response.data.success){
                     dispatch({type: "SIGN", payload: response.data.response})
                 }else {
@@ -20,6 +22,8 @@ const usersAction = {
         return async (dispatch, getState) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/user/sign-up", userSignUp)
+                if(response.data.response === 'Usuario ya registrado')return response.data.response
+                
                 if(response.data.success){
                     dispatch({type: "SIGN", payload: response.data.response})
                 }else {
@@ -48,7 +52,8 @@ const usersAction = {
                         eMail: response.data.eMail, 
                         admin: response.data.admin, 
                         _id: response.data.id,
-                        dni: response.data.dni
+                        dni: response.data.dni,
+                        google: response.data.google
                     }})
             }catch(e){
                 dispatch({type: "LOGOUT"})
@@ -129,6 +134,17 @@ const usersAction = {
         }
     },
     
+    sendNewBill: (userId, amount, shopCart, shipping, methodPayment, token) => {
+        return async () => {
+            let data = {userId, amount, shopCart, shipping, methodPayment}
+            let response = await axios.post("http://localhost:4000/api/sales", data , {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+            })
+            return response.data
+        }
+    }
 }
 
 export default usersAction

@@ -5,6 +5,7 @@ const productsControllers = require('../controllers/productsControllers')
 const brandCategoryControllers= require('../controllers/brandCategoryControllers')
 const validatorControllers = require('../controllers/validatorControllers')
 const messagesControllers = require('../controllers/messagesControllers')
+const salesControllers = require('../controllers/salesControllers')
 
 const router = express.Router()
 
@@ -39,6 +40,9 @@ router.route('/user/edit-profile/:id')
     .put( passport.authenticate('jwt', {session: false}), 
         validatorControllers.validatorEditComplete, 
         usersControllers.editProfile)
+
+router.route("/user/myshopping/:id")
+    .get(salesControllers.getOneSale)
 
 router.route("/verifyToken")
     .get(passport.authenticate("jwt", { session: false }),
@@ -106,5 +110,12 @@ router.route('/contact')
 router.route('/verify-admin')
         .get(passport.authenticate('jwt', {session: false}), 
         usersControllers.verifyAdmin)
+
+router.route('/sales')
+    .get(passport.authenticate('jwt', {session: false}), 
+    usersControllers.verifyAdmin,
+    salesControllers.getAllSales)
+    .post(passport.authenticate('jwt', {session: false}), 
+    salesControllers.saveNewSale)
 
 module.exports = router

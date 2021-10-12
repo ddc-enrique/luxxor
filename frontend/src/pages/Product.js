@@ -37,6 +37,9 @@ const Product = () => {
       </p>
     </div>
   );
+
+  
+
   return (
     <>
       <main className={styles.productsContainer}>
@@ -100,8 +103,9 @@ const Product = () => {
                   ></div>
                   <p>
                     Te llega a partir de{" "}
-                    <span className={styles.orange}>Mañana 6 de Octubre</span>{" "}
+                    <span className={styles.orange}>Mañana 6 de </span>{" "}
                   </p>
+                  {console.log('ghola')}
                 </div>
                 <div className={styles.promotions}>
                   <div

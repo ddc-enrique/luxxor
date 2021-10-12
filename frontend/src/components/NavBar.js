@@ -10,6 +10,7 @@ import ModalCart from './ModalCart';
 
 
 const NavBar = (props) => {  
+    console.log(props)
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(false)
     const [modalPass,setmodalPass]=useState(false)
@@ -35,7 +36,6 @@ const NavBar = (props) => {
         if(history.location.pathname === "/mi-cuenta") history.push("/")
     }
 
-
     const homeLocationsPathFlag = [ "/como-comprar", "/contacto"].includes(history.location.pathname) || (history.location.pathname === "/")
     return(
         <header className={styles.headerContainer}>
@@ -56,8 +56,10 @@ const NavBar = (props) => {
                         </Link>
                     }
                 </div>
-                <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/pTZVv7n0/Diseño_sin_título_(66).png")'}} onClick={clickHandler}>
-                </div>
+                {props.token?
+                <div className={styles.icon} style={{backgroundImage: props.flagGoogle ? `url(${props.profilePic})` : `url(http://localhost:4000/usersPhoto/${props.profilePic})`}} onClick={clickHandler}></div>                
+                :<div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/pTZVv7n0/Diseño_sin_título_(66).png")'}} onClick={clickHandler}></div>
+                }
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}} onClick={clickCart}>
                     <p className={styles.cartLength}>{props.cartProduct.length}</p>
                 </div>
@@ -80,17 +82,19 @@ const NavBar = (props) => {
                                 <span>Contacto</span>
                             </Link>
                         }
-                            <a>
-                                <div className={styles.dropDown}>
-                                <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
-                                        {!props.token && <Link to="#" ><p onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</p></Link>}
-                                            {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible}/>}
-                                        {!props.token && <Link to="/registro"><p>Registrarme</p></Link>}
-                                        {props.token && <Link to="#"><p onClick={logOut}>Cerrar Sesión</p></Link> }
-                                        {props.token && <Link to="/mi-cuenta">Mi Cuenta</Link>}
-                                        {props.admin && <Link to="/admin"><p>Admin</p></Link>}
-                                    </div>
-                            </a>
+                            {!props.token && <Link to="#" >
+                            <span onClick={()=>setModalLogIn(!modalLogIn)}>Ingresar</span>
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
+                            </Link>}
+                        {modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible}/>}
+                        {props.token && <Link to="#">
+                            <span onClick={logOut}>Cerrar Sesión</span>
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
+                            </Link> }
+                        {!props.token && <Link to="/registro">
+                            <span>Registrarme</span>
+                            <div className={styles.icon} style={{backgroundImage: "url('https://i.postimg.cc/kM2MB2hm/programmer.png')"}}></div>
+                            </Link>}
                             <a>
                                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/Qtnz2xpg/carrito-de-compras.png")'}}>
                                     
@@ -124,7 +128,8 @@ const mapStateToProps = (state) => {
         lastName: state.users.lastName,
         token: state.users.token,
         admin: state.users.admin,
-        cartProduct:state.shopCart,
+        cartProduct:state.shopCart.shopCart,
+        flagGoogle: state.users.google
     }
 }
 

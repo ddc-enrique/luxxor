@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { PlusLg, XCircleFill } from 'react-bootstrap-icons'
+import { PlusLg, XCircleFill, Trash } from 'react-bootstrap-icons'
 import Moment from 'react-moment'
 
 
 const MessageRow = ({ message, deleteMessage, styles}) => {
     const [modal, setModal] = useState(false)
-
+    const [modalOn, setModalOn] = useState(false)
+    
     return (
         <tr>
             <td>
@@ -30,11 +31,20 @@ const MessageRow = ({ message, deleteMessage, styles}) => {
                 <PlusLg />
             </td>
             <td
-                onClick={()=> deleteMessage(message._id)}
+                onClick={()=> setModalOn(true)}
                 className={styles.deleteMessage}
             >
-                Eliminar
+                <Trash/>
             </td>
+            {modalOn &&
+                (<div className={styles.modal}>
+                    <XCircleFill onClick={() => setModalOn(!modalOn)}/>             
+                        <h3>Queres borrar el mensaje de  {message.authorName} ?</h3>
+                        <div className={styles.buttonsModal}>
+                            <button className={styles.confirmButton}  onClick={() => deleteMessage(message._id)}>Confirmar</button>
+                            <button className={styles.cancelButton}  onClick={() => setModalOn(!modalOn)}>Cancelar</button>
+                        </div>
+                </div>)}
         { modal && 
             <div
                 className={styles.modalTextMessage}                

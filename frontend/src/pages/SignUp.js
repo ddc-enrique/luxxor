@@ -9,12 +9,15 @@ import { Link } from "react-router-dom"
 import { Carousel } from "react-carousel-minimal"
 import SignIn from "../components/SignIn"
 import toast, { Toaster } from "react-hot-toast"
+import Password from "./Password"
 
 const SignUp = (props) => {
   const { signUp } = props
-
+  const [visible, setVisible] =useState(false)
   const [check, setCheck] = useState(true)
   const [checkConfirm, setCheckConfirm] = useState(true)
+  const [modalPass,setmodalPass]=useState(false)
+
   const [modalLogIn, setModalLogIn] = useState(true)
   const [newUser, setNewUser] = useState({
     firstName: "",
@@ -34,16 +37,32 @@ const SignUp = (props) => {
     ? "5NX1hj01/eyeOpen.png"
     : "hPNgcgzm/EyeClose.png"
 
-  const responseGoogle = (res) => {
-    let newUserWithGoogle = {
-      firstName: res.profileObj.givenName,
-      lastName: res.profileObj.familyName,
-      eMail: res.profileObj.email,
-      password: res.profileObj.googleId,
-      profilePic: res.profileObj.imageUrl,
-      google: true,
+  const responseGoogle = async (res) => {
+    try{
+      let newUserWithGoogle = {
+        firstName: res.profileObj.givenName,
+        lastName: res.profileObj.familyName,
+        eMail: res.profileObj.email,
+        password: res.profileObj.googleId,
+        profilePic: res.profileObj.imageUrl,
+        google: true,
+      }
+      
+      const response = await signUp(newUserWithGoogle)
+      if(response === 'Usuario ya registrado'){
+        toast("Usuario ya registrado", {
+          icon: "🚫",
+          style: {
+            borderRadius: "1rem",
+            background: "#fff",
+            color: "#545454",
+          },
+        })
+      }
+    }catch(error){
+
     }
-    signUp(newUserWithGoogle)
+    
   }
 
   const newUserHandler = (e) => {
@@ -53,8 +72,6 @@ const SignUp = (props) => {
         e.target.name === "profilePic" ? e.target.files[0] : e.target.value,
     })
   }
-
-  console.log(newUser.profilePic)
 
   const enterNewUser = async () => {
     try {
@@ -82,7 +99,6 @@ const SignUp = (props) => {
       } else {
         const resp = await signUp(FD)
         if (resp) {
-          console.log(resp)
           setErrorName(
             resp.find((err) => err.path[0] === "firstName")
               ? resp.find((err) => err.path[0] === "firstName").message
@@ -105,7 +121,7 @@ const SignUp = (props) => {
               : null
           )
         } else {
-          toast("Welcome", {
+          toast("Bienvenido", {
             icon: "👏",
             style: {
               borderRadius: "1rem",
@@ -196,7 +212,7 @@ const SignUp = (props) => {
             name="firstName"
             defaultValue={newUser.firstName}
           />
-          <small style={{ color: "red" }}>{errorName}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorName}&nbsp;</small>
           <input
             onChange={newUserHandler}
             type="text"
@@ -205,7 +221,7 @@ const SignUp = (props) => {
             name="lastName"
             defaultValue={newUser.lastName}
           />
-          <small style={{ color: "red" }}>{errorLastName}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorLastName}&nbsp;</small>
           <input
             onChange={newUserHandler}
             type="text"
@@ -215,7 +231,7 @@ const SignUp = (props) => {
             defaultValue={newUser.eMail}
             onKeyPress={keyPressHandler}
           />
-          <small style={{ color: "red" }}>{errorEmail}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorEmail}&nbsp;</small>
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
@@ -233,7 +249,7 @@ const SignUp = (props) => {
               alt="..."
             />
           </div>
-          <small style={{ color: "red" }}>{errorPass}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPass}&nbsp;</small>
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
@@ -250,7 +266,7 @@ const SignUp = (props) => {
               alt="..."
             />
           </div>
-          <small style={{ color: "red" }}>{errorPassChecked}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPassChecked}&nbsp;</small>
           {newUser.profilePic && <p>{newUser.profilePic.name}</p>}
           <label className={styles.labelInput} for="inputPhoto">
             <img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif" />
@@ -293,7 +309,8 @@ const SignUp = (props) => {
         </div>
         
       </div>
-      {!modalLogIn && <SignIn />}
+      {!modalLogIn && <SignIn modalLogIn={modalLogIn} setModalLogIn={setModalLogIn} setmodalPass={setmodalPass} setVisible={setVisible} />}
+      {modalPass && <Password setmodalPass={setmodalPass} setVisible={setVisible}/>}
       <Footer />
       <Toaster position="top-center" reverseOrder={false} />
     </>

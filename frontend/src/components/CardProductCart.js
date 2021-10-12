@@ -3,16 +3,15 @@ import styles from "../styles/modalCart.module.css";
 import { connect } from "react-redux";
 import shopCartActions from "../redux/actions/shopCartActions"
 import toast, { Toaster } from "react-hot-toast"
+import {  PlusCircle, DashCircle, X} from 'react-bootstrap-icons'
 
 const CardProductCart = (props) =>{
    const {product}=props
-   console.log(product)
     const[counter,setCounter]=useState(product.quantity)
-    console.log(product.price)
     /* setTotal(total+subTotalProduct) */
     const addProductHandler=()=>{
         if(counter<product.stock){
-            props.addProduct(product._id,product.price)
+            props.addProduct(product._id,product.price,product.discount,product.name)
             setCounter(counter+1)
         }else{
             toast("No hay mas unidades a la venta", {
@@ -27,7 +26,7 @@ const CardProductCart = (props) =>{
     }
     const deleteProductHandler=()=>{
         if(counter>1){
-            props.deleteProduct(product._id,false,product.price)
+            props.deleteProduct(product._id,false,product.price,counter,product.discount)
             setCounter(counter-1)
         }
     }
@@ -46,31 +45,19 @@ const CardProductCart = (props) =>{
                 <img width="90" src={`http://localhost:4000/productsPhoto/${product.photos[0]}`}/>
                 <div className={styles.containerProductTetx}>
                     <p>{product.name}</p>
-                    <span>$ {" "+product.price}</span>
+                    <span>$ {" "+product.price.toFixed(2)}</span>
                     <div className={styles.counter}>
-                        <div className={styles.icon}
-                            style={{
-                            backgroundImage:
-                                "url('https://i.postimg.cc/63nKHn7j/3-removebg-preview-2.png')",
-                            }}
-                            onClick={deleteProductHandler}></div>
+                        <DashCircle onClick={deleteProductHandler} className={styles.iconClose}/>
                         <span>{counter}</span>
-                        <div
-                            className={styles.icon}
-                            style={{
-                            backgroundImage:
-                                "url('https://i.postimg.cc/0NLxdcNK/2-removebg-preview-4.png')",
-                            }}
-                            onClick= {addProductHandler}
-                        ></div>
-                        
+                         <PlusCircle onClick={addProductHandler} className={styles.iconClose}/>
                     </div>                   
                 </div>
             </div>
             <div className={styles.containerSubTotal}>
-                    <span  className={styles.inputSubtotal}>{" "+counter*product.price}</span>
-                    <img onClick={() => props.deleteProduct(product._id,true,product.price,counter)} className={styles.iconDelete} src='https://i.postimg.cc/1zysmTqh/bin.png'/>                           
+                    <span  className={styles.inputSubtotal}>${" "+(counter*product.price).toFixed(2)}</span>
+                    
             </div>
+            <X onClick={() => props.DeleteProductModalCart(product._id,true,product.price,counter,product.discount)} className={styles.iconClose}/>
             <Toaster position="top-center" reverseOrder={false} />
         </div>
     )

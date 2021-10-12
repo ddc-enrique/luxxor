@@ -1,19 +1,10 @@
 import { Carousel } from 'react-carousel-minimal'
 
-const CarouselHero=()=> {
-const data = [
-    {
-        image: "https://i.postimg.cc/sg5jwZQH/Nombre-5.png",
-    },
-    {
-        image: "https://i.postimg.cc/jj5RTrz0/Nombre-7.png",
-    },
-    {image: "https://i.postimg.cc/Sx90xZJR/Nombre-10.png"}
-]
-
+const CarouselHero=(props)=> {
+console.log(props.data)
 return (
     <Carousel
-        data={data}
+        data={props.data}
         time={4000}
         width="25rem"
         height="25rem"

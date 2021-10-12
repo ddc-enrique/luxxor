@@ -18,12 +18,16 @@ import Banned from "./pages/Banned";
 import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
 import AdminMessages from "./pages/AdminMessages"
+import shopCartActions from "./redux/actions/shopCartActions"
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
   useEffect(() => {
     if (localStorage.getItem("token")){
       signWithLocal(localStorage.getItem("token"))
+    }
+    if(localStorage.getItem('shopCart') && localStorage.getItem('subtotal') && localStorage.getItem('subtotal')){
+      props.loadShopInLs(localStorage.getItem('shopCart'),localStorage.getItem('subtotal'),localStorage.getItem('total'))
     }
   }, [])
 
@@ -34,7 +38,7 @@ const App = (props) => {
         <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
         <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
-        <Route path="/registro" component={SignUp} />
+        {/* <Route path="/registro" component={SignUp} /> */}
         <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route exact path="/admin/messages" component={AdminMessages} />
@@ -48,14 +52,15 @@ const App = (props) => {
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
-        <Redirect to="/error" />
+        <Redirect to="/" />
       </Switch>
     </BrowserRouter>
   )
 }
 
 const mapDispatchToProps = {
-  signWithLocal: usersAction.signWithLocal
+  signWithLocal: usersAction.signWithLocal,
+  loadShopInLs:shopCartActions.loadShopInLs
 }
 
 const mapStateToProps = (state) => {

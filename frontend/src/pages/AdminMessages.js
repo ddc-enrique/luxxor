@@ -1,16 +1,17 @@
-import styles from "../styles/adminMessages.module.css"
+import styles from "../styles/admin.module.css"
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { NavAdmin } from "../components/NavAdmin";
 import messagesActions from "../redux/actions/messagesActions";
 import toast, { Toaster } from "react-hot-toast";
-import MessageRow from "./MessageRow";
+import MessageRow from "../components/MessageRow";
 import { ArrowDown } from "react-bootstrap-icons";
 
 
 const AdminMessages = (props) => {
     const [messages, setMessages] = useState([])
+
     
     useEffect(() => {
         const getAllMessages = async() => {
@@ -27,10 +28,10 @@ const AdminMessages = (props) => {
         }        
         if(!messages.length) getAllMessages()
     }, [])
-
+    
     const deleteMessage = async(id) =>{
         try {
-            let response = await props.removeMessage(id)
+            let response = await props.removeMessage(id, props.token)
             if(response.success) {
                 toast('Mensaje Eliminado', { icon: '🗑️',})
                 setMessages(messages.filter(message => message._id != id))
@@ -43,7 +44,7 @@ const AdminMessages = (props) => {
     }
 
     const sortBy = (e) => {
-        
+
     }
 
     return (
@@ -75,12 +76,10 @@ const AdminMessages = (props) => {
                                     <ArrowDown />
                                 </th>
                                 <th
-                                    onClick={sortBy}
                                 >
                                     Nombre
                                 </th>
                                 <th
-                                    onClick={sortBy}
                                 >
                                     Email
                                 </th>
@@ -117,4 +116,10 @@ const mapDispatchToProps = {
     removeMessage: messagesActions.deleteMessage
 }
 
-export default connect (null, mapDispatchToProps)(AdminMessages)
+const mapStateToProps = (state) => {
+    return{
+        token: state.users.token
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(AdminMessages)

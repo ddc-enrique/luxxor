@@ -2,9 +2,9 @@ section.sectionSale{
     width: 80%;
     margin: 2rem auto;
     padding: 2rem;
-    background-color: rgb(255, 255, 255);
     min-height: 30rem;
     display: flex;
+    color: white;
     flex-direction: column;
 }
 div.navCarrito{
@@ -17,7 +17,7 @@ div.navCarrito{
 }
 div.navCarrito div{
     width: 20%;
-    border-bottom: 3px solid grey;
+    border-bottom: 3px solid #ededed;
     cursor: pointer;
 }
 
@@ -37,10 +37,15 @@ div.containerSend{
 button.buttonSend{
     padding: 1rem 1.5rem;
     font-size: 1.05rem;
-    background-color: rgb(60, 32, 87);
-    color:white;
+    background-color: transparent;
+    color: #ffffff;
     border: none;
     cursor: pointer;
+    border: 1px solid white;
+}
+button.buttonSend:hover {
+    background-color: white;
+    color: #4d4d4d;
 }
 div.containerTotal h3{
     font-size: 1.7rem
@@ -59,13 +64,21 @@ div.boxInputs{
     gap:1rem;
 }
 div.boxInputs input{
-    flex: 1;
+    flex: 1 1;
     padding: 0.5rem;
     background-color: transparent;
-    border:none;
-    border-bottom:3px solid  rgb(151, 144, 157)
+    border: none;
+    outline: none;
+    border-bottom: 3px solid rgb(217 217 217);
 }
 
 div.formData h3{
     font-size: 1.5rem
+}
+
+div.formSending {
+    padding: 1rem;
+}
+div.formSending input {
+    margin-left: 1.5rem;
 }

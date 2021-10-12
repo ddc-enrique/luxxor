@@ -1,0 +1,15 @@
+.loading {
+    min-height: 100%;
+    width: 80%;
+    /* border: 1px solid; */
+    background-image: url(https://i.postimg.cc/qRv8Dwtt/preloader3.gif);
+    background-size: 9% 30%;
+    background-position: center;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    opacity: .5;
+}
+
+.headerConfirmed{
+    
+}

@@ -10,13 +10,13 @@ import productsActions from "../redux/actions/productsActions"
 import toast, { Toaster } from "react-hot-toast"
 
 const Products = (props) => {
-  const [products, setProducts] = useState([])
-  const [filteredProducts, setFilteredProducts] = useState([])
+  const [products, setProducts] = useState(props.products)
+  const [filteredProducts, setFilteredProducts] = useState(props.products)
   const [updateOnSort, setUpdateOnSort] = useState(true)
   const [loading, setLoading] = useState(true)
   useEffect(()=> {
     const getAllProducts = async() =>{
-      if(!products.length) {
+      if(!props.products.length) {
         try {
           let response = await props.getProducts()
           if(!Array.isArray(response)) throw new Error(response.response)         
@@ -27,12 +27,8 @@ const Products = (props) => {
         }                
       }
     }
-    if(props.products.length===0){
-      getAllProducts()
-    }else{
-      setProducts(props.products)
-    }
-    
+    getAllProducts()
+    console.log(props.products)
     setLoading(false)
   },[])
 
@@ -132,14 +128,16 @@ const Products = (props) => {
           </div>
           <div className={styles.pageContent}>
             {filteredProducts.map(product => (
-                    <div class={styles.card}style={{
+                    <div className={styles.card}style={{
                       backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`,
-                    }} >
-                        <div class={styles.content}>
-                            <h2 class={styles.title}>{product.name}</h2>
+                    }} 
+                      key={product._id}
+                    >
+                        <div className={styles.content}>
+                            <h2 className={styles.title}>{product.name}</h2>
                             {product.discount>0 && <p>%{product.discount} Off</p>}
-                            <p class={styles.copy}>${(product.price * (1-(product.discount/100))).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
-                            <Link to={`/producto/${product._id}`}> <button class={styles.btn}>Ver +</button></Link>
+                            <p className={styles.copy}>${(product.price * (1-(product.discount/100))).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            <Link to={`/producto/${product._id}`}> <button className={styles.btn}>Ver +</button></Link>
                       </div>
                     </div>
             ))}
@@ -165,7 +163,7 @@ const mapStateToProps = (state) => {
   return{
     brands: state.products,
     categories: state.products,
-    products:state.products.products
+    products: state.products.products
   }
 }
 

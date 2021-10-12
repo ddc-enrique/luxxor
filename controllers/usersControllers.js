@@ -10,12 +10,12 @@ const handleError = (res, err) =>{
 
 const usersControllers = {
     signUp: (req, res) =>{
-        
+        console.log(req.files)
         console.log("Received Register User Petition:" + Date())
         const { firstName, lastName, eMail, password, google } = req.body
-        
+        route = path.join(__dirname, "../assets/usersPhoto")
         let hashedPass = bcryptjs.hashSync(password.trim())
-        const adminUser = [ process.env.ADMIN1 ]
+        const adminUser = [ process.env.ADMIN1, process.env.MAIL, process.env.MAIL2 ]
         let admin = adminUser.includes(eMail)
         const newUser = new User({
             firstName: firstName.trim(),
@@ -26,11 +26,10 @@ const usersControllers = {
             admin
         })
         if (req.files) {
-            let fileName = newUser.eMail + "." + req.files.profilePic.name.split(".")[req.files.profilePic.name.split.length-1]
-                newUser.profilePic = fileName
-
-            route = path.join(__dirname, "../assets/usersPhoto")
-            req.files.profilePic.mv(`${route}/${fileName}`)
+            const {profilePic} = req.files
+            let fileName = newUser.eMail + "." + profilePic.name.split(".")[req.files.profilePic.name.split.length-1]
+                newUser.profilePic = fileName           
+            profilePic.mv(`${route}/${fileName}`)
         }else{
             newUser.profilePic = req.body.profilePic
         }
@@ -41,7 +40,7 @@ const usersControllers = {
                 newUser.save()
                     .then( (user) => {
                         const token = jwt.sign({...newUser}, process.env.SECRETORKEY) 
-                        res.json({success: true, response: {profilePic: user.profilePic, firstName: user.firstName, lastName: user.lastName, eMail: user.eMail, token: token, admin: user.admin, _id:user._id}})                  
+                        res.json({success: true, response: {profilePic: user.profilePic, google: user.google, firstName: user.firstName, lastName: user.lastName, eMail: user.eMail, token: token, admin: user.admin, _id:user._id}})                  
                     })
             })
             .catch( err => handleError(res, err) )
@@ -59,7 +58,7 @@ const usersControllers = {
                 if (userFound.banned) throw new Error("Cuenta bloqueada")
                 if (!bcryptjs.compareSync(password, userFound.password)) throw new Error(errMessage)
                 const token = jwt.sign({...userFound}, process.env.SECRETORKEY)
-                res.json({success: true, response: {profilePic: userFound.profilePic, firstName: userFound.firstName, lastName: userFound.lastName, eMail: userFound.eMail, token: token, admin: userFound.admin, _id: userFound._id, dni:userFound.dni}})
+                res.json({success: true, response: {profilePic: userFound.profilePic, google: userFound.google, firstName: userFound.firstName, lastName: userFound.lastName, eMail: userFound.eMail, token: token, admin: userFound.admin, _id: userFound._id, dni:userFound.dni}})
             })
             .catch( err => handleError(res, err) )
     },
@@ -209,8 +208,8 @@ const usersControllers = {
     },
     
     verifyToken: (req, res) => {
-        const {profilePic, firstName, lastName, eMail, admin, dni, _id} = req.user
-        res.json({profilePic, firstName, lastName, eMail, admin, dni, id: _id})
+        const {profilePic, firstName, lastName, eMail, admin, dni, _id, google} = req.user
+        res.json({profilePic, firstName, lastName, eMail, admin, dni, id: _id, google})
     },
     sendMailPassword:(req,res)=>{
         console.log("Received CHANGE PASSWORD Petition:" + Date())
@@ -260,8 +259,21 @@ const usersControllers = {
         } else {
             res.json({ success: false, response: "Admin permissions required"})
         }
-    }
+    },
 
+    // saveNewSale: (req, res) => {
+    //     console.log("Received SAVE NEW SALE Petition:" + Date())
+    //     // const {userId, amount, shopCart, shipping, methodPayment} = req.body
+    //     console.log(req.body)
+    //     // console.log(req.user)
+    //     res.json({ success: true })
+    // },
+
+    saveNewSale: (req, res) => {
+        console.log("Received SAVE NEW SALE Petition:" + Date())
+        console.log(req.body)
+        res.json({ success: true, response: req.body })
+    },
 }
 
 module.exports = usersControllers
