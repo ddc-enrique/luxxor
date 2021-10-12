@@ -81,18 +81,18 @@ header.headerAdmin h1 {
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
-  background-color: white;
-  color: #464646;
+  /* background-color: white; */
+  color: #ffffff;
 }
 
 .loading {
   min-height: 32rem;
   width: 10rem;
-  background-image: url(https://i.postimg.cc/qRv8Dwtt/preloader3.gif);
   background-size: 50%;
   background-position: center;
   background-repeat: no-repeat;
   opacity: .5;
+  background-image: url(https://i.postimg.cc/TwZG2QWc/loading.gif);
 }
 
 .containerAdmin .sectionBrandCategory .containerCategory .category {
@@ -101,7 +101,7 @@ header.headerAdmin h1 {
   display: flex;
   width: 94%;
   justify-content: space-between;
-  padding: 0 .5rem;
+  padding: 0.6rem .5rem;
   align-items: center;
 
 }
@@ -115,42 +115,36 @@ header.headerAdmin h1 {
 .containerForm div {
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .containerForm div:nth-child(2) {
-  border: 1px solid #999999;
   padding: 1rem;
 }
 
-.navAdmin .icon,
-.icon {
-  height: 3rem;
-  width: 3rem;
+.navAdmin .icon, .containerCategory .icon {
+  height: 2rem;
+  width: 2rem;
   background-position: center;
   background-size: 1.8rem;
-  background-color: #f3f3f3;
-  border-radius: 1rem;
+  border-radius: .2rem;
   background-repeat: no-repeat;
   cursor: pointer;
+  padding: .5rem;
 }
 
 .icon {
   background-color: transparent;
 }
 
-.navAdmin .icon:hover {
-  background-color: #c4c4c4;
-}
 
 .addNew .icon,
 .search .icon,
 .lastAdded .icon {
-  height: 2.5rem;
-  width: 2.5rem;
+  height: 1.8rem;
+  width: 1.8rem;
   background-position: center;
   background-size: 98%;
-  /* background-color: #ebebeb; */
-  /* background-repeat: no-repeat; */
   border-radius: 2rem;
   margin: 0 0.4rem;
 }
@@ -165,15 +159,18 @@ header.headerAdmin h1 {
 
 .navAdmin a span {
   left: 2.5rem;
-  position: absolute;
-  padding: 1rem 3rem;
-  opacity: 0;
-  width: 0rem;
+    position: absolute;
+    padding: 1rem 3rem;
+    opacity: 0;
+    width: 0rem;
+    color: black;
+    font-weight: bold;
 }
 
 .navAdmin a span:hover {
   opacity: 1;
 }
+
 
 .containerSections .addNew>*,
 .containerSections .search>*,
@@ -276,8 +273,8 @@ label {
 
 .formNew .containerInputs>*,
 .containerInputs>* {
-  padding: 0 0.5rem;
-  font-size: 0.9rem;
+  padding-right: 0.8rem;
+  font-size: 0.8rem;
 }
 
 .formNew select {
@@ -332,10 +329,13 @@ label {
 .titleProduct {
   display: flex;
   justify-content: space-between;
-  padding: 0.5rem 0;
+  padding: 1.5rem 0;
   align-items: center;
 }
-
+.titleProduct h3 {
+  font-size: .9rem;
+  width: 10rem;
+}
 .titleProduct .cointanerEdit,
 .cointanerEdit {
   display: flex;
@@ -383,7 +383,8 @@ label {
 .imageProduct {
   border: 1px solid #dbdbdb;
   width: 5rem;
-  height: 4rem;
+  height: 5rem;
+  margin-right: 1rem;
   border-radius: 0.5rem;
   background-size: cover;
   background-position: center;
