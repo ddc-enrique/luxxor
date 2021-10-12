@@ -66,7 +66,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
     return(
         <div>
             <NavBar />
-            <div className={styles.divContainerExito}>
+                <div className={styles.divContainerExito}>
                     <div className={styles.divContainerCuenta}>
                             <h2>
                                 {completeAccount && "Puedes editar estos datos de tu cuenta"}

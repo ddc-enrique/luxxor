@@ -17,9 +17,13 @@ const messagesActions = {
         }
     },
 
-    deleteMessage: (id) => {
+    deleteMessage: (id, token) => {
         return async () => {
-            let response = await axios.delete(`http://localhost:4000/api/admin/message/${id}`)
+            let response = await axios.delete(`http://localhost:4000/api/admin/message/${id}`, {
+                headers: {
+                    Authorization: "Bearer " + token
+                }
+            })
             if(!response.data.success) throw response.data.response
             return response.data
         }

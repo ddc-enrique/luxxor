@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from 'react'
 import { connect } from 'react-redux'
+import shopCartActions from "../redux/actions/shopCartActions"
+
 
 
 const Paypal = (props) => {
@@ -49,6 +51,10 @@ const mapStateToProps = (state) =>{
     return{
         total: state.shopCart.total
     }
+}
+
+const mapDispatchToProps ={
+    resetCart:shopCartActions.resetCart,
 }
 
 export default connect(mapStateToProps)(Paypal)

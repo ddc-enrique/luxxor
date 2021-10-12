@@ -1,38 +1,40 @@
-import React,  { useState, useEffect}from "react";
+import React, { useState, useEffect } from "react";
 import styles from "../styles/sale.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
 import CardProductCart from "./CardProductCart";
-import { Link } from "react-router-dom"
-import shopCartActions from "../redux/actions/shopCartActions"
+import { Link } from "react-router-dom";
+import shopCartActions from "../redux/actions/shopCartActions";
 import productsActions from "../redux/actions/productsActions";
 
-const CheckOutProducts = (props) =>{
-
-    const [products,setProducts]=useState([])
-    const[products2,setProducts2]=useState([])
-    const[loading,setLoading]=useState(true)
-    const[total,setTotal]=useState(0)
-    let aux
-    var aux_array=[]
-    console.log(props.cartProduct)
-    useEffect(()=>{
-        /* console.log(props.cartProduct) */
-        props.cartProduct.forEach(item=>{
-            props.product(item.productId)
-            .then((res)=>{
-                aux= {...res.data.response,quantity:item.quantity}
-              /*   products4=[...products,aux]
-                console.log(products4)
-                 setProducts(products4)  */
-                 /* aux_array=aux_array.push(aux)
-                 setProducts(aux_array) */
+const CheckOutProducts = (props) => {
+  const [products, setProducts] = useState([]);
+  const [products2, setProducts2] = useState([]);
+  const [dataShipping, setDataShipping] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(0);
+  let aux;
+  var aux_array = [];
+  const [dataAddress,setDataAddress]=useState({})
+  useEffect(() => {
+    /* console.log(props.cartProduct) */
+    props.cartProduct.forEach((item) => {
+      props
+        .product(item.productId)
+        .then((res) => {
+          aux = { ...res.data.response, quantity: item.quantity };
                  setProducts2(products2.push(aux))
                  setProducts(products2) 
-                 /* setLoading(!loading) */
             })
             .catch(e=>console.log(e))
         }) 
+    props.getUserData(props.id,props.token)
+        .then(res=>{
+            console.log(res)
+            setDataAddress(res)
+        })
+        .catch(e=>console.log(e))
+
         setTimeout(()=>{
             setLoading(!loading)  
         },500)
@@ -40,7 +42,7 @@ const CheckOutProducts = (props) =>{
     },[])
 
 
-    return(
+    /* return(
         <>       
             
             <div className={styles.containerCart}>
@@ -48,7 +50,6 @@ const CheckOutProducts = (props) =>{
                     return(
                         <>
                             <CardProductCart sale={false} product={product} deleteProduct={props.deleteProduct} setTotal={setTotal} total={total}/>
-                        {/* <h1>kjhkjhj</h1> */}
                         </>
                     )
                 })
@@ -85,21 +86,104 @@ const CheckOutProducts = (props) =>{
                 <button onClick={()=>props.setScreen(2)} className={styles.buttonSend}>Continuar Compra</button>
             </div>
         </>
-    )
+    ) */
 
-}
+  return (
+    <>
+      <div className={styles.containerCart}>
+        {products.map((product) => {
+          return (
+            <>
+              <CardProductCart
+                sale={false}
+                product={product}
+                deleteProduct={props.deleteProduct}
+                setTotal={setTotal}
+                total={total}
+              />
+            </>
+          );
+        })}
+      </div>
+      <div className={styles.formData}>
+        <h3>DATOS DEL DESTINATARIO</h3>
+        <div className={styles.boxInputs}>
+          <input style={{color:"#FFF"}}type="text" name="firstName" placeholder="Nombre" defaultValue={props.firstName} />
+          <input style={{color:"#FFF"}} type="text" name="lastName" placeholder="Apellido" defaultValue={props.lastName}/>
+        </div>
+        <div className={styles.boxInputs}>
+          <input style={{color:"#FFF"}} type="text" name="dni" placeholder="DNI"defaultValue={props.dni} />
+          <input style={{color:"#FFF"}} type="text" name="phone" placeholder="Teléfono" defaultValue={dataAddress.phone} />
+        </div>
+      </div>
+      <div className={styles.formSending}>
+        <input
+          type="radio"
+          value="true"
+          name="shipping"
+          onClick={() => setDataShipping(true)}
+        />
+        Envio a domicilio
+        <input
+          type="radio"
+          value="false"
+          name="shipping"
+          onClick={() => setDataShipping(false)}
+        />
+        Retirar en sucursal
+      </div>
+      {dataShipping && (
+        <div className={styles.formData}>
+          <h3>DIRECCION DE ENTREGA</h3>
+          <div className={styles.boxInputs}>
+            <input style={{color:"#FFF"}} type="text" name="adress" placeholder="Dirección" defaultValue={dataAddress.address}/>
+            <input
+            style={{color:"#FFF"}}
+              type="text"
+              name="zipCode"
+              placeholder="Departamento(opcional)"
+              defaultValue={dataAddress.optional && dataAddress.optional  }
+            />
+          </div>
+          <div className={styles.boxInputs}>
+            <input style={{color:"#FFF"}} type="text" name="city" placeholder="Ciudad" defaultValue={dataAddress.city} />
+            <input style={{color:"#FFF"}} type="number" name="zipCode" placeholder="Código Postal" defaultValue={dataAddress.zipCode} />
+          </div>
+        </div>
+      )}
+      <div className={styles.containerTotal}>
+        <h3>TOTAL: {props.total}</h3>
+      </div>
 
+      <div className={styles.containerSend}>
+        <button
+          onClick={() => props.setScreen(2)}
+          className={styles.buttonSend}
+        >
+          Continuar Compra
+        </button>
+      </div>
+    </>
+  );
+};
 
 const mapStateToProps = (state) => {
-    return {
-        cartProduct:state.shopCart.shopCart
-    }
-}
-const mapDispatchToProps ={
-    /*  addProduct:shopCartActions.addToCart, */
-     deleteProduct:shopCartActions.deleteToCart,
-     /* resetCart:shopCartActions.resetCart, */
-    product:productsActions.product  
-   }
+  return {
+    cartProduct: state.shopCart.shopCart,
+    id:state.users.id,
+    token:state.users.token,
+    lastName:state.users.lastName,
+    firstName:state.users.firstName,
+    dni:state.users.dni,
+    total:state.shopCart.total
+  };
+};
+const mapDispatchToProps = {
+  /*  addProduct:shopCartActions.addToCart, */
+  deleteProduct: shopCartActions.deleteToCart,
+  /* resetCart:shopCartActions.resetCart, */
+  product: productsActions.product,
+  getUserData:usersAction.getUserData
+};
 
-export default connect(mapStateToProps,mapDispatchToProps)(CheckOutProducts)
+export default connect(mapStateToProps, mapDispatchToProps)(CheckOutProducts);

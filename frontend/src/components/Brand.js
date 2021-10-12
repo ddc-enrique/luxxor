@@ -28,7 +28,7 @@ const Brand = (props) => {
     if (!brand) {
       alert("No puede estar vacio");
     } else {
-      let res = await props.addBrand(brand);
+      let res = await props.addBrand(brand, props.token);
       if (!res.data.success) {
         alert(res.data.response);
       } else {
@@ -40,12 +40,12 @@ const Brand = (props) => {
   };
 
   const editBrand = async (id) => {
-    let res = await props.editBrand(id, { name: brand });
+    let res = await props.editBrand(id, { name: brand }, props.token);
     let resp = await props.getBrands();
     setBrands(resp);
   };
   const deleteBrand = async (id, index) => {
-    let res = await props.deleteBrand(id);
+    let res = await props.deleteBrand(id, props.token);
     console.log(res);
     res.data.success && alert("Borrado con éxito");
     setBrands(brands.splice(id, index));
@@ -145,6 +145,7 @@ const Brand = (props) => {
 const mapStateToProps = (state) => {
   return {
     allBrands: state.products.brands,
+    token: state.users.token
   };
 };
 
