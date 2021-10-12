@@ -88,7 +88,7 @@
   top: 10rem;
   left: 4rem;
   width: 13rem;
-  background-color: rgb(5 51 66 / 65%);
+  background-color: rgb(48 106 154);
   box-shadow: 12px 0px 100vw 55vw #26262673;
   padding: 2rem;
   display: flex;
@@ -106,7 +106,6 @@
   background-position: center;
   background-size: cover;
   cursor: pointer;
-  background-color: rgb(51 51 51);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -310,7 +309,6 @@ div.picRecomendados p {
     background-position: center;
     background-size: cover;
     cursor: pointer;
-    background-color: rgb(51 51 51);
     display: flex;
     justify-content: center;
     align-items: center;

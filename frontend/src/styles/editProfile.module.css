@@ -45,6 +45,7 @@ form.formContainerExito input {
     background-color: transparent;
     border-bottom: 1px solid #e3e3e3;
     outline: none;
+    color: white;
 }
 
 input::placeholder {

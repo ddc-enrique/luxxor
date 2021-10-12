@@ -2,6 +2,7 @@ import React,  { useState, useEffect, useRef }from "react";
 import styles from "../styles/password.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
+import {  XCircleFill } from 'react-bootstrap-icons'
 
 const Password = (props) =>{
     const [eMail,setEmail]=useState({
@@ -56,9 +57,12 @@ const Password = (props) =>{
         <>
             <div className={styles.containerTotal}>
                 <div className={styles.containerForm}>
-                    <img onClick={()=>{
+                    {/* <img onClick={()=>{
                         props.setVisible(false)
-                        props.setmodalPass(false)}} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
+                        props.setmodalPass(false)}} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/> */}
+                          <XCircleFill  onClick={()=>{
+                        props.setVisible(false)
+                        props.setmodalPass(false)}} className={styles.iconClose}  className={styles.icono}/>
                     <div className={styles.boxData} >
                         <div className={styles.boxTitle} >
                             <h3>Recupera tu contraseña</h3>

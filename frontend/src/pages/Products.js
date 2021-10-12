@@ -8,7 +8,6 @@ import { connect } from "react-redux"
 import FilterProducts from "../components/FilterProducts"
 import productsActions from "../redux/actions/productsActions"
 import toast, { Toaster } from "react-hot-toast"
-
 const Products = (props) => {
   const [products, setProducts] = useState(props.products)
   const [filteredProducts, setFilteredProducts] = useState(props.products)
@@ -95,9 +94,13 @@ const Products = (props) => {
     setUpdateOnSort(!updateOnSort)
   }
 
-  if(loading){
-    return <div> Cargando...</div>
-  }
+  // if(loading){
+  //   return(
+  //     <div className={styles.productsSection}>
+  //     <div className={styles.loading}></div>
+  //     </div>
+  // )
+  // }
 
   return (
     <>

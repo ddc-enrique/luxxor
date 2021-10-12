@@ -7,6 +7,7 @@ import shopCartActions from "../redux/actions/shopCartActions"
 import toast, { Toaster } from "react-hot-toast"
 import productsActions from "../redux/actions/productsActions"
 import Moment from 'react-moment'
+import { XCircle } from 'react-bootstrap-icons';
 
 
 const Product2 = (props) => {
@@ -69,7 +70,6 @@ const Product2 = (props) => {
                   </p>
                   <button onClick={addProductHandler}
                   className={styles.cart}>AGREGAR AL CARRITO</button>
-                 
     </>
   )
 
@@ -121,11 +121,12 @@ const Product2 = (props) => {
         </div> 
 		{modal && (
                 <div className={styles.modal}>
-                  <div
+                  {/* <div
                     className={styles.icon}
                     onClick={() => setModal(!modal)}
                     
-                  >X</div>
+                  >X</div> */}
+                  <XCircle className={styles.icon} onClick={() => setModal(!modal)}/>
 				  <div>
 					 <h3>FICHA TÉCNICA</h3>
 					  <ul>
