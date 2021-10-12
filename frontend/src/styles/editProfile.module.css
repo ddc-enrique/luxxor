@@ -7,6 +7,10 @@ form.formContainerExito {
 
 }
 
+div.none {
+    display: none;
+}
+
 form.formContainerExito {
     background-color: #e5e5e521;
     padding: 1rem;

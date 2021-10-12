@@ -48,12 +48,10 @@ const Product2 = (props) => {
   },[])
  
   const addProductHandler=()=>{
-    console.log(product.price)
     props.addProduct(props.match.params.id,product.price,product.discount,product.name)
   }
   console.log(product.category)
   const arrayRecom =products.filter(item => item.category._id === product.category._id && item._id !== product._id)
-  console.log(arrayRecom)
   const details = detailsOn &&(
    
     <>
@@ -80,7 +78,6 @@ const Product2 = (props) => {
         </>
     )
   }
-  console.log(product)
     return (
         <>
 

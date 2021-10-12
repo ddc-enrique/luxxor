@@ -231,7 +231,7 @@ const productsActions = {
                 if (!response.data.success) throw new Error(response.data.response)
                 return response.data.response
             }catch(e){
-                return ({success: false, response: e})
+                return ({success: false, response: e.message})
             }
         }
     },
