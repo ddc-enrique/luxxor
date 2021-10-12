@@ -5,7 +5,7 @@ import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
 import { NavAdmin } from "../components/NavAdmin";
 import EditProduct from "../components/EditProduct";
-
+import { House, PlusCircle, DashCircle, X, ColumnsGap, Bag, Tag,ChatDots, Search, XCircle, ClockFill, Pen} from 'react-bootstrap-icons'
 const Admin = (props) => {
 
   const [newProduct, setNewProduct] = useState({
@@ -42,12 +42,11 @@ const Admin = (props) => {
     
     const getAllProducts = async () => {
       if(!products.length){
-        
         let response = await props.getAllProducts()
         setProducts(response)
         setProductsFiltered(response)
         setProductsFilt(response)
-        setLoading(!loading)
+        setLoading(false)
       }
     }
     getAllProducts()
@@ -68,14 +67,11 @@ const Admin = (props) => {
       }
     }
     getAllCategories()
+  }, [])
 
-  
-  }, [render])
-  
-  
+ 
   const handle = (e) => {
     setProductsFilt(productsFiltered.filter(item => (item.name.toLowerCase().startsWith(e.target.value.trim().toLowerCase()))))
-    
   }
 
   const newProductHandler = (index, e) => { 
@@ -111,7 +107,7 @@ const Admin = (props) => {
   }
 
   const deleteProduct = (id) => {
-      props.deleteProductById(id)
+      props.deleteProductById(id, props.token)
       .then(response=>{
         if(!response.success){
             console.log("Hubo un error") //poner tostada
@@ -125,11 +121,10 @@ const Admin = (props) => {
   
 const EditProductComp = (props) => {
     props.setModalEdit(true) 
-    return (modalEdit && <EditProduct setModalEdit={props.setModalEdit} id={props.productId} brands={brands} categories={categories}/>)
+    return (modalEdit && <EditProduct  setModalEdit={props.setModalEdit} id={props.productId} brands={brands} categories={categories}/>)
 }
   
 
-  console.log(modalEdit)
 
   const addProductHandler = async () => {
     const FD = new FormData()
@@ -147,7 +142,7 @@ const EditProductComp = (props) => {
     FD.append("discount", newProduct.discount)
     FD.append("category", newProduct.category)
     FD.append("brand", newProduct.brand)
-   let response = await props.addProduct(FD)
+   let response = await props.addProduct(FD, props.token)
    if (!response.success) {
      console.log("Error") //Poner tostada
    }else {
@@ -176,13 +171,7 @@ const EditProductComp = (props) => {
         <div className={styles.containerSections}>
           <section className={styles.addNew}>
             <div>
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/0NLxdcNK/2-removebg-preview-4.png')",
-                }}
-              ></div>
+            <PlusCircle className={styles.icon}/>
               <h3>Agregar nuevo</h3>
             </div>
             <div className={styles.formNew}>
@@ -245,7 +234,7 @@ const EditProductComp = (props) => {
                   <input id="name" type="text" name="name" onChange={(e)=>newProductHandler("index", e)} />
                 </div>
                 <div className={styles.containerInputs}>
-                  <label htmlFor="color">Categoria</label>
+                  <label htmlFor="category">Categoria</label>
                   <select className={styles.select} name="category" onChange={(e)=>newProductHandler("index", e)}>
                     {categories.map(category=> (
                       <option
@@ -258,7 +247,8 @@ const EditProductComp = (props) => {
                   </select>
                 </div>
                 <div>
-                  <p onClick={newInput} style={{cursor: "pointer"}}>+ Agregar input</p>
+                <PlusCircle className={styles.icon} onClick={newInput} style={{cursor: "pointer"}}/>
+                  {/* <p onClick={newInput} style={{cursor: "pointer"}}>+ Agregar input</p> */}
                   {inputFields.map((input, index)=>{
                    return <div key={index}>
                       <div className={styles.containerInputs}>
@@ -269,7 +259,8 @@ const EditProductComp = (props) => {
                         <label htmlFor="optionValue">Descripción de car.</label>
                         <input id="optionValue" type="text" name="optionValue" onChange={(e)=>newProductHandler(index, e)} defaultValue={input.optionValue}/>
                       </div>
-                      <p onClick={()=>removeInput(index)} style={{cursor: "pointer"}}>- Borrar input</p>
+                      <DashCircle className={styles.icon} onClick={()=>removeInput(index)} style={{cursor: "pointer"}}/>
+                      {/* <p onClick={()=>removeInput(index)} style={{cursor: "pointer"}}>- Borrar input</p> */}
                   </div>
                   
                   })}
@@ -324,16 +315,7 @@ const EditProductComp = (props) => {
           </section>
           <section className={styles.search}>
             <div>
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/h47DcVZB/search.png')",
-                }}
-              ></div>
-
-
-
+            <Search className={styles.icon}/>
               <h3>Buscar</h3>
             </div>
             
@@ -353,46 +335,34 @@ const EditProductComp = (props) => {
                       ></div>
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>
-                        <div
+                        {/* <div
                           onClick={()=>{setProductId(product._id); setModalEdit(!modalEdit)}}
                           className={styles.icon}
                           style={{
                             backgroundImage:
                               "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
                           }}
-                        ></div>
-                        <div
-                          onClick={()=>deleteProduct(product._id)}
-                          className={styles.icon}
-                          style={{
-                            backgroundImage:
-                              "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                          }}
-                        ></div>
+                        ></div> */}
+                         <Pen className={styles.icon} style={{cursor: "pointer"}}  onClick={()=>{setProductId(product._id); setModalEdit(!modalEdit)}}/>
+                         <XCircle className={styles.icon} onClick={()=>deleteProduct(product._id)} style={{cursor: "pointer"}}/>
                       </div>
                     </div>
 
                   </div>
                 ))}
-                {modalEdit && <EditProductComp productId={productId} setModalEdit={setModalEdit}/>}
+                {modalEdit && <EditProductComp  productId={productId} setModalEdit={setModalEdit}/>}
               </div>
             </div>
           </section>
           <section className={styles.lastAdded}>
             <div>
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/Vv1mKVqW/reciente.png')",
-                }}
-              ></div>
+            <ClockFill className={styles.icon} style={{cursor: "pointer"}}/>
               <h3>Agregados Recientemente</h3>
             </div>
             <div className={styles.containerAllInputs}>
               <div className={styles.containerProducts}>
                 {loading ? <div className={styles.loading}></div> :
-                  products.map((product, index) => (
+                  productsFiltered.slice(0,4).reverse().map((product, index) => (
                   <div className={styles.boxProduct} key={index}>
                     <div className={styles.titleProduct}>
                       <div
@@ -401,21 +371,15 @@ const EditProductComp = (props) => {
                       ></div>
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>
-                        <div
+                      <Pen className={styles.icon}  style={{cursor: "pointer"}}/>
+                        {/* <div
                           className={styles.icon}
                           style={{
                             backgroundImage:
                               "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
                           }}
-                        ></div>
-                        <div
-                          onClick={()=>deleteProduct(product._id)}
-                          className={styles.icon}
-                          style={{
-                            backgroundImage:
-                              "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                          }}
-                        ></div>
+                        ></div> */}
+                        <XCircle className={styles.icon} onClick={()=>deleteProduct(product._id)} style={{cursor: "pointer"}}/>
                       </div>
                     </div>
                     
@@ -442,7 +406,6 @@ const mapDispatchToProps = {
   getBrands: productsActions.brands,
   getAllProducts: productsActions.products,
   deleteProductById: productsActions.deleteProduct,
-  editProduct: productsActions.editProduct,
 }
 
 const mapStateToProps = (state) => {
@@ -450,6 +413,7 @@ const mapStateToProps = (state) => {
     categories: state.products.categories,
     brands: state.products.brands,
     products: state.products.products,
+    token: state.users.token
   }
 }
 

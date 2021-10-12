@@ -9,11 +9,11 @@ const shopCartReducer=(state=initialState ,action)=>{
         let productFound = state.shopCart.find((item) => item.productId === action.payload.id);
             let aux_shopCart_add=state.shopCart.map(item=>
                 item.productId===action.payload.id
-                    ?{productId:item.productId,quantity: item.quantity + 1}
+                    ?{productId:item.productId,quantity: item.quantity + 1,name:action.payload.name,productPrice:action.payload.price}
                     :item    
             )
-            let aux_shopCart_add_2=[...state.shopCart,{productId:action.payload.id,quantity:1}]
-            let subtotal_add=state.subtotal+action.payload.price
+            let aux_shopCart_add_2=[...state.shopCart,{productId:action.payload.id,quantity:1,name:action.payload.name,productPrice:action.payload.price}]
+            let subtotal_add=parseFloat((state.subtotal+(action.payload.price)).toFixed(2))
             let total_add=parseFloat((state.total+((action.payload.price)*(100-action.payload.discount)/100)).toFixed(2))
 
             localStorage.setItem('subtotal',JSON.stringify(subtotal_add))
@@ -45,7 +45,7 @@ const shopCartReducer=(state=initialState ,action)=>{
                     :item
                 )
                 let aux_shopCart_delete_2=state.shopCart.filter(item=>item.productId!==action.payload.id)
-                let subtotal_delete=state.subtotal-(action.payload.price)
+                let subtotal_delete=parseFloat((state.subtotal-(action.payload.price)).toFixed(2))
                 let total_delete= parseFloat((state.total-((action.payload.price)*(100-action.payload.discount)/100)).toFixed(2))
 
                 localStorage.setItem('subtotal',JSON.stringify(subtotal_delete))
@@ -71,7 +71,7 @@ const shopCartReducer=(state=initialState ,action)=>{
 
             case 'DELETE_ALL_QUANTITY': {
                 let aux_shopCart=state.shopCart.filter(item=>item.productId!==action.payload.id)
-                let subtotal_delete_quantity=state.subtotal-(action.payload.price*action.payload.quantity)
+                let subtotal_delete_quantity=parseFloat((state.subtotal-(action.payload.price*action.payload.quantity)).toFixed(2))
                 let total_delete_quantity=parseFloat((state.total-((action.payload.price*action.payload.quantity)*(100-action.payload.discount)/100)).toFixed(2))
 
                 localStorage.setItem('shopCart',JSON.stringify(aux_shopCart))

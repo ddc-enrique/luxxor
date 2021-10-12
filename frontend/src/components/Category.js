@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
 import { connect } from "react-redux";
+import { House, PlusCircle, DashCircle, X, ColumnsGap, Bag, Tag,ChatDots, Search, XCircle, ClockFill, Pen, CheckCircle} from 'react-bootstrap-icons'
 const Category = (props) => {
   const [categories, setCategories] = useState(props.categories);
   const [loading, setLoading] = useState(true);
@@ -28,7 +29,7 @@ const Category = (props) => {
     if (!category) {
       alert("No puede estar vacio");
     } else {
-      let res = await props.addCategory(category);
+      let res = await props.addCategory(category, props.token);
       if (!res.data.success) {
         alert(res.data.response);
       } else {
@@ -39,7 +40,7 @@ const Category = (props) => {
     }
   };
   const editCategory = async (id) => {
-    let res = await props.editCategory(id, { name: category });
+    let res = await props.editCategory(id, { name: category }, props.token);
     if (res.data.success) {
       let resp = await props.getCategories();
       setCategories(resp);
@@ -48,7 +49,7 @@ const Category = (props) => {
     }
   };
   const deleteCategory = async (id, index) => {
-    let res = await props.deleteCategory(id);
+    let res = await props.deleteCategory(id, props.token);
     res.data.success && alert("Borrado con éxito");
     setCategories(categories.splice(id, index));
   };
@@ -83,34 +84,16 @@ const Category = (props) => {
                         >
                           {category.name}
                         </textarea>
-                        <button onClick={() => editCategory(category._id)}>
-                          ✔️
-                        </button>
-                        <button onClick={() => setEditOpen(!editOpen)}>
-                          ✖️
-                        </button>
+                        <CheckCircle className={styles.icon} onClick={() => editCategory(category._id)}/>
+                        <XCircle className={styles.icon} onClick={() => setEditOpen(!editOpen)}/>
                       </>
                     ) : (
                       category.name
                     )}
                   </h3>
                   <div className={styles.cointanerEdit}>
-                    <div
-                      onClick={() => setEditOpen(category.name)}
-                      className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
-                      }}
-                    ></div>
-                    <div
-                      onClick={() => deleteCategory(category._id, index)}
-                      className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                      }}
-                    ></div>
+                     <Pen className={styles.icon} onClick={() => setEditOpen(category.name)}/>
+                     <XCircle className={styles.icon} onClick={() => deleteCategory(category._id, index)}/>
                   </div>
                 </div>
               ))
@@ -149,6 +132,7 @@ const Category = (props) => {
 const mapStateToProps = (state) => {
   return {
     allcategories: state.products.categories,
+    token: state.users.token
   };
 };
 

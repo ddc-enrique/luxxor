@@ -11,7 +11,7 @@ const CardProductCart = (props) =>{
     /* setTotal(total+subTotalProduct) */
     const addProductHandler=()=>{
         if(counter<product.stock){
-            props.addProduct(product._id,product.price,product.discount)
+            props.addProduct(product._id,product.price,product.discount,product.name)
             setCounter(counter+1)
         }else{
             toast("No hay mas unidades a la venta", {
@@ -45,7 +45,7 @@ const CardProductCart = (props) =>{
                 <img width="90" src={`http://localhost:4000/productsPhoto/${product.photos[0]}`}/>
                 <div className={styles.containerProductTetx}>
                     <p>{product.name}</p>
-                    <span>$ {" "+product.price}</span>
+                    <span>$ {" "+product.price.toFixed(2)}</span>
                     <div className={styles.counter}>
                         <DashCircle onClick={deleteProductHandler} className={styles.iconClose}/>
                         <span>{counter}</span>
@@ -54,9 +54,10 @@ const CardProductCart = (props) =>{
                 </div>
             </div>
             <div className={styles.containerSubTotal}>
-                    <span  className={styles.inputSubtotal}>${" "+counter*product.price}</span>
-                    <X onClick={() => props.deleteProduct(product._id,true,product.price,counter,product.discount)} className={styles.iconClose}/>
+                    <span  className={styles.inputSubtotal}>${" "+(counter*product.price).toFixed(2)}</span>
+                    
             </div>
+            <X onClick={() => props.DeleteProductModalCart(product._id,true,product.price,counter,product.discount)} className={styles.iconClose}/>
             <Toaster position="top-center" reverseOrder={false} />
         </div>
     )

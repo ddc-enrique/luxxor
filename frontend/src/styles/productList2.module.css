@@ -126,20 +126,24 @@ div.container {
   .inputSelect {
     display: flex;
     justify-content: flex-end;
-    margin-right: 3rem;
+    margin-right: 1rem;
 
   }
 
 
   .selectInput {
-    border: 0.05rem solid #848484;
     outline: 0;
     height: 3rem;
     width: 20.5rem;
-    border: 1px solid black;
     padding-left: 1rem;
     border: none;
     padding-right: 1rem;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+  }
+  select option {
+    color: rgb(0, 0, 0);
   }
 
 }
@@ -184,30 +188,32 @@ div.container {
 
 @media (min-width: 800px) {
   .pageContent {
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
   }
 }
 
 .card {
   position: relative;
   display: flex;
+  height: 25rem;
+  width: 15rem;
   align-items: flex-end;
   overflow: hidden;
   padding: 1rem;
   width: 80%;
   text-align: center;
-  background-size: 103% 38%;
+  background-size: 77% 53%;
   background-position: center;
-  background-image: url('https://i.postimg.cc/Kz4h0KXr/produ.png');
+  background-image: url(https://i.postimg.cc/Kz4h0KXr/produ.png);
   background-repeat: no-repeat;
   color: whitesmoke;
-  /* background-color: whitesmoke; */
   box-shadow: 0 1px 1px rgb(0 0 0 / 10%), 0 2px 2px rgb(0 0 0 / 10%), 0 4px 4px rgb(0 0 0 / 10%), 0 8px 8px rgb(0 0 0 / 10%), 0 16px 16px rgb(0 0 0 / 10%);
 }
 
 @media (min-width: 600px) {
   .card {
-    height: 350px;
+    height: 25rem;
+    width: 15rem;
   }
 }
 

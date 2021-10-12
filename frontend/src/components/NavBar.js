@@ -10,6 +10,7 @@ import ModalCart from './ModalCart';
 
 
 const NavBar = (props) => {  
+    console.log(props)
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(false)
     const [modalPass,setmodalPass]=useState(false)
@@ -35,7 +36,6 @@ const NavBar = (props) => {
         if(history.location.pathname === "/mi-cuenta") history.push("/")
     }
 
-
     const homeLocationsPathFlag = [ "/como-comprar", "/contacto"].includes(history.location.pathname) || (history.location.pathname === "/")
     return(
         <header className={styles.headerContainer}>
@@ -57,7 +57,7 @@ const NavBar = (props) => {
                     }
                 </div>
                 {props.token?
-                <div className={styles.icon} style={{backgroundImage: `url(${props.profilePic})`}} onClick={clickHandler}></div>                
+                <div className={styles.icon} style={{backgroundImage: props.flagGoogle ? `url(${props.profilePic})` : `url(http://localhost:4000/usersPhoto/${props.profilePic})`}} onClick={clickHandler}></div>                
                 :<div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/pTZVv7n0/Diseño_sin_título_(66).png")'}} onClick={clickHandler}></div>
                 }
                 <div className={styles.icon} style={{backgroundImage: 'url("https://i.postimg.cc/KzhQNPLP/Dise-o-sin-t-tulo-73.png")'}} onClick={clickCart}>
@@ -129,6 +129,7 @@ const mapStateToProps = (state) => {
         token: state.users.token,
         admin: state.users.admin,
         cartProduct:state.shopCart.shopCart,
+        flagGoogle: state.users.google
     }
 }
 

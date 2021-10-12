@@ -99,7 +99,6 @@ const SignUp = (props) => {
       } else {
         const resp = await signUp(FD)
         if (resp) {
-          console.log(resp)
           setErrorName(
             resp.find((err) => err.path[0] === "firstName")
               ? resp.find((err) => err.path[0] === "firstName").message
@@ -122,7 +121,7 @@ const SignUp = (props) => {
               : null
           )
         } else {
-          toast("Welcome", {
+          toast("Bienvenido", {
             icon: "👏",
             style: {
               borderRadius: "1rem",
@@ -213,7 +212,7 @@ const SignUp = (props) => {
             name="firstName"
             defaultValue={newUser.firstName}
           />
-          <small style={{ color: "red" }}>{errorName}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorName}&nbsp;</small>
           <input
             onChange={newUserHandler}
             type="text"
@@ -222,7 +221,7 @@ const SignUp = (props) => {
             name="lastName"
             defaultValue={newUser.lastName}
           />
-          <small style={{ color: "red" }}>{errorLastName}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorLastName}&nbsp;</small>
           <input
             onChange={newUserHandler}
             type="text"
@@ -232,7 +231,7 @@ const SignUp = (props) => {
             defaultValue={newUser.eMail}
             onKeyPress={keyPressHandler}
           />
-          <small style={{ color: "red" }}>{errorEmail}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorEmail}&nbsp;</small>
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
@@ -250,7 +249,7 @@ const SignUp = (props) => {
               alt="..."
             />
           </div>
-          <small style={{ color: "red" }}>{errorPass}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPass}&nbsp;</small>
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
@@ -267,7 +266,7 @@ const SignUp = (props) => {
               alt="..."
             />
           </div>
-          <small style={{ color: "red" }}>{errorPassChecked}&nbsp;</small>
+          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPassChecked}&nbsp;</small>
           {newUser.profilePic && <p>{newUser.profilePic.name}</p>}
           <label className={styles.labelInput} for="inputPhoto">
             <img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif" />

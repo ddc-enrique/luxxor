@@ -31,7 +31,7 @@ const AdminMessages = (props) => {
     
     const deleteMessage = async(id) =>{
         try {
-            let response = await props.removeMessage(id)
+            let response = await props.removeMessage(id, props.token)
             if(response.success) {
                 toast('Mensaje Eliminado', { icon: '🗑️',})
                 setMessages(messages.filter(message => message._id != id))
@@ -116,4 +116,10 @@ const mapDispatchToProps = {
     removeMessage: messagesActions.deleteMessage
 }
 
-export default connect (null, mapDispatchToProps)(AdminMessages)
+const mapStateToProps = (state) => {
+    return{
+        token: state.users.token
+    }
+}
+
+export default connect (mapStateToProps, mapDispatchToProps)(AdminMessages)

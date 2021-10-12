@@ -41,23 +41,29 @@ router.route('/user/edit-profile/:id')
         validatorControllers.validatorEditComplete, 
         usersControllers.editProfile)
 
+router.route("/user/myshopping/:id")
+    .get(salesControllers.getOneSale)
+
 router.route("/verifyToken")
     .get(passport.authenticate("jwt", { session: false }),
         usersControllers.verifyToken)
 
 router.route('/products')
     .get(productsControllers.getAllProducts)
-    .post(passport.authenticate("jwt", { session: false }),
-        usersControllers.verifyAdmin,
+    .post(
+        // passport.authenticate("jwt", { session: false }),
+        // usersControllers.verifyAdmin,
         productsControllers.addProduct)
 
 router.route('/product/:id')
     .get(productsControllers.getOneProduct)
-    .put(passport.authenticate("jwt", { session: false }),
-        usersControllers.verifyAdmin,
+    .put(
+        // passport.authenticate("jwt", { session: false }),
+        // usersControllers.verifyAdmin,
         productsControllers.editProduct)
-    .delete(passport.authenticate("jwt", { session: false }),
-        usersControllers.verifyAdmin,
+    .delete(
+        // passport.authenticate("jwt", { session: false }),
+        // usersControllers.verifyAdmin,
         productsControllers.deleteProduct)
 
 router.route('/checkout')
@@ -65,8 +71,9 @@ router.route('/checkout')
     
 router.route('/admin/brands')
     .get(brandCategoryControllers.getAll)
-    .post(passport.authenticate("jwt", { session: false }),
-        usersControllers.verifyAdmin,
+    .post(
+        // passport.authenticate("jwt", { session: false }),
+        // usersControllers.verifyAdmin,
         brandCategoryControllers.addValueField)
     
 router.route('/admin/brand/:id')
