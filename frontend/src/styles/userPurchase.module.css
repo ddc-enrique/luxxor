@@ -1,10 +1,50 @@
 div.divContainer {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: space-around;
+    
 }
 
 div.none {
     display: none;
+}
+
+div.divImage {
+    width: 60%;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+    transition: .5s ease-in-out;
+}
+
+nav.navegator {
+
+    text-align: center;
+}
+
+h2.title {
+    margin: 1rem;
+    text-align: center;
+    font-size: 2rem;
+    color: #e3e3e3;
+}
+
+div.photoShop {
+    background-position: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 30rem;
+    height: 30rem;
+    margin-right: 5rem;
+    filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
+}
+
+div.container{
+    background-color: #e3e3e33f;
+    margin-bottom: 0.7rem;
+    display: flex;
+}
+
+div.productsContainer {
+    margin-top: 2rem;
+    width: 65%;
 }
