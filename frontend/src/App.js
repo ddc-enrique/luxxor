@@ -19,6 +19,7 @@ import Product2  from "./pages/Product2"
 import Sale from "./pages/Sale";
 import AdminMessages from "./pages/AdminMessages"
 import shopCartActions from "./redux/actions/shopCartActions"
+import AdminSales from "./components/AdminSales";
 
 const App = (props) => {
   const {token, dni, signWithLocal} = props
@@ -44,14 +45,17 @@ const App = (props) => {
         <Route exact path="/admin/messages" component={AdminMessages} />
         <Route path="/admin/categorias" component={Category} />
         <Route path="/admin/marcas" component={Brand} />
+        <Route path="/admin/ventas" component={AdminSales}/>  
         <Route path="/admin" component={Admin} />
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
-        <Route path="/checkout" component={Sale}/>        
+        <Route path="/checkout" component={Sale}/>       
+        
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
+        
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

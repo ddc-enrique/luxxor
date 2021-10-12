@@ -80,11 +80,11 @@ const ModalCart = (props) =>{
                 <div className={styles.containerDisconts}>
                     <div className={styles.containerSubTotalCart}>
                         <h3>Subtotal (sin envio):</h3>
-                        <span>${props.subtotal}</span>
+                        <span>${(props.subtotal).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                     </div>
                     <div className={styles.containerSubTotalCart}>
                         <h3>{props.total>0 ? parseFloat((100-props.total*100/props.subtotal).toFixed(2))+ " % OFF": "- %"}</h3>
-                        <span>$ {props.total}</span>
+                        <span>$ {(props.total).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                     </div>
                 </div>
                 <div className={styles.containerShip}>
@@ -100,7 +100,7 @@ const ModalCart = (props) =>{
                 </div>
                 <div className={styles.containerTotal}>
                     <h3>TOTAL:</h3>
-                    <span>${props.total}</span>
+                    <span>${(props.total).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                 </div>
                 <Link to="/checkout">
                         <div className={styles.price}> <p>Finaliza Compra</p></div>

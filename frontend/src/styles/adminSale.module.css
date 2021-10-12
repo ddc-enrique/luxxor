@@ -1,0 +1,46 @@
+section.sectionTotal{
+    background: rgb(47,144,176);
+    background: radial-gradient(circle, rgba(47,144,176,1) 0%, rgba(48,106,154,1) 55%, rgba(49,75,136,1) 96%);
+    box-shadow: -300px 0px 200vw 200vw #444343d1;
+    min-height: 40rem;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+div.container{
+    width: 70%;
+    border: 1px solid white;
+    
+}
+div.container h1{
+    text-align: center;
+    color: white;
+    font-size: 2rem;
+}
+img.imgProduct{
+    width: 6.5rem;
+}
+div.containerProduct{
+    width: 85%;
+    margin: 0 auto;
+    border: 1px solid rgb(163, 158, 158);
+    padding: 0.5rem 1.3rem;
+
+}
+div.containerProduct h2{
+    color: white;
+}
+div.headerTitles{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
+div.headerTitles h3{
+    text-decoration: underline;
+}
+div.boxInfoProducts{
+    display: flex;
+    justify-content: space-between;
+    color: white;
+}
