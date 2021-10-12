@@ -9,7 +9,7 @@ const Payment = (props) =>{
     const [modalPayment, setModalPayment] = useState(false)
 
     const chooseCash = () => {
-        props.setPayment("Efectivo")
+        props.setPayment("Efectivo")       
         props.setScreen(3)
     }
 

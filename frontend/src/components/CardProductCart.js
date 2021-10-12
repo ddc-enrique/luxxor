@@ -45,7 +45,7 @@ const CardProductCart = (props) =>{
                 <img width="90" src={`http://localhost:4000/productsPhoto/${product.photos[0]}`}/>
                 <div className={styles.containerProductTetx}>
                     <p>{product.name}</p>
-                    <span>$ {" "+product.price.toFixed(2)}</span>
+                    <span>$ {" "+(product.price).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                     <div className={styles.counter}>
                         <DashCircle onClick={deleteProductHandler} className={styles.iconClose}/>
                         <span>{counter}</span>
@@ -54,7 +54,7 @@ const CardProductCart = (props) =>{
                 </div>
             </div>
             <div className={styles.containerSubTotal}>
-                    <span  className={styles.inputSubtotal}>${" "+(counter*product.price).toFixed(2)}</span>
+                    <span  className={styles.inputSubtotal}>${" "+(counter*product.price).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>
                     
             </div>
             <X onClick={() => props.DeleteProductModalCart(product._id,true,product.price,counter,product.discount)} className={styles.iconClose}/>
