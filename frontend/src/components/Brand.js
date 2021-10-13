@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
+import toast, { Toaster } from "react-hot-toast";
 import { connect } from "react-redux";
 const Brand = (props) => {
   const [brands, setBrands] = useState([]);
@@ -23,23 +24,35 @@ const Brand = (props) => {
         let res = await props.getBrands();
         setBrands(res);
       } catch (e) {
-        console.log(e);
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
       } finally {
         setLoading(!loading);
       }
     };
     getBrands();
   }, []);
-
+  const notificationToast = (message, icon) => {
+    return toast(message, {
+      icon: icon,
+      style: {
+        borderRadius: "1rem",
+        background: "#fff",
+        color: "#545454",
+      },
+    });
+  };
   const sendBrand = async () => {
     if (!brand) {
-      alert("No puede estar vacio");
+      notificationToast("El campo no puede estar vacio", "🚫");
     } else {
       let res = await props.addBrand(brand, props.token);
       if (!res.data.success) {
-        alert(res.data.response);
+        notificationToast(res.data.response, "🚫");
       } else {
-        alert("Creado con éxito");
+        notificationToast("Creado con éxito", "👏");
         let resp = await props.getBrands();
         setBrands(resp);
       }
@@ -47,17 +60,38 @@ const Brand = (props) => {
   };
 
   const editBrand = async (id) => {
-    let res = await props.editBrand(id, { name: brand }, props.token);
-    let resp = await props.getBrands();
-    setBrands(resp);
+    if (!brand) {
+      notificationToast("El campo no puede estar vacio", "🚫");
+    } else {
+      try {
+        let res = await props.editBrand(id, { name: brand }, props.token);
+        if (res.data.success) {
+          notificationToast("Modificado con éxito", "👏");
+          let resp = await props.getBrands();
+          setBrands(resp);
+        } else {
+          throw new Error();
+        }
+      } catch (e) {
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
+      }
+    }
   };
   const deleteBrand = async (id, index) => {
-    let res = await props.deleteBrand(id, props.token);
-    res.data.success && alert("Borrado con éxito");
-    setBrands(brands.splice(id, index));
+    try {
+      let res = await props.deleteBrand(id, props.token);
+      res.data.success && notificationToast("Borrado con éxito", "👏");
+      setBrands(brands.splice(id, index));
+    } catch (e) {
+      notificationToast("Hubo un problema, intente nuevamente más tarde", "🚫");
+    }
   };
   return (
     <div className={styles.divContainer}>
+      <Toaster />
       <header className={styles.headerAdmin}>
         <Link to="/">
           <h1>

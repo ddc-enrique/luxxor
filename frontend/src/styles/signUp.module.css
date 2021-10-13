@@ -1,9 +1,9 @@
 .container {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     flex-wrap: wrap;
-    /* margin:1rem 0rem; */
-    color:white;
+    align-items: center;
+    color: white;
 }
 
 .containerForm {
@@ -88,16 +88,21 @@ div.textSign {
 }
 
 .containerCarousel{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    width: 40rem;
+    height: 35rem;
+    background-image: url(https://i.postimg.cc/VLZbw28G/Alienware-UFO-concept-tablet-removebg-preview.png);
+    /* border: 1px solid; */
+    background-repeat: no-repeat;
+    background-size: 107%;
+    background-position: center;
+    /* filter: drop-shadow(-17px 15px 26px rgba(92, 92, 92, 0.55)); */
     filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
-
 }
 
-.containerCarousel img {
+.containerCarousel .image {
     filter: drop-shadow(-17px 15px 26px rgba(92, 92, 92, 0.55));
+    width: 10rem;
+    height: 10rem;
 }
 
 .containerCarousel h2 {

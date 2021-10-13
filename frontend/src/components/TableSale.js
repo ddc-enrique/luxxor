@@ -2,6 +2,7 @@ import React from "react";
 import styles from "../styles/tableSale.module.css";
 
 const TableSale = (props) => {
+    console.log(props.shopCart)
     return(
         <>
             <table className={styles.tableTotal}>
@@ -11,8 +12,7 @@ const TableSale = (props) => {
                                 <th>Cantidad</th>
 
                             </tr>
-                            {
-                                props.shopCart.map(item=>{
+                            {props.shopCart.map(item=>{
                                 return(
                                     <tr>
                                         <td> <img className={styles.imgProduct} src={`http://localhost:4000/productsPhoto/${item.productId.photos[0]}`}/> </td>
@@ -23,7 +23,7 @@ const TableSale = (props) => {
                                 })
                             }
                             <tr>
-                                <td  colSpan="2"><h3 className={styles.td}> Total:</h3></td>
+                                <td  colSpan="2"><p className={styles.td}> Total:</p></td>
                                 <td ><h3 className={styles.td}>$ {(props.amount).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3></td>
                             </tr>
                        
