@@ -7,6 +7,7 @@ import Footer from "./Footer"
 import { Link } from "react-router-dom"
 
 const UserPurchase = (props) => {
+    console.log(props)
     //https://i.postimg.cc/ZRKk8wv4/nh-2-removebg-preview-1.png
     const [myProducts, setMyProducts] = useState()
     const [myShoppingDetails, setMyShoppingDetails] = useState()
@@ -60,8 +61,8 @@ const UserPurchase = (props) => {
                                 <div className={styles.divImage} style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${sale.productId.photos[0]}")`, height: "10rem", width: "10rem"}}>
                                 </div>
                                 <div>
-                                    <p>{sale.productId.name}</p>
-                                    <p>{sale.quantity}</p>
+                                    <p>{`${sale.quantity}  ${sale.productId.name}`}</p>
+                                    {/* <p>{sale.quantity}</p> */}
                                 </div>
                             </div>
                         )

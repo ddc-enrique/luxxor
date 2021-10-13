@@ -2,8 +2,8 @@
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
-    color: white;
-    background: radial-gradient(circle, rgba(47, 144, 176, 1) 0%, rgba(48, 106, 154, 1) 55%, rgba(49, 75, 136, 1) 73%, rgba(49, 25, 109, 1) 100%);
+    /* margin:1rem 0rem; */
+    color:white;
 }
 
 .containerForm {
@@ -40,7 +40,6 @@ div.textSign {
 
 .btnSign {
     background-color: transparent;
-    /* border-radius:2em; */
     outline: none;
     display: inline-block;
     cursor: pointer;
@@ -48,24 +47,23 @@ div.textSign {
     font-size: 1.5rem;
     padding: 0.5rem 1rem;
     text-decoration: none;
-    text-shadow: 0px 1px 0px #7A5EA8;
     margin: 1rem 0rem;
     margin-left: 1rem;
     border: none;
-    /* border-bottom-color:rgb(250, 212, 212)!important ; */
-    border-bottom: 0.25rem solid white;
+    border: 1px solid white;
 }
-
+.btnSign:hover {
+    background-color: #fff;
+    color: #000000;
+}
 .inputTypes {
     outline: none;
     background-color: transparent;
     margin: 0.9rem 0rem;
-    padding: 1rem 0;
     border-width: 0 0 3px 0;
-    /* border-image: linear-gradient(to right, rgba(248,4,156,1), rgba(253,213,79,1)) 1; */
-    border-bottom-color: white;
     width: 32rem;
-    color: white
+    border-bottom: 1px solid white;
+    color: white;
 }
 
 .inputTypes::placeholder {
@@ -89,11 +87,13 @@ div.textSign {
     color: white
 }
 
-.containerCarousel {
+.containerCarousel{
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
+
 }
 
 .containerCarousel img {
@@ -124,26 +124,35 @@ img.imgForPass {
 input.inputPhoto {
     display: none;
 }
-
+.labelInput .photo {
+    width: 11rem;
+    height: 3rem;
+    text-align: end;
+}
 label.labelInput {
-    align-self: center;
+    /* align-self: center; */
     cursor: pointer;
+    /* border: 1px solid white; */
+    padding: 1rem;
+    width: 42rem;
+    background-image: url(https://i.postimg.cc/s2zfx6sP/5455165-removebg-preview.png);
+    background-size: 63%;
+    background-repeat: no-repeat;
 }
 
 div.buttonGoogle button {
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
-    width: 20rem !important;
-    background-color: rgba(233, 230, 230, 0.1) !important;
-    outline: none !important;
-    color: #ffffff !important;
-    font-size: 1rem !important;
-    padding: 1.45rem 0rem !important;
-    text-decoration: none !important;
-    height: 2rem !important;
-    border: none !important;
-    border-bottom: 0.25rem solid white !important
+    display: flex!important;
+    justify-content: center!important;
+    align-items: center!important;
+    width: 20rem!important;
+    background-color:rgba(233, 230, 230, 0.1)!important;
+    outline: none!important;
+	color:#ffffff!important;
+	font-size:1rem!important;
+	padding:1.45rem 0rem!important;
+	text-decoration:none!important;
+    height: 2rem!important;
+    border: none!important;
 }
 
 div.buttonGoogle button div {

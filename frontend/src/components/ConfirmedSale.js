@@ -26,10 +26,8 @@ const ConfirmedSale = ({ id, total, shopCart, token, shipping, payment, sendBill
     // <div>LOADING...</div>
 
     return (
-        <div>
-            <h1
-                className={styles.headerConfirmed}
-            >
+        <div className={styles.containerConfirm}>
+            <h1 className={styles.headerConfirmed}>
                {confirmedMessage}
             </h1>
 

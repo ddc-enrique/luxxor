@@ -27,9 +27,9 @@ const ModalCart = (props) =>{
             })
             .catch(e=>console.log(e))
         }) 
-        setTimeout(()=>{
-            setLoading(!loading)  
-        },500)
+        // setTimeout(()=>{
+        //     setLoading(!loading)  
+        // },500)
     },[])
     console.log(products)
 

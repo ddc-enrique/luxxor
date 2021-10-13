@@ -14,6 +14,8 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
     const [dataUser, setDataUser] = useState(initialDataUser)
     const [view, setView] = useState(true)
     const [errorsValidation, setErrorsValidation] = useState({})
+    const[loading,setLoading]=useState(true)
+
 
     useEffect( () => {
         const getDataUser = async () => {
@@ -25,7 +27,9 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
             }
         }
         if(completeAccount) getDataUser()
-
+        setTimeout(()=>{
+            setLoading(!loading)  
+        },500)
         //eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -64,7 +68,13 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
             }
         }
     }
-
+    // if(loading){
+    //     return(
+    //         <div className={styles.divContainerCuenta}>
+    //         <div className={styles.loading}></div>
+    //         </div>
+    //     )
+    // } 
     return(
         <div>
             <NavBar />
@@ -86,6 +96,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                         <form className={styles.formContainerExito}>
                             {!completeAccount  && 
                                 <div className={styles.field}>
+
                                     <p>DNI
                                         <input 
                                             className={styles.inputDni} name='dni' type= 'number' placeholder='ej 44444444'
