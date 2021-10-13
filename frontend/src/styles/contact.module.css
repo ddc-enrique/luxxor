@@ -89,6 +89,7 @@ form.formContact button:hover {
 div.imageContact {
     background-position: center;
     background-size: cover;
+    filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
 }
 
 @media screen and (min-width: 375px) and (max-width: 767px) {

@@ -1,7 +1,10 @@
 div.divContainer {
+    align-items: end;
     display: flex;
     justify-content: space-around;
-    
+    color: white;
+    justify-content: center;
+    padding: 4rem 0;
 }
 
 div.none {
@@ -16,8 +19,8 @@ div.divImage {
     transition: .5s ease-in-out;
 }
 
-nav.navegator {
-
+.navegator {
+    border: 1px solid white!;
     text-align: center;
 }
 
@@ -40,11 +43,18 @@ div.photoShop {
 
 div.container{
     background-color: #e3e3e33f;
-    margin-bottom: 0.7rem;
+    /* margin-bottom: 0.7rem; */
     display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 31rem;
+    margin: .2rem;
 }
+
 
 div.productsContainer {
     margin-top: 2rem;
     width: 65%;
+    display: flex;
+    flex-wrap: wrap;
 }

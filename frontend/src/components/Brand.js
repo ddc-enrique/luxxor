@@ -53,7 +53,6 @@ const Brand = (props) => {
   };
   const deleteBrand = async (id, index) => {
     let res = await props.deleteBrand(id, props.token);
-    console.log(res);
     res.data.success && alert("Borrado con éxito");
     setBrands(brands.splice(id, index));
   };

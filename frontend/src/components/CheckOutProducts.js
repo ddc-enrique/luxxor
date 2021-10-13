@@ -123,14 +123,14 @@ const CheckOutProducts = (props) => {
           name="shipping"
           onClick={() => setDataShipping(true)}
         />
-        Envio a domicilio
+      <label formData='shipping'>Envio a domicilio</label>
         <input
           type="radio"
           value="false"
           name="shipping"
           onClick={() => setDataShipping(false)}
         />
-        Retirar en sucursal
+        <label formData='shipping'>Retirar en Sucursal</label>
       </div>
       {dataShipping && (
         <div className={styles.formData}>

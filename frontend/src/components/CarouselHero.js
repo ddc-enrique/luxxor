@@ -1,7 +1,6 @@
 import { Carousel } from 'react-carousel-minimal'
 
 const CarouselHero=(props)=> {
-console.log(props.data)
 return (
     <Carousel
         data={props.data}

@@ -5,7 +5,19 @@ import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions";
 import { NavAdmin } from "../components/NavAdmin";
 import EditProduct from "../components/EditProduct";
-import { House, PlusCircle, DashCircle, X, ColumnsGap, Bag, Tag,ChatDots, Search, XCircle, ClockFill, Pen} from 'react-bootstrap-icons'
+import {
+    //  House,
+    PlusCircle,
+    DashCircle, 
+    // X, 
+    // ColumnsGap, 
+    // Bag, 
+    // Tag,
+    // ChatDots, 
+    Search, 
+    XCircle, 
+    ClockFill, 
+    Pen} from 'react-bootstrap-icons'
 const Admin = (props) => {
 
   const [newProduct, setNewProduct] = useState({
@@ -35,7 +47,6 @@ const Admin = (props) => {
   const [productsFilt, setProductsFilt] = useState(props.products)
   const [productsFiltered, setProductsFiltered] = useState(props.products)
   const [productId, setProductId] = useState(null)
-  const [render, setRender] = useState(false)
   const [modalEdit, setModalEdit] = useState(false)
   const [loading, setLoading] = useState(true)
   useEffect(()=>{

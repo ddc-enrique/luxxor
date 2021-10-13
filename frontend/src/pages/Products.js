@@ -8,7 +8,6 @@ import { connect } from "react-redux"
 import FilterProducts from "../components/FilterProducts"
 import productsActions from "../redux/actions/productsActions"
 import toast, { Toaster } from "react-hot-toast"
-
 const Products = (props) => {
   const [products, setProducts] = useState(props.products)
   const [filteredProducts, setFilteredProducts] = useState(props.products)
@@ -28,12 +27,11 @@ const Products = (props) => {
       }
     }
     getAllProducts()
-    console.log(props.products)
     setLoading(false)
+    // eslint-disable-next-line
   },[])
 
   const sortProducts = (e) => {
-    console.log(e.target.value)
     switch (e.target.value) {
       case "lowerPrice":
         setFilteredProducts(
@@ -95,9 +93,13 @@ const Products = (props) => {
     setUpdateOnSort(!updateOnSort)
   }
 
-  if(loading){
-    return <div> Cargando...</div>
-  }
+  // if(loading){
+  //   return(
+  //     <div className={styles.productsSection}>
+  //     <div className={styles.loading}></div>
+  //     </div>
+  // )
+  // }
 
   return (
     <>
@@ -135,8 +137,10 @@ const Products = (props) => {
                     >
                         <div className={styles.content}>
                             <h2 className={styles.title}>{product.name}</h2>
+                            <div className={styles.infoPrice}>
                             {product.discount>0 && <p>%{product.discount} Off</p>}
                             <p className={styles.copy}>${(product.price * (1-(product.discount/100))).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            </div>
                             <Link to={`/producto/${product._id}`}> <button className={styles.btn}>Ver +</button></Link>
                       </div>
                     </div>

@@ -1,0 +1,12 @@
+table.tableTotal{
+    width: 80%;
+    color: white;
+}
+
+table.tableTotal th, table.tableTotal td{
+    text-align: end;
+}
+
+img.imgProduct{
+    width: 6.5rem;
+}

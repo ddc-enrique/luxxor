@@ -6,10 +6,10 @@ import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 import { GoogleLogin } from "react-google-login"
 import { Link } from "react-router-dom"
-import { Carousel } from "react-carousel-minimal"
 import SignIn from "../components/SignIn"
 import toast, { Toaster } from "react-hot-toast"
 import Password from "./Password"
+import {  XCircleFill,Eye, EyeSlash } from 'react-bootstrap-icons'
 
 const SignUp = (props) => {
   const { signUp } = props
@@ -32,10 +32,10 @@ const SignUp = (props) => {
   const [errorPass, setErrorPass] = useState(null)
   const [errorPassChecked, setErrorPassCkecked] = useState(null)
 
-  let viewPassImg = check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
-  let viewPassImgConfirm = checkConfirm
-    ? "5NX1hj01/eyeOpen.png"
-    : "hPNgcgzm/EyeClose.png"
+  let viewPassImg = !check ? <Eye className={styles.eye}/> : <EyeSlash className={styles.eye}/>
+  let viewPassImgConfirm = !checkConfirm
+    ? <Eye className={styles.eye}/>
+    : <EyeSlash className={styles.eye}/>
 
   const responseGoogle = async (res) => {
     try{
@@ -143,32 +143,32 @@ const SignUp = (props) => {
     }
   }
 
-  const data = [
-    {
-      image: "https://i.postimg.cc/c1fWVFXW/first-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/1tPB45hJ/second-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/bYS5MdY2/third-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/9FWG9NkF/fourth-Comment.pngpng",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/TwyvP9VR/fifth-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/P5fcxyHB/sixth-Comment.png",
-      caption: "",
-    },
-  ]
+  // const data = [
+  //   {
+  //     image: "https://i.postimg.cc/c1fWVFXW/first-Comment.png",
+  //     caption: "",
+  //   },
+  //   {
+  //     image: "https://i.postimg.cc/1tPB45hJ/second-Comment.png",
+  //     caption: "",
+  //   },
+  //   {
+  //     image: "https://i.postimg.cc/bYS5MdY2/third-Comment.png",
+  //     caption: "",
+  //   },
+  //   {
+  //     image: "https://i.postimg.cc/9FWG9NkF/fourth-Comment.pngpng",
+  //     caption: "",
+  //   },
+  //   {
+  //     image: "https://i.postimg.cc/TwyvP9VR/fifth-Comment.png",
+  //     caption: "",
+  //   },
+  //   {
+  //     image: "https://i.postimg.cc/P5fcxyHB/sixth-Comment.png",
+  //     caption: "",
+  //   },
+  // ]
 
   const captionStyle = {
     fontSize: "2em",
@@ -235,42 +235,30 @@ const SignUp = (props) => {
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
-              type={!check ? "password" : "text"}
+              type={check ? "password" : "text"}
               className={styles.inputTypes}
               placeholder="Contraseña"
               name="password"
               defaultValue={newUser.password}
             />
-
-            <img
-              onClick={() => setCheck(!check)}
-              className={styles.imgForPass}
-              src={`https://i.postimg.cc/${viewPassImg}`}
-              alt="..."
-            />
+             <div onClick={() => setCheck(!check)}> {viewPassImg}</div>
           </div>
           <small style={{color: "yellow",fontWeight:'bold'}}>{errorPass}&nbsp;</small>
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
-              type={!checkConfirm ? "password" : "text"}
+              type={checkConfirm ? "password" : "text"}
               className={styles.inputTypes}
               placeholder="Confirmar contraseña"
               name="checkPassword"
               onKeyPress={keyPressHandler}
             />
-            <img
-              onClick={() => setCheckConfirm(!checkConfirm)}
-              className={styles.imgForPass}
-              src={`https://i.postimg.cc/${viewPassImgConfirm}`}
-              alt="..."
-            />
+            <div  onClick={() => setCheckConfirm(!checkConfirm)}> {viewPassImgConfirm}</div>
           </div>
           <small style={{color: "yellow",fontWeight:'bold'}}>{errorPassChecked}&nbsp;</small>
           {newUser.profilePic && <p>{newUser.profilePic.name}</p>}
           <label className={styles.labelInput} for="inputPhoto">
-            <img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif" />
-            Foto de perfil
+            <div className={styles.photo}> Foto de perfil</div>
           </label>
           <input
             id="inputPhoto"

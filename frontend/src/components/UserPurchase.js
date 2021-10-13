@@ -2,14 +2,12 @@ import { useEffect, useState } from "react"
 import {connect} from "react-redux"
 import productsActions from "../redux/actions/productsActions"
 import styles from "../styles/userPurchase.module.css"
-import NavBar from "./NavBar"
-import Footer from "./Footer"
 import { Link } from "react-router-dom"
+import moment from "moment"
+import TableSale from "./TableSale"
 
 const UserPurchase = (props) => {
-    //https://i.postimg.cc/ZRKk8wv4/nh-2-removebg-preview-1.png
     const [myProducts, setMyProducts] = useState()
-    const [myShoppingDetails, setMyShoppingDetails] = useState()
     const [error, setError] = useState("")
 
     useEffect(()=> {
@@ -22,13 +20,13 @@ const UserPurchase = (props) => {
        }
        myShops()
     }, [])
-    console.log()
     let myShopping = []
     let sales = []
-
+    let allProducts = []
     if (myProducts && !error){
         myShopping = myProducts.map(product=> product.shopCart)
         myShopping.map(shop => shop.forEach(shop => sales.push(shop)))
+        allProducts = myProducts.concat(sales)
     }
 
 
@@ -43,7 +41,6 @@ const UserPurchase = (props) => {
             </nav>
             </>
             }
-            
             <div className={!props.view ? styles.divContainer : styles.none}>
 
                 {error ? <div>
@@ -54,15 +51,12 @@ const UserPurchase = (props) => {
                     <div className={styles.photoShop} style={{backgroundImage: `url(${"https://i.postimg.cc/MKvCYWqL/prod.png"})`, width: "30rem", height: "30rem"}}></div>
                 </div>
                 : <div className={styles.productsContainer}>
-                    {sales && sales.map(sale => {
-                        return (
+                    {myProducts && myProducts.map(product => {
+                        return (    
                             <div className={styles.container}>
-                                <div className={styles.divImage} style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${sale.productId.photos[0]}")`, height: "10rem", width: "10rem"}}>
-                                </div>
-                                <div>
-                                    <p>{sale.productId.name}</p>
-                                    <p>{sale.quantity}</p>
-                                </div>
+                                <h2>Orden: #{product.numberOrder}</h2>
+                                <p>Fecha: {moment(product.date).format("DD/MM/YYYY")}</p>
+                                            <TableSale shopCart={product.shopCart} amount={product.amount}/>
                             </div>
                         )
                     })}

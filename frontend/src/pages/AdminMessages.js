@@ -34,7 +34,7 @@ const AdminMessages = (props) => {
             let response = await props.removeMessage(id, props.token)
             if(response.success) {
                 toast('Mensaje Eliminado', { icon: '🗑️',})
-                setMessages(messages.filter(message => message._id != id))
+                setMessages(messages.filter(message => message._id !== id))
             }else{
                 throw response.response
             }

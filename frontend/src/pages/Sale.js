@@ -1,10 +1,8 @@
 import React,  { useState, useEffect }from "react";
 import styles from "../styles/sale.module.css";
 import { connect } from "react-redux";
-import usersAction from "../redux/actions/usersAction";
 import NavBar from "../components/NavBar";
 import toast, { Toaster } from "react-hot-toast"
-import CardProductCart from "../components/CardProductCart";
 import CheckOutProducts from "../components/CheckOutProducts";
 import Payment from "../components/Payment";
 import ConfirmedSale from "../components/ConfirmedSale";
@@ -49,7 +47,8 @@ const Sale = (props) =>{
         case 3:
             componentToRender= <ConfirmedSale payment={payment}/>
             break 
-
+        default:
+            break
     }
 
     return(

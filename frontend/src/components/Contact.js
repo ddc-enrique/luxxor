@@ -22,7 +22,6 @@ const Contact = ({ reference, sendNewMessage }) =>{
     const sendMessage = async(e) => {
         e.preventDefault()
         console.log("enviar mensaje")
-        console.log(newMessage)
         try {
             let response = await sendNewMessage(newMessage)
             if(response.success) toast.success("Gracias por su mensaje, estaremos en contacto")

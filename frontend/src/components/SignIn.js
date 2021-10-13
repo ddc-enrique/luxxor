@@ -6,7 +6,7 @@ import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 import toast, { Toaster } from "react-hot-toast"
-
+import {  XCircleFill,Eye, EyeSlash } from 'react-bootstrap-icons'
 const SignIn = (props) => {
   const { signIn } = props
   const [check, setCheck] = useState(true)
@@ -17,7 +17,7 @@ const SignIn = (props) => {
     eMail: "",
     password: "",
   })
-  let viewPassImg = !check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
+  let viewPassImg = !check ? <Eye className={styles.eye}/> : <EyeSlash className={styles.eye}/>
 
   const enterUser = async () => {
     try {
@@ -95,14 +95,10 @@ const SignIn = (props) => {
     <>
       <div className={styles.container}>
         <div className={styles.signContainer}>
-          <img
-            className={styles.icono}
-            onClick={() => {
+           <XCircleFill  onClick={() => {
               props.setVisible(false)
               props.setModalLogIn(!props.modalLogIn)
-            }}
-            src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"
-          />
+            }} className={styles.icono}/>
           <h1>Iniciá sesion</h1>
           <div className={styles.inputContainer}>
             <input
@@ -127,12 +123,14 @@ const SignIn = (props) => {
                 onChange={userLoginHandler}
                 onKeyPress={keyPressHandler}
               />
-              <img
+              
+              <div  onClick={() => setCheck(!check)}> {viewPassImg}</div>
+              {/* <img
                 onClick={() => setCheck(!check)}
                 className={styles.imgForPass}
                 src={`https://i.postimg.cc/${viewPassImg}`}
                 alt="..."
-              />
+              /> */}
             </div>
             <small style={{ color: "red" }}>{errorPass}&nbsp;</small>
             <button className={styles.buttonSign} onClick={enterUser}>
