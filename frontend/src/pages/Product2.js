@@ -49,9 +49,9 @@ const Product2 = (props) => {
       setProducts(props.products)
       setLoading(false)
     }
+    // eslint-disable-next-line
   },[])
   useEffect(()=>{
-      console.log('rerenderizo')
       setProduct(products.find(product=> product._id===props.match.params.id))
   }, [prodRecomen])
 

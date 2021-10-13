@@ -105,7 +105,6 @@ const Product = () => {
                     Te llega a partir de{" "}
                     <span className={styles.orange}>Mañana 6 de </span>{" "}
                   </p>
-                  {console.log('ghola')}
                 </div>
                 <div className={styles.promotions}>
                   <div

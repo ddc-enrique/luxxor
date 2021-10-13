@@ -1,4 +1,4 @@
-import React,  { useState, useEffect, useRef }from "react";
+import React,  { useState, useRef }from "react";
 import styles from "../styles/password.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";

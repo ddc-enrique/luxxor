@@ -10,6 +10,7 @@ const stripePromisse = loadStripe("pk_test_51Jj1qDLyz3SCpT0O3dmugpTo4iA2C78CtOPd
 
 
 const PaymentCheckout = (props) => {
+    console.log(props)
     const stripe = useStripe()
     const elements = useElements()
 
@@ -22,16 +23,14 @@ const PaymentCheckout = (props) => {
         })
         if(!error){
             const {id} = paymentMethod
-            try {
-                await props.payCart({
+               props.payCart({
                     id,
-                    amount: props.total * 100
-                })                
-                props.setPayment("Tarjet de Crédito")
-                props.setScreen(3)
-            } catch (error) {
-                props.toast.error("No se pudo realizar el pago con tarjeta, intente más tarde o con otro método")
-            }            
+                    amount: props.total*100
+                }).then(response => {
+                    if(!response.success) throw new Error("No se pudo realizar el pago. Intente mas tarde, o use otro método.")
+                    props.setPayment("Tarjeta de Crédito")
+                    props.setScreen(3)
+                }).catch((e)=>toast.error(e.message))
         }
     }  
 
@@ -45,12 +44,10 @@ const PaymentCheckout = (props) => {
     
 }
 
-
-
 const PaymentWithStripe = (props) => {
     return (       
         <Elements stripe={stripePromisse}>
-            <PaymentCheckout payCart={props.payCart}/>
+            <PaymentCheckout total={props.total} setPayment={props.setPayment} setScreen={props.setScreen} payCart={props.payCart}/>
         </Elements>
     )
 }
@@ -65,5 +62,4 @@ const mapStateToProps = (state) => {
         total: state.shopCart.total
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(PaymentWithStripe)

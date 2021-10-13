@@ -10,7 +10,6 @@ const handleError = (res, err) =>{
 
 const usersControllers = {
     signUp: (req, res) =>{
-        console.log(req.files)
         console.log("Received Register User Petition:" + Date())
         const { firstName, lastName, eMail, password, google } = req.body
         route = path.join(__dirname, "../assets/usersPhoto")
@@ -89,10 +88,8 @@ const usersControllers = {
     banUser:(req,res)=>{
         console.log("Received BAN USER Petition:" + Date())
         const _id = req.params.id
-        console.log(_id)
         User.findById({_id})
         .then(userFound=>{
-            console.log(userFound)
             if(!userFound) throw new Error("Usuario no encontrado")
             if(userFound.banned) throw new Error("Usuario ya bloqueado")
             let mailBanned = {
@@ -138,10 +135,7 @@ const usersControllers = {
 
     changePassword:(req,res)=>{
         console.log("Received CHANGE PASSWORD Petition:" + Date())
-        console.log(req.body)
         const {eMail,password} = req.body
-        console.log(eMail)
-        console.log(password)
         let hashedPass = bcryptjs.hashSync(password.trim())
         User.findOne({eMail})
         .then(userFound=>{
@@ -272,7 +266,6 @@ const usersControllers = {
 
     saveNewSale: (req, res) => {
         console.log("Received SAVE NEW SALE Petition:" + Date())
-        console.log(req.body)
         res.json({ success: true, response: req.body })
     },
 }

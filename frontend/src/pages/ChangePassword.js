@@ -18,6 +18,7 @@ const ChangePassword = (props) =>{
         .then(res=>{
             if(!res) props.history.push("/")
        })
+       // eslint-disable-next-line
     },[])
     let viewPassImg = !check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
     let viewPassImg1 = !eye ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
@@ -36,7 +37,6 @@ const ChangePassword = (props) =>{
         }else{
             props.changePassword(userData.eMail,userData.password)
             .then(res=>{
-                console.log(res)
                 if(res){
                     alert("Su contraseña ha sido cambiada con exito")
                     props.history.push("/")

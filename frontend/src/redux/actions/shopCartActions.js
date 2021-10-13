@@ -19,7 +19,7 @@ const shopCartAction={
     payCart:(id, amount)=>{
         return async (dispatch)=>{
             let response = await axios.post("http://localhost:4000/api/checkout", id, amount)
-            console.log(response)
+            return response.data
         }
     },
     loadShopInLs:(shopCart,subtotal,total)=>{

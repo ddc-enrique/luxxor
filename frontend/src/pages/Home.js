@@ -3,7 +3,6 @@ import { useHistory } from "react-router"
 import Contact from "../components/Contact"
 import Footer from "../components/Footer"
 import Header from "../components/Header"
-import Hero from "../components/Hero"
 import SectionInfo from "../components/SectionInfo"
 
 const Home = ({  }) => {
@@ -19,7 +18,7 @@ const Home = ({  }) => {
                 if (Object.entries(sectionInfo.current).length > 0) sectionInfo.current.scrollIntoView()
             }
         }
-
+        // eslint-disable-next-line
     }, [])
 
     return(

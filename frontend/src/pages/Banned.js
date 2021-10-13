@@ -1,12 +1,10 @@
-import React,  { useState, useEffect, useRef }from "react";
-import styles from "../styles/password.module.css";
+import React,  {  useEffect }from "react";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
 
 
 const Banned = (props) =>{
     useEffect(()=>{
-        console.log(props.match.params.id)
         props.verifyIdMail(props.match.params.id)
         .then(res=>{
             if(!res){
@@ -15,6 +13,7 @@ const Banned = (props) =>{
                 props.banAccount(props.match.params.id)
             }
        })
+       // eslint-disable-next-line
     },[])
     return(
         <>
