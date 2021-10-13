@@ -2,31 +2,21 @@ import styles from '../styles/sectionInfo.module.css'
 import Information from './Information'
 import productsActions from '../redux/actions/productsActions'
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const SectionInfo = (props)=>{
-    const {reference, products} = props
-    const images =[
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-    ]
-
+    const [products, setProducts] = useState(props.products)
     useEffect(()=>{
         const getProducts = async () => {
-            props.getProducts()
+            let res = await props.getProducts()
+            setProducts(res)
         }
         getProducts()
     }, [])
-
+    console.log(products)
     return(
-        <section id="novedades" className={styles.sectionContainer} ref={reference}> 
+        <section id="novedades" className={styles.sectionContainer} ref={props.reference}> 
                 <p>Novedades</p>
                 <div className={styles.container}>
                     { products.reverse().splice(0 , 6).map((product) =>
