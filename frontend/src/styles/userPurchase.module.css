@@ -45,13 +45,20 @@ div.container{
     background-color: #e3e3e33f;
     /* margin-bottom: 0.7rem; */
     display: flex;
-    justify-content: space-around;
+    /* justify-content: space-around; */
     align-items: center;
-    width: 31rem;
-    margin: .2rem;
+    flex-direction: column;
+    width: 62rem;
+    padding: 1.5rem 0;
+    margin: 1.2rem;
 }
-
-
+div.container h3 {
+    font-size: .8rem;
+}
+div.container p {
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+}
 div.productsContainer {
     margin-top: 2rem;
     width: 65%;
