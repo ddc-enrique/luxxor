@@ -28,7 +28,7 @@ const ModalCart = (props) =>{
             .catch(e=>console.log(e))
         }) 
         // setTimeout(()=>{
-        //     setLoading(!loading)  
+            setLoading(!loading)  
         // },500)
     },[])
     console.log(products)
@@ -67,10 +67,13 @@ const ModalCart = (props) =>{
                     {
                         products.map(product=>{                          
                             return(
-                                <>
-                                    <CardProductCart sale={false} product={product} deleteProduct={props.deleteProduct} setTotal={setTotal} total={total} DeleteProductModalCart={DeleteProductModalCart}/>
-                                {/* <h1>kjhkjhj</h1> */}
-                                </>
+                                <CardProductCart 
+                                sale={false} 
+                                product={product} 
+                                deleteProduct={props.deleteProduct} 
+                                setTotal={setTotal} total={total}
+                                key={product._id} 
+                                DeleteProductModalCart={DeleteProductModalCart}/>
                             )
                         })
                     }
