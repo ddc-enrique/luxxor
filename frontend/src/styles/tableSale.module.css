@@ -1,0 +1,16 @@
+table.tableTotal{
+    width: 95%;
+    color: white;
+}
+
+table.tableTotal th, table.tableTotal td{
+    text-align: center;
+}
+
+img.imgProduct{
+    width: 7.5rem;
+}
+
+h3.td {
+    text-align: end;
+}

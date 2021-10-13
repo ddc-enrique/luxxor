@@ -81,7 +81,7 @@ const productsControllers = {
         .catch(error=> res.json({success: false, reponse:error.message}))
     },
     productOnCart:async(req, res)=>{
-           console.log(req.body)
+        console.log(req.body)
         try {
             let response = await stripe.paymentIntents.create({
                 amount: req.body.amount,
@@ -95,7 +95,6 @@ const productsControllers = {
             console.log(e)
             res.json({message: e})
         }
-           
     }
 
 }

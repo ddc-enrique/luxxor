@@ -1,4 +1,4 @@
-import React,  { useState, useEffect, useRef }from "react";
+import React,  { useState, useRef }from "react";
 import styles from "../styles/password.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
@@ -58,7 +58,7 @@ const Password = (props) =>{
                 <div className={styles.containerForm}>
                     <img onClick={()=>{
                         props.setVisible(false)
-                        props.setmodalPass(false)}} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/>
+                        props.setmodalPass(false)}} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png" alt="..."/>
                     <div className={styles.boxData} >
                         <div className={styles.boxTitle} >
                             <h3>Recupera tu contraseña</h3>

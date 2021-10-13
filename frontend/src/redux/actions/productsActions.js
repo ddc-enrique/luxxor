@@ -1,5 +1,4 @@
 import axios from "axios"
-import Product from "../../components/Product"
 
 const productsActions = {
     categories: () =>{
@@ -174,8 +173,7 @@ const productsActions = {
     },
 
 
-    addProduct: (product, token) =>{
-        console.log(product)  
+    addProduct: (product, token) =>{ 
         return async (dispatch) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/products", product, {

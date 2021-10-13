@@ -36,7 +36,6 @@ const salesControllers = {
         })       
         .catch(error=>res.json({success:false, response:error.message}))
 
-        console.log(numberOrder)
         const newSale = new Sale({
             user: userId,
             amount,
@@ -59,7 +58,7 @@ const salesControllers = {
         
         User.findOne({_id: userId})
         .then((userFound) =>{ 
-            console.log(userFound.eMail)/* background-color: #dfdbdb */
+/* background-color: #dfdbdb */
             let mailSale = {
                 from: 'Luxxor <luxxor.tech@gmail.com>',
                 to: userFound.eMail,
@@ -123,9 +122,8 @@ const salesControllers = {
     },
 
     getOneSale: (req, res) => {
-        console.log(req.params.id)
         Sale.find({user: req.params.id}).populate("shopCart.productId")
-        .then(saleFound => {console.log(saleFound)
+        .then(saleFound => {
             if (!saleFound.length) throw new Error("No tiene compras")
             res.json({success: true, response: saleFound})
         }).catch((error)=> res.json({success: false, response: error.message}))

@@ -40,9 +40,15 @@ div.photoShop {
 
 div.container{
     background-color: #e3e3e33f;
-    margin-bottom: 0.7rem;
-    display: flex;
+    margin-bottom: 0.7rem;  
+    color: white;
+    padding: 1rem;
 }
+
+div.container p {
+    margin-bottom: 1rem;
+}
+
 
 div.productsContainer {
     margin-top: 2rem;

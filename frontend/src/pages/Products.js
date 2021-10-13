@@ -28,12 +28,11 @@ const Products = (props) => {
       }
     }
     getAllProducts()
-    console.log(props.products)
     setLoading(false)
+    // eslint-disable-next-line
   },[])
 
   const sortProducts = (e) => {
-    console.log(e.target.value)
     switch (e.target.value) {
       case "lowerPrice":
         setFilteredProducts(

@@ -7,17 +7,17 @@ import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
 import { connect } from "react-redux";
 import {
-  House,
-  PlusCircle,
-  DashCircle,
-  X,
-  ColumnsGap,
-  Bag,
-  Tag,
-  ChatDots,
-  Search,
+  // House,
+  // PlusCircle,
+  // DashCircle,
+  // X,
+  // ColumnsGap,
+  // Bag,
+  // Tag,
+  // ChatDots,
+  // Search,
   XCircle,
-  ClockFill,
+  // ClockFill,
   Pen,
   CheckCircle,
 } from "react-bootstrap-icons";
