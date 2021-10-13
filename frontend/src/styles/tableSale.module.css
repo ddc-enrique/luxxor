@@ -2,6 +2,8 @@ table.tableTotal{
     width: 80%;
     color: white;
     text-align: center;
+    /* border: 1px solid #ffffff4f; */
+    padding: 1rem;
 }
 
 table.tableTotal th{

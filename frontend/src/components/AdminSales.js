@@ -53,11 +53,11 @@ const AdminSale = (props) => {
         
     },[props.token])
 /*     console.log(props.token)    */   
-    if(loading){
-        return(
-            <h1>Loading...</h1>
-        )
-    }
+    // if(loading){
+    //     return(
+    //         <h1>Loading...</h1>
+    //     )
+    // }
 
     return(
         <>
@@ -79,13 +79,17 @@ const AdminSale = (props) => {
                     {
                         sales.map((item,index)=>{
                             return(
+                                <>
                                 <div className={styles.containerProduct}>
+                              
                                     <h2>Orden: #{item.numberOrder} </h2>
                                     <h3>Fecha: {moment(item.date).format("DD/MM/YYYY")}</h3>
                                     <div>
                                         <TableSale shopCart={item.shopCart} amount={item.amount}/> 
+                                  
                                     </div>
                                 </div>
+                                </>
                             )                   
                         })
                     }
