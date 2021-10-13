@@ -9,7 +9,20 @@
     background-repeat: no-repeat;
     opacity: .5;
 }
+div.containerConfirm {
+        height: 25rem;
+        width: 68rem;
+        background-image: url(https://i.postimg.cc/mkLNMpGq/descarga-jpg-removebg-preview.png);
+        background-size: 78%;
+        /* background-position: center; */
+        background-repeat: no-repeat;
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
 
-.headerConfirmed{
-    
+}
+h1.headerConfirmed{
+    font-size: 2.1rem;
+    margin-bottom: 8rem;
 }

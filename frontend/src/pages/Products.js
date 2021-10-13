@@ -138,8 +138,10 @@ const Products = (props) => {
                     >
                         <div className={styles.content}>
                             <h2 className={styles.title}>{product.name}</h2>
+                            <div className={styles.infoPrice}>
                             {product.discount>0 && <p>%{product.discount} Off</p>}
                             <p className={styles.copy}>${(product.price * (1-(product.discount/100))).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p>
+                            </div>
                             <Link to={`/producto/${product._id}`}> <button className={styles.btn}>Ver +</button></Link>
                       </div>
                     </div>

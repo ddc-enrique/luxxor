@@ -6,10 +6,24 @@ form.formContainerExito {
     align-items: center;
 
 }
+.divContainerCuenta .loading {
+    height: 100%;
+    width: 100%;
+    padding: 1rem;
+    background-image: url(https://i.postimg.cc/TwZG2QWc/loading.gif);
+    background-position: center;
+    background-size: 8%;
+    background-repeat: no-repeat;
+}
+div.none {
+    display: none;
+}
 
 form.formContainerExito {
     background-color: #e5e5e521;
     padding: 1rem;
+    min-width: 20rem;
+    min-height: 27rem;
 }
 
 div.divContainerCuenta,
@@ -23,6 +37,7 @@ div.divContForm {
 
 div.divContainerCuenta {
     gap: 1.5rem;
+    min-height: 2rem;
 }
 
 div.divContainerCuenta span {
@@ -91,10 +106,10 @@ form.formContainerExito p {
 .formContainerExito .field .error {
     display: block;
     padding: .2rem;
-    background-color: red;
-    color: white;
-    border-radius: 1rem;
-    text-align: center;
+    background-color: #e3e3e3;
+    color: red;
+    width: max-content;
+    padding: 0.3rem;
 }
 
 .formContainerExito .field .errorPlaceholder {

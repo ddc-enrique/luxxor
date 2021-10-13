@@ -5,13 +5,17 @@ import NavBar from "../components/NavBar"
 import usersAction from "../redux/actions/usersAction"
 import styles from "../styles/editProfile.module.css"
 import toast, { Toaster } from 'react-hot-toast';
-
+import { Link } from "react-router-dom"
+import UserPurchase from "../components/UserPurchase"
 
 const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName, lastName, editDataUser }) => {
     let initialDataUser = completeAccount ? { firstName: "", lastName: "", city: "", zipCode: "", address: "", optional: "", phone: "" }
         : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" } 
     const [dataUser, setDataUser] = useState(initialDataUser)
+    const [view, setView] = useState(true)
     const [errorsValidation, setErrorsValidation] = useState({})
+    const[loading,setLoading]=useState(true)
+
 
     useEffect( () => {
         const getDataUser = async () => {
@@ -23,7 +27,9 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
             }
         }
         if(completeAccount) getDataUser()
-
+        setTimeout(()=>{
+            setLoading(!loading)  
+        },500)
         //eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -62,11 +68,18 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
             }
         }
     }
-
+    // if(loading){
+    //     return(
+    //         <div className={styles.divContainerCuenta}>
+    //         <div className={styles.loading}></div>
+    //         </div>
+    //     )
+    // } 
     return(
         <div>
             <NavBar />
-                <div className={styles.divContainerExito}>
+                {<UserPurchase setView={setView} view={view}/>}
+                <div className={view ? styles.divContainerExito : styles.none}>
                     <div className={styles.divContainerCuenta}>
                             <h2>
                                 {completeAccount && "Puedes editar estos datos de tu cuenta"}
@@ -74,14 +87,16 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                 {/* Cuenta creada con <span>Éxito</span>! */}
                             </h2>
                     </div>
+                    <nav>
+                        <Link onClick={()=>setView(false)} to="#">Mis compras</Link> 
+                        <Link to="#">Mis datos</Link>
+                    </nav>   
                     <div className={styles.divContForm}>
                         <div className={styles.divExitoImg} style={{backgroundImage: 'url("https://i.postimg.cc/Kz4h0KXr/psvr-overview-hardware-column-image-01-ps4-en-06jan20-removebg-preview.png")'}}></div>
                         <form className={styles.formContainerExito}>
-                            {/* <h3>
-                                Actualiza tus datos para poder Comprar
-                            </h3> */}
                             {!completeAccount  && 
                                 <div className={styles.field}>
+
                                     <p>DNI
                                         <input 
                                             className={styles.inputDni} name='dni' type= 'number' placeholder='ej 44444444'

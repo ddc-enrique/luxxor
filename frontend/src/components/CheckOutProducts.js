@@ -123,14 +123,14 @@ const CheckOutProducts = (props) => {
           name="shipping"
           onClick={() => setDataShipping(true)}
         />
-        Envio a domicilio
+      <label formData='shipping'>Envio a domicilio</label>
         <input
           type="radio"
           value="false"
           name="shipping"
           onClick={() => setDataShipping(false)}
         />
-        Retirar en sucursal
+        <label formData='shipping'>Retirar en Sucursal</label>
       </div>
       {dataShipping && (
         <div className={styles.formData}>
@@ -152,7 +152,7 @@ const CheckOutProducts = (props) => {
         </div>
       )}
       <div className={styles.containerTotal}>
-        <h3>TOTAL: {props.total}</h3>
+        <h3>TOTAL: $ {(props.total).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</h3>
       </div>
 
       <div className={styles.containerSend}>

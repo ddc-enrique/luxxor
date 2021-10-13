@@ -1,40 +1,41 @@
-.container{
+.container {
     display: flex;
-    justify-content:space-around;
+    justify-content: space-around;
     flex-wrap: wrap;
     /* margin:1rem 0rem; */
     color:white;
 }
 
-.containerForm{
+.containerForm {
     display: flex;
-    justify-content:center;
+    justify-content: center;
     flex-direction: column;
 }
 
-.container h1{
-    margin:2rem 0rem
+.container h1 {
+    margin: 2rem 0rem
 }
 
-.containerForm h1{
+.containerForm h1 {
     background-color: rgb(248, 248, 240);
-    padding:1rem 0rem;
-    color:rgba(48,106,154,1) 
+    padding: 1rem 0rem;
+    color: rgba(48, 106, 154, 1)
 }
 
-.containerForm h1,.containerForm .location{
-    display:flex;
-    justify-content:center;
-    flex-direction: row;
-    align-items:center;
-}
-
-div.textSign{
-    display:flex;
-    justify-content:center;
+.containerForm h1,
+.containerForm .location {
+    display: flex;
+    justify-content: center;
     flex-direction: row;
     align-items: center;
-    margin:1rem 0rem
+}
+
+div.textSign {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    margin: 1rem 0rem
 }
 
 .btnSign {
@@ -65,25 +66,25 @@ div.textSign{
     color: white;
 }
 
-.inputTypes::placeholder{
-    color:white
+.inputTypes::placeholder {
+    color: white
 }
 
 .location {
-    flex-direction: column!important;
-    
+    flex-direction: column !important;
+
     height: 10rem;
 }
 
-.location button{
-    margin:1rem 1rem;
-    
+.location button {
+    margin: 1rem 1rem;
+
 }
 
-.link{
+.link {
     text-decoration: none;
     margin: 0rem 1rem;
-    color:white
+    color: white
 }
 
 .containerCarousel{
@@ -95,8 +96,12 @@ div.textSign{
 
 }
 
-.containerCarousel h2{
-    margin-bottom:11rem
+.containerCarousel img {
+    filter: drop-shadow(-17px 15px 26px rgba(92, 92, 92, 0.55));
+}
+
+.containerCarousel h2 {
+    margin-bottom: 11rem
 }
 
 div.inputPassContainer {
@@ -151,57 +156,51 @@ div.buttonGoogle button {
 }
 
 div.buttonGoogle button div {
-    background-color: transparent!important
+    background-color: transparent !important
 }
 
 @media only screen and (min-width: 375px) {
-    .inputTypes{
+    .inputTypes {
         width: 20rem;
     }
-    .containerCarousel h2{
-        margin:1rem 0rem;
-        margin-top:4rem;
+
+    .containerCarousel h2 {
+        margin: 1rem 0rem;
+        margin-top: 4rem;
     }
-  }
-  
-  
-  @media only screen and (min-width: 425px) {
-    .inputTypes{
+}
+
+
+@media only screen and (min-width: 425px) {
+    .inputTypes {
         width: 20rem;
-        font-size:1rem
+        font-size: 1rem
     }
-  }
-  
-  @media only screen and (max-width: 425px) {
-    .containerCarousel img{
-        display:none
+}
+
+@media only screen and (max-width: 425px) {
+    .containerCarousel img {
+        display: none
     }
-  }
-  
-  @media only screen and (min-width: 576px) {
-    
-  }
-  
-  
-  @media only screen and (min-width: 768px) {
-    .inputTypes{
+}
+
+@media only screen and (min-width: 576px) {}
+
+
+@media only screen and (min-width: 768px) {
+    .inputTypes {
         width: 30rem;
-        font-size:1rem
+        font-size: 1rem
     }
-    .containerCarousel h2{
-        margin-bottom:1rem
+
+    .containerCarousel h2 {
+        margin-bottom: 1rem
     }
-  }
-  
-  
-  @media only screen and (min-width: 768px) {
-  
-  }
-  
-  @media only screen and (min-width: 1024px) {
-    
-  }
-  
-  @media only screen and (min-width: 1440px) {
-  
-  }
+}
+
+
+@media only screen and (min-width: 768px) {}
+
+@media only screen and (min-width: 1024px) {}
+
+@media only screen and (min-width: 1440px) {}

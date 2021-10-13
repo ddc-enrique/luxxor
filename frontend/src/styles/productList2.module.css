@@ -18,10 +18,11 @@ div.productsSection .loading {
 }
 
 .inputsFilter {
-  color: #e3e3e3;
-  border: 1px solid;
-  padding: 1rem;
-  margin-top: 0.5rem;
+color: #e3e3e3;
+    border: 1px solid;
+    padding: 1.5rem;
+    margin-top: 0.5rem;
+    width: 9rem;
 }
 
 .inputsFilter .switchContainer {
@@ -197,6 +198,8 @@ div.container {
 @media (min-width: 800px) {
   .pageContent {
     grid-template-columns: repeat(4, 1fr);
+    width: 81rem;
+    min-height: 31rem;
   }
 }
 
@@ -270,16 +273,22 @@ div.container {
 }
 
 .title {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
   line-height: 1.2;
 }
 
 .copy {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-style: italic;
   line-height: 1.35;
+}
+.infoPrice {
+     width: 13rem;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
 }
 
 .btn {
