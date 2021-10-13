@@ -119,7 +119,13 @@ const salesControllers = {
     },
 
     getAllSales: (req, res) => { // para que el admin obtenga todas las ventas
-
+        Sale.find().populate("shopCart.productId")
+        .then(salesFound => {
+            if (!salesFound.length) throw new Error("No hay ventas")
+            res.json({success: true, response: salesFound})
+        })
+        .catch((error)=> res.json({success: false, response: error.message}))
+    
     },
 
     getOneSale: (req, res) => {

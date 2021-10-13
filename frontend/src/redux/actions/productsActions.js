@@ -235,6 +235,24 @@ const productsActions = {
             }
         }
     },
+    productsSold:(token)=>{
+        return async (dispatch) => {
+            try{
+                console.log("entre try")
+                let response = await axios.get("http://localhost:4000/api/sales", {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                })
+                console.log(response.data)
+                if (!response.data.success) throw new Error(response.data.response)
+                return response.data
+            }catch(e){
+                console.log(e)
+                return ({success: false, response: e.message})
+            }
+        }
+    }
 
 }
 export default productsActions
