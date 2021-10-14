@@ -27,15 +27,31 @@ const CheckOutProducts = (props) => {
                  setProducts2(products2.push(aux))
                  setProducts(products2) 
             })
-            .catch(e=>console.log(e))
+            .catch(e=>toast(e.message, {
+              icon: "🚫",
+              style: {
+                borderRadius: "1rem",
+                background: "#fff",
+                color: "#545454",
+              },
+            }))
         }) 
     props.getUserData(props.id,props.token)
         .then(res=>{
-            console.log(res)
             setDataAddress(res)
             setDataClient({firstName: props.firstName, lastName: props.lastName,dni:props.dni,phone:res.phone, shipping:""}) 
         })
-        .catch(e=>console.log(e))
+        .catch(e=>{
+          toast(e.message, {
+            icon: "🚫",
+            style: {
+              borderRadius: "1rem",
+              background: "#fff",
+              color: "#545454",
+            },
+          })
+          
+        })
 
         setTimeout(()=>{
             setLoading(!loading)  
@@ -61,11 +77,9 @@ const CheckOutProducts = (props) => {
       }
     }
     
-    console.log("shipping objeto dataClient",dataClient.shipping)
-    console.log(" dataClient",dataClient)
     const submitHandler=()=>{
+      
       let arr_aux=Object.values(dataAddress).filter((item,index)=>index!==3)
-      console.log(arr_aux)
       Object.values(arr_aux).forEach((field_value)=>!field_value && (field_empty = true))
       let inputs=Object.values(dataClient).some((input)=>input==="")      
       /* let inputsShipping=Object.values(dataAddress).filter(item=>item==="optional").some((input)=>input==="")   */

@@ -144,7 +144,7 @@ const usersControllers = {
             let mailChangePassword = {
                 from: 'Luxxor <luxxor.tech@gmail.com>',
                 to: eMail,
-                // subject: `Cambio de contraseña realizado con exito ${userFound.lastName}, ${userFound.firstName}!`,
+                subject: `Cambio de contraseña realizado con exito ${userFound.lastName}, ${userFound.firstName}!`,
                 html: `
               
 <table style="min-width: 700px;min-heigth: 500px; padding: 10px; margin:0 auto; border-collapse: collapse;">
