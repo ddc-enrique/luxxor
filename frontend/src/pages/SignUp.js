@@ -184,10 +184,7 @@ const SignUp = (props) => {
       <Navbar />
       <div className={styles.container}>
       <div className={styles.containerCarousel}>
-          <img
-            src="https://i.postimg.cc/SKYqgXsy/8a9591545481ca29b3f44f9ed47b7d23-removebg-preview.png"
-            alt="Auriculares"
-          />
+        <div className={styles.image}></div>
           {/* <h2>Testimonios de nuestros clientes</h2>
           <Carousel
             data={data}

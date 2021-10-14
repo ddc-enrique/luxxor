@@ -83,7 +83,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                     <div className={styles.divContainerCuenta}>
                             <h2>
                                 {completeAccount && "Puedes editar estos datos de tu cuenta"}
-                                {!completeAccount && "Actualiza tus datos para poder Comprar"}
+                                {!completeAccount && "Completa tus datos para poder Comprar"}
                                 {/* Cuenta creada con <span>Éxito</span>! */}
                             </h2>
                     </div>
