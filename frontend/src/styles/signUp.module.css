@@ -52,10 +52,12 @@ div.textSign {
     border: none;
     border: 1px solid white;
 }
+
 .btnSign:hover {
     background-color: #fff;
     color: #000000;
 }
+
 .inputTypes {
     outline: none;
     background-color: transparent;
@@ -87,7 +89,7 @@ div.textSign {
     color: white
 }
 
-.containerCarousel{
+.containerCarousel {
     width: 40rem;
     height: 35rem;
     background-image: url(https://i.postimg.cc/VLZbw28G/Alienware-UFO-concept-tablet-removebg-preview.png);
@@ -129,35 +131,35 @@ img.imgForPass {
 input.inputPhoto {
     display: none;
 }
+
 .labelInput .photo {
     width: 11rem;
     height: 3rem;
     text-align: end;
 }
+
 label.labelInput {
-    /* align-self: center; */
     cursor: pointer;
-    /* border: 1px solid white; */
     padding: 1rem;
     width: 42rem;
-    background-image: url(https://i.postimg.cc/s2zfx6sP/5455165-removebg-preview.png);
+    background-image: url(https://i.postimg.cc/Gm67RbYj/Dise-o-sin-t-tulo-80.png);
     background-size: 63%;
     background-repeat: no-repeat;
 }
 
 div.buttonGoogle button {
-    display: flex!important;
-    justify-content: center!important;
-    align-items: center!important;
-    width: 20rem!important;
-    background-color:rgba(233, 230, 230, 0.1)!important;
-    outline: none!important;
-	color:#ffffff!important;
-	font-size:1rem!important;
-	padding:1.45rem 0rem!important;
-	text-decoration:none!important;
-    height: 2rem!important;
-    border: none!important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 20rem !important;
+    background-color: rgba(233, 230, 230, 0.1) !important;
+    outline: none !important;
+    color: #ffffff !important;
+    font-size: 1rem !important;
+    padding: 1.45rem 0rem !important;
+    text-decoration: none !important;
+    height: 2rem !important;
+    border: none !important;
 }
 
 div.buttonGoogle button div {
