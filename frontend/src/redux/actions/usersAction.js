@@ -107,15 +107,19 @@ const usersAction = {
             const headers = { Authorization: "Bearer " + token }
             let response = flagEdit ? await axios.put(url, {...dataUser}, { headers } ) : await axios.post(url, {...dataUser}, { headers })
             console.log("respuesta en action", response.data)
+            console.log(dataUser)
             if(response.data.success){
+                console.log("dentro del primer if en edit userAction")
                 if(flagEdit){
+                    console.log("dentro del segundo if en edit userAction")
                     dispatch({ type: "UPDATE_USER", 
                     payload:{
                         firstName: response.data.response.firstName,
                         lastName: response.data.response.lastName,
                     }})
                 } else {
-                    dispatch({ type: "UPDATE_DNI", dispatch: response.data.response.dni})
+                    console.log("dentro del primer ifELSE en edit userAction")
+                    dispatch({ type: "UPDATE_DNI", payload: response.data })
                 }
                 return response.data
             } else {

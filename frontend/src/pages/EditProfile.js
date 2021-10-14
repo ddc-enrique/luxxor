@@ -8,8 +8,12 @@ import toast, { Toaster } from 'react-hot-toast';
 import { Link } from "react-router-dom"
 import UserPurchase from "../components/UserPurchase"
 
-const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName, lastName, editDataUser }) => {
-    let initialDataUser = completeAccount ? { firstName: "", lastName: "", city: "", zipCode: "", address: "", optional: "", phone: "" }
+const EditProfile = (props) => {
+    console.log( props.dni ,"dni redux en componente")
+    console.log(props.dni > 0)
+    console.log(props.firstName, "firstName")
+    const [completeAccount, setCompleteAccount] = useState(props.dni > 0)
+    let initialDataUser = completeAccount ? { firstName: props.firstName, lastName: props.lastName , city: "", zipCode: "", address: "", optional: "", phone: "" }
         : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" } 
     const [dataUser, setDataUser] = useState(initialDataUser)
     const [view, setView] = useState(true)
@@ -20,8 +24,8 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
     useEffect( () => {
         const getDataUser = async () => {
             try{
-                let extraData = await getAddressAndPhone(id, token)                
-                setDataUser( {...extraData, firstName, lastName } )
+                let extraData = await props.getAddressAndPhone(props.id, props.token)                
+                setDataUser( {...extraData, firstName: props.firstName, lastName: props.lastName } )
             } catch(err) {
                 toast.error(err.message)
             }
@@ -44,17 +48,18 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
     const updateDataUser = async (e) => {
         e.preventDefault()
         try{
-            let response = await editDataUser(id, completeAccount, token, dataUser)
+            let response = await props.editDataUser(props.id, completeAccount, props.token, dataUser)
             console.log(response)
             if(response.success){ 
                 if(!completeAccount){
                     toast.success("Datos Actualizados con éxito ya puedes comprar")
-                    completeAccount = true
+                    setCompleteAccount(true)
                 } else {
                     toast.success("Datos Actualizados con éxito")
                 }
             }
         } catch(error) {
+            console.log(error)
             if (typeof error === 'string' || error === "DNI en uso"){
                 toast.error(error)
             } else if (Array.isArray(error)){
@@ -114,7 +119,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                     <p>Nombre
                                         <input 
                                             name='firstName' type= 'text' placeholder='ej Juan'
-                                            defaultValue={dataUser.firstName}
+                                            defaultValue={props.firstName}
                                             onChange={inputHandler}
                                             onKeyPress={keyPressHandler}
                                         />
@@ -128,7 +133,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                     <p>Apellido
                                         <input 
                                             name='lastName' type= 'text' placeholder='ej Garcia'
-                                            defaultValue={dataUser.lastName}
+                                            defaultValue={props.lastName}
                                             onChange={inputHandler}
                                             onKeyPress={keyPressHandler}
                                         />
@@ -220,7 +225,8 @@ const mapStateToProps = (state) => {
         id: state.users.id,
         token: state.users.token,
         firstName: state.users.firstName,
-        lastName: state.users.lastName
+        lastName: state.users.lastName,
+        dni: state.users.dni
     }
 }
 

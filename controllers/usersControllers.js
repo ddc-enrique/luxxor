@@ -71,7 +71,7 @@ const usersControllers = {
                 if (userFound) throw new Error ("DNI en uso")
                 User.findOneAndUpdate({ _id: req.params.id }, { ...req.body }, { new: true })
                     .then( (userUpdated) => {
-                        res.json({ success: true, response: { dni: userUpdated.dni } })
+                        res.json({ success: true, response: userUpdated.dni })
                     } )
             })
             .catch( err => handleError(res, err) )
