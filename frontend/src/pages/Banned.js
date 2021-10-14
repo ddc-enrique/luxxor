@@ -8,13 +8,19 @@ const Banned = (props) =>{
     useEffect(()=>{
         props.verifyIdMail(props.match.params.id)
         .then(res=>{
+            console.log(res)
             if(!res){
                 props.history.push("/") 
-                notificationToast("Cuenta bloqueada con éxito", "👏");
+                toast.error("Hubo un problema, intente más tarde")
             }else{
                 props.banAccount(props.match.params.id)
+                toast.success("Cuenta bloqueada con éxito")
+                props.history.push("/") 
             }
-       })
+       }).catch((error) => {
+        toast.error("Hubo un problema, intente más tarde")
+        props.history.push("/") 
+    })
        // eslint-disable-next-line
     },[])
     const notificationToast = (message, icon) => {
@@ -32,7 +38,7 @@ const Banned = (props) =>{
         <NavBar/>
         <div className={styles.containerBanned}>
             <Toaster />
-            <h1>¡Cuenta bloqueada con éxito!</h1>
+            
         </div>
        </>
     )

@@ -81,7 +81,8 @@ const usersAction = {
                 let response = await axios.get(`http://localhost:4000/api/user/verifyId/${id}`)
                 if(response.data.success) return response.data.success
             }else{
-                let response = await axios.get(`http://localhost:4000/api/user/verify-mail/${id}`)
+                let response = await axios.get(`http://localhost:4000/api/userverify-mail/${id}`)
+                console.log(response)
                 if(response.data.success){
                     return response.data.success
                 }

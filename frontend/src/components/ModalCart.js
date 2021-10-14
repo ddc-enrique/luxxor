@@ -23,11 +23,11 @@ const ModalCart = (props) =>{
                 aux= {...res.data.response,quantity:item.quantity}
                  setProducts2(products2.push(aux))
                  setProducts(products2) 
-                 setLoading(!loading)  
-            })
-            .catch(e=>console.log(e))
-        }) 
-
+                })
+                .catch(e=>console.log(e))
+            }) 
+            
+            setLoading(!loading)  
     },[])
 
      const DeleteProductModalCart=(id,deleteAll,price,quantity,discount)=>{

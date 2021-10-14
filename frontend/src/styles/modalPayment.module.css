@@ -8,18 +8,36 @@ div.container {
 }
 
 div.paymentContainer {
-    background-color: #EFEAEA;
+    background-color: #e3e3e3;
+    border: 1px solid;
     width: 25rem;
     height: 25rem;
     box-shadow: 12px 0px 100vw 55vw #444343d1;
-    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 1rem;
+    justify-content: space-evenly;
+    padding: 1rem;
 }
 
 
 
-img.icono {
-    width: 2rem;
+.paymentContainer .icon {
+    width: 9rem;
     height: 2rem;
     cursor: pointer;
-    align-self: flex-start;
+    align-self: flex-end;
+    padding-bottom: 2rem;
+    color: black;
+    position: absolute;
+    bottom: 21.6rem;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.329);
+    left: 15.5rem;
+    background: transparent;
+}
+
+.paymentContainer .icon:hover {
+    color: rgb(121, 13, 13);
 }
