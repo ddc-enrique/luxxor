@@ -44,8 +44,8 @@ const SignIn = (props) => {
           toast.success("Bienvenido", {
             position: "top-center",
           })
-          props.setModalLogIn(!props.modalLogIn)
-        //   props.istory.push("/")
+          props.setModalLogIn(false)
+          props.history.push("/")
         }
       }
     } catch (error) {

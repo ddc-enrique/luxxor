@@ -1,11 +1,22 @@
 div.productsSection .loading {
   height: 24rem;
-  width: 100%;
+  width: 97%;
   padding: 1rem;
   background-image: url(https://i.postimg.cc/TwZG2QWc/loading.gif);
   background-position: center;
   background-size: 8%;
   background-repeat: no-repeat;
+}
+.content .cart {
+  border: none;
+    font-size: .8rem;
+    padding: .5rem;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+.content .cart:hover {
+  border-bottom: 1px solid white;
 }
 .inputFilterContain h2,
 .inputSelect h2 {
@@ -226,7 +237,7 @@ div.container {
 
 @media (min-width: 600px) {
   .card {
-    height: 25rem;
+    height: 26rem;
     width: 15rem;
   }
 }

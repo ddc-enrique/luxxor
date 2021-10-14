@@ -63,12 +63,11 @@ form.formContact .eachInput .errorPlaceholder{
 
 form.formContact .eachInput .error{
     display: block;
-    border-bottom-right-radius: .5rem;
-    border-bottom-left-radius: .5rem;
     padding: .2rem;
     background-color: white;
     color: red;
-    text-align: center;}
+    text-align: center;
+}
 
 form.formContact button {
     float: right;
