@@ -72,7 +72,6 @@ const Password = (props) => {
               props.setmodalPass(false);
             }}
             className={styles.iconClose}
-            className={styles.icono}
           />
           <div className={styles.boxData}>
             <div className={styles.boxTitle}>
@@ -93,7 +92,7 @@ const Password = (props) => {
                 {error.error.length === 0 ? (
                   <p className={styles.pError}></p>
                 ) : (
-                  error.error
+                  <p className={styles.error}>{error.error}</p>
                 )}{" "}
               </span>
               <button onClick={submit} className={styles.buttonSend}>

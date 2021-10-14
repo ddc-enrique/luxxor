@@ -244,12 +244,13 @@ div.picRecomendados p {
   }
 .backToProducts{
   padding: 0 1.66rem;
+  text-align: center;
 }
 .backToProducts a .icon {
   padding: 0 .66rem;
 }
   .containerProduct .cart, .backToProducts .cart {
-    border: 1px solid #ffffff;
+    border-bottom: 1px solid #ffffff;
     padding: 1rem;
   }
 

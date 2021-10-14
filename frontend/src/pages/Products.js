@@ -23,13 +23,13 @@ const Products = (props) => {
           if (!Array.isArray(response)) throw new Error(response.response);
           setProducts(response);
           setFilteredProducts(response);
+          setLoading(false);
         } catch (error) {
           toast.error(error);
         }
       }
     };
     getAllProducts();
-    setLoading(false);
     // eslint-disable-next-line
   }, []);
   const addProductHandler = async (id, price, discount, name) => {
@@ -182,7 +182,7 @@ const Products = (props) => {
                 </div>
               </div>
             ))}
-            {loading === false && !filteredProducts.length && (
+            {!filteredProducts.length && (
               <div className={styles.emptyProducts}>
                 <p>Ups! No hay resultado para tu busqueda. ¡Intenta otro!</p>
               </div>
