@@ -9,6 +9,7 @@ import FilterProducts from "../components/FilterProducts"
 import productsActions from "../redux/actions/productsActions"
 import toast, { Toaster } from "react-hot-toast"
 const Products = (props) => {
+  console.log(props.products)
   const [products, setProducts] = useState(props.products)
   const [filteredProducts, setFilteredProducts] = useState(props.products)
   const [updateOnSort, setUpdateOnSort] = useState(true)
@@ -100,7 +101,6 @@ const Products = (props) => {
   //     </div>
   // )
   // }
-
   return (
     <>
       <Toaster />

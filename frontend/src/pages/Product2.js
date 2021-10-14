@@ -10,6 +10,7 @@ import productsActions from "../redux/actions/productsActions"
 import Moment from 'react-moment'
 import { XCircle } from 'react-bootstrap-icons';
 import Footer from '../components/Footer';
+import { element } from 'prop-types';
 
 
 const Product2 = (props) => {
@@ -20,7 +21,8 @@ const Product2 = (props) => {
   const [modal, setModal] = useState(false);
   const [loading,setLoading]=useState(true)
   const date = new Date()
-// console.log(product)
+  let stock=true
+
   useEffect(()=>{
     window.scrollTo(0,0)
     if(!props.products.length){
@@ -56,17 +58,34 @@ const Product2 = (props) => {
   }, [prodRecomen])
 
   const addProductHandler=()=>{
-    props.addProduct(props.match.params.id,product.price,product.discount,product.name)
+    props.shopCart.forEach(item => {
+      if(item.productId===props.match.params.id){
+        if((item.quantity+1)>product.stock){
+          stock=false
+        }
+      }
+    })
+   !stock 
+   ? toast("No hay mas unidades a la venta.", {
+    icon: "🚫",
+    style: {
+      borderRadius: "1rem",
+      background: "#fff",
+      color: "#545454",
+    }
+  })
+  :props.addProduct(props.match.params.id,product.price,product.discount,product.name)
+    
   }
   const arrayRecom =products.filter(item => item.category._id === product.category._id && item._id !== product._id)
   const details = detailsOn &&(
    
     <>
      <p>CARACTERÍSTICAS</p>
-           <h2>{product.name}</h2>
-           <p>$ {" "+product.price}</p>
-           <span>Ver todas las promociones</span>
-           <p>Te llega a partir de <span className={styles.orange}><Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> </span>
+            <h2>{product.name}</h2>
+            <p>$ {" "+product.price}</p>
+            <span>Ver todas las promociones</span>
+            <p>Te llega a partir de <span className={styles.orange}><Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> </span>
                   </p>
                   <p>
                     1 Año de garantia oficial. 10 días para cambios y
@@ -174,7 +193,7 @@ const Product2 = (props) => {
 
 const mapStateToProps = (state) => {
   return {
-    cartProduct: state.shopCart,
+    shopCart: state.shopCart.shopCart,
     products: state.products.products,
     brands: state.products.brands
   }

@@ -98,25 +98,28 @@ const usersControllers = {
                 subject: `Cuenta Bloqueada-${userFound.firstName} ${userFound.lastName}`,
                
                  html: `
-                <table style="max-width: 800px; padding: 10px; margin:0 auto; border-collapse: collapse;">
-                        <div style="width: 100%;margin:20px 0; text-align: center;">
-                            <a href="http://localhost:3000/"><img src="https://i.postimg.cc/QxNK5h6Y/logo-Luxxor.png"" /></a>
-                        </div>
-                    <tr>
-                        <td style="background-color: #dfdbdb;border-radius:20px;box-shadow: 0 5px 16px 0 #433e3e94">
-                        <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif;border-radius:20px;">
-                            <h1 style="color: #7A5EA8; margin: 0 0 7px">Cuenta Bloqueada</h1>
-                            <h2 style="color: #000; margin: 0 0 7px">¡Hola  ${userFound.firstName} ${userFound.lastName}!</h2>
-                            <p style="margin: 2px; font-size: 15px; color: #000">
-                                    Te enviamos este e-mail para comunicarle que su cuenta ha sido bloqueada!
-                                    Puede comunicarse a esta casilla de correo para recuperarla.
-                            </p>                    
-                            <hr/>
-                            <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
-                            
-                        </td>
-                    </tr>
-                </table>
+                 <div style="background: rgb(47,144,176);
+                 background: radial-gradient(circle, rgba(47,144,176,1) 0%, rgba(48,106,154,1) 55%, rgba(49,75,136,1) 96%); padding: 20px">
+                 <table style="max-width: 800px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+                                         <div style="width: 100%;margin:20px 0; text-align: center; back">
+                                           <a href="http://localhost:3000/"><img src="https://i.postimg.cc/mrgTGbNq/OFERTA-3-removebg-preview.png"" style="width: 410; "/> </a>
+                                         </div>
+                                     <tr>
+                 <td style="color: #fff; border: 1px solid">
+                                         <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif;border-radius:20px;">
+                                             <h1 style="color: #fff; margin: 0 0 7px">Cuenta Bloqueada</h1>
+                                             <h2 style="color: #fff; margin: 0 0 7px">¡Hola  ${userFound.firstName} ${userFound.lastName}!</h2>
+                                             <p style="margin: 2px; font-size: 15px; color: #fff">
+                                                     Te enviamos este e-mail para comunicarle que su cuenta ha sido bloqueada!
+                                                     Puede comunicarse a esta casilla de correo para recuperarla.
+                                             </p>                    
+                                             <hr/>
+                                             <p style="color: #fff; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
+                                             
+                                         </td>
+                                     </tr>
+                                 </table>
+                 </div>                 
                     `
             }
             userFound.mailSentPassBan=false
@@ -145,29 +148,31 @@ const usersControllers = {
                 to: eMail,
                 subject: `Cambio de contraseña realizado con exito ${userFound.lastName}, ${userFound.firstName}!`,
                 html: `
-                    <table style="max-width: 800px; padding: 10px; margin:0 auto; border-collapse: collapse;">
-                            <div style="width: 100%;margin:20px 0; text-align: center;">
-                                <a href="http://localhost:3000/"><img src="https://i.postimg.cc/QxNK5h6Y/logo-Luxxor.png"" /></a>
-                            </div>
-                        <tr>
-                            <td style="background-color: #dfdbdb;border-radius:20px;box-shadow: 0 5px 16px 0 #433e3e94">
-                            <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family: sans-serif;border-radius:20px;">
-                                <h1 style="color: #7A5EA8; margin: 0 0 7px">Cambio de Contraseña realizado con exito.</h1>
-                                <h2 style="color: #000; margin: 0 0 7px">¡Hola ${userFound.lastName}, ${userFound.firstName}!</h2>
-                                <p style="margin: 2px; font-size: 15px; color: #000">
-                                        Te enviamos este e-mail para comunicarte que has cambiado tu contraseña con exito!
-                                </p>
-                                <h2 style="color:#e11919;">INFORMACION IMPORTANTE </h2>
-                                <p style="margin: 2px; font-size: 15px; color: #000">
-                                    Si tu no realizaste la solicitud de cambio de contraseña, haz click en el siguiente botón:
-                                </p>
-                                <a href="http://localhost:3000/bloqueo-cuenta/${userFound._id}"><button  style="background-color: #f48f31;color: white; border:none; padding:0.5rem 1rem">Bloquear Cuenta</button></a>
-                                <hr/>
-                                <p style="color: #34495e; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
-                                
-                            </td>
-                        </tr>
-                    </table>
+                <div style='background: radial-gradient(circle, rgba(47,144,176,1) 0%, rgba(48,106,154,1) 55%, rgba(49,75,136,1) 73%, rgba(49,25,109,1) 100%); '>
+                <table style="max-width: 800px; padding: 10px; margin:0 auto; border-collapse: collapse;">
+                                            <div style="width: 100%;margin:20px 0; text-align: center;">
+                                              <a href="http://localhost:3000/"><img src="https://i.postimg.cc/mrgTGbNq/OFERTA__3_-removebg-preview.png"" style='width: 300'/></a>
+                                            </div>
+                                        <tr>
+                <td style="border: 1px solid white">
+                                            <div style="color: #34495e; margin: 4% 10% 2%; text-align: justify;font-family:sans-serif;">
+                                                <h1 style="color: #fff; margin: 0 0 7px">Cambio de Contraseña realizado con exito.</h1>
+                                                <h2 style="color: #fff; margin: 0 0 7px">¡Hola ${userFound.lastName}, ${userFound.firstName}!</h2>
+                                                <p style="margin: 2px; font-size: 15px; color: #fff">
+                                                        Te enviamos este e-mail para comunicarte que has cambiado tu contraseña con exito!
+                                                </p>
+                                                <h2 style="color:white;">INFORMACION IMPORTANTE </h2>
+                                                <p style="margin: 2px; font-size: 15px; color: #fff">
+                                                    Si tu no realizaste la solicitud de cambio de contraseña, haz click en el siguiente botón:
+                                                </p>
+                <a href="http://localhost:3000/bloqueo-cuenta/${userFound._id}"><button  style="border: #f48f31 ;color: grey; margin-top: 1rem; padding:1rem">Bloquear Cuenta</button></a>
+                                                <hr/>
+                                                <p style="color: white; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
+                                                
+                                            </td>
+                                        </tr>
+                                    </table>
+                </div>
                         `               
             }
             userFound.password=hashedPass

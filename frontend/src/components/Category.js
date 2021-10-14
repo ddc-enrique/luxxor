@@ -2,25 +2,11 @@ import React from "react";
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import styles from "../styles/category.module.css";
 import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
 import { connect } from "react-redux";
-import {
-  // House,
-  // PlusCircle,
-  // DashCircle,
-  // X,
-  // ColumnsGap,
-  // Bag,
-  // Tag,
-  // ChatDots,
-  // Search,
-  XCircle,
-  // ClockFill,
-  Pen,
-  CheckCircle,
-} from "react-bootstrap-icons";
+import toast, { Toaster } from "react-hot-toast";
+import { XCircle, Pen, CheckCircle } from "react-bootstrap-icons";
 const Category = (props) => {
   const [categories, setCategories] = useState(props.categories);
   const [loading, setLoading] = useState(true);
@@ -32,43 +18,74 @@ const Category = (props) => {
         let res = await props.getCategories();
         setCategories(res);
       } catch (e) {
-        console.log(e);
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
       } finally {
         setLoading(!loading);
       }
     };
     getCategories();
   }, []);
+  const notificationToast = (message, icon) => {
+    return toast(message, {
+      icon: icon,
+      style: {
+        borderRadius: "1rem",
+        background: "#fff",
+        color: "#545454",
+      },
+    });
+  };
   const sendCategory = async () => {
     if (!category) {
-      alert("No puede estar vacio");
+      notificationToast("El campo no puede estar vacio", "🚫");
     } else {
       let res = await props.addCategory(category, props.token);
       if (!res.data.success) {
-        alert(res.data.response);
+        notificationToast(res.data.response, "🚫");
       } else {
-        alert("Creado con éxito");
+        notificationToast("Creado con éxito", "👏");
         let response = await props.getCategories();
         setCategories(response);
       }
     }
   };
   const editCategory = async (id) => {
-    let res = await props.editCategory(id, { name: category }, props.token);
-    if (res.data.success) {
-      let resp = await props.getCategories();
-      setCategories(resp);
+    if (!category) {
+      notificationToast("El campo no puede estar vacio", "🚫");
     } else {
-      alert(res.data.response);
+      try {
+        let res = await props.editCategory(id, { name: category }, props.token);
+        if (res.data.success) {
+          notificationToast("Modificado con éxito", "👏");
+          let resp = await props.getCategories();
+          setCategories(resp);
+        } else {
+          throw new Error();
+        }
+      } catch (e) {
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
+      }
     }
   };
   const deleteCategory = async (id, index) => {
-    let res = await props.deleteCategory(id, props.token);
-    res.data.success && alert("Borrado con éxito");
-    setCategories(categories.splice(id, index));
+    try {
+      let res = await props.deleteCategory(id, props.token);
+      if (!res.data.success) throw new Error();
+      res.data.success && notificationToast("Borrado con éxito", "👏");
+      setCategories(categories.splice(id, index));
+    } catch (e) {
+      notificationToast("Hubo un problema, intente nuevamente más tarde", "🚫");
+    }
   };
   return (
     <div className={styles.divContainer}>
+      <Toaster />
       <header className={styles.headerAdmin}>
         <Link to="/">
           <h1>
@@ -85,7 +102,7 @@ const Category = (props) => {
             {loading ? (
               <div className={styles.loading}></div>
             ) : !categories ? (
-              <h1>No hay categorías cargadas</h1>
+              <h1>No hay categorías cargadas. ¡Carga una!</h1>
             ) : (
               categories.map((category, index) => (
                 <div key={index} className={styles.category}>

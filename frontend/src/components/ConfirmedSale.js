@@ -5,13 +5,13 @@ import { connect } from 'react-redux'
 import usersAction from '../redux/actions/usersAction'
 import shopCartActions from "../redux/actions/shopCartActions"
 
-const ConfirmedSale = ({ id, total, shopCart, token, shipping, payment, sendBill,resetCart}) => {
-    const [confirmedMessage, setConfirmedMessage] = useState("Muchas gracias por su compra")
+const ConfirmedSale = ({ id, total, shopCart, token, dataShipping, payment, sendBill,resetCart}) => {
+    const [confirmedMessage, setConfirmedMessage] = useState(`Muchas gracias por su compra. En breve recibirás un mail con la información de su orden de compra.`)
     const [loading, setLoading] = useState(true)
     useEffect(()=>{
         const sendNewBill = async () => {
             try {
-                let response = await sendBill(id, total, shopCart, true, payment, token)
+                let response = await sendBill(id, total, shopCart, dataShipping, payment, token)
                 if(!response.success) setConfirmedMessage("Algo salio mal, ponganse en contacto luxxor.tech@gmail.com")
                resetCart()
             } catch (error) {

@@ -9,9 +9,10 @@ import ConfirmedSale from "../components/ConfirmedSale";
 
 const Sale = (props) =>{
     const [payment,setPayment]= useState(false)
+    const [dataShipping, setDataShipping] = useState(false);
     const[screen,setScreen]=useState(1)
     useEffect(()=>{
-        window.scrollTo(0,0)
+        /* window.scrollTo(0,0) */
         if(!props.token){
             toast("Deberas loguearte para finaliza la compra", {
                 icon: "🚫",
@@ -39,13 +40,13 @@ const Sale = (props) =>{
     let componentToRender
     switch(screen){
         case 1:
-            componentToRender= <CheckOutProducts setScreen={setScreen} />
+            componentToRender= <CheckOutProducts setScreen={setScreen} setDataShipping={setDataShipping} dataShipping={dataShipping}/>
             break
         case 2:
             componentToRender= <Payment setScreen={setScreen} setPayment={setPayment} toast={toast}/>
             break
         case 3:
-            componentToRender= <ConfirmedSale payment={payment}/>
+            componentToRender= <ConfirmedSale payment={payment} dataShipping={dataShipping}/>
             break 
         default:
             break
@@ -89,9 +90,7 @@ const mapStateToProps = (state) => {
         token:state.users.token, 
     }
 }
-const mapDispatchToProps ={
-    
-}
-export default connect(mapStateToProps,mapDispatchToProps)(Sale)
+
+export default connect(mapStateToProps)(Sale)
 
 /* {!clickBuy ? <CheckOutProducts setClickBuy= {setClickBuy}/> : <Payment setPayment={setPayment}/>} */

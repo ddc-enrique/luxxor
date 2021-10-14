@@ -259,9 +259,8 @@ const EditProductComp = (props) => {
                 </div>
                 <div>
                 <PlusCircle className={styles.icon} onClick={newInput} style={{cursor: "pointer"}}/>
-                  {/* <p onClick={newInput} style={{cursor: "pointer"}}>+ Agregar input</p> */}
                   {inputFields.map((input, index)=>{
-                   return <div key={index}>
+                   return <div key={index} className={styles.addCaracter}>
                       <div className={styles.containerInputs}>
                         <label htmlFor="optionName">Carácterística</label>
                         <input id="optionName" type="text" name="optionName" onChange={(e)=>newProductHandler(index, e)} defaultValue={input.optionName}/>
@@ -271,7 +270,6 @@ const EditProductComp = (props) => {
                         <input id="optionValue" type="text" name="optionValue" onChange={(e)=>newProductHandler(index, e)} defaultValue={input.optionValue}/>
                       </div>
                       <DashCircle className={styles.icon} onClick={()=>removeInput(index)} style={{cursor: "pointer"}}/>
-                      {/* <p onClick={()=>removeInput(index)} style={{cursor: "pointer"}}>- Borrar input</p> */}
                   </div>
                   
                   })}
@@ -336,24 +334,17 @@ const EditProductComp = (props) => {
                 <input id="search" type="text"  onChange={handle}/>
               </div>
               <div className={styles.containerProducts}>
-                {loading ? <div className={styles.loading}></div> :
+                {loading ? <div className={styles.loading}></div> : 
+                !productsFilt.length && <p>No hay resultados para tu búsqueda</p> ||
                   productsFilt.map((product) => (
                   <div className={styles.boxProduct} >
                     <div className={styles.titleProduct}>
                       <div
                         className={styles.imageProduct}
-                        style={{ backgroundImage: `url(${product.photos[0]})` }}
+                        style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}}
                       ></div>
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>
-                        {/* <div
-                          onClick={()=>{setProductId(product._id); setModalEdit(!modalEdit)}}
-                          className={styles.icon}
-                          style={{
-                            backgroundImage:
-                              "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
-                          }}
-                        ></div> */}
                          <Pen className={styles.icon} style={{cursor: "pointer"}}  onClick={()=>{setProductId(product._id); setModalEdit(!modalEdit)}}/>
                          <XCircle className={styles.icon} onClick={()=>deleteProduct(product._id)} style={{cursor: "pointer"}}/>
                       </div>
@@ -378,18 +369,11 @@ const EditProductComp = (props) => {
                     <div className={styles.titleProduct}>
                       <div
                         className={styles.imageProduct}
-                        style={{ backgroundImage: `url(${product.photos[0]})` }}
+                        style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}}
                       ></div>
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>
-                      <Pen className={styles.icon}  style={{cursor: "pointer"}}/>
-                        {/* <div
-                          className={styles.icon}
-                          style={{
-                            backgroundImage:
-                              "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
-                          }}
-                        ></div> */}
+                      <Pen className={styles.icon} style={{cursor: "pointer"}}  onClick={()=>{setProductId(product._id); setModalEdit(!modalEdit)}}/>
                         <XCircle className={styles.icon} onClick={()=>deleteProduct(product._id)} style={{cursor: "pointer"}}/>
                       </div>
                     </div>
