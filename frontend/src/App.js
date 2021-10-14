@@ -22,7 +22,7 @@ import shopCartActions from "./redux/actions/shopCartActions"
 import AdminSales from "./components/AdminSales";
 
 const App = (props) => {
-  const {token, dni, signWithLocal} = props
+  const {token, dni, signWithLocal, total, admin} = props
   useEffect(() => {
     if (localStorage.getItem("token")){
       signWithLocal(localStorage.getItem("token"))
@@ -39,7 +39,6 @@ const App = (props) => {
         <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
         <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
-        {/* <Route path="/registro" component={SignUp} /> */}
         <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
         <Route exact path="/admin/messages" component={AdminMessages} />
@@ -47,11 +46,11 @@ const App = (props) => {
         <Route path="/admin/marcas" component={Brand} />
         <Route path="/admin/ventas" component={AdminSales}/>  
         <Route path="/admin" component={Admin} />
+        {/* {admin && <Route path="/admin" component={Admin} />} */}
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
-        <Route path="/checkout" component={Sale}/>       
-        
+        {(token && total) && <Route path="/checkout" component={Sale}/>}
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
@@ -71,6 +70,8 @@ const mapStateToProps = (state) => {
   return {
     token: state.users.token,
     dni: state.users.dni,
+    total: state.shopCart.shopCart,
+    admin: state.users.admin
   }
 }
 

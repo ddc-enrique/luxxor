@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const SectionInfo = (props)=>{
-    const [products, setProducts] = useState(props.products)
+    const [products, setProducts] = useState([...props.products])
     useEffect(()=>{
         const getProducts = async () => {
             let res = await props.getProducts()
@@ -19,7 +19,7 @@ const SectionInfo = (props)=>{
         <section id="novedades" className={styles.sectionContainer} ref={props.reference}> 
                 <p>Novedades</p>
                 <div className={styles.container}>
-                    { products.reverse().splice(0 , 6).map((product) =>
+                    { products.reverse().slice(0 , 6).map((product) =>
                     <Link key={product._id} to={`/producto/${product._id}`}>
                         <div  className={styles.galleryItem}>
                             <div className={styles.image}>

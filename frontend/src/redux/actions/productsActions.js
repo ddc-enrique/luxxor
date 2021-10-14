@@ -40,6 +40,7 @@ const productsActions = {
                 return res
             }catch(e){
                 console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -53,7 +54,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-               console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -67,7 +68,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-               console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -81,7 +82,7 @@ const productsActions = {
                 })
                 return res
             }catch(e){
-                console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -95,7 +96,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-               console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -109,7 +110,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-            console.log(e)
+                return({success: false, response: e})
             }
         }
     },

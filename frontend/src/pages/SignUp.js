@@ -9,7 +9,7 @@ import { Link } from "react-router-dom"
 import SignIn from "../components/SignIn"
 import toast, { Toaster } from "react-hot-toast"
 import Password from "./Password"
-import {  XCircleFill,Eye, EyeSlash } from 'react-bootstrap-icons'
+import { Eye, EyeSlash } from 'react-bootstrap-icons'
 
 const SignUp = (props) => {
   const { signUp } = props
@@ -26,11 +26,9 @@ const SignUp = (props) => {
     eMail: "",
     profilePic: "",
   })
-  const [errorName, setErrorName] = useState(null)
-  const [errorLastName, setErrorLastName] = useState(null)
-  const [errorEmail, setErrorEmail] = useState(null)
-  const [errorPass, setErrorPass] = useState(null)
   const [errorPassChecked, setErrorPassCkecked] = useState(null)
+  const [errorsValidation, setErrorsValidation] = useState({})
+
 
   let viewPassImg = !check ? <Eye className={styles.eye}/> : <EyeSlash className={styles.eye}/>
   let viewPassImgConfirm = !checkConfirm
@@ -38,16 +36,15 @@ const SignUp = (props) => {
     : <EyeSlash className={styles.eye}/>
 
   const responseGoogle = async (res) => {
-    try{
-      let newUserWithGoogle = {
-        firstName: res.profileObj.givenName,
-        lastName: res.profileObj.familyName,
-        eMail: res.profileObj.email,
-        password: res.profileObj.googleId,
-        profilePic: res.profileObj.imageUrl,
-        google: true,
-      }
-      
+    let newUserWithGoogle = {
+      firstName: res.profileObj.givenName,
+      lastName: res.profileObj.familyName,
+      eMail: res.profileObj.email,
+      password: res.profileObj.googleId,
+      profilePic: res.profileObj.imageUrl,
+      google: true,
+    }
+    try{      
       const response = await signUp(newUserWithGoogle)
       if(response === 'Usuario ya registrado'){
         toast("Usuario ya registrado", {
@@ -74,14 +71,13 @@ const SignUp = (props) => {
   }
 
   const enterNewUser = async () => {
-    try {
       const FD = new FormData()
       FD.append("firstName", newUser.firstName)
       FD.append("lastName", newUser.lastName)
       FD.append("password", newUser.password)
       FD.append("eMail", newUser.eMail)
       FD.append("profilePic", newUser.profilePic)
-
+      let resp
       if (
         Object.values(newUser).some((value) => value === "") ||
         newUser.checkPassword === ""
@@ -95,32 +91,11 @@ const SignUp = (props) => {
           },
         })
       } else if (newUser.checkPassword !== newUser.password) {
-        setErrorPassCkecked("No coinciden... vuelve a intentarlo")
+        setErrorPassCkecked("Las contraseñas deben coincidir")
       } else {
-        const resp = await signUp(FD)
-        if (resp) {
-          setErrorName(
-            resp.find((err) => err.path[0] === "firstName")
-              ? resp.find((err) => err.path[0] === "firstName").message
-              : null
-          )
-          setErrorLastName(
-            resp.find((err) => err.path[0] === "lastName")
-              ? resp.find((err) => err.path[0] === "lastName").message
-              : null
-          )
-          setErrorEmail(
-            resp.find((err) => err.path[0] === "eMail")
-              ? resp.find((err) => err.path[0] === "eMail").message
-              : null
-          )
-
-          setErrorPass(
-            resp.find((err) => err.path[0] === "password")
-              ? resp.find((err) => err.path[0] === "password").message
-              : null
-          )
-        } else {
+        try {
+          resp = await signUp(FD)
+          if (!resp.success) throw resp.response
           toast("Bienvenido", {
             icon: "👏",
             style: {
@@ -130,11 +105,21 @@ const SignUp = (props) => {
             },
           })
           props.history.push("/")
+        } catch (error) {
+          if (typeof error === 'string'){
+            toast.error(error)
+          } else if (Array.isArray(error)){
+              let errors = {}
+              error.forEach(err=> {
+                  errors[err.path[0]] = err.message
+              })
+              setErrorsValidation(errors)
+          } else {
+            toast.error("Error de Conexión")
+          }
         }
       }
-    } catch (error) {
-      console.log(error)
-    }
+
   }
 
   const keyPressHandler = (e) => {
@@ -142,33 +127,6 @@ const SignUp = (props) => {
       enterNewUser()
     }
   }
-
-  // const data = [
-  //   {
-  //     image: "https://i.postimg.cc/c1fWVFXW/first-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/1tPB45hJ/second-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/bYS5MdY2/third-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/9FWG9NkF/fourth-Comment.pngpng",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/TwyvP9VR/fifth-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/P5fcxyHB/sixth-Comment.png",
-  //     caption: "",
-  //   },
-  // ]
 
   const captionStyle = {
     fontSize: "2em",
@@ -185,19 +143,6 @@ const SignUp = (props) => {
       <div className={styles.container}>
       <div className={styles.containerCarousel}>
         <div className={styles.image}></div>
-          {/* <h2>Testimonios de nuestros clientes</h2>
-          <Carousel
-            data={data}
-            time={2000}
-            width="42rem"
-            height="25rem"
-            automatic={true}
-            dots={false}
-            slideBackgroundColor="trasnparent"
-            slideImageFit="cover"
-            thumbnails={false}
-            showNavBtn={false}
-          /> */}
         </div>
         <div className={styles.containerForm}>
           <h1>REGISTRATE</h1>
@@ -209,7 +154,8 @@ const SignUp = (props) => {
             name="firstName"
             defaultValue={newUser.firstName}
           />
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorName}&nbsp;</small>
+          {!errorsValidation["firstName"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["firstName"] && <p className={styles.error}>&nbsp;{errorsValidation["firstName"]}</p>}
           <input
             onChange={newUserHandler}
             type="text"
@@ -218,7 +164,8 @@ const SignUp = (props) => {
             name="lastName"
             defaultValue={newUser.lastName}
           />
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorLastName}&nbsp;</small>
+          {!errorsValidation["lastName"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["lastName"] && <p className={styles.error}>&nbsp;{errorsValidation["lastName"]}</p>}
           <input
             onChange={newUserHandler}
             type="text"
@@ -228,7 +175,8 @@ const SignUp = (props) => {
             defaultValue={newUser.eMail}
             onKeyPress={keyPressHandler}
           />
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorEmail}&nbsp;</small>
+          {!errorsValidation["eMail"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["eMail"] && <p className={styles.error}>&nbsp;{errorsValidation["eMail"]}</p>}
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
@@ -240,7 +188,8 @@ const SignUp = (props) => {
             />
              <div onClick={() => setCheck(!check)}> {viewPassImg}</div>
           </div>
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPass}&nbsp;</small>
+          {!errorsValidation["password"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["password"] && <p className={styles.error}>&nbsp;{errorsValidation["password"]}</p>}
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
@@ -252,7 +201,8 @@ const SignUp = (props) => {
             />
             <div  onClick={() => setCheckConfirm(!checkConfirm)}> {viewPassImgConfirm}</div>
           </div>
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPassChecked}&nbsp;</small>
+          {!errorPassChecked && <div className={styles.errorPlaceholder}></div>}
+          {errorPassChecked && <p className={styles.error}>&nbsp;{errorPassChecked}</p>}
           {newUser.profilePic && <p>{newUser.profilePic.name}</p>}
           <label className={styles.labelInput} for="inputPhoto">
             <div className={styles.photo}> Foto de perfil</div>

@@ -22,7 +22,7 @@ const usersReducer = (state = initialState, action) =>{
                 admin: action.payload.admin, 
                 id: action.payload._id,
                 token: action.payload.token,
-                dni: action.payload.dni,
+                dni: action.payload.dni ? action.payload.dni : null,
                 google: action.payload.google
             }
         case "LOGOUT":
@@ -35,6 +35,7 @@ const usersReducer = (state = initialState, action) =>{
                 lastName: action.payload.lastName,
             }
         case "UPDATE_DNI":
+            console.log(action.payload)
             return{
                 ...state,
                 dni: action.payload.dni

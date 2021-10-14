@@ -5,15 +5,14 @@ const usersAction = {
         return async (dispatch, getState) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/user/sign-in", userSignIn)
-                if(response.data.response === 'Email y/o contraseña incorrectos' || response.data.response === 'Por favor usar Google')return response.data.response
-                
+                // if(response.data.response === 'Email y/o contraseña incorrectos' || response.data.response === 'Por favor usar Google')return response.data.response                
                 if(response.data.success){
                     dispatch({type: "SIGN", payload: response.data.response})
                 }else {
-                    return response.data.errors
+                    return response.data.response
                 }
             }catch(e) {
-
+                return ({success: false, response: e})
             }
         }
     },
@@ -22,16 +21,13 @@ const usersAction = {
         return async (dispatch, getState) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/user/sign-up", userSignUp)
-                if(response.data.response === 'Usuario ya registrado')return response.data.response
-                
+                // if(response.data.response === 'Usuario ya registrado')return response.data.response                
                 if(response.data.success){
                     dispatch({type: "SIGN", payload: response.data.response})
-                }else {
-                    return response.data.errors
                 }
-
+                return response.data
             }catch(e){
-                
+                return ({success: false, response: e})
             }
         }
     },
@@ -110,7 +106,6 @@ const usersAction = {
             const url = `http://localhost:4000/api/user/edit-profile/${id}`
             const headers = { Authorization: "Bearer " + token }
             let response = flagEdit ? await axios.put(url, {...dataUser}, { headers } ) : await axios.post(url, {...dataUser}, { headers })
-            console.log("respuesta en action", response.data)
             if(response.data.success){
                 if(flagEdit){
                     dispatch({ type: "UPDATE_USER", 
@@ -119,7 +114,7 @@ const usersAction = {
                         lastName: response.data.response.lastName,
                     }})
                 } else {
-                    dispatch({ type: "UPDATE_DNI", dispatch: response.data.response.dni})
+                    dispatch({ type: "UPDATE_DNI", payload: response.data })
                 }
                 return response.data
             } else {
