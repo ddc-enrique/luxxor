@@ -203,7 +203,7 @@ const SignUp = (props) => {
           </div>
           {!errorPassChecked && <div className={styles.errorPlaceholder}></div>}
           {errorPassChecked && <p className={styles.error}>&nbsp;{errorPassChecked}</p>}
-          {newUser.profilePic && <p>{newUser.profilePic.name}</p>}
+          {newUser.profilePic ? <p className={styles.pPhoto}>{newUser.profilePic.name}</p> : <p className={styles.pPhoto}></p>}
           <label className={styles.labelInput} for="inputPhoto">
             <div className={styles.photo}> Foto de perfil</div>
           </label>

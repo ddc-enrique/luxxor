@@ -3,6 +3,7 @@ import styles from "../styles/password.module.css";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
 import {  XCircleFill } from 'react-bootstrap-icons'
+import toast, { Toaster } from "react-hot-toast";
 
 const Password = (props) =>{
     const [eMail,setEmail]=useState({
@@ -12,7 +13,16 @@ const Password = (props) =>{
         error:""
     })
     const refSpan = useRef()
-    
+    const notificationToast = (message, icon) => {
+        return toast(message, {
+          icon: icon,
+          style: {
+            borderRadius: "1rem",
+            background: "#fff",
+            color: "#545454",
+          },
+        });
+      };
    if(error.error.length===0){
        if(refSpan.current){
            refSpan.current.className=`${styles.spanTransparent}`
@@ -56,6 +66,7 @@ const Password = (props) =>{
     return(
         <>
             <div className={styles.containerTotal}>
+            <Toaster />
                 <div className={styles.containerForm}>
                     {/* <img onClick={()=>{
                         props.setVisible(false)
@@ -71,7 +82,7 @@ const Password = (props) =>{
                         <div className={styles.boxEmail}>
                         <p>Ingresa tu correo electronico:</p>
                         <input type="email" className={styles.input} placeholder="E-mail" name="eMail"  onChange={inputHandler} />
-                        <span ref={refSpan} className={styles.spanTransparent}> {error.error.length===0 ? "." : error.error} </span>
+                        <span ref={refSpan} className={styles.spanTransparent}> {error.error.length===0 ? <p className={styles.pError}></p> : error.error} </span>
                         <button onClick={submit} className={styles.buttonSend}>Enviar</button>
                         </div>
                     </div>

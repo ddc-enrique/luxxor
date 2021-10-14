@@ -1,69 +1,77 @@
-const Sale = require('../models/Sale')
-const User = require('../models/User')
-const Product = require('../models/Product')
-const transport = require('../config/transport')
+const Sale = require("../models/Sale");
+const User = require("../models/User");
+const Product = require("../models/Product");
+const transport = require("../config/transport");
 
 const salesControllers = {
-    // enviar el mail aca tambien
-    saveNewSale: async(req, res) => {
-        let dateMail=Date()
-        console.log("Received SAVE NEW SALE Petition:" + Date())
-        const {userId, amount, shopCart, shipping, methodPayment} = req.body
-        let tableBody=""
-        let textSaleMail=""
-        let numberOrder=200
-        shopCart.forEach(item=>{
-            tableBody+=`<tr>
+  // enviar el mail aca tambien
+  saveNewSale: async (req, res) => {
+    let dateMail = Date();
+    console.log("Received SAVE NEW SALE Petition:" + Date());
+    const { userId, amount, shopCart, shipping, methodPayment } = req.body;
+    let tableBody = "";
+    let textSaleMail = "";
+    let numberOrder = 200;
+    shopCart.forEach((item) => {
+      tableBody += `<tr>
                 <td style="color:#FFF;text-align: center">${item.name}</td>
                 <td style="color:#FFF;text-align: center">${item.quantity}</td>
-                <td style="color:#FFF;text-align: end">${item.productPrice * item.quantity}</td>
-            </tr>`
-        })
-      !shipping 
-      ? textSaleMail="¡Muchas gracias por tu compra! En los próximos días recibirás otro correo electrónico con la confirmación para el retiro en sucursal. Por favor acercarse únicamente después de haber recibido el correo electrónico de confirmación para el retiro."
-      : textSaleMail="¡Muchas gracias por tu compra! En los próximos días recibirás otro correo electrónico con el CÓDIGO DE SEGUIMIENTO y un LINK para que puedas usarlo. Los tiempos de entrega dependen de La empresa de logistica, podrás verlos con ese link."
-      
-      /* try{
+                <td style="color:#FFF;text-align: end">${
+                  item.productPrice * item.quantity
+                }</td>
+            </tr>`;
+    });
+    !shipping
+      ? (textSaleMail =
+          "¡Muchas gracias por tu compra! En los próximos días recibirás otro correo electrónico con la confirmación para el retiro en sucursal. Por favor acercarse únicamente después de haber recibido el correo electrónico de confirmación para el retiro.")
+      : (textSaleMail =
+          "¡Muchas gracias por tu compra! En los próximos días recibirás otro correo electrónico con el CÓDIGO DE SEGUIMIENTO y un LINK para que puedas usarlo. Los tiempos de entrega dependen de La empresa de logistica, podrás verlos con ese link.");
+
+    /* try{
        let sales=await Sale.find()
        numberOrder+=(sales.length+1)
       }catch(e){
         console.log(e)
       } */
 
-     numberOrder+= await Sale.find()
-        .then(sales=>{
-           return(sales.length+1)
-        })       
-        .catch(error=>res.json({success:false, response:error.message}))
+    numberOrder += await Sale.find()
+      .then((sales) => {
+        return sales.length + 1;
+      })
+      .catch((error) => res.json({ success: false, response: error.message }));
 
-        const newSale = new Sale({
-            user: userId,
-            amount,
-            shopCart,
-            shipping,
-            methodPayment,
-            numberOrder:numberOrder,
-            date: Date()
-        })
-        newSale.save()
-        .then((savedSale) => {
-            savedSale.shopCart.forEach((item) => {
-                Product.findOneAndUpdate({_id: item.productId }, {$inc: {"stock": (item.quantity*-1) }}, {returnOriginal: false})
-                .then((product)=>{
-                    console.log(product.stock)
-                })
-            })
-        })
-        .catch((error) => res.json({ success: false, response: error.message}))
-        
-        User.findOne({_id: userId})
-        .then((userFound) =>{ 
-/* background-color: #dfdbdb */
-            let mailSale = {
-                from: 'Luxxor <luxxor.tech@gmail.com>',
-                to: userFound.eMail,
-                subject: `Compra #${numberOrder} aprobada`,
-                html: `
+    const newSale = new Sale({
+      user: userId,
+      amount,
+      shopCart,
+      shipping,
+      methodPayment,
+      numberOrder: numberOrder,
+      date: Date(),
+    });
+    newSale
+      .save()
+      .then((savedSale) => {
+        savedSale.shopCart.forEach((item) => {
+          Product.findOneAndUpdate(
+            { _id: item.productId },
+            { $inc: { stock: item.quantity * -1 } },
+            { returnOriginal: false }
+          ).then((product) => {
+            console.log(product.stock);
+          });
+        });
+      })
+      .catch((error) => res.json({ success: false, response: error.message }));
+
+    User.findOne({ _id: userId })
+      .then((userFound) => {
+        /* background-color: #dfdbdb */
+        let mailSale = {
+          from: "Luxxor <luxxor.tech@gmail.com>",
+          to: userFound.eMail,
+          subject: `Compra #${numberOrder} aprobada`,
+          html: `
                     <table style="max-width: 800px; padding: 10px; margin:0 auto; border-collapse: collapse;">
                         <tr>
                             <td style="background: rgb(47,144,176);
@@ -105,36 +113,36 @@ const salesControllers = {
                             </td>
                         </tr>
                     </table>
-                        `            
-            }
-            transport.sendMail(mailSale, (err, info) => {
-                if (err) throw new Error(err)
-                res.json({ success: true,response: info })
-            })   
+                        `,
+        };
+        transport.sendMail(mailSale, (err, info) => {
+          if (err) throw new Error(err);
+          res.json({ success: true, response: info });
+        });
+      }) //desde aca se envia el mail
+      .catch((error) => res.json({ success: false, response: error.message }));
+  },
 
-        }) //desde aca se envia el mail
-        .catch((error) => res.json({ success: false, response: error.message }))
-        
-    },
+  getAllSales: (req, res) => {
+    // para que el admin obtenga todas las ventas
+    Sale.find()
+      .populate("shopCart.productId")
+      .then((salesFound) => {
+        if (!salesFound.length) throw new Error("No hay ventas");
+        res.json({ success: true, response: salesFound });
+      })
+      .catch((error) => res.json({ success: false, response: error.message }));
+  },
 
-    getAllSales: (req, res) => { // para que el admin obtenga todas las ventas
-        Sale.find().populate("shopCart.productId")
-        .then(salesFound => {
-            if (!salesFound.length) throw new Error("No hay ventas")
-            res.json({success: true, response: salesFound})
-        })
-        .catch((error)=> res.json({success: false, response: error.message}))
-    
-    },
+  getOneSale: (req, res) => {
+    Sale.find({ user: req.params.id })
+      .populate("shopCart.productId")
+      .then((saleFound) => {
+        if (!saleFound.length) throw new Error("No tiene compras");
+        res.json({ success: true, response: saleFound });
+      })
+      .catch((error) => res.json({ success: false, response: error.message }));
+  },
+};
 
-    getOneSale: (req, res) => {
-        Sale.find({user: req.params.id}).populate("shopCart.productId")
-        .then(saleFound => {
-            if (!saleFound.length) throw new Error("No tiene compras")
-            res.json({success: true, response: saleFound})
-        }).catch((error)=> res.json({success: false, response: error.message}))
-    }
-
-}
-
-module.exports = salesControllers
+module.exports = salesControllers;
