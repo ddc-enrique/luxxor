@@ -14,7 +14,7 @@ const CardProductCart = (props) =>{
             props.addProduct(product._id,product.price,product.discount,product.name)
             setCounter(counter+1)
         }else{
-            toast("No hay mas unidades a la venta", {
+            toast("No hay mas unidades a la venta.", {
                 icon: "🚫",
                 style: {
                   borderRadius: "1rem",

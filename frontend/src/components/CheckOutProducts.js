@@ -8,9 +8,9 @@ import shopCartActions from "../redux/actions/shopCartActions";
 import productsActions from "../redux/actions/productsActions";
 
 const CheckOutProducts = (props) => {
+  const {dataShipping, setDataShipping} = props
   const [products, setProducts] = useState([]);
   const [products2, setProducts2] = useState([]);
-  const [dataShipping, setDataShipping] = useState(false);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
   let aux;

@@ -9,9 +9,10 @@ import ConfirmedSale from "../components/ConfirmedSale";
 
 const Sale = (props) =>{
     const [payment,setPayment]= useState(false)
+    const [dataShipping, setDataShipping] = useState(false);
     const[screen,setScreen]=useState(1)
     useEffect(()=>{
-        window.scrollTo(0,0)
+        /* window.scrollTo(0,0) */
         if(!props.token){
             toast("Deberas loguearte para finaliza la compra", {
                 icon: "🚫",
@@ -39,16 +40,21 @@ const Sale = (props) =>{
     let componentToRender
     switch(screen){
         case 1:
-            componentToRender= <CheckOutProducts setScreen={setScreen} />
+            componentToRender= <CheckOutProducts setScreen={setScreen} setDataShipping={setDataShipping} dataShipping={dataShipping}/>
             break
         case 2:
             componentToRender= <Payment setScreen={setScreen} setPayment={setPayment} toast={toast}/>
             break
         case 3:
-            componentToRender= <ConfirmedSale payment={payment}/>
+            componentToRender= <ConfirmedSale payment={payment} dataShipping={dataShipping}/>
             break 
         default:
             break
+    }
+    const changeMenuHandler=()=>{
+        if(screen===2){
+            setScreen(1)
+        }
     }
 
     return(
@@ -56,10 +62,10 @@ const Sale = (props) =>{
             <NavBar/>
             <section className={styles.sectionSale}>             
             <div className={styles.navCarrito}>
-                <div onClick={() => setScreen(1)} style={{borderBottomColor: screen === 1 && 'grey'}}>
+                <div onClick={changeMenuHandler} style={{borderBottomColor: screen === 1 && 'grey'}}>
                     <p>Paso 1</p> 
                 </div>
-                <div onClick={() => screen === 3 && setScreen(2)} style={{borderBottomColor: screen === 2 && 'grey'}}>
+                <div style={{borderBottomColor: screen === 2 && 'grey'}}>
                     <p>Paso 2</p> 
                 </div>
                 <div style={{borderBottomColor: screen === 3 && 'grey'}}>
@@ -84,9 +90,7 @@ const mapStateToProps = (state) => {
         token:state.users.token, 
     }
 }
-const mapDispatchToProps ={
-    
-}
-export default connect(mapStateToProps,mapDispatchToProps)(Sale)
+
+export default connect(mapStateToProps)(Sale)
 
 /* {!clickBuy ? <CheckOutProducts setClickBuy= {setClickBuy}/> : <Payment setPayment={setPayment}/>} */
