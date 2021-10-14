@@ -13,6 +13,7 @@ const fileupload = require("express-fileupload")
 
 
 app.use(express.static('assets'))
+app.use(express.static('assets/productsPhoto'))
 app.use(cors())
 app.use(express.json())
 app.use(fileupload())

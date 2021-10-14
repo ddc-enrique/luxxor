@@ -14,8 +14,6 @@ header.headerAdmin h1 {
   text-transform: uppercase;
 }
 
-
-
 .divContainer .navAdmin {
   width: 4rem;
   height: 25rem;
@@ -38,12 +36,12 @@ header.headerAdmin h1 {
 .containerAdmin .containerNav {
   display: flex;
   align-items: center;
-  height: 49rem;
+  height: 41rem;
 }
 
-.containerAdmin .containerSections>* {
+.containerAdmin .containerSections > * {
   border: 1px solid #dfdfdf;
-  min-height: 32rem;
+  min-height: 40.8rem;
   width: 30%;
 }
 
@@ -58,9 +56,8 @@ header.headerAdmin h1 {
   margin: 1rem;
 }
 
-.sectionBrandCategory>* {
+.sectionBrandCategory > * {
   border: 1px solid #bfbfbf;
-
 }
 
 .containerAdmin .sectionBrandCategory,
@@ -76,12 +73,11 @@ header.headerAdmin h1 {
 .containerAdmin .sectionBrandCategory .containerCategory {
   border: 1px solid #f1f1f1f7;
   height: 16rem !important;
-  width: 82%;
+  width: 98%;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 1rem 0;
-  /* background-color: white; */
   color: #ffffff;
 }
 
@@ -91,25 +87,23 @@ header.headerAdmin h1 {
   background-size: 50%;
   background-position: center;
   background-repeat: no-repeat;
-  opacity: .5;
+  opacity: 0.5;
   background-image: url(https://i.postimg.cc/TwZG2QWc/loading.gif);
 }
 
 .containerAdmin .sectionBrandCategory .containerCategory .category {
-  border: .8px solid #bfbfbf82;
+  border: 0.8px solid #bfbfbf82;
   height: 5rem;
   display: flex;
   width: 94%;
   justify-content: space-between;
-  padding: 0.6rem .5rem;
+  padding: 0.6rem 0.5rem;
   align-items: center;
-
 }
 
 .containerForm {
   padding: 1rem;
-  width: 80%;
-
+  width: 96%;
 }
 
 .containerForm div {
@@ -122,21 +116,24 @@ header.headerAdmin h1 {
   padding: 1rem;
 }
 
-.navAdmin .icon, .containerCategory .icon {
+.navAdmin .icon,
+.containerCategory .icon {
   height: 2rem;
   width: 2rem;
   background-position: center;
   background-size: 1.8rem;
-  border-radius: .2rem;
+  border-radius: 0.2rem;
   background-repeat: no-repeat;
   cursor: pointer;
-  padding: .5rem;
+  padding: 0.5rem;
 }
-
+.containerCategory h1 {
+  margin: 1rem;
+  font-size: 1rem;
+}
 .icon {
   background-color: transparent;
 }
-
 
 .addNew .icon,
 .search .icon,
@@ -159,22 +156,21 @@ header.headerAdmin h1 {
 
 .navAdmin a span {
   left: 2.5rem;
-    position: absolute;
-    padding: 1rem 3rem;
-    opacity: 0;
-    width: 0rem;
-    color: black;
-    font-weight: bold;
+  position: absolute;
+  padding: 1rem 3rem;
+  opacity: 0;
+  width: 0rem;
+  color: black;
+  font-weight: bold;
 }
 
 .navAdmin a span:hover {
   opacity: 1;
 }
 
-
-.containerSections .addNew>*,
-.containerSections .search>*,
-.containerSections .lastAdded>* {
+.containerSections .addNew > *,
+.containerSections .search > *,
+.containerSections .lastAdded > * {
   display: flex;
   min-height: 3rem;
   align-items: center;
@@ -250,12 +246,14 @@ div .file {
 .containerSections .lastAdded {
   display: flex;
   flex-direction: column;
-  align-items: end;
 }
-
+.containerSections .addNew {
+  overflow-x: hidden;
+  height: 21rem;
+}
 label {
   text-align: start;
-  width: 5rem !important;
+  width: 6rem !important;
 }
 
 .formNew .containerInputs,
@@ -266,13 +264,13 @@ label {
   width: 100%;
 }
 
-.search .containerInputs>*,
-.containerInputs>* {
+.search .containerInputs > *,
+.containerInputs > * {
   margin: 0 0.2rem;
 }
 
-.formNew .containerInputs>*,
-.containerInputs>* {
+.formNew .containerInputs > *,
+.containerInputs > * {
   padding-right: 0.8rem;
   font-size: 0.8rem;
 }
@@ -291,23 +289,28 @@ label {
   border-bottom-left-radius: 1rem !important;
 }
 
-.formNew textarea, textarea {
+.formNew textarea,
+.containerInputs textarea {
   resize: none;
   border: none;
   outline: none;
-  width: 17rem;
+  width: 15rem;
   height: 2rem;
   background-color: #dfdfdf;
- padding: 0 2rem;
+  padding: 0 2rem;
+  border-radius: 1rem;
 }
-
+.containerProducts p {
+  font-size: 1rem;
+  margin-top: 2rem;
+}
 .boxProduct {
   border: 1px solid #e9e9e9;
   margin: 1rem 0;
   height: 10rem;
   width: 22.2rem;
-  border-radius: 0.8rem;
   padding: 0 1rem;
+  margin-right: 0.8rem;
 }
 
 .containerProducts,
@@ -331,9 +334,10 @@ label {
   justify-content: space-between;
   padding: 1.5rem 0;
   align-items: center;
+  height: 72%;
 }
 .titleProduct h3 {
-  font-size: .9rem;
+  font-size: 0.9rem;
   width: 10rem;
 }
 .titleProduct .cointanerEdit,
@@ -381,7 +385,6 @@ label {
 }
 
 .imageProduct {
-  border: 1px solid #dbdbdb;
   width: 5rem;
   height: 5rem;
   margin-right: 1rem;
@@ -392,13 +395,13 @@ label {
 
 .containerAdmin .containerMessages {
   min-height: 60vh;
-  width: 86%;
-  color: #545454;
-  background-color: #ffffffbd;
+  width: 92%;
+  color: #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
   align-items: center;
+  padding-top: 4rem;
+  border: 1px solid;
 }
 
 .containerAdmin .containerMessages .headerMessages {
@@ -411,7 +414,7 @@ label {
 
 .containerAdmin .containerMessages .tableMessages tbody tr td {
   text-align: center;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
 }
 
 .containerAdmin .containerMessages .tableMessages tbody tr td.deleteMessage,
@@ -424,16 +427,14 @@ label {
   position: absolute;
   width: 40vw;
   min-height: 30vh;
-  top: 15vh;
+  top: 29vh;
   left: 30vw;
   padding: 1rem;
-  border-radius: 1rem;
-  background-color: #314183;
+  background-color: rgb(48 106 154);
   color: #fff;
   display: flex;
   flex-direction: column;
-  box-shadow: 1px 1px 4px 0px #302a2a;
-
+  box-shadow: 12px 0px 100vw 55vw #26262673;
 }
 
 .containerAdmin .containerMessages .tableBodyMessages .modalTextMessage div {
@@ -442,27 +443,33 @@ label {
   align-items: center;
 }
 
-.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage .closeModalText {
+.containerAdmin
+  .containerMessages
+  .tableBodyMessages
+  .modalTextMessage
+  .closeModalText {
   width: 2rem !important;
   height: 2rem !important;
   cursor: pointer;
 }
 
-.containerAdmin .containerMessages .tableBodyMessages .modalTextMessage p.textBody {
+.containerAdmin
+  .containerMessages
+  .tableBodyMessages
+  .modalTextMessage
+  p.textBody {
   flex-grow: 1;
   margin-top: 1rem;
 }
 
-
 .modal {
   min-height: 10rem;
   width: 26rem;
-  border-radius: 1rem;
   position: absolute;
   top: 30%;
   left: 40%;
-  width: 13rem;
-  background-color: #fff;
+  width: 23rem;
+  background-color: rgb(48 106 154);
   box-shadow: 12px 0px 100vw 55vw #26262673;
   padding: 2rem;
   display: flex;
@@ -470,7 +477,9 @@ label {
   align-items: flex-end;
   -webkit-backdrop-filter: blur(21px);
   backdrop-filter: blur(49px);
-  color: #302a2a;
+  color: #fdfdfd;
+  justify-content: start;
+  grid-gap: 0.5rem;
   gap: 0.5rem;
 }
 
@@ -478,12 +487,19 @@ button.confirmButton,
 button.cancelButton {
   border: none;
   padding: 0.5rem;
-  background-color: rgb(104, 167, 11);
-  color: #fff;
+  background-color:white;
+  color: rgb(0, 0, 0);
+  cursor: pointer;
 }
 
-button.cancelButton {
-  background-color: tomato;
+button.cancelButton, button.confirmButton:hover  {
+  background-color: transparent;
+  border: 1px solid white;
+  color: rgb(255, 255, 255);
+}
+button.cancelButton:hover {
+  background-color:white;
+  color: rgb(0, 0, 0);
 }
 
 div.buttonsModal {
@@ -494,4 +510,39 @@ div.buttonsModal {
 
 .modal h3 {
   margin: 1rem 0;
+}
+.sectionTotal {
+  border: 1px solid #ffffff69;
+  height: 35rem;
+  overflow-x: hidden;
+  color: white;
+  width: 88.5rem;
+  font-size: 1rem;
+  padding: 1rem;
+  border: 1px solid;
+}
+.sectionTotal .container {
+      /* border: 1px solid; */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+}
+.sectionTotal .container h1 {
+  text-align: center;
+  margin: 1rem 0;
+}
+.sectionTotal .containerProduct {
+  border: 1px solid;
+  padding: 0 1rem;
+  margin: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 70rem;
+}
+.sectionTotal .containerProduct h2, .sectionTotal .containerProduct h3{
+  margin: 1rem 0;
+}
+.sectionTotal .containerProduct h2 {
+  margin-top: 3rem;
 }

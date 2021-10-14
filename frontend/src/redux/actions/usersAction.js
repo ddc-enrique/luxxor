@@ -115,11 +115,11 @@ const usersAction = {
                 if(flagEdit){
                     dispatch({ type: "UPDATE_USER", 
                     payload:{
-                        firstName: response.data.firstName,
-                        lastName: response.data.lastName,
+                        firstName: response.data.response.firstName,
+                        lastName: response.data.response.lastName,
                     }})
                 } else {
-                    dispatch({ type: "UPDATE_DNI", dispatch: response.data.dni})
+                    dispatch({ type: "UPDATE_DNI", dispatch: response.data.response.dni})
                 }
                 return response.data
             } else {

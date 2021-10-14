@@ -20,8 +20,8 @@ div.divImage {
 }
 
 .navegator {
-    border: 1px solid white!;
     text-align: center;
+    margin-right: 2.5rem;
 }
 
 h2.title {
@@ -42,19 +42,29 @@ div.photoShop {
 }
 
 div.container{
-    background-color: #e3e3e33f;
-    /* margin-bottom: 0.7rem; */
     display: flex;
-    justify-content: space-around;
     align-items: center;
-    width: 31rem;
-    margin: .2rem;
+    flex-direction: column;
+    width: 77rem;
+    padding: 1.5rem 0;
+    /* border: 1px solid white; */
+    margin: 1.2rem;
+    background-color: rgb(6 40 82 / 36%);
 }
-
-
+div.container h3 {
+    font-size: .8rem;
+}
+div.container p {
+    margin-bottom: 1rem;
+    padding: 1rem 0;
+}
 div.productsContainer {
     margin-top: 2rem;
-    width: 65%;
+    width: 86%;
     display: flex;
     flex-wrap: wrap;
+    border: 1px solid #d3d3d3;
+    height: 29rem;
+    justify-content: center;
+    overflow-x: hidden;
 }

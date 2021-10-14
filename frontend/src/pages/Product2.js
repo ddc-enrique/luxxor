@@ -20,7 +20,7 @@ const Product2 = (props) => {
   const [modal, setModal] = useState(false);
   const [loading,setLoading]=useState(true)
   const date = new Date()
-// console.log(product)
+
   useEffect(()=>{
     window.scrollTo(0,0)
     if(!props.products.length){
@@ -63,10 +63,10 @@ const Product2 = (props) => {
    
     <>
      <p>CARACTERÍSTICAS</p>
-           <h2>{product.name}</h2>
-           <p>$ {" "+product.price}</p>
-           <span>Ver todas las promociones</span>
-           <p>Te llega a partir de <span className={styles.orange}><Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> </span>
+            <h2>{product.name}</h2>
+            <p>$ {" "+product.price}</p>
+            <span>Ver todas las promociones</span>
+            <p>Te llega a partir de <span className={styles.orange}><Moment add={{ days: 5, hours: 1 }} format="D MMM YYYY" withTitle>{date}</Moment> </span>
                   </p>
                   <p>
                     1 Año de garantia oficial. 10 días para cambios y

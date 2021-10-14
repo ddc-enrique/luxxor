@@ -4,7 +4,8 @@ import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
 import NavBar from '../components/NavBar'
 import Footer from "../components/Footer";
-
+import toast, { Toaster } from "react-hot-toast"
+import { Eye, EyeSlash } from 'react-bootstrap-icons'
 const ChangePassword = (props) =>{
     const [check, setCheck] = useState(true)
     const [eye, setEye] = useState(true)
@@ -20,8 +21,20 @@ const ChangePassword = (props) =>{
        })
        // eslint-disable-next-line
     },[])
-    let viewPassImg = !check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
-    let viewPassImg1 = !eye ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
+    const notificationToast = (message, icon) => {
+        return toast(message, {
+          icon: icon,
+          style: {
+            borderRadius: "1rem",
+            background: "#fff",
+            color: "#545454",
+          },
+        });
+      };
+    let viewPassImg = !check ? <Eye className={styles.eye}/>
+    : <EyeSlash className={styles.eye}/>
+    let viewPassImg1 = !eye  ? <Eye className={styles.eye}/>
+    : <EyeSlash className={styles.eye}/>
     const inputHandler =(e)=>{
         setUserData({
             ...userData,
@@ -31,17 +44,20 @@ const ChangePassword = (props) =>{
     const submit=()=>{
         let inputs=Object.values(userData).some((input)=>input==="")
         if(inputs || !userData.eMail.includes("@") ){
-            alert("Llena todos los campos y el mail debe ser valido")
+            notificationToast("Llena todos los campos y el mail debe ser valido","🚫")
         }else if(refPass.current.value!==userData.password){
-            alert("la contraseña no coincide")
+            notificationToast("La contraseña no coincide","🚫")
         }else{
             props.changePassword(userData.eMail,userData.password)
             .then(res=>{
                 if(res){
-                    alert("Su contraseña ha sido cambiada con exito")
+                    notificationToast("Su contraseña ha sido cambiada con exito","👏")
                     props.history.push("/")
                 }else{
-                    alert("error")
+                    notificationToast(
+                        "Hubo un problema, intente nuevamente más tarde",
+                        "🚫"
+                      );
                 }
             })
         }
@@ -51,6 +67,7 @@ const ChangePassword = (props) =>{
         <>
             <NavBar/>
             <section className={styles.sectione}>
+            <Toaster />
                 <div className={styles.form}>
                     <h2>Recupera tu contraseña</h2>
                     <hr/>
@@ -64,7 +81,7 @@ const ChangePassword = (props) =>{
                                 placeholder="Contraseña"
                                 name="password"
                             />
-                            <img onClick={()=>setCheck(!check)} className={styles.imgForPass} src={`https://i.postimg.cc/${viewPassImg}`} alt="..."/>
+                            <div  onClick={()=>setCheck(!check)} className={styles.imgForPass}> {viewPassImg}</div>
                         </div>
                         <div className={styles.inputPassContainer}>
                             <input
@@ -74,7 +91,7 @@ const ChangePassword = (props) =>{
                                 placeholder="Contraseña"
                                 name="password"
                             />
-                            <img onClick={()=>setEye(!eye)} className={styles.imgForPass} src={`https://i.postimg.cc/${viewPassImg1}`} alt="..."/>
+                            <div  onClick={()=>setEye(!eye)} className={styles.imgForPass}> {viewPassImg1}</div>
                         </div>
                         <button className={styles.buttonSend} onClick={submit}>ENVIAR</button>
                     </div>                                       
