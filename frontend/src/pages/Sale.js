@@ -50,16 +50,21 @@ const Sale = (props) =>{
         default:
             break
     }
+    const changeMenuHandler=()=>{
+        if(screen===2){
+            setScreen(1)
+        }
+    }
 
     return(
         <>
             <NavBar/>
             <section className={styles.sectionSale}>             
             <div className={styles.navCarrito}>
-                <div onClick={() => setScreen(1)} style={{borderBottomColor: screen === 1 && 'grey'}}>
+                <div onClick={changeMenuHandler} style={{borderBottomColor: screen === 1 && 'grey'}}>
                     <p>Paso 1</p> 
                 </div>
-                <div onClick={() => screen === 3 && setScreen(2)} style={{borderBottomColor: screen === 2 && 'grey'}}>
+                <div /* onClick={() => screen === 3 && setScreen(2)} */ style={{borderBottomColor: screen === 2 && 'grey'}}>
                     <p>Paso 2</p> 
                 </div>
                 <div style={{borderBottomColor: screen === 3 && 'grey'}}>

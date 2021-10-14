@@ -6,7 +6,7 @@ import usersAction from '../redux/actions/usersAction'
 import shopCartActions from "../redux/actions/shopCartActions"
 
 const ConfirmedSale = ({ id, total, shopCart, token, shipping, payment, sendBill,resetCart}) => {
-    const [confirmedMessage, setConfirmedMessage] = useState("Muchas gracias por su compra")
+    const [confirmedMessage, setConfirmedMessage] = useState("Muchas gracias por su compra.")
     const [loading, setLoading] = useState(true)
     useEffect(()=>{
         const sendNewBill = async () => {
