@@ -11,6 +11,7 @@ const Payment = (props) =>{
         props.setPayment("Efectivo")       
         props.setScreen(3)
     }
+   
 
     return(
         <>

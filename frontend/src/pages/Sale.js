@@ -64,7 +64,7 @@ const Sale = (props) =>{
                 <div onClick={changeMenuHandler} style={{borderBottomColor: screen === 1 && 'grey'}}>
                     <p>Paso 1</p> 
                 </div>
-                <div /* onClick={() => screen === 3 && setScreen(2)} */ style={{borderBottomColor: screen === 2 && 'grey'}}>
+                <div style={{borderBottomColor: screen === 2 && 'grey'}}>
                     <p>Paso 2</p> 
                 </div>
                 <div style={{borderBottomColor: screen === 3 && 'grey'}}>
