@@ -57,7 +57,7 @@ const Admin = (props) => {
         setProducts(response)
         setProductsFiltered(response)
         setProductsFilt(response)
-        setLoading(false)
+        // setLoading(false)
       }
     }
     getAllProducts()
@@ -78,6 +78,7 @@ const Admin = (props) => {
       }
     }
     getAllCategories()
+    setLoading(false)
   }, [])
 
  
