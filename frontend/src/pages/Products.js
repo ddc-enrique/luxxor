@@ -23,13 +23,13 @@ const Products = (props) => {
           if (!Array.isArray(response)) throw new Error(response.response);
           setProducts(response);
           setFilteredProducts(response);
-          setLoading(false);
         } catch (error) {
           toast.error(error);
         }
       }
     };
     getAllProducts();
+    setLoading(false);
     // eslint-disable-next-line
   }, []);
   const addProductHandler = async (id, price, discount, name) => {
