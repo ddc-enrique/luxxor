@@ -47,7 +47,7 @@ const validatorControllers = {
         if(!validation.error){
             next()
         }else{
-            res.json({success: false, errors: validation.error.details})
+            res.json({success: false, response: validation.error.details})
         }
     },
 
@@ -65,7 +65,7 @@ const validatorControllers = {
         if(!validation.error){
             next()
         }else{
-            res.json({success: false, errors: validation.error.details})
+            res.json({success: false, response: validation.error.details})
         }
     },
 
@@ -145,7 +145,7 @@ const validatorControllers = {
         if(!validation.error){
             next()
         }else{
-            res.json({success: false, errors: validation.error.details})
+            res.json({success: false, response: validation.error.details})
         }
     },
 

@@ -30,6 +30,21 @@
     align-items: center;
 }
 
+.containerForm .error {
+    display: block;
+    padding: .2rem;
+    background-color: #e3e3e3;
+    color: red;
+    width: max-content;
+    padding: 0.3rem;
+    margin-bottom: .3rem;
+}
+
+.containerForm .errorPlaceholder {
+    height: .9rem;
+    margin-bottom: .3rem;
+}
+
 div.textSign {
     display: flex;
     justify-content: center;
@@ -163,6 +178,7 @@ div.buttonGoogle button {
 div.buttonGoogle button div {
     background-color: transparent !important
 }
+
 
 @media only screen and (min-width: 375px) {
     .inputTypes {
