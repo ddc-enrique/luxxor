@@ -6,7 +6,16 @@ form.formContainerExito {
     align-items: center;
 
 }
-.divContainerCuenta .loading {
+
+.divContainerLoading {
+    flex: 1;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.divContainerLoading .loading {
     height: 100%;
     width: 100%;
     padding: 1rem;

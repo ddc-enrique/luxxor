@@ -3,10 +3,8 @@ import React,  { useState, useEffect}from "react";
 import { connect } from "react-redux";
 import productsActions from "../redux/actions/productsActions"
 import toast, { Toaster } from "react-hot-toast"
-import NavBar from "./NavBar";
 import TableSale from "./TableSale"
 import moment from "moment"
-import Footer from "./Footer";
 import { NavAdmin } from "./NavAdmin";
 import styles from "../styles/admin.module.css"
 import { Link } from "react-router-dom";
@@ -31,13 +29,11 @@ const AdminSale = (props) => {
                     }
                 })
             }else{    
-            console.log(res.response)            
              setSales(res.response)
              setLoading(false)
             }             
         })
         .catch(e=>{
-            console.log(e)
             toast("Problemas tecnicos", {
                 icon: "🚫",
                 style: {
@@ -52,12 +48,6 @@ const AdminSale = (props) => {
         }
         
     },[props.token])
-/*     console.log(props.token)    */   
-    // if(loading){
-    //     return(
-    //         <h1>Loading...</h1>
-    //     )
-    // }
 
     return(
         <>
@@ -79,17 +69,14 @@ const AdminSale = (props) => {
                     {
                         sales.map((item,index)=>{
                             return(
-                                <>
-                                <div className={styles.containerProduct}>
+                                <div key={item._id} className={styles.containerProduct}>
                               
                                     <h2>Orden: #{item.numberOrder} </h2>
                                     <h3>Fecha: {moment(item.date).format("DD/MM/YYYY")}</h3>
                                     <div>
-                                        <TableSale shopCart={item.shopCart} amount={item.amount}/> 
-                                  
+                                        <TableSale shopCart={item.shopCart} amount={item.amount} saleId={item._id}/>                                  
                                     </div>
                                 </div>
-                                </>
                             )                   
                         })
                     }

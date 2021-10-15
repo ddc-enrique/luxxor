@@ -3,6 +3,7 @@ import productsActions from "../redux/actions/productsActions"
 import { XCircleFill } from 'react-bootstrap-icons'
 import styles from "../styles/modalEdit.module.css"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 
 
 const EditProduct = (props) => {
@@ -30,8 +31,9 @@ const EditProduct = (props) => {
                     category: data.category,
                     brand: data.brand
                 })
-            }else 
-            console.log("error") //poner tostada
+            }else{
+                toast.error(response.data.response)
+            } 
             setLoading(true)
         }
         getOneProduct()      
@@ -48,18 +50,14 @@ const EditProduct = (props) => {
         }else {
           setProductToEdit({...productToEdit, [e.target.name]: e.target.value})
         }
-        console.log(e.target.name, "campo que cambia")
-        console.log(e.target.value, "nuevo valor")
       }
 
   const handleEdit = async () => {
-    console.log(productToEdit)
     let response = await props.editProduct(props.id, productToEdit, props.token)
     if (response.data.success){
-        console.log("Se actualizó con éxito")//poner tostada
-        props.setModalEdit(false)
+        toast.success("Se edito con éxito")
     }else{
-        console.log(response.data)//poner tostada
+        toast.error("No se pudo realizar cambios")
     }
   }
 
@@ -81,7 +79,6 @@ const EditProduct = (props) => {
                         <label htmlFor="brand">Marca</label>
                         <select name="brand" onChange={(e)=>productToEditHandler("index", e)}>
                         {props.brands.map(brand=> {
-                            console.log(brand.name, brand._id === productToEdit.brand._id)
                             if(brand._id === productToEdit.brand._id){
                                 return (<option
                                     key={brand._id + "selected"}
@@ -126,7 +123,6 @@ const EditProduct = (props) => {
                         <label htmlFor="category">Categoría</label>
                         <select onChange={(e)=>productToEditHandler("index", e)} name="category" >
                         {props.categories.map(category => {
-                            console.log(category.name, category._id === productToEdit.category._id)
                             if(category._id === productToEdit.category._id){
                                 return (<option
                                     key={category._id + "selected"}

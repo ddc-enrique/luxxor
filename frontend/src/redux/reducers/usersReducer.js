@@ -36,7 +36,6 @@ const usersReducer = (state = initialState, action) =>{
                 lastName: action.payload.lastName,
             }
         case "UPDATE_DNI":
-            console.log(action.payload)
             return{
                 ...state,
                 dni: action.payload.dni

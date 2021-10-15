@@ -1,6 +1,6 @@
 import styles from "../styles/footer.module.css";
 import { Link } from "react-router-dom";
-import { CartFill, ChevronUp, Whatsapp } from "react-bootstrap-icons";
+import { ChevronUp, Whatsapp } from "react-bootstrap-icons";
 
 const Footer = () => {
   return (

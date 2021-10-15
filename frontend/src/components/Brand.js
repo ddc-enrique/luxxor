@@ -1,9 +1,7 @@
 import {
   CheckCircle,
   XCircle,
-  ClockFill,
   Pen,
-  PlusCircle,
 } from "react-bootstrap-icons";
 import React from "react";
 import styles from "../styles/admin.module.css";

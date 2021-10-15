@@ -45,12 +45,10 @@ const Password = (props) => {
               position: "top-center",
             });
             props.setmodalPass(false);
-            //que se cierre el modal
           } else {
             toast.error("E-mail no registrado", {
               position: "top-center",
             });
-            // notificationToast("E-mail no registrado","🚫")
           }
         })
         .catch((e) => {

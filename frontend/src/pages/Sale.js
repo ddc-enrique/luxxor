@@ -9,11 +9,10 @@ import ConfirmedSale from "../components/ConfirmedSale";
 import Footer from "../components/Footer";
 
 const Sale = (props) =>{
-    const [payment,setPayment]= useState(false)
+    const [payment,setPayment] = useState(false)
     const [dataShipping, setDataShipping] = useState(false);
-    const[screen,setScreen]=useState(1)
+    const [screen,setScreen] = useState(1)
     useEffect(()=>{
-        /* window.scrollTo(0,0) */
         if(!props.token){
             toast("Deberas loguearte para finaliza la compra", {
                 icon: "🚫",

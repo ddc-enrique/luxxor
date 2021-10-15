@@ -37,7 +37,6 @@ const Product2 = (props) => {
         })
         .catch((error) => {
           setLoading(!loading);
-          console.log(error);
           toast("Problemas tecnicos", {
             icon: "🚫",
             style: {
@@ -224,7 +223,6 @@ const Product2 = (props) => {
               to={`/producto/${item._id}`}
               onClick={() => {
                 setProdRecomen(!prodRecomen);
-                console.log("onClick");
               }}
             >
               <div className={styles.galleryItem}>

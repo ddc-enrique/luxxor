@@ -53,7 +53,7 @@ const UserPurchase = (props) => {
                 : <div className={styles.productsContainer}>
                     {myProducts && myProducts.map(product => {
                         return (    
-                            <div className={styles.container}>
+                            <div className={styles.container} key={product._id}>
                                 <h2>Orden: #{product.numberOrder}</h2>
                                 <p>Fecha: {moment(product.date).format("DD/MM/YYYY")}</p>
                                             <TableSale shopCart={product.shopCart} amount={product.amount}/>

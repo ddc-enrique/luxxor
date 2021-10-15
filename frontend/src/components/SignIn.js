@@ -1,18 +1,16 @@
-import { useState, useContext } from "react"
+import { useState } from "react"
 import { GoogleLogin } from "react-google-login"
-// import styles from "../styles/signIn.module.css"
 import styles from "../styles/signIn2.module.css"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
-import toast, { Toaster } from "react-hot-toast"
+import toast from "react-hot-toast"
 import {  XCircleFill,Eye, EyeSlash } from 'react-bootstrap-icons'
 import { useHistory } from "react-router"
 const SignIn = (props) => {
   const { signIn } = props
   const [check, setCheck] = useState(true)
   const [errorEmail, setErrorEmail] = useState(null)
-  const [errorPass, setErrorPass] = useState(null)
   const history = useHistory()
 
   const [userLog, setUserLog] = useState({
@@ -51,7 +49,6 @@ const SignIn = (props) => {
         }
       }
     } catch (error) {
-      console.log(error)
         toast.error(error, {
             position: "top-center",
           })
@@ -71,7 +68,6 @@ const SignIn = (props) => {
             position: "top-center",
           })
         props.setModalLogIn(!props.modalLogIn)
-        // props.istory.push("/")
       }
     } catch (e) {
         toast.error(e, {
@@ -128,14 +124,7 @@ const SignIn = (props) => {
               />
               
               <div  onClick={() => setCheck(!check)}> {viewPassImg}</div>
-              {/* <img
-                onClick={() => setCheck(!check)}
-                className={styles.imgForPass}
-                src={`https://i.postimg.cc/${viewPassImg}`}
-                alt="..."
-              /> */}
             </div>
-            <small style={{ color: "red" }}>{errorPass}&nbsp;</small>
             <button className={styles.buttonSign} onClick={enterUser}>
               Entrar
             </button>
@@ -159,7 +148,6 @@ const SignIn = (props) => {
           </div>
         </div>
       </div>
-      {/* <Toaster position="top-center" reverseOrder={false}/> */}
     </>
   )
 }

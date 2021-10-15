@@ -6,7 +6,6 @@ import { NavAdmin } from "../components/NavAdmin";
 import messagesActions from "../redux/actions/messagesActions";
 import toast, { Toaster } from "react-hot-toast";
 import MessageRow from "../components/MessageRow";
-import { ArrowDown } from "react-bootstrap-icons";
 
 
 const AdminMessages = (props) => {

@@ -2,24 +2,22 @@ import "./App.css"
 import Home from "./pages/Home"
 import SignUp from "./pages/SignUp"
 import { Route, BrowserRouter, Switch, Redirect } from "react-router-dom"
-import Product from "./components/Product"
 import Products from "./pages/Products"
 import Category from "./components/Category"
 import Brand from "./components/Brand"
 import Admin from "./pages/Admin"
 import { useEffect } from "react"
 import usersAction from "./redux/actions/usersAction"
-import Error from "./pages/Error"
 import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
-import Password from "./pages/Password";
-import ChangePassword from "./pages/ChangePassword";
-import Banned from "./pages/Banned";
+import Password from "./pages/Password"
+import ChangePassword from "./pages/ChangePassword"
+import Banned from "./pages/Banned"
 import Product2  from "./pages/Product2"
-import Sale from "./pages/Sale";
+import Sale from "./pages/Sale"
 import AdminMessages from "./pages/AdminMessages"
 import shopCartActions from "./redux/actions/shopCartActions"
-import AdminSales from "./components/AdminSales";
+import AdminSales from "./components/AdminSales"
 
 const App = (props) => {
   const {token, dni, signWithLocal, total, admin} = props
@@ -47,7 +45,6 @@ const App = (props) => {
         <Route path="/admin/ventas" component={AdminSales}/>  
         <Route path="/admin" component={Admin} />
         {/* {admin && <Route path="/admin" component={Admin} />} */}
-        <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
         <Route path="/checkout" component={Sale}/>

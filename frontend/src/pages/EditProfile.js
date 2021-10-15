@@ -9,16 +9,13 @@ import { Link } from "react-router-dom"
 import UserPurchase from "../components/UserPurchase"
 
 const EditProfile = (props) => {
-    console.log( props.dni ,"dni redux en componente")
-    console.log(props.dni > 0)
-    console.log(props.firstName, "firstName")
     const [completeAccount, setCompleteAccount] = useState(props.dni > 0)
     let initialDataUser = completeAccount ? { firstName: props.firstName, lastName: props.lastName , city: "", zipCode: "", address: "", optional: "", phone: "" }
         : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" } 
     const [dataUser, setDataUser] = useState(initialDataUser)
     const [view, setView] = useState(true)
     const [errorsValidation, setErrorsValidation] = useState({})
-    const[loading,setLoading]=useState(true)
+    const [loading,setLoading] = useState(true)
 
 
     useEffect( () => {
@@ -49,7 +46,6 @@ const EditProfile = (props) => {
         e.preventDefault()
         try{
             let response = await props.editDataUser(props.id, completeAccount, props.token, dataUser)
-            console.log(response)
             if(response.success){ 
                 if(!completeAccount){
                     toast.success("Datos Actualizados con éxito ya puedes comprar")
@@ -59,7 +55,6 @@ const EditProfile = (props) => {
                 }
             }
         } catch(error) {
-            console.log(error)
             if (typeof error === 'string' || error === "DNI en uso"){
                 toast.error(error)
             } else if (Array.isArray(error)){
@@ -73,13 +68,13 @@ const EditProfile = (props) => {
             }
         }
     }
-    // if(loading){
-    //     return(
-    //         <div className={styles.divContainerCuenta}>
-    //         <div className={styles.loading}></div>
-    //         </div>
-    //     )
-    // } 
+    if(loading){
+        return(
+            <div className={styles.divContainerLoading}>
+                <div className={styles.loading}></div>
+            </div>
+        )
+    } 
     return(
         <div>
             <NavBar />
@@ -89,7 +84,6 @@ const EditProfile = (props) => {
                             <h2>
                                 {completeAccount && "Puedes editar estos datos de tu cuenta"}
                                 {!completeAccount && "Completa tus datos para poder Comprar"}
-                                {/* Cuenta creada con <span>Éxito</span>! */}
                             </h2>
                     </div>
                     <nav>

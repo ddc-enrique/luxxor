@@ -13,7 +13,7 @@ import { Eye, EyeSlash } from 'react-bootstrap-icons'
 
 const SignUp = (props) => {
   const { signUp } = props
-  const [visible, setVisible] =useState(false)
+  const [visible, setVisible] = useState(false)
   const [check, setCheck] = useState(true)
   const [checkConfirm, setCheckConfirm] = useState(true)
   const [modalPass,setmodalPass]=useState(false)

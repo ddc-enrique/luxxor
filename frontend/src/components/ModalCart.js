@@ -1,6 +1,5 @@
 import React,  { useState, useEffect, useRef }from "react";
 import styles from "../styles/modalCart.module.css";
-// import styles from "../styles/modal2.module.css";
 import { connect } from "react-redux";
 import CardProductCart from "./CardProductCart";
 import { Link } from "react-router-dom"
@@ -27,10 +26,11 @@ const ModalCart = (props) =>{
                  setProducts2(products2.push(aux))
                  setProducts(products2)               
             })
-            .catch(e=>console.log(e))
+            .catch(()=>{
+                toast.error("Problemas Técnicos")
+            })
         }) 
         setLoading(false)  
-
     },[])
 
      const DeleteProductModalCart=(id,deleteAll,price,quantity,discount)=>{
@@ -61,7 +61,6 @@ const ModalCart = (props) =>{
     return(
         <div className={styles.containerGeneral}>
             <div className={styles.containerCart}>
-                {/* <img onClick={()=>props.setModalCart(false)} className={styles.iconClose} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"/> */}
                 <XCircleFill onClick={()=>props.setModalCart(false)} className={styles.iconClose}/>
                 <h2>Carrito de Compras</h2>
                { !props.cartProduct.length ?

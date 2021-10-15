@@ -1,6 +1,5 @@
 import styles from "../styles/modalPayment.module.css"
 import PaymentWithStripe from "./PaymentWithStripe"
-import { connect } from "react-redux"
 
 const ModalPaymentMethod = (props) => {
     return (

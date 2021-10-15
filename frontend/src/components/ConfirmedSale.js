@@ -23,14 +23,13 @@ const ConfirmedSale = ({ id, total, shopCart, token, dataShipping, payment, send
     },[])
     
     if(loading) return <div className={styles.loading}></div>
-    // <div>LOADING...</div>
 
     return (
         <div className={styles.containerConfirm}>
             <h1 className={styles.headerConfirmed}>
                {confirmedMessage}
             </h1>
-
+            <Toaster />
         </div>
     )
 }

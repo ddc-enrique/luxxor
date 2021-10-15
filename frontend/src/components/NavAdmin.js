@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
-import { House, ColumnsGap, Bag, Tag,ChatDots, CartCheck} from 'react-bootstrap-icons'
+import { ColumnsGap, Bag, Tag,ChatDots, CartCheck} from 'react-bootstrap-icons'
 export const NavAdmin = () => {
   return (
     <div className={styles.containerNav}>

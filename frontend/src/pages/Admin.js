@@ -6,19 +6,14 @@ import productsActions from "../redux/actions/productsActions";
 import { NavAdmin } from "../components/NavAdmin";
 import EditProduct from "../components/EditProduct";
 import {
-    //  House,
     PlusCircle,
     DashCircle, 
-    // X, 
-    // ColumnsGap, 
-    // Bag, 
-    // Tag,
-    // ChatDots, 
     Search, 
     CheckCircle,
     XCircle, 
     ClockFill, 
     Pen} from 'react-bootstrap-icons'
+import toast from "react-hot-toast";
 const Admin = (props) => {
 
   const [newProduct, setNewProduct] = useState({
@@ -58,7 +53,6 @@ const Admin = (props) => {
         setProducts(response)
         setProductsFiltered(response)
         setProductsFilt(response)
-        // setLoading(false)
       }
     }
     getAllProducts()
@@ -123,11 +117,11 @@ const Admin = (props) => {
       props.deleteProductById(id, props.token)
       .then(response=>{
         if(!response.success){
-            console.log("Hubo un error") //poner tostada
+            toast.error("No se pudo borrar el producto")
         }else {
           setProducts(products.filter(product => product._id !== id))
           setProductsFilt(productsFilt.filter(product => product._id !== id))
-          console.log("Se borró con éxito") //poner tostada
+          toast.success("Se borró con éxito")
         }
       })
   }
@@ -137,8 +131,6 @@ const EditProductComp = (props) => {
     return (modalEdit && <EditProduct  setModalEdit={props.setModalEdit} id={props.productId} brands={brands} categories={categories}/>)
 }
   
-
-
   const addProductHandler = async () => {
     const FD = new FormData()
     FD.append("name", newProduct.name)
@@ -157,9 +149,9 @@ const EditProductComp = (props) => {
     FD.append("brand", newProduct.brand)
    let response = await props.addProduct(FD, props.token)
    if (!response.success) {
-     console.log("Error") //Poner tostada
+    toast.error("No se pudo cargar el producto")    
    }else {
-     console.log("Se creó el producto correctamente") //Poner tostada
+     toast.success("Se creó el producto correctamente")
      props.getAllProducts()
      .then(response=>{
       setProducts(response)
@@ -339,7 +331,7 @@ const EditProductComp = (props) => {
                 {loading ? <div className={styles.loading}></div> : 
                 !productsFilt.length && <p>No hay resultados para tu búsqueda</p> ||
                   productsFilt.map((product) => (
-                  <div className={styles.boxProduct} >
+                  <div className={styles.boxProduct} key={product._id} >
                     <div className={styles.titleProduct}>
                       <div
                         className={styles.imageProduct}
@@ -367,7 +359,7 @@ const EditProductComp = (props) => {
               <div className={styles.containerProducts}>
                 {loading ? <div className={styles.loading}></div> :
                   productsFiltered.slice(0,4).reverse().map((product, index) => (
-                  <div className={styles.boxProduct} key={index}>
+                  <div className={styles.boxProduct} key={product._id}>
                     <div className={styles.titleProduct}>
                       <div
                         className={styles.imageProduct}

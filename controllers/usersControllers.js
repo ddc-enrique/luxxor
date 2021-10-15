@@ -10,7 +10,6 @@ const handleError = (res, err) =>{
 
 const usersControllers = {
     signUp: (req, res) =>{
-        console.log("Received Register User Petition:" + Date())
         const { firstName, lastName, eMail, password, google } = req.body
         route = path.join(__dirname, "../assets/usersPhoto")
         let hashedPass = bcryptjs.hashSync(password.trim())
@@ -47,7 +46,6 @@ const usersControllers = {
 
 
     signIn: (req, res) => {
-        console.log("Received SIGN IN USER Petition:" + Date())
         const { eMail, password, google } = req.body
         const errMessage = "Email y/o contraseña incorrectos"
         User.findOne({ eMail })
@@ -63,7 +61,6 @@ const usersControllers = {
     },
 
     completeProfile: (req, res) => {
-        console.log("Received COMPLETE DATA USER FIRST TIME Petition:" + Date())
         // const { firstName, lastName, dni, address, phone } = req.body
         // const { city, zipCode, street, optional } = address
         User.findOne({ dni: req.body.dni })
@@ -78,7 +75,6 @@ const usersControllers = {
     },
 
     editProfile: (req, res) => {
-        console.log("Received EDIT DATA USER Petition:" + Date())
 
         User.findOneAndUpdate({ _id: req.params.id }, {...req.body}, { new: true })
             .then( (userUpdated) => res.json({ success: true, response: { firstName: userUpdated.firstName, lastName: userUpdated.lastName} }) )
@@ -86,7 +82,6 @@ const usersControllers = {
     },
 
     banUser:(req,res)=>{
-        console.log("Received BAN USER Petition:" + Date())
         const _id = req.params.id
         User.findById({_id})
         .then(userFound=>{
@@ -124,7 +119,6 @@ const usersControllers = {
             userFound.banned=true
             userFound.save()
             .then((userUpdated)=>{
-                console.log("130",userUpdated)
                 transport.sendMail(mailBanned, (err, info) => {
                     if (err) throw new Error(err)
                     res.json({ success: true, response: info })
@@ -135,7 +129,6 @@ const usersControllers = {
     },
 
     changePassword:(req,res)=>{
-        console.log("Received CHANGE PASSWORD Petition:" + Date())
         const {eMail,password} = req.body
         let hashedPass = bcryptjs.hashSync(password.trim())
         User.findOne({eMail})
@@ -185,7 +178,6 @@ const usersControllers = {
     },
 
     getProfile: (req,res) => {
-        console.log("Received GET DATA USER Petition:" + Date())
         
         User.findById({_id:req.params.id})
         .then( userFound => {
@@ -208,7 +200,6 @@ const usersControllers = {
         res.json({profilePic, firstName, lastName, eMail, admin, dni, id: _id, google})
     },
     sendMailPassword:(req,res)=>{
-        console.log("Received CHANGE PASSWORD Petition:" + Date())
         eMail=req.body.eMail
         User.findOne({eMail:eMail})
         .then(userFound=>{
@@ -251,7 +242,6 @@ const usersControllers = {
     },
 
     verifyAdmin: (req, res, next) => {
-        console.log(req.user.admin)
         if(req.user.admin){
             next()
         } else {
@@ -259,16 +249,9 @@ const usersControllers = {
         }
     },
 
-    // saveNewSale: (req, res) => {
-    //     console.log("Received SAVE NEW SALE Petition:" + Date())
-    //     // const {userId, amount, shopCart, shipping, methodPayment} = req.body
-    //     console.log(req.body)
-    //     // console.log(req.user)
-    //     res.json({ success: true })
-    // },
+
 
     saveNewSale: (req, res) => {
-        console.log("Received SAVE NEW SALE Petition:" + Date())
         res.json({ success: true, response: req.body })
     },
 

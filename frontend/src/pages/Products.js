@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
-// import styles from "../styles/productList.module.css"
 import shopCartActions from "../redux/actions/shopCartActions";
 import styles from "../styles/productList2.module.css";
 import { Link } from "react-router-dom";
@@ -9,7 +8,7 @@ import { connect } from "react-redux";
 import FilterProducts from "../components/FilterProducts";
 import productsActions from "../redux/actions/productsActions";
 import toast, { Toaster } from "react-hot-toast";
-import { CartFill, ChevronUp, Whatsapp, BookmarkStar } from "react-bootstrap-icons";
+import { CartFill} from "react-bootstrap-icons";
 import usersAction from "../redux/actions/usersAction";
 const Products = (props) => {
 
@@ -17,7 +16,6 @@ const Products = (props) => {
   const [filteredProducts, setFilteredProducts] = useState(props.products);
   const [updateOnSort, setUpdateOnSort] = useState(true);
   const [loading, setLoading] = useState(true);
-  const [loadingFilter, setLoadingFilter] = useState(true)
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -128,7 +126,6 @@ const Products = (props) => {
       <div className={styles.container}>
         <FilterProducts
           setFilteredProducts={setFilteredProducts}
-          setLoadingFilter={setLoadingFilter}
           products={products}
         />
         <div className={styles.productsSection}>
@@ -162,11 +159,6 @@ const Products = (props) => {
               >
                 <div className={styles.content}>
                   <h2 className={styles.title}>{product.name}</h2>
-                  {/* {props.wishList && (listWish = props.wishList.find(wish => 
-                    wish.productId === product._id
-                  )), console.log(listWish)}
-                  
-                  {<BookmarkStar className={styles.iconForWish} />} */}
                   <div className={styles.infoPrice}>
                     {product.discount > 0 && <p>%{product.discount} Off</p>}
                     <p className={styles.copy}>

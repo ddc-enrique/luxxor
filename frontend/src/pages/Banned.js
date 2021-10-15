@@ -8,7 +8,6 @@ const Banned = (props) =>{
     useEffect(()=>{
         props.verifyIdMail(props.match.params.id)
         .then(res=>{
-            console.log(res)
             if(!res){
                 props.history.push("/") 
             }else{
