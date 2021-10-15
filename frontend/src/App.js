@@ -33,20 +33,19 @@ const App = (props) => {
   return (    
     <BrowserRouter>
       <Switch>
-        {!props.token && <Route path="/registro" component={SignUp} />}
+        {!token && <Route path="/registro" component={SignUp} />}
         <Route exact path="/" render={ () => <Home scrollTo={"#"} />} />
         <Route path="/contacto" render={ () => <Home scrollTo={"#contacto"} /> } />
         <Route path="/novedades" render={ () => <Home scrollTo={"#novedades"} /> } />
         <Route path="/producto/:id" component={Product2} /> 
         <Route path="/productos" component={Products} />
-        <Route exact path="/admin/messages" component={AdminMessages} />
-        <Route path="/admin/categorias" component={Category} />
-        <Route path="/admin/marcas" component={Brand} />
-        <Route path="/admin/ventas" component={AdminSales}/>  
-        <Route path="/admin" component={Admin} />
-        {/* {admin && <Route path="/admin" component={Admin} />} */}
-        <Route path="/bloqueo-cuenta/:id" component={Banned}/>
-        <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
+        {admin && <Route exact path="/admin/messages" component={AdminMessages} />}
+        {admin && <Route path="/admin/categorias" component={Category} />}
+        {admin && <Route path="/admin/marcas" component={Brand} />}
+        {admin && <Route path="/admin/ventas" component={AdminSales}/>  }
+        {admin && <Route path="/admin" component={Admin} />}
+        {!token && <Route path="/bloqueo-cuenta/:id" component={Banned}/>}
+        {!token && <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>}
         <Route path="/checkout" component={Sale}/>
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
