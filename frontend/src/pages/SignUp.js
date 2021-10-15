@@ -98,15 +98,6 @@ const SignUp = (props) => {
           if (!resp.success){ 
             throw resp.response
           } else {
-            toast("Bienvenido", {
-              icon: "👏",
-              style: {
-                borderRadius: "1rem",
-                background: "#f48f31",
-                color: "#fff",
-              },
-            })
-            props.history.push("/")
           }          
         } catch (error) {
           if (typeof error === 'string'){
