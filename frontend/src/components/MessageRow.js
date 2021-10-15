@@ -10,7 +10,7 @@ const MessageRow = ({ message, deleteMessage, styles}) => {
     return (
         <tr>
             <td>
-                <Moment format="YYYY/MM/DD">
+                <Moment format="DD/MM/YYYY">
                     {message.date}
                 </Moment>
             </td>

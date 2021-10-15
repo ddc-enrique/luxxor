@@ -160,7 +160,7 @@ const Products = (props) => {
                 <div className={styles.content}>
                   <h2 className={styles.title}>{product.name}</h2>
                   <div className={styles.infoPrice}>
-                    {product.discount > 0 && <p>%{product.discount} Off</p>}
+                    {product.discount > 0 && <p>{product.discount}% Off</p>}
                     <p className={styles.copy}>
                       $
                       {(product.price * (1 - product.discount / 100))

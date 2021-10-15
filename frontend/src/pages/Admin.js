@@ -41,7 +41,7 @@ const Admin = (props) => {
   const [brands, setBrands] = useState(props.brands)
   const [products, setProducts] = useState(props.products)
   const [productsFilt, setProductsFilt] = useState(props.products)
-  const [productsFiltered, setProductsFiltered] = useState(props.products)
+  const [productsFiltered, setProductsFiltered] = useState(JSON.parse(JSON.stringify(props.products)))
   const [productId, setProductId] = useState(null)
   const [modalEdit, setModalEdit] = useState(false)
   const [loading, setLoading] = useState(true)
