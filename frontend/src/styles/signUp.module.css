@@ -58,13 +58,15 @@ div.textSign {
     display: inline-block;
     cursor: pointer;
     color: #ffffff;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
     padding: 0.5rem 1rem;
     text-decoration: none;
-    margin: 1rem 0rem;
-    margin-left: 1rem;
+    margin-top: 1rem 0rem;
+    margin-left: 5rem;
+    width: 65%;
     border: none;
     border: 1px solid white;
+    margin-top: 2rem;
 }
 
 .btnSign:hover {

@@ -216,10 +216,10 @@ const SignUp = (props) => {
             name="profilePic"
             defaultValue={newUser.profilePic}
           />
-          <div className={styles.location}>
-            <button onClick={enterNewUser} className={styles.btnSign}>
+            <button onClick={enterNewUser} className={styles.btnSign} id="register">
               Registrarme
             </button>
+          <div className={styles.location}>            
             <div className={styles.buttonGoogle}>
               <GoogleLogin
                 clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"
