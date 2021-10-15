@@ -10,7 +10,6 @@ import { useEffect } from "react"
 import usersAction from "./redux/actions/usersAction"
 import EditProfile from "./pages/EditProfile"
 import { connect } from "react-redux"
-import Password from "./pages/Password"
 import ChangePassword from "./pages/ChangePassword"
 import Banned from "./pages/Banned"
 import Product2  from "./pages/Product2"
@@ -47,7 +46,6 @@ const App = (props) => {
         {!token && <Route path="/bloqueo-cuenta/:id" component={Banned}/>}
         {!token && <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>}
         <Route path="/checkout" component={Sale}/>
-       {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}
         {(token && dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={true} /> } />}
         
