@@ -2,34 +2,27 @@ import styles from '../styles/sectionInfo.module.css'
 import Information from './Information'
 import productsActions from '../redux/actions/productsActions'
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 
 const SectionInfo = (props)=>{
-    const {reference, products} = props
-    const images =[
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-        {image: 'https://i.postimg.cc/jj5RTrz0/Nombre_(7).png', description: 'Notebook Lenovo I3 10ma Gen 15.6 Touch 8Gb 256Gb SSD Win 10'},
-        {image: 'https://i.postimg.cc/sg5jwZQH/Nombre_(5).png', description: 'Joystick Inalámbrico Sony Dualsense Cosmic Red PS5'},
-    ]
-
+    const [products, setProducts] = useState(JSON.parse(JSON.stringify(props.products)))
+    const [loading, setLoading] = useState(true)
     useEffect(()=>{
         const getProducts = async () => {
-            props.getProducts()
+            let res = await props.getProducts()
+            setProducts(JSON.parse(JSON.stringify(res)))
         }
         getProducts()
+        setLoading(!loading)
     }, [])
-
     return(
-        <section id="novedades" className={styles.sectionContainer} ref={reference}> 
+        <section id="novedades" className={styles.sectionContainer} ref={props.reference}> 
                 <p>Novedades</p>
                 <div className={styles.container}>
-                    { products.reverse().map((product) =>
-                        <div key={product._id} className={styles.galleryItem}>
+                {loading ? <div className={styles.loading}>{loading}</div> : products.reverse().slice(0,6).map((product) =>
+                    <Link key={product._id} to={`/producto/${product._id}`}>
+                        <div  className={styles.galleryItem}>
                             <div className={styles.image}>
                                 <div className={styles.divImage} style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}} alt="nature">
                             </div>
@@ -42,7 +35,8 @@ const SectionInfo = (props)=>{
                                 </div>
                             </div>
                         </div> 
-                        </div>)}
+                        </div> 
+                        </Link> )}
                 </div>
                 <Information/>
         </section>

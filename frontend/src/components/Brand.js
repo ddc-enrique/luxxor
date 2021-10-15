@@ -1,9 +1,15 @@
+import {
+  CheckCircle,
+  XCircle,
+  Pen,
+} from "react-bootstrap-icons";
 import React from "react";
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
+import toast, { Toaster } from "react-hot-toast";
 import { connect } from "react-redux";
 const Brand = (props) => {
   const [brands, setBrands] = useState([]);
@@ -16,23 +22,35 @@ const Brand = (props) => {
         let res = await props.getBrands();
         setBrands(res);
       } catch (e) {
-        console.log(e);
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
       } finally {
         setLoading(!loading);
       }
     };
     getBrands();
   }, []);
-
+  const notificationToast = (message, icon) => {
+    return toast(message, {
+      icon: icon,
+      style: {
+        borderRadius: "1rem",
+        background: "#fff",
+        color: "#545454",
+      },
+    });
+  };
   const sendBrand = async () => {
     if (!brand) {
-      alert("No puede estar vacio");
+      notificationToast("El campo no puede estar vacio", "🚫");
     } else {
       let res = await props.addBrand(brand, props.token);
       if (!res.data.success) {
-        alert(res.data.response);
+        notificationToast(res.data.response, "🚫");
       } else {
-        alert("Creado con éxito");
+        notificationToast("Creado con éxito", "👏");
         let resp = await props.getBrands();
         setBrands(resp);
       }
@@ -40,18 +58,38 @@ const Brand = (props) => {
   };
 
   const editBrand = async (id) => {
-    let res = await props.editBrand(id, { name: brand }, props.token);
-    let resp = await props.getBrands();
-    setBrands(resp);
+    if (!brand) {
+      notificationToast("El campo no puede estar vacio", "🚫");
+    } else {
+      try {
+        let res = await props.editBrand(id, { name: brand }, props.token);
+        if (res.data.success) {
+          notificationToast("Modificado con éxito", "👏");
+          let resp = await props.getBrands();
+          setBrands(resp);
+        } else {
+          throw new Error();
+        }
+      } catch (e) {
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
+      }
+    }
   };
   const deleteBrand = async (id, index) => {
-    let res = await props.deleteBrand(id, props.token);
-    console.log(res);
-    res.data.success && alert("Borrado con éxito");
-    setBrands(brands.splice(id, index));
+    try {
+      let res = await props.deleteBrand(id, props.token);
+      res.data.success && notificationToast("Borrado con éxito", "👏");
+      setBrands(brands.filter(brand => brand._id !== id));
+    } catch (e) {
+      notificationToast("Hubo un problema, intente nuevamente más tarde", "🚫");
+    }
   };
   return (
     <div className={styles.divContainer}>
+      <Toaster />
       <header className={styles.headerAdmin}>
         <Link to="/">
           <h1>
@@ -81,32 +119,28 @@ const Brand = (props) => {
                         >
                           {brand.name}
                         </textarea>
-                        <button onClick={() => editBrand(brand._id)}>✔️</button>
-                        <button onClick={() => setEditOpen(!editOpen)}>
-                          ✖️
-                        </button>
+                        <CheckCircle
+                          className={styles.icon}
+                          onClick={() => editBrand(brand._id)}
+                        />
+                        <XCircle
+                          className={styles.icon}
+                          onClick={() => setEditOpen(!editOpen)}
+                        />
                       </>
                     ) : (
                       brand.name
                     )}
                   </h3>
                   <div className={styles.cointanerEdit}>
-                    <div
+                    <Pen
+                      className={styles.icon}
                       onClick={() => setEditOpen(brand.name)}
+                    />
+                    <XCircle
                       className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
-                      }}
-                    ></div>
-                    <div
                       onClick={() => deleteBrand(brand._id, index)}
-                      className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                      }}
-                    ></div>
+                    />
                   </div>
                 </div>
               ))
@@ -114,13 +148,6 @@ const Brand = (props) => {
           </div>
           <div className={styles.containerForm}>
             <div>
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/h47DcVZB/search.png')",
-                }}
-              ></div>
               <h3>Cargar nueva Marca</h3>
             </div>
             <div className={styles.containerAllInputs}>
@@ -131,7 +158,7 @@ const Brand = (props) => {
                   type="text"
                   name="name"
                   onChange={(e) => setBrand({ name: e.target.value })}
-                />{" "}
+                />
                 <button onClick={() => sendBrand()}>Enviar</button>
               </div>
             </div>
@@ -145,7 +172,7 @@ const Brand = (props) => {
 const mapStateToProps = (state) => {
   return {
     allBrands: state.products.brands,
-    token: state.users.token
+    token: state.users.token,
   };
 };
 

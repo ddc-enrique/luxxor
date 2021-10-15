@@ -92,7 +92,7 @@ const FilterProducts = (props) => {
                                 />
                             </div>
                         ))}
-                    <h3>Categoria</h3>
+                    <h3 className={styles.optionsFilter}>Categoria</h3>
                         <div
                             className={styles.switchContainer}
                         >
@@ -123,7 +123,7 @@ const FilterProducts = (props) => {
                         ))}
                     </div>
                 {visible &&<div className={styles.inputsFilter2}>
-                                        <h3>Marca</h3>
+                                        <h3 className={styles.optionsFilter}>Marca</h3>
                                         <div
                                             className={styles.switchContainer}
                                         >

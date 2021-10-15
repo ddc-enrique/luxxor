@@ -10,7 +10,7 @@ import ModalCart from './ModalCart';
 
 
 const NavBar = (props) => {  
-    console.log(props)
+    
     const [visible, setVisible] =useState(false)
     const [modalLogIn, setModalLogIn] = useState(false)
     const [modalPass,setmodalPass]=useState(false)

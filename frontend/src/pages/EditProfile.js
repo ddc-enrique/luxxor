@@ -5,25 +5,32 @@ import NavBar from "../components/NavBar"
 import usersAction from "../redux/actions/usersAction"
 import styles from "../styles/editProfile.module.css"
 import toast, { Toaster } from 'react-hot-toast';
+import { Link } from "react-router-dom"
+import UserPurchase from "../components/UserPurchase"
 
-
-const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName, lastName, editDataUser }) => {
-    let initialDataUser = completeAccount ? { firstName: "", lastName: "", city: "", zipCode: "", address: "", optional: "", phone: "" }
+const EditProfile = (props) => {
+    const [completeAccount, setCompleteAccount] = useState(props.dni > 0)
+    let initialDataUser = completeAccount ? { firstName: props.firstName, lastName: props.lastName , city: "", zipCode: "", address: "", optional: "", phone: "" }
         : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" } 
     const [dataUser, setDataUser] = useState(initialDataUser)
+    const [view, setView] = useState(true)
     const [errorsValidation, setErrorsValidation] = useState({})
+    const [loading,setLoading] = useState(true)
+
 
     useEffect( () => {
         const getDataUser = async () => {
             try{
-                let extraData = await getAddressAndPhone(id, token)                
-                setDataUser( {...extraData, firstName, lastName } )
+                let extraData = await props.getAddressAndPhone(props.id, props.token)                
+                setDataUser( {...extraData, firstName: props.firstName, lastName: props.lastName } )
             } catch(err) {
                 toast.error(err.message)
             }
         }
         if(completeAccount) getDataUser()
-
+        setTimeout(()=>{
+            setLoading(!loading)  
+        },500)
         //eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
 
@@ -38,12 +45,11 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
     const updateDataUser = async (e) => {
         e.preventDefault()
         try{
-            let response = await editDataUser(id, completeAccount, token, dataUser)
-            console.log(response)
+            let response = await props.editDataUser(props.id, completeAccount, props.token, dataUser)
             if(response.success){ 
                 if(!completeAccount){
                     toast.success("Datos Actualizados con éxito ya puedes comprar")
-                    completeAccount = true
+                    setCompleteAccount(true)
                 } else {
                     toast.success("Datos Actualizados con éxito")
                 }
@@ -62,26 +68,34 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
             }
         }
     }
-
+    if(loading){
+        return(
+            <div className={styles.divContainerLoading}>
+                <div className={styles.loading}></div>
+            </div>
+        )
+    } 
     return(
         <div>
             <NavBar />
-                <div className={styles.divContainerExito}>
+                {<UserPurchase setView={setView} view={view}/>}
+                <div className={view ? styles.divContainerExito : styles.none}>
                     <div className={styles.divContainerCuenta}>
                             <h2>
                                 {completeAccount && "Puedes editar estos datos de tu cuenta"}
-                                {!completeAccount && "Actualiza tus datos para poder Comprar"}
-                                {/* Cuenta creada con <span>Éxito</span>! */}
+                                {!completeAccount && "Completa tus datos para poder Comprar"}
                             </h2>
                     </div>
+                    <nav>
+                        <Link onClick={()=>setView(false)} to="#">Mis compras</Link> 
+                        <Link to="#">Mis datos</Link>
+                    </nav>   
                     <div className={styles.divContForm}>
                         <div className={styles.divExitoImg} style={{backgroundImage: 'url("https://i.postimg.cc/Kz4h0KXr/psvr-overview-hardware-column-image-01-ps4-en-06jan20-removebg-preview.png")'}}></div>
                         <form className={styles.formContainerExito}>
-                            {/* <h3>
-                                Actualiza tus datos para poder Comprar
-                            </h3> */}
                             {!completeAccount  && 
                                 <div className={styles.field}>
+
                                     <p>DNI
                                         <input 
                                             className={styles.inputDni} name='dni' type= 'number' placeholder='ej 44444444'
@@ -99,7 +113,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                     <p>Nombre
                                         <input 
                                             name='firstName' type= 'text' placeholder='ej Juan'
-                                            defaultValue={dataUser.firstName}
+                                            defaultValue={props.firstName}
                                             onChange={inputHandler}
                                             onKeyPress={keyPressHandler}
                                         />
@@ -113,7 +127,7 @@ const EditProfile = ({ completeAccount, id, getAddressAndPhone, token, firstName
                                     <p>Apellido
                                         <input 
                                             name='lastName' type= 'text' placeholder='ej Garcia'
-                                            defaultValue={dataUser.lastName}
+                                            defaultValue={props.lastName}
                                             onChange={inputHandler}
                                             onKeyPress={keyPressHandler}
                                         />
@@ -205,7 +219,8 @@ const mapStateToProps = (state) => {
         id: state.users.id,
         token: state.users.token,
         firstName: state.users.firstName,
-        lastName: state.users.lastName
+        lastName: state.users.lastName,
+        dni: state.users.dni
     }
 }
 

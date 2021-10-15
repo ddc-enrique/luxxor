@@ -1,23 +1,23 @@
-import { useState, useContext } from "react"
+import { useState } from "react"
 import { GoogleLogin } from "react-google-login"
-// import styles from "../styles/signIn.module.css"
 import styles from "../styles/signIn2.module.css"
 import { Link } from "react-router-dom"
 import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
-import toast, { Toaster } from "react-hot-toast"
-
+import toast from "react-hot-toast"
+import {  XCircleFill,Eye, EyeSlash } from 'react-bootstrap-icons'
+import { useHistory } from "react-router"
 const SignIn = (props) => {
   const { signIn } = props
   const [check, setCheck] = useState(true)
   const [errorEmail, setErrorEmail] = useState(null)
-  const [errorPass, setErrorPass] = useState(null)
+  const history = useHistory()
 
   const [userLog, setUserLog] = useState({
     eMail: "",
     password: "",
   })
-  let viewPassImg = !check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
+  let viewPassImg = !check ? <Eye className={styles.eye}/> : <EyeSlash className={styles.eye}/>
 
   const enterUser = async () => {
     try {
@@ -44,8 +44,8 @@ const SignIn = (props) => {
           toast.success("Bienvenido", {
             position: "top-center",
           })
-          props.setModalLogIn(!props.modalLogIn)
-        //   props.istory.push("/")
+          props.setModalLogIn(false)
+          history.push("/")
         }
       }
     } catch (error) {
@@ -68,7 +68,6 @@ const SignIn = (props) => {
             position: "top-center",
           })
         props.setModalLogIn(!props.modalLogIn)
-        // props.istory.push("/")
       }
     } catch (e) {
         toast.error(e, {
@@ -95,14 +94,10 @@ const SignIn = (props) => {
     <>
       <div className={styles.container}>
         <div className={styles.signContainer}>
-          <img
-            className={styles.icono}
-            onClick={() => {
+           <XCircleFill  onClick={() => {
               props.setVisible(false)
               props.setModalLogIn(!props.modalLogIn)
-            }}
-            src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"
-          />
+            }} className={styles.icono}/>
           <h1>Iniciá sesion</h1>
           <div className={styles.inputContainer}>
             <input
@@ -127,14 +122,9 @@ const SignIn = (props) => {
                 onChange={userLoginHandler}
                 onKeyPress={keyPressHandler}
               />
-              <img
-                onClick={() => setCheck(!check)}
-                className={styles.imgForPass}
-                src={`https://i.postimg.cc/${viewPassImg}`}
-                alt="..."
-              />
+              
+              <div  onClick={() => setCheck(!check)}> {viewPassImg}</div>
             </div>
-            <small style={{ color: "red" }}>{errorPass}&nbsp;</small>
             <button className={styles.buttonSign} onClick={enterUser}>
               Entrar
             </button>
@@ -158,7 +148,6 @@ const SignIn = (props) => {
           </div>
         </div>
       </div>
-      {/* <Toaster position="top-center" reverseOrder={false}/> */}
     </>
   )
 }

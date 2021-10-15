@@ -29,7 +29,15 @@ section.sectionContainer p {
     gap: 1rem;
     flex-wrap: wrap;
 }
-
+.container .loading {
+    height: 24rem;
+    width: 100%;
+    padding: 1rem;
+    background-image: url(https://i.postimg.cc/TwZG2QWc/loading.gif);
+    background-position: center;
+    background-size: 8%;
+    background-repeat: no-repeat;
+}
 .image {
     width: 28rem;
     height: 100%;
@@ -42,10 +50,13 @@ section.sectionContainer p {
 
 .galleryItem .image>* {
     height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .galleryItem .image div.divImage {
-    width: 60%;
+    width: 70%;
     background-size: cover;
     background-position: center;
     cursor: pointer;

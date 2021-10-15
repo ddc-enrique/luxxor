@@ -2,10 +2,11 @@ import React from "react";
 import styles from "../styles/admin.module.css";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-// import styles from "../styles/category.module.css";
 import { NavAdmin } from "./NavAdmin";
 import productsActions from "../redux/actions/productsActions";
 import { connect } from "react-redux";
+import toast, { Toaster } from "react-hot-toast";
+import { XCircle, Pen, CheckCircle } from "react-bootstrap-icons";
 const Category = (props) => {
   const [categories, setCategories] = useState(props.categories);
   const [loading, setLoading] = useState(true);
@@ -17,43 +18,74 @@ const Category = (props) => {
         let res = await props.getCategories();
         setCategories(res);
       } catch (e) {
-        console.log(e);
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
       } finally {
         setLoading(!loading);
       }
     };
     getCategories();
   }, []);
+  const notificationToast = (message, icon) => {
+    return toast(message, {
+      icon: icon,
+      style: {
+        borderRadius: "1rem",
+        background: "#fff",
+        color: "#545454",
+      },
+    });
+  };
   const sendCategory = async () => {
     if (!category) {
-      alert("No puede estar vacio");
+      notificationToast("El campo no puede estar vacio", "🚫");
     } else {
       let res = await props.addCategory(category, props.token);
       if (!res.data.success) {
-        alert(res.data.response);
+        notificationToast(res.data.response, "🚫");
       } else {
-        alert("Creado con éxito");
+        notificationToast("Creado con éxito", "👏");
         let response = await props.getCategories();
         setCategories(response);
       }
     }
   };
   const editCategory = async (id) => {
-    let res = await props.editCategory(id, { name: category }, props.token);
-    if (res.data.success) {
-      let resp = await props.getCategories();
-      setCategories(resp);
+    if (!category) {
+      notificationToast("El campo no puede estar vacio", "🚫");
     } else {
-      alert(res.data.response);
+      try {
+        let res = await props.editCategory(id, { name: category }, props.token);
+        if (res.data.success) {
+          notificationToast("Modificado con éxito", "👏");
+          let resp = await props.getCategories();
+          setCategories(resp);
+        } else {
+          throw new Error();
+        }
+      } catch (e) {
+        notificationToast(
+          "Hubo un problema, intente nuevamente más tarde",
+          "🚫"
+        );
+      }
     }
   };
   const deleteCategory = async (id, index) => {
-    let res = await props.deleteCategory(id, props.token);
-    res.data.success && alert("Borrado con éxito");
-    setCategories(categories.splice(id, index));
+    try {
+      let res = await props.deleteCategory(id, props.token);
+      if (!res.data.success) throw new Error();
+      res.data.success && notificationToast("Borrado con éxito", "👏");
+      setCategories(categories.filter(category => category._id !== id));
+    } catch (e) {
+      notificationToast("Hubo un problema, intente nuevamente más tarde", "🚫");
+    }
   };
   return (
     <div className={styles.divContainer}>
+      <Toaster />
       <header className={styles.headerAdmin}>
         <Link to="/">
           <h1>
@@ -70,7 +102,7 @@ const Category = (props) => {
             {loading ? (
               <div className={styles.loading}></div>
             ) : !categories ? (
-              <h1>No hay categorías cargadas</h1>
+              <h1>No hay categorías cargadas. ¡Carga una!</h1>
             ) : (
               categories.map((category, index) => (
                 <div key={index} className={styles.category}>
@@ -83,34 +115,28 @@ const Category = (props) => {
                         >
                           {category.name}
                         </textarea>
-                        <button onClick={() => editCategory(category._id)}>
-                          ✔️
-                        </button>
-                        <button onClick={() => setEditOpen(!editOpen)}>
-                          ✖️
-                        </button>
+                        <CheckCircle
+                          className={styles.icon}
+                          onClick={() => editCategory(category._id)}
+                        />
+                        <XCircle
+                          className={styles.icon}
+                          onClick={() => setEditOpen(!editOpen)}
+                        />
                       </>
                     ) : (
                       category.name
                     )}
                   </h3>
                   <div className={styles.cointanerEdit}>
-                    <div
+                    <Pen
+                      className={styles.icon}
                       onClick={() => setEditOpen(category.name)}
+                    />
+                    <XCircle
                       className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/bN0rQQhh/editar.png')",
-                      }}
-                    ></div>
-                    <div
                       onClick={() => deleteCategory(category._id, index)}
-                      className={styles.icon}
-                      style={{
-                        backgroundImage:
-                          "url('https://i.postimg.cc/C51Bv5HN/borrar.png')",
-                      }}
-                    ></div>
+                    />
                   </div>
                 </div>
               ))
@@ -118,13 +144,6 @@ const Category = (props) => {
           </div>
           <div className={styles.containerForm}>
             <div>
-              <div
-                className={styles.icon}
-                style={{
-                  backgroundImage:
-                    "url('https://i.postimg.cc/h47DcVZB/search.png')",
-                }}
-              ></div>
               <h3>Cargar Nueva Categoria</h3>
             </div>
             <div className={styles.containerAllInputs}>
@@ -149,7 +168,7 @@ const Category = (props) => {
 const mapStateToProps = (state) => {
   return {
     allcategories: state.products.categories,
-    token: state.users.token
+    token: state.users.token,
   };
 };
 

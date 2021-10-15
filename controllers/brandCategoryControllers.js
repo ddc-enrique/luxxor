@@ -4,7 +4,6 @@ const Category = require('../models/Category')
 const brandCategoryControllers={
 
     getAll: async(req,res)=>{
-        console.log("Received GET ALL BRAND/CATEGORY Petition:" + Date())
         const flagBrand = req.url.includes('brand')
         try{
             let fieldValues= flagBrand ? await Brand.find() : await Category.find()
@@ -16,7 +15,6 @@ const brandCategoryControllers={
     },
 
     addValueField: async (req,res)=>{
-        console.log("Received ADD BRAND/CATEGORY Petition:" + Date())
         const flagBrand = req.url.includes('brand')
         let name=req.body.name
         try{
@@ -32,8 +30,6 @@ const brandCategoryControllers={
     },
 
     editValueField:async (req,res)=>{
-        console.log(req.body)
-        console.log("Received EDIT BRAND/CATEGORY Petition:" + Date())
         const flagBrand = req.url.includes('brand')
         const name= req.body.name
         const _id =req.params.id
@@ -46,7 +42,6 @@ const brandCategoryControllers={
     },
 
     deleteValueField: async (req,res)=>{
-        console.log("Received DELETE BRAND/CATEGORY Petition:" + Date())
         const flagBrand = req.url.includes('brand')
         const _id =req.params.id
         try{
@@ -57,7 +52,6 @@ const brandCategoryControllers={
         }        
     },
     getOneValueField:async(req,res)=>{
-        console.log("Received GET ONE BRAND/CATEGORY Petition:" + Date())
         const flagBrand = req.url.includes('brand')
         const _id =req.params.id
         try{

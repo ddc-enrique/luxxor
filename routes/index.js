@@ -41,6 +41,9 @@ router.route('/user/edit-profile/:id')
         validatorControllers.validatorEditComplete, 
         usersControllers.editProfile)
 
+router.route("/user/wish/:id")
+    .put(usersControllers.addWish)
+    
 router.route("/user/myshopping/:id")
     .get(salesControllers.getOneSale)
 
@@ -112,8 +115,8 @@ router.route('/verify-admin')
         usersControllers.verifyAdmin)
 
 router.route('/sales')
-    .get(passport.authenticate('jwt', {session: false}), 
-    usersControllers.verifyAdmin,
+    .get(passport.authenticate('jwt', {session: false}),  
+        usersControllers.verifyAdmin,   
     salesControllers.getAllSales)
     .post(passport.authenticate('jwt', {session: false}), 
     salesControllers.saveNewSale)

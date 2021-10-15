@@ -63,12 +63,11 @@ form.formContact .eachInput .errorPlaceholder{
 
 form.formContact .eachInput .error{
     display: block;
-    border-bottom-right-radius: .5rem;
-    border-bottom-left-radius: .5rem;
     padding: .2rem;
     background-color: white;
     color: red;
-    text-align: center;}
+    text-align: center;
+}
 
 form.formContact button {
     float: right;
@@ -89,6 +88,7 @@ form.formContact button:hover {
 div.imageContact {
     background-position: center;
     background-size: cover;
+    filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
 }
 
 @media screen and (min-width: 375px) and (max-width: 767px) {

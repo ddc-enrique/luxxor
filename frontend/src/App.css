@@ -11,10 +11,12 @@ body {
   background: rgb(47, 144, 176);
   background: radial-gradient(circle, rgba(47, 144, 176, 1) 0%, rgba(48, 106, 154, 1) 55%, rgba(49, 75, 136, 1) 73%, rgba(49, 25, 109, 1) 100%);
 }
-
+select {
+  cursor: pointer;
+}
 a {
   text-decoration: none;
-  color: #545454;
+  color: #f9f9f9;
 }
 
 ::-webkit-scrollbar-track {

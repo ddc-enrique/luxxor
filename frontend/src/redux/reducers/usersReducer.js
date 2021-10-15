@@ -22,8 +22,9 @@ const usersReducer = (state = initialState, action) =>{
                 admin: action.payload.admin, 
                 id: action.payload._id,
                 token: action.payload.token,
-                dni: action.payload.dni,
-                google: action.payload.google
+                dni: action.payload.dni ? action.payload.dni : null,
+                google: action.payload.google,
+                wishList: action.payload.wishList
             }
         case "LOGOUT":
             localStorage.removeItem("token")

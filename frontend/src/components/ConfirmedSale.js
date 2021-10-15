@@ -3,15 +3,17 @@ import React, { useEffect, useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
 import usersAction from '../redux/actions/usersAction'
+import shopCartActions from "../redux/actions/shopCartActions"
 
-const ConfirmedSale = ({ id, total, shopCart, token, shipping, payment, sendBill}) => {
-    const [confirmedMessage, setConfirmedMessage] = useState("Muchas gracias por su compra")
+const ConfirmedSale = ({ id, total, shopCart, token, dataShipping, payment, sendBill,resetCart}) => {
+    const [confirmedMessage, setConfirmedMessage] = useState(`Muchas gracias por su compra. En breve recibirás un mail con la información de su orden de compra.`)
     const [loading, setLoading] = useState(true)
     useEffect(()=>{
         const sendNewBill = async () => {
             try {
-                let response = await sendBill(id, total, shopCart, true, payment, token)
+                let response = await sendBill(id, total, shopCart, dataShipping, payment, token)
                 if(!response.success) setConfirmedMessage("Algo salio mal, ponganse en contacto luxxor.tech@gmail.com")
+               resetCart()
             } catch (error) {
                 toast.error(error)
             }
@@ -21,22 +23,20 @@ const ConfirmedSale = ({ id, total, shopCart, token, shipping, payment, sendBill
     },[])
     
     if(loading) return <div className={styles.loading}></div>
-    // <div>LOADING...</div>
 
     return (
-        <div>
-            <h1
-                className={styles.headerConfirmed}
-            >
+        <div className={styles.containerConfirm}>
+            <h1 className={styles.headerConfirmed}>
                {confirmedMessage}
             </h1>
-
+            <Toaster />
         </div>
     )
 }
 
 const mapDispatchToProps = {
-    sendBill: usersAction.sendNewBill
+    sendBill: usersAction.sendNewBill,
+    resetCart:shopCartActions.resetCart,
 }
 
 const mapStateToProps = (state) => {

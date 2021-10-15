@@ -6,14 +6,14 @@ import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 import { GoogleLogin } from "react-google-login"
 import { Link } from "react-router-dom"
-import { Carousel } from "react-carousel-minimal"
 import SignIn from "../components/SignIn"
 import toast, { Toaster } from "react-hot-toast"
 import Password from "./Password"
+import { Eye, EyeSlash } from 'react-bootstrap-icons'
 
 const SignUp = (props) => {
   const { signUp } = props
-  const [visible, setVisible] =useState(false)
+  const [visible, setVisible] = useState(false)
   const [check, setCheck] = useState(true)
   const [checkConfirm, setCheckConfirm] = useState(true)
   const [modalPass,setmodalPass]=useState(false)
@@ -26,28 +26,25 @@ const SignUp = (props) => {
     eMail: "",
     profilePic: "",
   })
-  const [errorName, setErrorName] = useState(null)
-  const [errorLastName, setErrorLastName] = useState(null)
-  const [errorEmail, setErrorEmail] = useState(null)
-  const [errorPass, setErrorPass] = useState(null)
   const [errorPassChecked, setErrorPassCkecked] = useState(null)
+  const [errorsValidation, setErrorsValidation] = useState({})
 
-  let viewPassImg = check ? "5NX1hj01/eyeOpen.png" : "hPNgcgzm/EyeClose.png"
-  let viewPassImgConfirm = checkConfirm
-    ? "5NX1hj01/eyeOpen.png"
-    : "hPNgcgzm/EyeClose.png"
+
+  let viewPassImg = !check ? <Eye className={styles.eye}/> : <EyeSlash className={styles.eye}/>
+  let viewPassImgConfirm = !checkConfirm
+    ? <Eye className={styles.eye}/>
+    : <EyeSlash className={styles.eye}/>
 
   const responseGoogle = async (res) => {
-    try{
-      let newUserWithGoogle = {
-        firstName: res.profileObj.givenName,
-        lastName: res.profileObj.familyName,
-        eMail: res.profileObj.email,
-        password: res.profileObj.googleId,
-        profilePic: res.profileObj.imageUrl,
-        google: true,
-      }
-      
+    let newUserWithGoogle = {
+      firstName: res.profileObj.givenName,
+      lastName: res.profileObj.familyName,
+      eMail: res.profileObj.email,
+      password: res.profileObj.googleId,
+      profilePic: res.profileObj.imageUrl,
+      google: true,
+    }
+    try{      
       const response = await signUp(newUserWithGoogle)
       if(response === 'Usuario ya registrado'){
         toast("Usuario ya registrado", {
@@ -74,14 +71,13 @@ const SignUp = (props) => {
   }
 
   const enterNewUser = async () => {
-    try {
       const FD = new FormData()
       FD.append("firstName", newUser.firstName)
       FD.append("lastName", newUser.lastName)
       FD.append("password", newUser.password)
       FD.append("eMail", newUser.eMail)
       FD.append("profilePic", newUser.profilePic)
-
+      let resp
       if (
         Object.values(newUser).some((value) => value === "") ||
         newUser.checkPassword === ""
@@ -95,46 +91,29 @@ const SignUp = (props) => {
           },
         })
       } else if (newUser.checkPassword !== newUser.password) {
-        setErrorPassCkecked("No coinciden... vuelve a intentarlo")
+        setErrorPassCkecked("Las contraseñas deben coincidir")
       } else {
-        const resp = await signUp(FD)
-        if (resp) {
-          setErrorName(
-            resp.find((err) => err.path[0] === "firstName")
-              ? resp.find((err) => err.path[0] === "firstName").message
-              : null
-          )
-          setErrorLastName(
-            resp.find((err) => err.path[0] === "lastName")
-              ? resp.find((err) => err.path[0] === "lastName").message
-              : null
-          )
-          setErrorEmail(
-            resp.find((err) => err.path[0] === "eMail")
-              ? resp.find((err) => err.path[0] === "eMail").message
-              : null
-          )
-
-          setErrorPass(
-            resp.find((err) => err.path[0] === "password")
-              ? resp.find((err) => err.path[0] === "password").message
-              : null
-          )
-        } else {
-          toast("Bienvenido", {
-            icon: "👏",
-            style: {
-              borderRadius: "1rem",
-              background: "#f48f31",
-              color: "#fff",
-            },
-          })
-          props.history.push("/")
+        try {
+          resp = await signUp(FD)
+          if (!resp.success){ 
+            throw resp.response
+          } else {
+          }          
+        } catch (error) {
+          if (typeof error === 'string'){
+            toast.error(error)
+          } else if (Array.isArray(error)){
+              let errors = {}
+              error.forEach(err=> {
+                  errors[err.path[0]] = err.message
+              })
+              setErrorsValidation(errors)
+          } else {
+            toast.error("Error de Conexión")
+          }
         }
       }
-    } catch (error) {
-      console.log(error)
-    }
+
   }
 
   const keyPressHandler = (e) => {
@@ -143,64 +122,12 @@ const SignUp = (props) => {
     }
   }
 
-  const data = [
-    {
-      image: "https://i.postimg.cc/c1fWVFXW/first-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/1tPB45hJ/second-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/bYS5MdY2/third-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/9FWG9NkF/fourth-Comment.pngpng",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/TwyvP9VR/fifth-Comment.png",
-      caption: "",
-    },
-    {
-      image: "https://i.postimg.cc/P5fcxyHB/sixth-Comment.png",
-      caption: "",
-    },
-  ]
-
-  const captionStyle = {
-    fontSize: "2em",
-    fontWeight: "bold",
-  }
-  const slideNumberStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-  }
-
   return (
     <>
       <Navbar />
       <div className={styles.container}>
       <div className={styles.containerCarousel}>
-          <img
-            src="https://i.postimg.cc/SKYqgXsy/8a9591545481ca29b3f44f9ed47b7d23-removebg-preview.png"
-            alt="Auriculares"
-          />
-          {/* <h2>Testimonios de nuestros clientes</h2>
-          <Carousel
-            data={data}
-            time={2000}
-            width="42rem"
-            height="25rem"
-            automatic={true}
-            dots={false}
-            slideBackgroundColor="trasnparent"
-            slideImageFit="cover"
-            thumbnails={false}
-            showNavBtn={false}
-          /> */}
+        <div className={styles.image}></div>
         </div>
         <div className={styles.containerForm}>
           <h1>REGISTRATE</h1>
@@ -212,7 +139,8 @@ const SignUp = (props) => {
             name="firstName"
             defaultValue={newUser.firstName}
           />
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorName}&nbsp;</small>
+          {!errorsValidation["firstName"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["firstName"] && <p className={styles.error}>&nbsp;{errorsValidation["firstName"]}</p>}
           <input
             onChange={newUserHandler}
             type="text"
@@ -221,7 +149,8 @@ const SignUp = (props) => {
             name="lastName"
             defaultValue={newUser.lastName}
           />
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorLastName}&nbsp;</small>
+          {!errorsValidation["lastName"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["lastName"] && <p className={styles.error}>&nbsp;{errorsValidation["lastName"]}</p>}
           <input
             onChange={newUserHandler}
             type="text"
@@ -231,46 +160,37 @@ const SignUp = (props) => {
             defaultValue={newUser.eMail}
             onKeyPress={keyPressHandler}
           />
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorEmail}&nbsp;</small>
+          {!errorsValidation["eMail"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["eMail"] && <p className={styles.error}>&nbsp;{errorsValidation["eMail"]}</p>}
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
-              type={!check ? "password" : "text"}
+              type={check ? "password" : "text"}
               className={styles.inputTypes}
               placeholder="Contraseña"
               name="password"
               defaultValue={newUser.password}
             />
-
-            <img
-              onClick={() => setCheck(!check)}
-              className={styles.imgForPass}
-              src={`https://i.postimg.cc/${viewPassImg}`}
-              alt="..."
-            />
+             <div onClick={() => setCheck(!check)}> {viewPassImg}</div>
           </div>
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPass}&nbsp;</small>
+          {!errorsValidation["password"] && <div className={styles.errorPlaceholder}></div>}
+          {errorsValidation["password"] && <p className={styles.error}>&nbsp;{errorsValidation["password"]}</p>}
           <div className={styles.inputPassContainer}>
             <input
               onChange={newUserHandler}
-              type={!checkConfirm ? "password" : "text"}
+              type={checkConfirm ? "password" : "text"}
               className={styles.inputTypes}
               placeholder="Confirmar contraseña"
               name="checkPassword"
               onKeyPress={keyPressHandler}
             />
-            <img
-              onClick={() => setCheckConfirm(!checkConfirm)}
-              className={styles.imgForPass}
-              src={`https://i.postimg.cc/${viewPassImgConfirm}`}
-              alt="..."
-            />
+            <div  onClick={() => setCheckConfirm(!checkConfirm)}> {viewPassImgConfirm}</div>
           </div>
-          <small style={{color: "yellow",fontWeight:'bold'}}>{errorPassChecked}&nbsp;</small>
-          {newUser.profilePic && <p>{newUser.profilePic.name}</p>}
+          {!errorPassChecked && <div className={styles.errorPlaceholder}></div>}
+          {errorPassChecked && <p className={styles.error}>&nbsp;{errorPassChecked}</p>}
+          {newUser.profilePic ? <p className={styles.pPhoto}>{newUser.profilePic.name}</p> : <p className={styles.pPhoto}></p>}
           <label className={styles.labelInput} for="inputPhoto">
-            <img src="https://i.postimg.cc/k4GS8rY3/61-camera-outline.gif" />
-            Foto de perfil
+            <div className={styles.photo}> Foto de perfil</div>
           </label>
           <input
             id="inputPhoto"
@@ -281,10 +201,10 @@ const SignUp = (props) => {
             name="profilePic"
             defaultValue={newUser.profilePic}
           />
-          <div className={styles.location}>
-            <button onClick={enterNewUser} className={styles.btnSign}>
+            <button onClick={enterNewUser} className={styles.btnSign} id="register">
               Registrarme
             </button>
+          <div className={styles.location}>            
             <div className={styles.buttonGoogle}>
               <GoogleLogin
                 clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"

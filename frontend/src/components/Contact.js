@@ -2,7 +2,6 @@ import { useState } from 'react'
 import toast, { Toaster } from 'react-hot-toast'
 import { connect } from 'react-redux'
 import messagesActions from '../redux/actions/messagesActions'
-import usersAction from '../redux/actions/usersAction'
 import styles from '../styles/contact.module.css'
 const Contact = ({ reference, sendNewMessage }) =>{
     const [newMessage, setNewMessage] = useState({
@@ -21,8 +20,6 @@ const Contact = ({ reference, sendNewMessage }) =>{
 
     const sendMessage = async(e) => {
         e.preventDefault()
-        console.log("enviar mensaje")
-        console.log(newMessage)
         try {
             let response = await sendNewMessage(newMessage)
             if(response.success) toast.success("Gracias por su mensaje, estaremos en contacto")
@@ -32,7 +29,6 @@ const Contact = ({ reference, sendNewMessage }) =>{
                 textMessage: ""
             })
         } catch (error) {
-            console.log(error)
             if (typeof error === 'string'){
                 toast.error(error)
             } else if (Array.isArray(error)){

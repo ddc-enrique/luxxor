@@ -4,6 +4,7 @@ div.divContainer {
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 13rem;
 }
 
 div.containerHero {

@@ -1,26 +1,52 @@
-import React,  { useState, useEffect, useRef }from "react";
-import styles from "../styles/password.module.css";
+import React,  {  useEffect }from "react";
 import { connect } from "react-redux";
 import usersAction from "../redux/actions/usersAction";
-
-
+import NavBar from "../components/NavBar";
+import styles from "../styles/banned.module.css";
+import toast, { Toaster } from "react-hot-toast";
 const Banned = (props) =>{
     useEffect(()=>{
-        console.log(props.match.params.id)
         props.verifyIdMail(props.match.params.id)
         .then(res=>{
             if(!res){
-               props.history.push("/") 
+                props.history.push("/") 
             }else{
                 props.banAccount(props.match.params.id)
+                .then(()=>{
+                    notificationToast("Cuenta bloqueada con éxito", "👏");
+                })     
             }
        })
+       .catch(e=>{
+            toast("Problemas tecnicos.", {
+                icon: "🚫",
+                style: {
+                borderRadius: "1rem",
+                background: "#fff",
+                color: "#545454",
+                },
+            })
+        })
+       // eslint-disable-next-line
     },[])
+    const notificationToast = (message, icon) => {
+        return toast(message, {
+          icon: icon,
+          style: {
+            borderRadius: "1rem",
+            background: "#fff",
+            color: "#545454",
+          },
+        });
+      };
     return(
-        <>
-        <h1>Te banneo</h1>
-        <h2>Cuenta bloqueada con exito</h2>
-        </>
+       <>
+        <NavBar/>
+        <div className={styles.containerBanned}>
+            <Toaster />
+            
+        </div>
+       </>
     )
 }
 const mapDispatchToProps ={

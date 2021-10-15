@@ -32,14 +32,13 @@
 }
 
 .title .detailDescription {
-  width: 15rem !important;
+  min-width: 16rem !important;
 }
 
 .containerProduct .photo {
   background-position: center;
-  background-size: 22rem;
+  background-size: 16rem;
   background-repeat: no-repeat;
-  /* background-image: url(https://i.postimg.cc/Jhmptvkj/1000x1000-1-removebg-preview-1.png); */
   filter: drop-shadow(-17px 15px 26px rgba(92, 92, 92, 0.55));
   width: 100%;
   height: 15rem;
@@ -88,7 +87,7 @@
   top: 10rem;
   left: 4rem;
   width: 13rem;
-  background-color: rgb(5 51 66 / 65%);
+  background-color: rgb(48 106 154);
   box-shadow: 12px 0px 100vw 55vw #26262673;
   padding: 2rem;
   display: flex;
@@ -106,7 +105,6 @@
   background-position: center;
   background-size: cover;
   cursor: pointer;
-  background-color: rgb(51 51 51);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -125,6 +123,8 @@ div.divRecomendados {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 1rem 0rem;
+  margin: 6rem 0;
 }
 
 div.divRecomendados h3 {
@@ -170,7 +170,7 @@ div.picRecomendados p {
 
 @media only screen and (min-width: 768px) {
   .containerProduct .photo {
-    background-size: 32rem;
+    background-size: 23rem;
     height: 22rem;
   }
 
@@ -194,10 +194,7 @@ div.picRecomendados p {
     background-size: cover;
   }
 
-  .descriptionWeb button {
-    border: 1px solid;
-  }
-
+ 
   .containerProduct {
     height: 40rem;
     width: 100%;
@@ -223,13 +220,15 @@ div.picRecomendados p {
   }
 
   .containerProduct .title p {
-    border-bottom: 1px solid rgb(255, 255, 255);
+    /* border-bottom: 1px solid rgb(255, 255, 255); */
     width: 6.5rem;
     margin: 1rem 0;
-    text-align: center;
+    text-align: start;
     color: white;
   }
-
+  .containerProduct .title p:last-child {
+    text-align: center;
+  }
   .containerProduct .title h2 {
     font-size: 4rem;
   }
@@ -238,17 +237,32 @@ div.picRecomendados p {
     order: 2;
     background-position: center;
     background-size: cover;
-    background-image: url(https://i.postimg.cc/Jhmptvkj/1000x1000-1-removebg-preview-1.png);
+    /* background-image: url(https://i.postimg.cc/Jhmptvkj/1000x1000-1-removebg-preview-1.png); */
     height: 100%;
     filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
-
+    width: 50%;
   }
-
-  .containerProduct .cart {
-    border: 1px solid #ffffff;
+.backToProducts{
+  padding: 0 1.66rem;
+  text-align: center;
+}
+.backToProducts a .icon {
+  padding: 0 .66rem;
+}
+  .containerProduct .cart, .backToProducts .cart {
+    border-bottom: 1px solid #ffffff;
     padding: 1rem;
   }
 
+.containerProduct .loading {
+  height: 24rem;
+  width: 100%;
+  padding: 1rem;
+  background-image: url(https://i.postimg.cc/TwZG2QWc/loading.gif);
+  background-position: center;
+  background-size: 8%;
+  background-repeat: no-repeat;
+}
   p.copy {
     padding: 0.3rem;
     background-color: #fff;
@@ -294,7 +308,7 @@ div.picRecomendados p {
     color: white;
   }
 
-  .containerProduct .descriptionWeb button:hover {
+  .containerProduct .descriptionWeb button:hover, .backToProducts .cart:hover {
     background-color: rgb(255 255 255);
     color: black;
   }
@@ -313,7 +327,6 @@ div.picRecomendados p {
     background-position: center;
     background-size: cover;
     cursor: pointer;
-    background-color: rgb(51 51 51);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -350,7 +363,7 @@ div.containerPicItems {
 }
 
 .galleryItem .imageItem div.divImage {
-  width: 60%;
+  width: 50%;
   background-size: cover;
   background-position: center;
   cursor: pointer;

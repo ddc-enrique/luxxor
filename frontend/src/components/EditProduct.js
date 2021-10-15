@@ -3,17 +3,19 @@ import productsActions from "../redux/actions/productsActions"
 import { XCircleFill } from 'react-bootstrap-icons'
 import styles from "../styles/modalEdit.module.css"
 import { useEffect, useState } from "react"
+import toast from "react-hot-toast"
 
 
 const EditProduct = (props) => {
 
     const [product, setProduct] = useState({})
     const [loading, setLoading] = useState(false)
-    const [productToEdit, setProductToEdit] = useState({})
+    const [productToEdit, setProductToEdit] = useState({
+        category:{ _id: 1}, brand: { _id: 1 }
+    })
 
     useEffect(()=>{
         const getOneProduct = async ()=>{
-
             let response = await props.getOneProduct(props.id)
             if (response.data.success){
                 let data = response.data.response
@@ -29,8 +31,9 @@ const EditProduct = (props) => {
                     category: data.category,
                     brand: data.brand
                 })
-            }else 
-            console.log("error") //poner tostada
+            }else{
+                toast.error(response.data.response)
+            } 
             setLoading(true)
         }
         getOneProduct()      
@@ -52,11 +55,9 @@ const EditProduct = (props) => {
   const handleEdit = async () => {
     let response = await props.editProduct(props.id, productToEdit, props.token)
     if (response.data.success){
-        props.setRender(!props.render)
-        console.log("Se actualizó con éxito")//poner tostada
-        props.setModalEdit(false)
+        toast.success("Se edito con éxito")
     }else{
-        console.log(response.data)//poner tostada
+        toast.error("No se pudo realizar cambios")
     }
   }
 
@@ -68,22 +69,33 @@ const EditProduct = (props) => {
                     className={styles.close}
                     onClick={()=>props.setModalEdit(false)}
                 />  
+                    <h3>Editar Producto</h3>
                     <div className={styles.containerInputs}>
                         <label htmlFor="name">Nombre</label>
                         <input defaultValue={product.name} onChange={(e)=>productToEditHandler("index", e)} name="name"/>
                     </div>
                     
                     <div className={styles.containerInputs}>
-                        <label htmlFor="brands">Marca</label>
-                        <select name="brands" onChange={(e)=>productToEditHandler("index", e)}>
-                            {props.brands.map(brand=> (
-                            <option
-                                key={brand._id}
-                                value={brand._id}
-                            >
-                                {brand.name}
-                            </option>
-                        ))}
+                        <label htmlFor="brand">Marca</label>
+                        <select name="brand" onChange={(e)=>productToEditHandler("index", e)}>
+                        {props.brands.map(brand=> {
+                            if(brand._id === productToEdit.brand._id){
+                                return (<option
+                                    key={brand._id + "selected"}
+                                    value={brand._id}
+                                    selected
+                                >
+                                    {brand.name}
+                                </option>)
+                            } else {
+                                return (<option
+                                    key={brand._id  + "notSelected"}
+                                    value={brand._id}
+                                >
+                                    {brand.name}
+                                </option>)
+                            }
+                        })}
                         </select>
                     </div>
                     
@@ -109,13 +121,25 @@ const EditProduct = (props) => {
                     </div>
                     <div className={styles.containerInputs}>
                         <label htmlFor="category">Categoría</label>
-                        <select onChange={(e)=>productToEditHandler("index", e)} name="category">
-                        {props.categories.map(category => (
-                            <option
-                            key={category._id}
-                            value={category._id}
-                            >{category.name}</option>
-                        ))}
+                        <select onChange={(e)=>productToEditHandler("index", e)} name="category" >
+                        {props.categories.map(category => {
+                            if(category._id === productToEdit.category._id){
+                                return (<option
+                                    key={category._id + "selected"}
+                                    value={category._id}
+                                    selected
+                                >
+                                    {category.name}
+                                </option>)
+                            } else {
+                                return (<option
+                                    key={category._id + "notSelected"}
+                                    value={category._id}
+                                >
+                                    {category.name}
+                                </option>)
+                            }
+                        })}
                         </select>
                     </div>
                     <div className={styles.containerInputs}>

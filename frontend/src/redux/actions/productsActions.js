@@ -1,5 +1,4 @@
 import axios from "axios"
-import Product from "../../components/Product"
 
 const productsActions = {
     categories: () =>{
@@ -40,7 +39,7 @@ const productsActions = {
                 })
                 return res
             }catch(e){
-                console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -54,7 +53,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-               console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -68,7 +67,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-               console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -82,7 +81,7 @@ const productsActions = {
                 })
                 return res
             }catch(e){
-                console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -96,7 +95,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-               console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -110,7 +109,7 @@ const productsActions = {
                 })
                     return res
             }catch(e){
-            console.log(e)
+                return({success: false, response: e})
             }
         }
     },
@@ -174,8 +173,7 @@ const productsActions = {
     },
 
 
-    addProduct: (product, token) =>{
-        console.log(product)  
+    addProduct: (product, token) =>{ 
         return async (dispatch) =>{
             try {
                 let response = await axios.post("http://localhost:4000/api/products", product, {
@@ -231,10 +229,25 @@ const productsActions = {
                 if (!response.data.success) throw new Error(response.data.response)
                 return response.data.response
             }catch(e){
-                return ({success: false, response: e})
+                return ({success: false, response: e.message})
             }
         }
     },
+    productsSold:(token)=>{
+        return async (dispatch) => {
+            try{
+                let response = await axios.get("http://localhost:4000/api/sales", {
+                    headers: {
+                        Authorization: "Bearer " + token
+                    }
+                })
+                if (!response.data.success) throw new Error(response.data.response)
+                return response.data
+            }catch(e){
+                return ({success: false, response: e.message})
+            }
+        }
+    }
 
 }
 export default productsActions

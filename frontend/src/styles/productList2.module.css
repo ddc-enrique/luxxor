@@ -1,3 +1,23 @@
+div.productsSection .loading {
+  height: 24rem;
+  width: 97%;
+  padding: 1rem;
+  background-image: url(https://i.postimg.cc/TwZG2QWc/loading.gif);
+  background-position: center;
+  background-size: 8%;
+  background-repeat: no-repeat;
+}
+.content .cart {
+  border: none;
+    font-size: .8rem;
+    padding: .5rem;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+}
+.content .cart:hover {
+  border-bottom: 1px solid white;
+}
 .inputFilterContain h2,
 .inputSelect h2 {
   color: #e3e3e3;
@@ -9,12 +29,16 @@
 }
 
 .inputsFilter {
-  color: #e3e3e3;
-  border: 1px solid;
-  padding: 1rem;
-  margin-top: 0.5rem;
+color: #e3e3e3;
+    border: 1px solid;
+    padding: 1.5rem;
+    margin-top: 0.5rem;
+    width: 9rem;
 }
-
+.inputsFilter .optionsFilter {
+  border-bottom: 1rem!important;
+  padding: 1rem 0
+}
 .inputsFilter .switchContainer {
   display: flex;
   justify-content: space-between;
@@ -50,21 +74,16 @@
   transition-delay: 0s, 0s;
   box-shadow: inset 0 0 0 2.62857em gray !important;
   padding-left: .88rem;
-  /*15px*/
 }
 
 .inputsFilter .switchContainer .switch:before {
   display: inline-block;
   height: 1rem;
-  /*14px*/
   width: 1rem;
-  /*14px*/
   margin: 0.1rem;
-  /*3px*/
   margin-left: 0.18rem;
   background-color: #fff;
   border-radius: 2.1rem;
-  /*2.1em*/
   transition: all 0.1s ease 0.1s;
 }
 
@@ -97,10 +116,11 @@ div.container {
   display: flex;
   justify-content: center;
   align-items: center;
+  border: 1px solid black;
 }
 
 .containerProducts .emptyProducts p {
-  display: block;
+  font-size: 5rem;
 }
 
 @media only screen and (min-width: 800px) {
@@ -129,20 +149,24 @@ div.container {
   .inputSelect {
     display: flex;
     justify-content: flex-end;
-    margin-right: 3rem;
+    margin-right: 1rem;
 
   }
 
 
   .selectInput {
-    border: 0.05rem solid #848484;
     outline: 0;
     height: 3rem;
     width: 20.5rem;
-    border: 1px solid black;
     padding-left: 1rem;
     border: none;
     padding-right: 1rem;
+    background-color: transparent;
+    border: 1px solid white;
+    color: white;
+  }
+  select option {
+    color: rgb(0, 0, 0);
   }
 
 }
@@ -153,8 +177,32 @@ div.container {
   padding: 1rem;
   max-width: 1024px;
   margin: 0 auto;
+  min-height: 27rem;
+  align-items: center;
+  justify-content: center;
 }
-
+.emptyProducts p {
+  color: white;
+    font-size: 1.5rem;
+    padding: 1rem;
+    font-weight: 600;
+    width: 45rem;
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(79px);
+    background-color: #ffffff24;
+    text-align: center;
+}
+.emptyProducts {
+  width: 146%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  background-image: url(https://i.postimg.cc/mrCmTyHY/PRODUCTO-removebg-preview.png);
+  background-size: 47% 93%;
+  background-position: 96%;
+  background-repeat: no-repeat;
+  filter: drop-shadow(-37px 45px 7px rgba(0, 0, 0, 0.79));
+}
 @media (min-width: 600px) {
   .pageContent {
     grid-template-columns: repeat(2, 1fr);
@@ -164,6 +212,8 @@ div.container {
 @media (min-width: 800px) {
   .pageContent {
     grid-template-columns: repeat(4, 1fr);
+    width: 81rem;
+    min-height: 31rem;
   }
 }
 
@@ -187,7 +237,7 @@ div.container {
 
 @media (min-width: 600px) {
   .card {
-    height: 25rem;
+    height: 26rem;
     width: 15rem;
   }
 }
@@ -237,16 +287,22 @@ div.container {
 }
 
 .title {
-  font-size: 1.3rem;
+  font-size: 1rem;
   font-weight: bold;
   line-height: 1.2;
 }
 
 .copy {
   font-family: var(--font-serif);
-  font-size: 1.125rem;
+  font-size: 1rem;
   font-style: italic;
   line-height: 1.35;
+}
+.infoPrice {
+     width: 13rem;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
 }
 
 .btn {

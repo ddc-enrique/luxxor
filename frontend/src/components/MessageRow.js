@@ -24,10 +24,6 @@ const MessageRow = ({ message, deleteMessage, styles}) => {
                 onClick={ () => setModal(true)}
                 className={styles.viewTextMessage}
             >
-                {/* <img
-                    src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"
-                    // className={styles.closeModalText}
-                /> */}
                 <PlusLg />
             </td>
             <td
@@ -51,10 +47,6 @@ const MessageRow = ({ message, deleteMessage, styles}) => {
             >
                 <div>
                     <h4>Mensaje de {message.authorName}</h4>
-                    {/* <img
-                        src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png"
-                        className={styles.closeModalText}
-                    /> */}
                     <XCircleFill 
                         className={styles.closeModalText}
                         onClick={() => setModal(false)}

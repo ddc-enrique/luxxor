@@ -8,7 +8,6 @@ const stripe = new Stripe(process.env.KEY_STRIPE)
 const productsControllers = {
 
     getAllProducts:(req,res)=>{
-        console.log("Received GET ALL PRODUCTS Petition:" + Date())
         Product.find().populate('brand').populate('category')    
         .then(products=>{
             if(!products.length) throw new Error('No hay productos cargados') 
@@ -19,7 +18,6 @@ const productsControllers = {
 
     addProduct:(req,res)=>{   
            
-        console.log("Received ADD PRODUCTS Petition:" + Date())
         const{name,stock,price,color,dataSheet,description,discount,category,brand}=req.body
         const{photos}=req.files
         route = path.join(__dirname, "../assets/productsPhoto") 
@@ -58,21 +56,18 @@ const productsControllers = {
         .catch(error=>res.json({success:false,response:error.message}))
     },
     editProduct:(req,res)=>{
-        console.log("Received EDIT PRODUCTS Petition:" + Date())
         const _id = req.params.id
         Product.findOneAndUpdate({_id},{...req.body},{new:true})
         .then(editedProduct=>res.json({success:true,response:editedProduct}))
         .catch(error=>res.json({success:false,response:error.message}))
     },
     deleteProduct:(req,res)=>{
-        console.log("Received DELETE PRODUCTS Petition:" + Date())
         const _id = req.params.id
         Product.findOneAndDelete({_id})
         .then(() => res.json({success: true}))
         .catch(error=> res.json({success: false, response:error.message}))
     },
     getOneProduct:(req,res)=>{
-        console.log("Received GET ONE PRODUCTS Petition:" + Date())
         Product.findById(req.params.id).populate('brand').populate('category') 
         .then( productFound => {
             if(!productFound) throw new Error("No se encontro ningun Producto")
@@ -81,7 +76,6 @@ const productsControllers = {
         .catch(error=> res.json({success: false, reponse:error.message}))
     },
     productOnCart:async(req, res)=>{
-           console.log(req.body)
         try {
             let response = await stripe.paymentIntents.create({
                 amount: req.body.amount,
@@ -92,10 +86,8 @@ const productsControllers = {
             })
          res.json({success: true, response})
         }catch(e){
-            console.log(e)
             res.json({message: e})
         }
-           
     }
 
 }

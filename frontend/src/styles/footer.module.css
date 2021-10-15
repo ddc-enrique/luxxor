@@ -1,11 +1,11 @@
 footer.footerContainer {
-    min-height: 8rem;
+    min-height: 14rem;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
     padding: 0 2rem;
-    margin-top: 2rem;
+    margin-top: 1rem;
 }
 
 footer.footerContainer {
@@ -15,7 +15,41 @@ footer.footerContainer {
 div.divContainer a {
     color: #F1F6F7 !important;
 }
-
+.footerContainer .up {
+    height: 1rem;
+    min-width: 4rem;
+    padding: 1rem;
+}
+.footerContainer .up:hover {
+      border-bottom: 1px solid white;
+  }
+  .footerContainer .whatsapp {
+    height: 1rem;
+    border: 1px solid white;
+    padding: 1.4rem;
+    position: fixed;
+    bottom: 4rem;
+    right: 6rem;
+    border-radius: 2rem;
+    background-color: transparent;
+    color: #eeeeee!important;
+    cursor: pointer;
+    z-index: 1;
+  }
+  .footerContainer .whatsapp:hover {
+    background: white;
+    color: rgb(0, 0, 0)!important;
+  }
+  .footerContainer a span {
+         /* border: 1px solid; */
+    position: absolute;
+    right: 4rem;
+    padding: .2rem;
+    bottom: 1rem;
+  }
+  .footerContainer a span:hover {
+    border-bottom: 1px solid;
+  }
 div.divContainer {
     width: 100%;
     display: flex;

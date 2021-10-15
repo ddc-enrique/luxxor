@@ -6,12 +6,10 @@ import { NavAdmin } from "../components/NavAdmin";
 import messagesActions from "../redux/actions/messagesActions";
 import toast, { Toaster } from "react-hot-toast";
 import MessageRow from "../components/MessageRow";
-import { ArrowDown } from "react-bootstrap-icons";
 
 
 const AdminMessages = (props) => {
     const [messages, setMessages] = useState([])
-
     
     useEffect(() => {
         const getAllMessages = async() => {
@@ -34,17 +32,13 @@ const AdminMessages = (props) => {
             let response = await props.removeMessage(id, props.token)
             if(response.success) {
                 toast('Mensaje Eliminado', { icon: '🗑️',})
-                setMessages(messages.filter(message => message._id != id))
+                setMessages(messages.filter(message => message._id !== id))
             }else{
                 throw response.response
             }
         } catch (error) {
             toast.error("No se pudo eliminar el mensaje, intentelo más tarde")
         }
-    }
-
-    const sortBy = (e) => {
-
     }
 
     return (
@@ -69,11 +63,8 @@ const AdminMessages = (props) => {
                             className={styles.headerTableMessages}
                         >
                             <tr>
-                                <th
-                                    onClick={sortBy}
-                                >
+                                <th>
                                     Dia
-                                    <ArrowDown />
                                 </th>
                                 <th
                                 >

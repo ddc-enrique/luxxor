@@ -70,6 +70,7 @@ div.containerProductTotal{
     margin-bottom: 1rem;
     padding: 1rem 0.3rem;
     background-color: rgba(163, 189, 189, 0.171);
+    font-size: 0.8rem;
 }
 img.imgProduct{
     width: 5rem;
@@ -145,6 +146,9 @@ div.containerDisconts{
 }
 div.containerShip{
     margin-top: 2rem;
+}
+div.containerShip .textShipping, div.containerShip h3{
+    margin-bottom: 0.6rem;
 }
 div.containerTotal{
     margin-top: 2rem;
