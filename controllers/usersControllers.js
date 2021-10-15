@@ -61,8 +61,6 @@ const usersControllers = {
     },
 
     completeProfile: (req, res) => {
-        // const { firstName, lastName, dni, address, phone } = req.body
-        // const { city, zipCode, street, optional } = address
         User.findOne({ dni: req.body.dni })
             .then( (userFound) => {
                 if (userFound) throw new Error ("DNI en uso")
@@ -156,7 +154,7 @@ const usersControllers = {
                                    Si tu no realizaste la solicitud de cambio de contraseña, haz click en el siguiente botón:
                           </p>
                   
-                                  <a href="http://localhost:3000/bloqueo-cuenta/${userFound._id}"><button  style="border: 1px solid white ;color: white; margin-top: 1rem; padding: 10px; background-color: transparent">Bloquear Cuenta</button></a>
+                                  <a href="https://luxxor.herokuapp.com/bloqueo-cuenta/${userFound._id}"><button  style="border: 1px solid white ;color: white; margin-top: 1rem; padding: 10px; background-color: transparent">Bloquear Cuenta</button></a>
                           <hr/>
                           <p style="color: white; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
                           
@@ -223,7 +221,7 @@ const usersControllers = {
                                   Te enviamos este e-mail para comunicarte que has solicitado el cambio de contraseña, haz click en el botón que aparece a continuación para cambiar tu contraseña:
                           </p>
                   
-                                   <a href="http://localhost:3000/cambio-contrasenia/${userFound._id}"><button  style="background-color: transparent;color: white; border:1px solid white; margin: 10px 0; padding:0.5rem 1rem">Cambiar contraseña</button></a>
+                                   <a href="https://luxxor.herokuapp.com/cambio-contrasenia/${userFound._id}"><button  style="background-color: transparent;color: white; border:1px solid white; margin: 10px 0; padding:0.5rem 1rem">Cambiar contraseña</button></a>
                           <hr/>
                           <p style="color: white; font-size: 14px; text-align: center;">© Copyright 2021 | Luxxor.</p>
                           

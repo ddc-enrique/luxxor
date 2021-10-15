@@ -335,7 +335,7 @@ const EditProductComp = (props) => {
                     <div className={styles.titleProduct}>
                       <div
                         className={styles.imageProduct}
-                        style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}}
+                        style={{backgroundImage: `url("https://luxxor.herokuapp.com/productsPhoto/${product.photos[0]}")`}}
                       ></div>
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>
@@ -363,7 +363,7 @@ const EditProductComp = (props) => {
                     <div className={styles.titleProduct}>
                       <div
                         className={styles.imageProduct}
-                        style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}}
+                        style={{backgroundImage: `url("https://luxxor.herokuapp.com/productsPhoto/${product.photos[0]}")`}}
                       ></div>
                       <h3>{product.name}</h3>
                       <div className={styles.cointanerEdit}>

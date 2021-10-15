@@ -42,7 +42,7 @@ const CardProductCart = (props) =>{
                     backgroundImage: `url("https://home.ripley.com.pe/Attachment/WOP_5/2004209413829/2004209413829-1.jpg")`,
                 }}
                 ></div> */}
-                <img width="90" src={`http://localhost:4000/productsPhoto/${product.photos[0]}`}/>
+                <img width="90" src={`https://luxxor.herokuapp.com/productsPhoto/${product.photos[0]}`}/>
                 <div className={styles.containerProductTetx}>
                     <p>{product.name}</p>
                     <span>$ {" "+(product.price).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</span>

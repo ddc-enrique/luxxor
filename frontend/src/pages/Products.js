@@ -153,7 +153,7 @@ const Products = (props) => {
               <div
                 className={styles.card}
                 style={{
-                  backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`,
+                  backgroundImage: `url("https://luxxor.herokuapp.com/productsPhoto/${product.photos[0]}")`,
                 }}
                 key={product._id}
               >

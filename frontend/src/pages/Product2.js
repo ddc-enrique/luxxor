@@ -117,7 +117,7 @@ const Product2 = (props) => {
     );
   }
   const photosCarousel = product.photos.map((photo) => ({
-    image: `http://localhost:4000/productsPhoto/${photo}`,
+    image: `https://luxxor.herokuapp.com/productsPhoto/${photo}`,
     caption: "",
   }));
   return (
@@ -230,7 +230,7 @@ const Product2 = (props) => {
                   <div
                     className={styles.divImage}
                     style={{
-                      backgroundImage: `url(http://localhost:4000/productsPhoto/${item.photos[0]})`,
+                      backgroundImage: `url(https://luxxor.herokuapp.com/productsPhoto/${item.photos[0]})`,
                     }}
                     alt="pic"
                   ></div>

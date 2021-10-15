@@ -18,7 +18,7 @@ const shopCartAction={
     },
     payCart:(id, amount)=>{
         return async (dispatch)=>{
-            let response = await axios.post("http://localhost:4000/api/checkout", id, amount)
+            let response = await axios.post("https://luxxor.herokuapp.com/api/checkout", id, amount)
             return response.data
         }
     },

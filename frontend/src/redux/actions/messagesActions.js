@@ -3,7 +3,7 @@ import axios from "axios"
 const messagesActions = {
     sendNewMessage: (newMessage) => {
         return async () => {
-            let response = await axios.post("http://localhost:4000/api/contact", newMessage)
+            let response = await axios.post("https://luxxor.herokuapp.com/api/contact", newMessage)
             if (!response.data.success) throw response.data.response
             return response.data
         }
@@ -11,7 +11,7 @@ const messagesActions = {
 
     getAllMessages: () => {
         return async () => {
-            let response = await axios.get("http://localhost:4000/api/admin/messages")
+            let response = await axios.get("https://luxxor.herokuapp.com/api/admin/messages")
             if(!response.data.success) throw response.data.response
             return response.data.response
         }
@@ -19,7 +19,7 @@ const messagesActions = {
 
     deleteMessage: (id, token) => {
         return async () => {
-            let response = await axios.delete(`http://localhost:4000/api/admin/message/${id}`, {
+            let response = await axios.delete(`https://luxxor.herokuapp.com/api/admin/message/${id}`, {
                 headers: {
                     Authorization: "Bearer " + token
                 }

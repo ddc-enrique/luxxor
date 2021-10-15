@@ -4,7 +4,7 @@ const productsActions = {
     categories: () =>{
         return async (dispatch) =>{
             try {
-                let response = await axios.get("http://localhost:4000/api/admin/categories")
+                let response = await axios.get("https://luxxor.herokuapp.com/api/admin/categories")
                 if(!response.data.success) throw new Error(response.data.response)
                 dispatch({type: "CATEGORIES", payload: response.data.response})
                 return response.data.response
@@ -17,7 +17,7 @@ const productsActions = {
     category: (id) =>{
         return async (dispatch) =>{
             try {
-                let response = await axios.get(`http://localhost:4000/api/admin/category/${id}`)
+                let response = await axios.get(`https://luxxor.herokuapp.com/api/admin/category/${id}`)
                 if (response.data.success) {
                     return response
                 }else {
@@ -32,7 +32,7 @@ const productsActions = {
     addCategory: (name, token) => {
         return async () => {
             try {
-                let res = await axios.post('http://localhost:4000/api/admin/categories', name, {
+                let res = await axios.post('https://luxxor.herokuapp.com/api/admin/categories', name, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -46,7 +46,7 @@ const productsActions = {
     editCategory: (id,category, token) =>{
         return async () => {
             try {
-                let res = await axios.put(`http://localhost:4000/api/admin/category/${id}`, {...category}, {
+                let res = await axios.put(`https://luxxor.herokuapp.com/api/admin/category/${id}`, {...category}, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -60,7 +60,7 @@ const productsActions = {
     deleteCategory: (id, token) =>{
         return async () => {
             try {
-                let res = await axios.delete(`http://localhost:4000/api/admin/category/${id}`, {
+                let res = await axios.delete(`https://luxxor.herokuapp.com/api/admin/category/${id}`, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -74,7 +74,7 @@ const productsActions = {
     addBrand: (name, token) => {
         return async () => {
             try {
-                let res = await axios.post('http://localhost:4000/api/admin/brands', name, {
+                let res = await axios.post('https://luxxor.herokuapp.com/api/admin/brands', name, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -88,7 +88,7 @@ const productsActions = {
     editBrand: (id,brand, token) =>{
         return async () => {
             try {
-                let res = await axios.put(`http://localhost:4000/api/admin/brand/${id}`, {...brand}, {
+                let res = await axios.put(`https://luxxor.herokuapp.com/api/admin/brand/${id}`, {...brand}, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -102,7 +102,7 @@ const productsActions = {
     deleteBrand: (id, token) =>{
         return async () => {
             try {
-                let res = await axios.delete(`http://localhost:4000/api/admin/brand/${id}`, {
+                let res = await axios.delete(`https://luxxor.herokuapp.com/api/admin/brand/${id}`, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -116,7 +116,7 @@ const productsActions = {
     brands: () => {
         return async (dispatch) =>{
             try {
-                let response = await axios.get("http://localhost:4000/api/admin/brands")
+                let response = await axios.get("https://luxxor.herokuapp.com/api/admin/brands")
                 if(response.data.success) {
                     dispatch({type: "BRANDS", payload: response.data.response})
                     return response.data.response
@@ -132,7 +132,7 @@ const productsActions = {
     brand: (id) => {
         return async (dispatch) =>{
             try {
-                let response = axios.get(`http://localhost:4000/api/admin/brand/${id}`)
+                let response = axios.get(`https://luxxor.herokuapp.com/api/admin/brand/${id}`)
                 if (response.data.success) {
                     return response
                 }else {
@@ -147,7 +147,7 @@ const productsActions = {
     products: () => {
         return async (dispatch) =>{
             try {
-                let response = await axios.get("http://localhost:4000/api/products")
+                let response = await axios.get("https://luxxor.herokuapp.com/api/products")
                 if (!response.data.success) throw new Error(response.data.response)
                 dispatch({type: "PRODUCTS", payload: response.data.response})
                 return response.data.response
@@ -160,7 +160,7 @@ const productsActions = {
     product: (id) => {
         return async (dispatch) =>{
             try {
-                let response = await axios.get(`http://localhost:4000/api/product/${id}`)
+                let response = await axios.get(`https://luxxor.herokuapp.com/api/product/${id}`)
                 if (response.data.success) {
                     return response
                 }else {
@@ -176,7 +176,7 @@ const productsActions = {
     addProduct: (product, token) =>{ 
         return async (dispatch) =>{
             try {
-                let response = await axios.post("http://localhost:4000/api/products", product, {
+                let response = await axios.post("https://luxxor.herokuapp.com/api/products", product, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -195,7 +195,7 @@ const productsActions = {
     deleteProduct: (id, token) =>{
         return async (dispatch) => {
             try {
-                let response = await axios.delete(`http://localhost:4000/api/product/${id}`, {
+                let response = await axios.delete(`https://luxxor.herokuapp.com/api/product/${id}`, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -210,7 +210,7 @@ const productsActions = {
     editProduct: (id, productToEdit, token) =>{
         return async (dispatch) => {
             try {
-                let response = await axios.put(`http://localhost:4000/api/product/${id}`, productToEdit, {
+                let response = await axios.put(`https://luxxor.herokuapp.com/api/product/${id}`, productToEdit, {
                     headers: {
                         Authorization: "Bearer " + token
                     }
@@ -225,7 +225,7 @@ const productsActions = {
     productsByUser: (id) => {
         return async (dispatch) => {
             try{
-                let response =  await axios.get(`http://localhost:4000/api/user/myshopping/${id}`)
+                let response =  await axios.get(`https://luxxor.herokuapp.com/api/user/myshopping/${id}`)
                 if (!response.data.success) throw new Error(response.data.response)
                 return response.data.response
             }catch(e){
@@ -236,7 +236,7 @@ const productsActions = {
     productsSold:(token)=>{
         return async (dispatch) => {
             try{
-                let response = await axios.get("http://localhost:4000/api/sales", {
+                let response = await axios.get("https://luxxor.herokuapp.com/api/sales", {
                     headers: {
                         Authorization: "Bearer " + token
                     }

@@ -13,7 +13,7 @@ const TableSale = (props) => {
                 {props.shopCart.map((item, index)=>{
                     return(
                         <tr key={item.productId._id + props.saleId}>
-                            <td> <img className={styles.imgProduct} src={`http://localhost:4000/productsPhoto/${item.productId.photos[0]}`}/> </td>
+                            <td> <img className={styles.imgProduct} src={`https://luxxor.herokuapp.com/productsPhoto/${item.productId.photos[0]}`}/> </td>
                             <td><h3> {item.productId.name}</h3></td>
                             <td ><h3>{item.quantity} </h3></td>
                         </tr>

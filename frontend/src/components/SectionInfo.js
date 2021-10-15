@@ -24,7 +24,7 @@ const SectionInfo = (props)=>{
                     <Link key={product._id} to={`/producto/${product._id}`}>
                         <div  className={styles.galleryItem}>
                             <div className={styles.image}>
-                                <div className={styles.divImage} style={{backgroundImage: `url("http://localhost:4000/productsPhoto/${product.photos[0]}")`}} alt="nature">
+                                <div className={styles.divImage} style={{backgroundImage: `url("https://luxxor.herokuapp.com/productsPhoto/${product.photos[0]}")`}} alt="nature">
                             </div>
                             <div className={styles.descriptionContainer}>
                                     <div className={styles.descriptionFirst}><p>{product.name}</p></div>
