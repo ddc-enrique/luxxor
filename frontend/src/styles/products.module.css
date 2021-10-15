@@ -39,6 +39,11 @@ section.sectionDescription p {
   margin-top: 1.3rem;
 }
 
+.iconForWish {
+  width: 1rem;
+  height: 1rem;
+}
+
 /*productos*/
 main.productsContainer .sectionProduct {
   min-height: 24rem;
