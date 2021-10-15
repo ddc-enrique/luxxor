@@ -41,6 +41,9 @@ router.route('/user/edit-profile/:id')
         validatorControllers.validatorEditComplete, 
         usersControllers.editProfile)
 
+router.route("/user/wish/:id")
+    .put(usersControllers.addWish)
+    
 router.route("/user/myshopping/:id")
     .get(salesControllers.getOneSale)
 

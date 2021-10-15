@@ -15,6 +15,7 @@ import {
     // Tag,
     // ChatDots, 
     Search, 
+    CheckCircle,
     XCircle, 
     ClockFill, 
     Pen} from 'react-bootstrap-icons'
@@ -198,8 +199,8 @@ const EditProductComp = (props) => {
                   <div
                     className={styles.file}
                     style={{
-                      backgroundImage:
-                        "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
+                      backgroundImage: !newProduct.photos[0] ?
+                        "url('https://i.postimg.cc/Y9rFYtw8/add.png')" : "url('https://i.postimg.cc/1tcp7bhy/image-removebg-preview.png')",
                     }}
                   >
                     <input type="file" name="photoOne" onChange={(e)=>newProductHandler("index", e)} />
@@ -215,8 +216,8 @@ const EditProductComp = (props) => {
                   <div
                     className={styles.file}
                     style={{
-                      backgroundImage:
-                        "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
+                      backgroundImage:!newProduct.photos[1] ?
+                      "url('https://i.postimg.cc/Y9rFYtw8/add.png')" : "url('https://i.postimg.cc/1tcp7bhy/image-removebg-preview.png')",
                     }}
                   >
                     <input type="file" name="photoTwo" onChange={(e)=>newProductHandler("index", e)}  />
@@ -232,8 +233,8 @@ const EditProductComp = (props) => {
                   <div
                     className={styles.file}
                     style={{
-                      backgroundImage:
-                        "url('https://i.postimg.cc/Y9rFYtw8/add.png')",
+                      backgroundImage:!newProduct.photos[2] ?
+                      "url('https://i.postimg.cc/Y9rFYtw8/add.png')" : "url('https://i.postimg.cc/1tcp7bhy/image-removebg-preview.png')",
                     }}
                   >
                     <input type="file" name="photoThree" onChange={(e)=>newProductHandler("index", e)}  />
