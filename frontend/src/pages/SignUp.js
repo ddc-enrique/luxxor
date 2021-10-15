@@ -143,61 +143,12 @@ const SignUp = (props) => {
     }
   }
 
-  // const data = [
-  //   {
-  //     image: "https://i.postimg.cc/c1fWVFXW/first-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/1tPB45hJ/second-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/bYS5MdY2/third-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/9FWG9NkF/fourth-Comment.pngpng",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/TwyvP9VR/fifth-Comment.png",
-  //     caption: "",
-  //   },
-  //   {
-  //     image: "https://i.postimg.cc/P5fcxyHB/sixth-Comment.png",
-  //     caption: "",
-  //   },
-  // ]
-
-  const captionStyle = {
-    fontSize: "2em",
-    fontWeight: "bold",
-  }
-  const slideNumberStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
-  }
-
   return (
     <>
       <Navbar />
       <div className={styles.container}>
       <div className={styles.containerCarousel}>
         <div className={styles.image}></div>
-          {/* <h2>Testimonios de nuestros clientes</h2>
-          <Carousel
-            data={data}
-            time={2000}
-            width="42rem"
-            height="25rem"
-            automatic={true}
-            dots={false}
-            slideBackgroundColor="trasnparent"
-            slideImageFit="cover"
-            thumbnails={false}
-            showNavBtn={false}
-          /> */}
         </div>
         <div className={styles.containerForm}>
           <h1>REGISTRATE</h1>
