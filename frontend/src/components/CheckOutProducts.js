@@ -36,26 +36,25 @@ const CheckOutProducts = (props) => {
               },
             }))
         }) 
-    props.getUserData(props.id,props.token)
-        .then(res=>{
-            setDataAddress(res)
-            setDataClient({firstName: props.firstName, lastName: props.lastName,dni:props.dni,phone:res.phone, shipping:""}) 
-        })
-        .catch(e=>{
-          toast(e.message, {
-            icon: "🚫",
-            style: {
-              borderRadius: "1rem",
-              background: "#fff",
-              color: "#545454",
-            },
+        if(props.id) {
+          props.getUserData(props.id,props.token)
+          .then(res=>{
+              setDataAddress(res)
+              setDataClient({firstName: props.firstName, lastName: props.lastName,dni:props.dni,phone:res.phone, shipping:""}) 
           })
-          
-        })
+          .catch(e=>{
+            toast(e.message, {
+              icon: "🚫",
+              style: {
+                borderRadius: "1rem",
+                background: "#fff",
+                color: "#545454",
+              },
+            })            
+          })
+        }
 
-        setTimeout(()=>{
-            setLoading(!loading)  
-        },500)
+      setLoading(!loading)  
            
     },[])
 

@@ -23,19 +23,19 @@ const Sale = (props) =>{
                 },
             })
             props.history.push("/registro")   
+        } else{
+            if(!props.dni){
+                toast("Completa tu perfil para finalizar la compra", {
+                    icon: "🚫",
+                    style: {
+                      borderRadius: "1rem",
+                      background: "#fff",
+                      color: "#545454",
+                    },
+                })
+                props.history.push("/mi-cuenta")   
+            }
         }
-        if(!props.dni){
-            toast("Completa tu perfil para finalizar la compra", {
-                icon: "🚫",
-                style: {
-                  borderRadius: "1rem",
-                  background: "#fff",
-                  color: "#545454",
-                },
-            })
-            props.history.push("/mi-cuenta")   
-        }
-
     })
     let componentToRender
     switch(screen){

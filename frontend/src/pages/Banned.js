@@ -8,6 +8,7 @@ const Banned = (props) =>{
     useEffect(()=>{
         props.verifyIdMail(props.match.params.id)
         .then(res=>{
+            console.log(res)
             if(!res){
                 props.history.push("/") 
             }else{
@@ -44,7 +45,7 @@ const Banned = (props) =>{
         <NavBar/>
         <div className={styles.containerBanned}>
             <Toaster />
-            <h1>¡Cuenta bloqueada con éxito!</h1>
+            
         </div>
        </>
     )

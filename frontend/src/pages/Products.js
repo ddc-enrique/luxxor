@@ -28,7 +28,7 @@ const Products = (props) => {
           setProducts(response);
           setFilteredProducts(response);
         } catch (error) {
-          toast.error(error);
+			    toast.error(error);
         }
       }
     };

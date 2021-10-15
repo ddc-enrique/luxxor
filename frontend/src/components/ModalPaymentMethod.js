@@ -3,13 +3,9 @@ import PaymentWithStripe from "./PaymentWithStripe"
 import { connect } from "react-redux"
 
 const ModalPaymentMethod = (props) => {
-    console.log(props)
     return (
         <div className={styles.container}>
             <div className={styles.paymentContainer}>
-            <img className={styles.icono} onClick={()=>{
-                 props.setModalPayment(!props.modalPayment)}} src="https://i.postimg.cc/0NymP3J3/2-removebg-preview-4.png" alt="..."/>
-
                 <PaymentWithStripe
                     modalPayment={props.modalPayment} 
                     setModalPayment={props.setModalPayment} 
@@ -17,6 +13,9 @@ const ModalPaymentMethod = (props) => {
                     setPayment={props.setPayment}
                     toast={props.toast}
                 />
+                <button  className={styles.icon} onClick={()=>props.setModalPayment(!props.modalPayment)}>
+                    Cancelar
+                </button>
             </div>
         </div>
 
