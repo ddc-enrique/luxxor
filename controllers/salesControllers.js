@@ -6,7 +6,7 @@ const transport = require("../config/transport");
 const salesControllers = {
   // enviar el mail aca tambien
   saveNewSale: async (req, res) => {
-    let dateMail = Date();
+    let dateMail = new Date();
     console.log("Received SAVE NEW SALE Petition:" + Date());
     const { userId, amount, shopCart, shipping, methodPayment } = req.body;
     let tableBody = "";
@@ -16,8 +16,8 @@ const salesControllers = {
       tableBody += `<tr>
                 <td style="color:#FFF;text-align: center">${item.name}</td>
                 <td style="color:#FFF;text-align: center">${item.quantity}</td>
-                <td style="color:#FFF;text-align: end">${
-                  item.productPrice * item.quantity
+                <td style="color:#FFF;text-align: end">$ ${
+                  (item.productPrice * item.quantity).toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                 }</td>
             </tr>`;
     });
@@ -85,7 +85,7 @@ const salesControllers = {
                                 </p>
                                 <hr/>
                                 <h4 style="color:#FFF;"><span>Compra:</span> #${numberOrder}</h4>
-                                <h4 style="color:#FFF;"><span>Fecha de compra:</span> ${dateMail}</h4>
+                                <h4 style="color:#FFF;"><span>Fecha de compra:</span> ${dateMail.toLocaleDateString()}</h4>
                                 <h4 style="color:#FFF;"><span>Forma de pago:</span> ${methodPayment} </h4>
                                 <hr/>
                                 <table>
@@ -103,7 +103,7 @@ const salesControllers = {
                                         <tr>
                                             <td style="color:#FFF;min-width: 80px;text-align: center">-</td>
                                             <td style="color:#FFF;min-width: 80px;text-align: center">Total:</td>
-                                            <td style="color:#FFF;min-width: 80px;text-align: end">${amount}</td>
+                                            <td style="color:#FFF;min-width: 80px;text-align: end">$ ${amount.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</td>
                                         </tr>
                                     </tfoot>
                                 </table>
