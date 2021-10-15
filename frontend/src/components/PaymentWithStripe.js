@@ -5,12 +5,12 @@ import { connect } from "react-redux";
 import shopCartAction from "../redux/actions/shopCartActions";
 import toast from "react-hot-toast";
 import shopCartActions from "../redux/actions/shopCartActions";
+import PhotoCard from "./PhotoCard";
 
 const stripePromisse = loadStripe("pk_test_51Jj1qDLyz3SCpT0O3dmugpTo4iA2C78CtOPdxQlVspZixLw1sOHMezxnQrmRJCQKUtocOMDMizxW3YraU9Rli0KL00RpThZaav")
 
 
 const PaymentCheckout = (props) => {
-    console.log(props)
     const stripe = useStripe()
     const elements = useElements()
 
@@ -36,8 +36,9 @@ const PaymentCheckout = (props) => {
 
     return( 
         <form className={styles.form} onSubmit={handleSubmit}>
-                <CardElement className={styles.element}/>
-                <button onClick={handleSubmit} >
+                <PhotoCard/>
+                <CardElement className={styles.element} />
+                <button onClick={handleSubmit} className={styles.button}>
                     Pagar
                 </button>
         </form>)

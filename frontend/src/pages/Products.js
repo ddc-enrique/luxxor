@@ -9,12 +9,16 @@ import { connect } from "react-redux";
 import FilterProducts from "../components/FilterProducts";
 import productsActions from "../redux/actions/productsActions";
 import toast, { Toaster } from "react-hot-toast";
-import { CartFill, ChevronUp, Whatsapp } from "react-bootstrap-icons";
+import { CartFill, ChevronUp, Whatsapp, BookmarkStar } from "react-bootstrap-icons";
+import usersAction from "../redux/actions/usersAction";
 const Products = (props) => {
+
   const [products, setProducts] = useState(props.products);
   const [filteredProducts, setFilteredProducts] = useState(props.products);
   const [updateOnSort, setUpdateOnSort] = useState(true);
   const [loading, setLoading] = useState(true);
+  const [loadingFilter, setLoadingFilter] = useState(true)
+
   useEffect(() => {
     const getAllProducts = async () => {
       if (!props.products.length) {
@@ -23,15 +27,19 @@ const Products = (props) => {
           if (!Array.isArray(response)) throw new Error(response.response);
           setProducts(response);
           setFilteredProducts(response);
-          setLoading(false);
         } catch (error) {
-          toast.error(error);
+			    toast.error(error);
         }
       }
     };
     getAllProducts();
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if(filteredProducts.length) setLoading(false)
+  },[filteredProducts.length])
+
   const addProductHandler = async (id, price, discount, name) => {
     let res = await props.addProduct(id, price, discount, name);
     if (!res) {
@@ -106,7 +114,7 @@ const Products = (props) => {
     setUpdateOnSort(!updateOnSort);
   };
 
-  if (loading) {
+  if (loading ) {
     return (
       <div className={styles.productsSection}>
         <div className={styles.loading}></div>
@@ -120,6 +128,7 @@ const Products = (props) => {
       <div className={styles.container}>
         <FilterProducts
           setFilteredProducts={setFilteredProducts}
+          setLoadingFilter={setLoadingFilter}
           products={products}
         />
         <div className={styles.productsSection}>
@@ -153,6 +162,11 @@ const Products = (props) => {
               >
                 <div className={styles.content}>
                   <h2 className={styles.title}>{product.name}</h2>
+                  {/* {props.wishList && (listWish = props.wishList.find(wish => 
+                    wish.productId === product._id
+                  )), console.log(listWish)}
+                  
+                  {<BookmarkStar className={styles.iconForWish} />} */}
                   <div className={styles.infoPrice}>
                     {product.discount > 0 && <p>%{product.discount} Off</p>}
                     <p className={styles.copy}>
@@ -198,6 +212,7 @@ const Products = (props) => {
 const mapDispatchToProps = {
   getProducts: productsActions.products,
   addProduct: shopCartActions.addToCart,
+  addToWishList: usersAction.addToWishList,
 };
 
 const mapStateToProps = (state) => {
@@ -205,6 +220,8 @@ const mapStateToProps = (state) => {
     brands: state.products,
     categories: state.products,
     products: state.products.products,
+    id: state.users.id,
+    wishList: state.users.wishList
   };
 };
 

@@ -7,11 +7,13 @@ import { connect } from "react-redux"
 import usersAction from "../redux/actions/usersAction"
 import toast, { Toaster } from "react-hot-toast"
 import {  XCircleFill,Eye, EyeSlash } from 'react-bootstrap-icons'
+import { useHistory } from "react-router"
 const SignIn = (props) => {
   const { signIn } = props
   const [check, setCheck] = useState(true)
   const [errorEmail, setErrorEmail] = useState(null)
   const [errorPass, setErrorPass] = useState(null)
+  const history = useHistory()
 
   const [userLog, setUserLog] = useState({
     eMail: "",
@@ -45,10 +47,11 @@ const SignIn = (props) => {
             position: "top-center",
           })
           props.setModalLogIn(false)
-          props.history.push("/")
+          history.push("/")
         }
       }
     } catch (error) {
+      console.log(error)
         toast.error(error, {
             position: "top-center",
           })

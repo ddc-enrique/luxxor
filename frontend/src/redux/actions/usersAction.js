@@ -49,7 +49,7 @@ const usersAction = {
                         admin: response.data.admin, 
                         _id: response.data.id,
                         dni: response.data.dni,
-                        google: response.data.google
+                        google: response.data.google,
                     }})
             }catch(e){
                 dispatch({type: "LOGOUT"})
@@ -81,7 +81,8 @@ const usersAction = {
                 let response = await axios.get(`http://localhost:4000/api/user/verifyId/${id}`)
                 if(response.data.success) return response.data.success
             }else{
-                let response = await axios.get(`http://localhost:4000/api/user/verify-mail/${id}`)
+                let response = await axios.get(`http://localhost:4000/api/userverify-mail/${id}`)
+                console.log(response)
                 if(response.data.success){
                     return response.data.success
                 }
@@ -139,6 +140,19 @@ const usersAction = {
             })
             return response.data
         }
+    },
+
+    addToWishList: (id, userId) => {
+        return async () => {
+            try {
+                let response = await axios.put(`http:localhost:4000/api/user/wish/${userId}`, {productId: id})
+                    if (!response.success) throw new Error("Error")
+                    return response.data
+            }catch(e){
+                return ({success: false, response: e.message})
+            }
+        }
+        
     }
 }
 

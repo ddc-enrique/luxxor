@@ -81,6 +81,7 @@ button.buttonSign {
     padding: 0.5rem 1rem;
     width: 8rem;
     text-decoration: none;
+    z-index: 3;
 }
 div.buttonGoogle {
     margin-top: 0.7rem;

@@ -6,6 +6,7 @@ import toast, { Toaster } from "react-hot-toast"
 import CheckOutProducts from "../components/CheckOutProducts";
 import Payment from "../components/Payment";
 import ConfirmedSale from "../components/ConfirmedSale";
+import Footer from "../components/Footer";
 
 const Sale = (props) =>{
     const [payment,setPayment]= useState(false)
@@ -23,19 +24,19 @@ const Sale = (props) =>{
                 },
             })
             props.history.push("/registro")   
+        } else{
+            if(!props.dni){
+                toast("Completa tu perfil para finalizar la compra", {
+                    icon: "🚫",
+                    style: {
+                      borderRadius: "1rem",
+                      background: "#fff",
+                      color: "#545454",
+                    },
+                })
+                props.history.push("/mi-cuenta")   
+            }
         }
-        if(!props.dni){
-            toast("Completa tu perfil para finalizar la compra", {
-                icon: "🚫",
-                style: {
-                  borderRadius: "1rem",
-                  background: "#fff",
-                  color: "#545454",
-                },
-            })
-            props.history.push("/mi-cuenta")   
-        }
-
     })
     let componentToRender
     switch(screen){
@@ -61,22 +62,21 @@ const Sale = (props) =>{
         <>
             <NavBar/>
             <section className={styles.sectionSale}>             
-            <div className={styles.navCarrito}>
-                <div onClick={changeMenuHandler} style={{borderBottomColor: screen === 1 && 'grey'}}>
-                    <p>Paso 1</p> 
+                <div className={styles.navCarrito}>
+                    <div onClick={changeMenuHandler} style={{borderBottomColor: screen === 1 && 'grey'}}>
+                        <p>Paso 1</p> 
+                    </div>
+                    <div style={{borderBottomColor: screen === 2 && 'grey'}}>
+                        <p>Paso 2</p> 
+                    </div>
+                    <div style={{borderBottomColor: screen === 3 && 'grey'}}>
+                        <p>Paso 3</p> 
+                    </div>              
                 </div>
-                <div style={{borderBottomColor: screen === 2 && 'grey'}}>
-                    <p>Paso 2</p> 
-                </div>
-                <div style={{borderBottomColor: screen === 3 && 'grey'}}>
-                    <p>Paso 3</p> 
-                </div>              
-            </div>
-            {componentToRender}
-            
-        </section>
-    
-            
+                {componentToRender}
+                
+            </section>
+            <Footer />
             <Toaster position="top-center" reverseOrder={false} />
         </>
     )

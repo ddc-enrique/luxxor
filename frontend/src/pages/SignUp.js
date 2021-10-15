@@ -95,16 +95,10 @@ const SignUp = (props) => {
       } else {
         try {
           resp = await signUp(FD)
-          if (!resp.success) throw resp.response
-          toast("Bienvenido", {
-            icon: "👏",
-            style: {
-              borderRadius: "1rem",
-              background: "#f48f31",
-              color: "#fff",
-            },
-          })
-          props.history.push("/")
+          if (!resp.success){ 
+            throw resp.response
+          } else {
+          }          
         } catch (error) {
           if (typeof error === 'string'){
             toast.error(error)
@@ -126,15 +120,6 @@ const SignUp = (props) => {
     if (e.key === "Enter") {
       enterNewUser()
     }
-  }
-
-  const captionStyle = {
-    fontSize: "2em",
-    fontWeight: "bold",
-  }
-  const slideNumberStyle = {
-    fontSize: "20px",
-    fontWeight: "bold",
   }
 
   return (
@@ -216,10 +201,10 @@ const SignUp = (props) => {
             name="profilePic"
             defaultValue={newUser.profilePic}
           />
-          <button id='register' onClick={enterNewUser}  className={styles.btnSign}>
+            <button onClick={enterNewUser} className={styles.btnSign} id="register">
               Registrarme
             </button>
-          <div className={styles.location} >
+          <div className={styles.location}>            
             <div className={styles.buttonGoogle}>
               <GoogleLogin
                 clientId="791178895075-hd66p5o1uhcrj3t20lmsu0f7j1n5ol1p.apps.googleusercontent.com"

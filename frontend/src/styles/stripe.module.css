@@ -1,10 +1,34 @@
 form.form {
     display: flex;
     flex-direction: column;
+    width: 22rem;
+}
+
+
+.element {
+    border: 1px solid;
+    padding: 1rem;
+    background-color: rgb(207 207 207 / 79%);
+    height: 1rem;
+    color: #d9d9d9;
+    width: 20rem;
+    border-bottom: 1px solid #838383;
+    margin-bottom: 1rem;
 
 }
 
-.element {
-    padding: 2rem;
-    background-color: rgba(128, 128, 128, 0.253);
+.form .button {
+    width: 10rem;
+    border: none;
+    padding: 1rem;
+    cursor: pointer;
+    color: black;
+    background-color: transparent;
+    border-bottom: 1px solid #0000005c;
+}
+
+.form  .button:hover {
+    color: #1d0e72;
+    background-color: transparent;
+    border-bottom: 1px solid #1d0e7221;
 }

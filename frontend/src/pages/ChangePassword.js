@@ -19,6 +19,16 @@ const ChangePassword = (props) =>{
         .then(res=>{
             if(!res) props.history.push("/")
        })
+       .catch(e=>{
+            toast("Problemas tecnicos", {
+                icon: "🚫",
+                style: {
+                borderRadius: "1rem",
+                background: "#fff",
+                color: "#545454",
+                },
+            })
+        })
        // eslint-disable-next-line
     },[])
     const notificationToast = (message, icon) => {

@@ -8,13 +8,26 @@ const Banned = (props) =>{
     useEffect(()=>{
         props.verifyIdMail(props.match.params.id)
         .then(res=>{
+            console.log(res)
             if(!res){
                 props.history.push("/") 
-                notificationToast("Cuenta bloqueada con éxito", "👏");
             }else{
                 props.banAccount(props.match.params.id)
+                .then(()=>{
+                    notificationToast("Cuenta bloqueada con éxito", "👏");
+                })     
             }
        })
+       .catch(e=>{
+            toast("Problemas tecnicos.", {
+                icon: "🚫",
+                style: {
+                borderRadius: "1rem",
+                background: "#fff",
+                color: "#545454",
+                },
+            })
+        })
        // eslint-disable-next-line
     },[])
     const notificationToast = (message, icon) => {
@@ -32,7 +45,7 @@ const Banned = (props) =>{
         <NavBar/>
         <div className={styles.containerBanned}>
             <Toaster />
-            <h1>¡Cuenta bloqueada con éxito!</h1>
+            
         </div>
        </>
     )

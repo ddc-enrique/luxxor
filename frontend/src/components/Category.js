@@ -78,7 +78,7 @@ const Category = (props) => {
       let res = await props.deleteCategory(id, props.token);
       if (!res.data.success) throw new Error();
       res.data.success && notificationToast("Borrado con éxito", "👏");
-      setCategories(categories.splice(id, index));
+      setCategories(categories.filter(category => category._id !== id));
     } catch (e) {
       notificationToast("Hubo un problema, intente nuevamente más tarde", "🚫");
     }

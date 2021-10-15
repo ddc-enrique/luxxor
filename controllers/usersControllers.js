@@ -39,7 +39,7 @@ const usersControllers = {
                 newUser.save()
                     .then( (user) => {
                         const token = jwt.sign({...newUser}, process.env.SECRETORKEY) 
-                        res.json({success: true, response: {profilePic: user.profilePic, google: user.google, firstName: user.firstName, lastName: user.lastName, eMail: user.eMail, token: token, admin: user.admin, _id:user._id}})                  
+                        res.json({success: true, response: {profilePic: user.profilePic, google: user.google, firstName: user.firstName, lastName: user.lastName, eMail: user.eMail, token: token, admin: user.admin, _id:user._id, wishList:user.wishList}})                  
                     })
             })
             .catch( err => handleError(res, err) )
@@ -57,7 +57,7 @@ const usersControllers = {
                 if (userFound.banned) throw new Error("Cuenta bloqueada")
                 if (!bcryptjs.compareSync(password, userFound.password)) throw new Error(errMessage)
                 const token = jwt.sign({...userFound}, process.env.SECRETORKEY)
-                res.json({success: true, response: {profilePic: userFound.profilePic, google: userFound.google, firstName: userFound.firstName, lastName: userFound.lastName, eMail: userFound.eMail, token: token, admin: userFound.admin, _id: userFound._id, dni:userFound.dni}})
+                res.json({success: true, response: {profilePic: userFound.profilePic, google: userFound.google, firstName: userFound.firstName, lastName: userFound.lastName, eMail: userFound.eMail, token: token, admin: userFound.admin, _id: userFound._id, dni:userFound.dni, wishList:userFound.wishList}})
             })
             .catch( err => handleError(res, err) )
     },
@@ -144,7 +144,7 @@ const usersControllers = {
             let mailChangePassword = {
                 from: 'Luxxor <luxxor.tech@gmail.com>',
                 to: eMail,
-                // subject: `Cambio de contraseña realizado con exito ${userFound.lastName}, ${userFound.firstName}!`,
+                subject: `Cambio de contraseña realizado con exito ${userFound.lastName}, ${userFound.firstName}!`,
                 html: `
               
 <table style="min-width: 700px;min-heigth: 500px; padding: 10px; margin:0 auto; border-collapse: collapse;">
@@ -271,6 +271,12 @@ const usersControllers = {
         console.log("Received SAVE NEW SALE Petition:" + Date())
         res.json({ success: true, response: req.body })
     },
+
+    addWish: (req, res) => {
+        User.findOneAndUpdate({_id: req.params.id}, {$push: {wishList: {productId: req.body.productId}}}, {new: true}).populate("wishList.productId")
+        .then(response => res.json({success: true, response}))
+        .catch(error => {res.json({success: false, response: error})})
+    }
 }
 
 module.exports = usersControllers

@@ -11,7 +11,6 @@ import { ArrowDown } from "react-bootstrap-icons";
 
 const AdminMessages = (props) => {
     const [messages, setMessages] = useState([])
-
     
     useEffect(() => {
         const getAllMessages = async() => {
@@ -43,10 +42,6 @@ const AdminMessages = (props) => {
         }
     }
 
-    const sortBy = (e) => {
-
-    }
-
     return (
         <div className={styles.divContainer}>
             <Toaster />
@@ -69,11 +64,8 @@ const AdminMessages = (props) => {
                             className={styles.headerTableMessages}
                         >
                             <tr>
-                                <th
-                                    onClick={sortBy}
-                                >
+                                <th>
                                     Dia
-                                    <ArrowDown />
                                 </th>
                                 <th
                                 >
