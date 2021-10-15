@@ -50,7 +50,6 @@ const App = (props) => {
         <Route path="/error" component={Error} />
         <Route path="/bloqueo-cuenta/:id" component={Banned}/>
         <Route path="/cambio-contrasenia/:id" component={ChangePassword}/>
-        {/* {(token && total) && <Route path="/checkout" component={Sale}/>} */}
         <Route path="/checkout" component={Sale}/>
        {/*  {!props.token && <Route path="/password" component={Password}/>}  */}
         {(token && !dni) && <Route path="/mi-cuenta" render={ () => <EditProfile completeAccount={false} /> } />}

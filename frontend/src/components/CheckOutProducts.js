@@ -18,7 +18,6 @@ const CheckOutProducts = (props) => {
   const[dataAddress,setDataAddress]=useState({})
   let field_empty=false
   useEffect(() => {
-    /* console.log(props.cartProduct) */
     props.cartProduct.forEach((item) => {
       props
         .product(item.productId)
@@ -53,9 +52,7 @@ const CheckOutProducts = (props) => {
             })            
           })
         }
-
-      setLoading(!loading)  
-           
+      setLoading(!loading)             
     },[])
 
     const DeleteProductModalCart=(id,deleteAll,price,quantity,discount)=>{
@@ -81,7 +78,6 @@ const CheckOutProducts = (props) => {
       let arr_aux=Object.values(dataAddress).filter((item,index)=>index!==3)
       Object.values(arr_aux).forEach((field_value)=>!field_value && (field_empty = true))
       let inputs=Object.values(dataClient).some((input)=>input==="")      
-      /* let inputsShipping=Object.values(dataAddress).filter(item=>item==="optional").some((input)=>input==="")   */
       if(props.cartProduct.length===0){
         toast("Al menos debes tener una unidad en el carrito.", {
           icon: "🚫",
@@ -201,9 +197,7 @@ const mapStateToProps = (state) => {
   };
 };
 const mapDispatchToProps = {
-  /*  addProduct:shopCartActions.addToCart, */
   deleteProduct: shopCartActions.deleteToCart,
-  /* resetCart:shopCartActions.resetCart, */
   product: productsActions.product,
   getUserData:usersAction.getUserData
 };

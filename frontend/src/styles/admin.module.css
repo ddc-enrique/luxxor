@@ -290,8 +290,9 @@ label {
 }
 
 .formNew textarea,
-.containerInputs textarea {
-  resize: none;
+.containerInputs textarea,
+.adminCategory textarea {
+  resize: none !important;
   border: none;
   outline: none;
   width: 15rem;

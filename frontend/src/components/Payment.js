@@ -22,10 +22,10 @@ const Payment = (props) =>{
                     <h3>Contado Efectivo</h3>
                 </div>}
                 {/* HABILITAR SI SOLO EL ENVIO ES SOLO POR RETIRO EN LOCAL */}
-                <div onClick={()=>props.setScreen(3)}className={styles.boxMethod}>
+                {/* <div onClick={()=>props.setScreen(3)}className={styles.boxMethod}>
                     <Receipt  className={styles.iconCard}/>
                     <h3>Transferencia Bancaria</h3>
-                </div>
+                </div> */}
                 <div onClick={()=>setModalPayment(!modalPayment)} className={styles.boxMethod}>
                 <CreditCard  className={styles.iconCard}/>
                     <h3>Tarjetas</h3>
