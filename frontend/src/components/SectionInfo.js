@@ -6,12 +6,12 @@ import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const SectionInfo = (props)=>{
-    const [products, setProducts] = useState(props.products)
+    const [products, setProducts] = useState(JSON.parse(JSON.stringify(props.products)))
     const [loading, setLoading] = useState(true)
     useEffect(()=>{
         const getProducts = async () => {
             let res = await props.getProducts()
-            setProducts(res)
+            setProducts(JSON.parse(JSON.stringify(res)))
         }
         getProducts()
         setLoading(!loading)

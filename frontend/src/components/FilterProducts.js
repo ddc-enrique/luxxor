@@ -39,6 +39,7 @@ const FilterProducts = (props) => {
             }
         }
         getAllCategories()
+        props.setLoadingFilter(false)
     }, [])
 
     useEffect(() => {

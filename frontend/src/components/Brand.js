@@ -84,7 +84,7 @@ const Brand = (props) => {
     try {
       let res = await props.deleteBrand(id, props.token);
       res.data.success && notificationToast("Borrado con éxito", "👏");
-      setBrands(brands.splice(id, index));
+      setBrands(brands.filter(brand => brand._id !== id));
     } catch (e) {
       notificationToast("Hubo un problema, intente nuevamente más tarde", "🚫");
     }

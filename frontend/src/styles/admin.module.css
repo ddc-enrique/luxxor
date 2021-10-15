@@ -291,14 +291,14 @@ label {
 
 .formNew textarea,
 .containerInputs textarea,
-.adminCategory textarea {
+.containerCategory textarea {
   resize: none !important;
   border: none;
   outline: none;
   width: 15rem;
-  height: 2rem;
+  height: 1.5rem;
   background-color: #dfdfdf;
-  padding: 0 2rem;
+  padding: .5rem 2rem;
   border-radius: 1rem;
 }
 .containerProducts p {
@@ -395,7 +395,9 @@ label {
 }
 
 .containerAdmin .containerMessages {
-  min-height: 60vh;
+  /* min-height: 60vh; */
+  height: 60vh;
+  overflow-y: scroll;
   width: 92%;
   color: #ffffff;
   display: flex;

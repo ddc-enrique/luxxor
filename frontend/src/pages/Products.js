@@ -17,7 +17,7 @@ const Products = (props) => {
   const [filteredProducts, setFilteredProducts] = useState(props.products);
   const [updateOnSort, setUpdateOnSort] = useState(true);
   const [loading, setLoading] = useState(true);
- 
+  const [loadingFilter, setLoadingFilter] = useState(true)
 
   useEffect(() => {
     const getAllProducts = async () => {
@@ -33,9 +33,13 @@ const Products = (props) => {
       }
     };
     getAllProducts();
-    setLoading(false);
     // eslint-disable-next-line
   }, []);
+
+  useEffect(() => {
+    if(filteredProducts.length) setLoading(false)
+  },[filteredProducts.length])
+
   const addProductHandler = async (id, price, discount, name) => {
     let res = await props.addProduct(id, price, discount, name);
     if (!res) {
@@ -110,7 +114,7 @@ const Products = (props) => {
     setUpdateOnSort(!updateOnSort);
   };
 
-  if (loading) {
+  if (loading ) {
     return (
       <div className={styles.productsSection}>
         <div className={styles.loading}></div>
@@ -124,6 +128,7 @@ const Products = (props) => {
       <div className={styles.container}>
         <FilterProducts
           setFilteredProducts={setFilteredProducts}
+          setLoadingFilter={setLoadingFilter}
           products={products}
         />
         <div className={styles.productsSection}>
