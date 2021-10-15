@@ -50,10 +50,13 @@ section.sectionContainer p {
 
 .galleryItem .image>* {
     height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
 
 .galleryItem .image div.divImage {
-    width: 60%;
+    width: 70%;
     background-size: cover;
     background-position: center;
     cursor: pointer;
