@@ -11,7 +11,7 @@ import UserPurchase from "../components/UserPurchase"
 const EditProfile = (props) => {
     const [completeAccount, setCompleteAccount] = useState(props.dni > 0)
     let initialDataUser = completeAccount ? { firstName: props.firstName, lastName: props.lastName , city: "", zipCode: "", address: "", optional: "", phone: "" }
-        : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: "" } 
+        : { dni: null, city: "", zipCode: "", address: "", optional: "", phone: ""} 
     const [dataUser, setDataUser] = useState(initialDataUser)
     const [view, setView] = useState(true)
     const [errorsValidation, setErrorsValidation] = useState({})

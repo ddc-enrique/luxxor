@@ -31,7 +31,7 @@ const SectionInfo = (props)=>{
                                 <div className={styles.descriptionRowOne}>    
                                     <div className={styles.description}><p>{product.brand.name}</p></div>
                                     <div className={styles.description}><p>{product.category.name}</p></div>
-                                    <div className={styles.description}><p>{product.price}</p></div>
+                                    <div className={styles.description}><p>${product.price.toFixed(0).replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</p></div>
                                 </div>
                             </div>
                         </div> 
