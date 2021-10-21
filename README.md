@@ -9,8 +9,9 @@
 
 ![Diseño sin título (8)](https://user-images.githubusercontent.com/79762693/138206954-4ad9e74a-816b-4b68-a05d-b3d5c871760a.gif)
 
-**Website Link**
-[Luxxor](https://luxxor.herokuapp.com/)
+**Links**
+[Website Demo](https://luxxor.herokuapp.com/)
+[MobileApp Repo](https://github.com/ddc-enrique/luxxorMobile)
 #
 
 ## Install
