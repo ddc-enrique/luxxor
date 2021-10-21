@@ -5,7 +5,7 @@
 
 #
 **Sale of technology products**
-#
+
 
 ![Diseño sin título (8)](https://user-images.githubusercontent.com/79762693/138206954-4ad9e74a-816b-4b68-a05d-b3d5c871760a.gif)
 
@@ -28,7 +28,7 @@ You have to set up your own .env
 
 **Applied Technologies**
 
-- **React
+- React
 - Redux
 - MongoDB
 - Node js
@@ -36,7 +36,7 @@ You have to set up your own .env
 - Express-Fileupload
 - Joi
 - Passport - JWT
-- Nodemailer**
+- Nodemailer
 
 #
 **Authors**
