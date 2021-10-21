@@ -12,17 +12,31 @@
 **Website Link**
 [Luxxor](https://luxxor.herokuapp.com/)
 #
+
+## Install
+
+```sh
+npm install
+```
+
+## Usage
+
+```sh
+npm start
+You have to set up your own .env
+```
+
 **Applied Technologies**
 
-> **React
-> Redux
-> MongoDB
-> Node js
-> Express
-> Express-Fileupload
-> Joi
-> Passport - JWT
-> Nodemailer**
+- **React
+- Redux
+- MongoDB
+- Node js
+- Express
+- Express-Fileupload
+- Joi
+- Passport - JWT
+- Nodemailer**
 
 #
 **Authors**
